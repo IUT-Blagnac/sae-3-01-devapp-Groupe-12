@@ -2,19 +2,23 @@ import paho.mqtt.client as mqtt
 import json
 import configparser
 import os
+import time
 from datetime import datetime
 
 # Chemin du fichier de configuration
-config_file_path = r'C:\Users\yanni\Documents\GitHub\sae-3-01-devapp-Groupe-12\code\IOT\Python\config.ini'
+config_file_path = r'code\IOT\Python\config.ini'
 
 # Obtenir le répertoire du fichier de configuration
 config_dir = os.path.dirname(config_file_path)
+
 
 print("Répertoire de travail actuel :", os.getcwd())
 
 # Lire les paramètres de configuration
 config = configparser.ConfigParser()
 found = config.read(config_file_path)
+
+frequence_affichage = config.getint('MQTT', 'frequence_affichage')
 print("Fichiers de configuration trouvés :", found)
 print("Sections trouvées :", config.sections())
 
@@ -45,6 +49,7 @@ def write_to_file(room, data):
                 file.write(f"\nSalle : {room}\n")
                 values_by_room[room] = []  # Initialise la liste pour la nouvelle salle
             file.write(data + "\n")
+        time.sleep(frequence_affichage)  # Attendre avant d'afficher la prochaine salle
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier : {e}")
 
