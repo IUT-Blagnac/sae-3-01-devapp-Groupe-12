@@ -1,0 +1,26 @@
+@startuml
+title Diagramme de Séquence pour la fonctionnalité de création d'un compte client
+actor Utilisateur as "Utilisateur"
+participant "PageCréationDeCompte" as Interface
+database BaseDeDonnees as BD
+
+activate Utilisateur
+
+Utilisateur -> Interface: Cliquer sur "Créer un compte"
+Interface --> Utilisateur: Afficher le formulaire d'inscription
+
+Utilisateur -> Interface: Remplir le formulaire
+Interface --> BD: Vérifier l'unicité du nom d'utilisateur et de l'email
+
+alt Informations uniques
+  BD --> Interface: Informations uniques
+  Interface --> Utilisateur: Afficher un message d'erreur
+else Informations valides
+  BD --> Interface: Informations valides
+  Interface --> BD: Enregistrer les informations du compte
+  BD --> Interface: Confirmation d'inscription
+  Interface --> Utilisateur: Rediriger vers la page de connexion
+end
+
+deactivate Utilisateur
+@enduml
