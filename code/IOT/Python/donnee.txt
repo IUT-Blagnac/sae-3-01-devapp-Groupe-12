@@ -1,0 +1,338 @@
+
+Salle : B108
+Valeurs pour B108:
+temperature: 20.1, Moyenne (10 dernières): 20.1
+humidity: 61, Moyenne (10 dernières): 61.0
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 819, Moyenne (10 dernières): 819.0
+tvoc: 232, Moyenne (10 dernières): 232.0
+illumination: 11, Moyenne (10 dernières): 11.0
+infrared: 6, Moyenne (10 dernières): 6.0
+infrared_and_visible: 17, Moyenne (10 dernières): 17.0
+pressure: 1001.9, Moyenne (10 dernières): 1001.9
+
+
+Salle : C004
+Valeurs pour C004:
+temperature: 23.4, Moyenne (10 dernières): 23.4
+humidity: 51.5, Moyenne (10 dernières): 51.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 471, Moyenne (10 dernières): 471.0
+tvoc: 237, Moyenne (10 dernières): 237.0
+illumination: 14, Moyenne (10 dernières): 14.0
+infrared: 7, Moyenne (10 dernières): 7.0
+infrared_and_visible: 20, Moyenne (10 dernières): 20.0
+pressure: 1002.5, Moyenne (10 dernières): 1002.5
+
+
+Salle : E006
+Valeurs pour E006:
+temperature: 22.6, Moyenne (10 dernières): 22.6
+humidity: 57.5, Moyenne (10 dernières): 57.5
+activity: 297, Moyenne (10 dernières): 297.0
+co2: 1492, Moyenne (10 dernières): 1492.0
+tvoc: 694, Moyenne (10 dernières): 694.0
+illumination: 21, Moyenne (10 dernières): 21.0
+infrared: 10, Moyenne (10 dernières): 10.0
+infrared_and_visible: 29, Moyenne (10 dernières): 29.0
+pressure: 1001.9, Moyenne (10 dernières): 1001.9
+
+
+Salle : E004
+Valeurs pour E004:
+temperature: 21.6, Moyenne (10 dernières): 21.6
+humidity: 54, Moyenne (10 dernières): 54.0
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 645, Moyenne (10 dernières): 645.0
+tvoc: 662, Moyenne (10 dernières): 662.0
+illumination: 176, Moyenne (10 dernières): 176.0
+infrared: 82, Moyenne (10 dernières): 82.0
+infrared_and_visible: 239, Moyenne (10 dernières): 239.0
+pressure: 1002.8, Moyenne (10 dernières): 1002.8
+
+
+Salle : B202
+Valeurs pour B202:
+temperature: 20.9, Moyenne (10 dernières): 20.9
+humidity: 63, Moyenne (10 dernières): 63.0
+activity: 8, Moyenne (10 dernières): 8.0
+co2: 1358, Moyenne (10 dernières): 1358.0
+tvoc: 244, Moyenne (10 dernières): 244.0
+illumination: 11, Moyenne (10 dernières): 11.0
+infrared: 6, Moyenne (10 dernières): 6.0
+infrared_and_visible: 17, Moyenne (10 dernières): 17.0
+pressure: 1002.1, Moyenne (10 dernières): 1002.1
+
+
+Salle : E001
+Valeurs pour E001:
+temperature: 20.9, Moyenne (10 dernières): 20.9
+humidity: 56, Moyenne (10 dernières): 56.0
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 613, Moyenne (10 dernières): 613.0
+tvoc: 874, Moyenne (10 dernières): 874.0
+illumination: 64, Moyenne (10 dernières): 64.0
+infrared: 35, Moyenne (10 dernières): 35.0
+infrared_and_visible: 97, Moyenne (10 dernières): 97.0
+pressure: 1002.9, Moyenne (10 dernières): 1002.9
+
+
+Salle : Serveurs
+Valeurs pour Serveurs:
+temperature: 23, Moyenne (10 dernières): 23.0
+humidity: 45.5, Moyenne (10 dernières): 45.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 634, Moyenne (10 dernières): 634.0
+tvoc: 188, Moyenne (10 dernières): 188.0
+illumination: 1, Moyenne (10 dernières): 1.0
+infrared: 1, Moyenne (10 dernières): 1.0
+infrared_and_visible: 1, Moyenne (10 dernières): 1.0
+pressure: 1002.1, Moyenne (10 dernières): 1002.1
+
+
+Salle : E003
+Valeurs pour E003:
+temperature: 21.7, Moyenne (10 dernières): 21.7
+humidity: 53.5, Moyenne (10 dernières): 53.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 691, Moyenne (10 dernières): 691.0
+tvoc: 735, Moyenne (10 dernières): 735.0
+illumination: 100, Moyenne (10 dernières): 100.0
+infrared: 54, Moyenne (10 dernières): 54.0
+infrared_and_visible: 150, Moyenne (10 dernières): 150.0
+pressure: 1002.6, Moyenne (10 dernières): 1002.6
+
+
+Salle : B106
+Valeurs pour B106:
+temperature: 22.2, Moyenne (10 dernières): 22.2
+humidity: 60.5, Moyenne (10 dernières): 60.5
+activity: 38, Moyenne (10 dernières): 38.0
+co2: 1727, Moyenne (10 dernières): 1727.0
+tvoc: 291, Moyenne (10 dernières): 291.0
+illumination: 50, Moyenne (10 dernières): 50.0
+infrared: 13, Moyenne (10 dernières): 13.0
+infrared_and_visible: 49, Moyenne (10 dernières): 49.0
+pressure: 1002.2, Moyenne (10 dernières): 1002.2
+
+
+Salle : B234
+Valeurs pour B234:
+temperature: 22, Moyenne (10 dernières): 22.0
+humidity: 57, Moyenne (10 dernières): 57.0
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 1253, Moyenne (10 dernières): 1253.0
+tvoc: 224, Moyenne (10 dernières): 224.0
+illumination: 12, Moyenne (10 dernières): 12.0
+infrared: 2, Moyenne (10 dernières): 2.0
+infrared_and_visible: 10, Moyenne (10 dernières): 10.0
+pressure: 1001.7, Moyenne (10 dernières): 1001.7
+
+
+Salle : C006
+Valeurs pour C006:
+temperature: 22.4, Moyenne (10 dernières): 22.4
+humidity: 53.5, Moyenne (10 dernières): 53.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 480, Moyenne (10 dernières): 480.0
+tvoc: 178, Moyenne (10 dernières): 178.0
+illumination: 1, Moyenne (10 dernières): 1.0
+infrared: 1, Moyenne (10 dernières): 1.0
+infrared_and_visible: 1, Moyenne (10 dernières): 1.0
+pressure: 1002.5, Moyenne (10 dernières): 1002.5
+
+
+Salle : E209
+Valeurs pour E209:
+temperature: 20.3, Moyenne (10 dernières): 20.3
+humidity: 57, Moyenne (10 dernières): 57.0
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 501, Moyenne (10 dernières): 501.0
+tvoc: 258, Moyenne (10 dernières): 258.0
+illumination: 36, Moyenne (10 dernières): 36.0
+infrared: 13, Moyenne (10 dernières): 13.0
+infrared_and_visible: 42, Moyenne (10 dernières): 42.0
+pressure: 1001.7, Moyenne (10 dernières): 1001.7
+
+
+Salle :  hall-amphi
+Valeurs pour  hall-amphi:
+temperature: 21.3, Moyenne (10 dernières): 21.3
+humidity: 57, Moyenne (10 dernières): 57.0
+activity: 106, Moyenne (10 dernières): 106.0
+co2: 567, Moyenne (10 dernières): 567.0
+tvoc: 297, Moyenne (10 dernières): 297.0
+illumination: 52, Moyenne (10 dernières): 52.0
+infrared: 36, Moyenne (10 dernières): 36.0
+infrared_and_visible: 93, Moyenne (10 dernières): 93.0
+pressure: 1002, Moyenne (10 dernières): 1002.0
+
+
+Salle : E103
+Valeurs pour E103:
+temperature: 22.7, Moyenne (10 dernières): 22.7
+humidity: 52.5, Moyenne (10 dernières): 52.5
+activity: 71, Moyenne (10 dernières): 71.0
+co2: 1006, Moyenne (10 dernières): 1006.0
+tvoc: 375, Moyenne (10 dernières): 375.0
+illumination: 71, Moyenne (10 dernières): 71.0
+infrared: 23, Moyenne (10 dernières): 23.0
+infrared_and_visible: 78, Moyenne (10 dernières): 78.0
+pressure: 1002.4, Moyenne (10 dernières): 1002.4
+
+
+Salle : E207
+Valeurs pour E207:
+temperature: 21.4, Moyenne (10 dernières): 21.4
+humidity: 55.5, Moyenne (10 dernières): 55.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 777, Moyenne (10 dernières): 777.0
+tvoc: 670, Moyenne (10 dernières): 670.0
+illumination: 918, Moyenne (10 dernières): 918.0
+infrared: 289, Moyenne (10 dernières): 289.0
+infrared_and_visible: 987, Moyenne (10 dernières): 987.0
+pressure: 1002, Moyenne (10 dernières): 1002.0
+
+
+Salle : B217
+Valeurs pour B217:
+temperature: 22.5, Moyenne (10 dernières): 22.5
+humidity: 56, Moyenne (10 dernières): 56.0
+activity: 429, Moyenne (10 dernières): 429.0
+co2: 1176, Moyenne (10 dernières): 1176.0
+tvoc: 333, Moyenne (10 dernières): 333.0
+illumination: 60, Moyenne (10 dernières): 60.0
+infrared: 12, Moyenne (10 dernières): 12.0
+infrared_and_visible: 52, Moyenne (10 dernières): 52.0
+pressure: 1001.6, Moyenne (10 dernières): 1001.6
+
+
+Salle : E106
+Valeurs pour E106:
+temperature: 23.1, Moyenne (10 dernières): 23.1
+humidity: 55, Moyenne (10 dernières): 55.0
+activity: 51, Moyenne (10 dernières): 51.0
+co2: 1341, Moyenne (10 dernières): 1341.0
+tvoc: 456, Moyenne (10 dernières): 456.0
+illumination: 59, Moyenne (10 dernières): 59.0
+infrared: 8, Moyenne (10 dernières): 8.0
+infrared_and_visible: 44, Moyenne (10 dernières): 44.0
+pressure: 1002.1, Moyenne (10 dernières): 1002.1
+
+
+Salle : B113
+Valeurs pour B113:
+temperature: 21.3, Moyenne (10 dernières): 21.3
+humidity: 66, Moyenne (10 dernières): 66.0
+activity: 317, Moyenne (10 dernières): 317.0
+co2: 1824, Moyenne (10 dernières): 1824.0
+tvoc: 479, Moyenne (10 dernières): 479.0
+illumination: 48, Moyenne (10 dernières): 48.0
+infrared: 12, Moyenne (10 dernières): 12.0
+infrared_and_visible: 46, Moyenne (10 dernières): 46.0
+pressure: 1001.6, Moyenne (10 dernières): 1001.6
+
+
+Salle : B212
+Valeurs pour B212:
+temperature: 19.4, Moyenne (10 dernières): 19.4
+humidity: 64.5, Moyenne (10 dernières): 64.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 852, Moyenne (10 dernières): 852.0
+tvoc: 290, Moyenne (10 dernières): 290.0
+illumination: 356, Moyenne (10 dernières): 356.0
+infrared: 103, Moyenne (10 dernières): 103.0
+infrared_and_visible: 366, Moyenne (10 dernières): 366.0
+pressure: 1002, Moyenne (10 dernières): 1002.0
+
+
+Salle : B103
+Valeurs pour B103:
+temperature: 23.6, Moyenne (10 dernières): 23.6
+humidity: 57.5, Moyenne (10 dernières): 57.5
+activity: 251, Moyenne (10 dernières): 251.0
+co2: 3591, Moyenne (10 dernières): 3591.0
+tvoc: 295, Moyenne (10 dernières): 295.0
+illumination: 87, Moyenne (10 dernières): 87.0
+infrared: 20, Moyenne (10 dernières): 20.0
+infrared_and_visible: 80, Moyenne (10 dernières): 80.0
+pressure: 1002.2, Moyenne (10 dernières): 1002.2
+
+
+Salle : Foyer-personnels
+Valeurs pour Foyer-personnels:
+temperature: 20.9, Moyenne (10 dernières): 20.9
+humidity: 60.5, Moyenne (10 dernières): 60.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 841, Moyenne (10 dernières): 841.0
+tvoc: 333, Moyenne (10 dernières): 333.0
+illumination: 78, Moyenne (10 dernières): 78.0
+infrared: 23, Moyenne (10 dernières): 23.0
+infrared_and_visible: 81, Moyenne (10 dernières): 81.0
+pressure: 1001.5, Moyenne (10 dernières): 1001.5
+
+
+Salle : B201
+Valeurs pour B201:
+temperature: 20.8, Moyenne (10 dernières): 20.8
+humidity: 64, Moyenne (10 dernières): 64.0
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 1271, Moyenne (10 dernières): 1271.0
+tvoc: 271, Moyenne (10 dernières): 271.0
+illumination: 9, Moyenne (10 dernières): 9.0
+infrared: 3, Moyenne (10 dernières): 3.0
+infrared_and_visible: 10, Moyenne (10 dernières): 10.0
+pressure: 1001.7, Moyenne (10 dernières): 1001.7
+
+
+Salle : E102
+Valeurs pour E102:
+temperature: 22.5, Moyenne (10 dernières): 22.5
+humidity: 53, Moyenne (10 dernières): 53.0
+activity: 95, Moyenne (10 dernières): 95.0
+co2: 1051, Moyenne (10 dernières): 1051.0
+tvoc: 311, Moyenne (10 dernières): 311.0
+illumination: 34, Moyenne (10 dernières): 34.0
+infrared: 15, Moyenne (10 dernières): 15.0
+infrared_and_visible: 45, Moyenne (10 dernières): 45.0
+pressure: 1001.5, Moyenne (10 dernières): 1001.5
+
+
+Salle : amphi1
+Valeurs pour amphi1:
+temperature: 19.4, Moyenne (10 dernières): 19.4
+humidity: 62.5, Moyenne (10 dernières): 62.5
+activity: 0, Moyenne (10 dernières): 0.0
+co2: 450, Moyenne (10 dernières): 450.0
+tvoc: 261, Moyenne (10 dernières): 261.0
+illumination: 1, Moyenne (10 dernières): 1.0
+infrared: 1, Moyenne (10 dernières): 1.0
+infrared_and_visible: 1, Moyenne (10 dernières): 1.0
+pressure: 1002.5, Moyenne (10 dernières): 1002.5
+
+
+Salle : E208
+Valeurs pour E208:
+temperature: 21.7, Moyenne (10 dernières): 21.7
+humidity: 51.5, Moyenne (10 dernières): 51.5
+activity: 485, Moyenne (10 dernières): 485.0
+co2: 631, Moyenne (10 dernières): 631.0
+tvoc: 333, Moyenne (10 dernières): 333.0
+illumination: 69, Moyenne (10 dernières): 69.0
+infrared: 15, Moyenne (10 dernières): 15.0
+infrared_and_visible: 62, Moyenne (10 dernières): 62.0
+pressure: 1001.6, Moyenne (10 dernières): 1001.6
+
+
+Salle : hall-entrée-principale
+Valeurs pour hall-entrée-principale:
+temperature: 22, Moyenne (10 dernières): 22.0
+humidity: 54, Moyenne (10 dernières): 54.0
+activity: 56, Moyenne (10 dernières): 56.0
+co2: 565, Moyenne (10 dernières): 565.0
+tvoc: 352, Moyenne (10 dernières): 352.0
+illumination: 73, Moyenne (10 dernières): 73.0
+infrared: 51, Moyenne (10 dernières): 51.0
+infrared_and_visible: 131, Moyenne (10 dernières): 131.0
+pressure: 1002.8, Moyenne (10 dernières): 1002.8
+
