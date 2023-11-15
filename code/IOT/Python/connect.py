@@ -25,6 +25,8 @@ print("Sections trouvées :", config.sections())
 broker = config.get('MQTT', 'broker')
 port = config.getint('MQTT', 'port')
 topic = config.get('MQTT', 'topic')
+choixDonnees = config.get('MQTT', 'choixDonnees').split(',')  # Récupère les valeurs à afficher
+print("Vous avez choisi d'afficher les données suivante : ", choixDonnees)
 
 # Dictionnaire pour stocker les valeurs
 values_by_room = {}
@@ -76,12 +78,13 @@ def on_message(client, userdata, msg):
         # Mise à jour des historiques et calcul des moyennes
         data_to_write = f"Valeurs pour {room}:\n"
         for key, value in sensor_data.items():
-            historique_par_salle[room][key].append(value)
-            # S'assurer que la liste ne contient que les 10 dernières valeurs
-            if len(historique_par_salle[room][key]) > 10:
-                historique_par_salle[room][key].pop(0)  # Supprime la valeur la plus ancienne
-            moyenne = calculer_moyenne(historique_par_salle[room][key])
-            data_to_write += f"{key}: {value}, Moyenne (10 dernières): {moyenne}\n"
+            if key.lower() in choixDonnees:  # Vérifie si la clé est dans les valeurs à afficher
+                historique_par_salle[room][key].append(value)
+                # S'assurer que la liste ne contient que les 10 dernières valeurs
+                if len(historique_par_salle[room][key]) > 10:
+                    historique_par_salle[room][key].pop(0)  # Supprime la valeur la plus ancienne
+                moyenne = calculer_moyenne(historique_par_salle[room][key])
+                data_to_write += f"{key}: {value}, Moyenne (10 dernières): {moyenne}\n"
 
         print(data_to_write)
         write_to_file(room, data_to_write)
