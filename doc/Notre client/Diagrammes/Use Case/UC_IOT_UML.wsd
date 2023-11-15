@@ -1,0 +1,20 @@
+@startuml
+skinparam actorStyle awesome
+left to right direction
+actor Utilisateur as "Utilisateur" #black
+
+rectangle "Interface" {
+usecase "Paramétrer le fichier de configuration" as fileConfig #LightSkyBlue
+usecase "Visualiser les données par salle" as showByRoom #LightSkyBlue
+usecase "Mettre en place des alertes pour les seuils de dépassement" as setAlert #LightSkyBlue
+usecase "Recevoir les alertes en temps réel" as getAlert #LightSkyBlue
+usecase "Visualiser l'historique de logs" as getLogs #LightSkyBlue
+
+Utilisateur --> fileConfig
+Utilisateur --> showByRoom
+Utilisateur --> setAlert
+Utilisateur --> getAlert
+Utilisateur --> getLogs
+}
+
+@enduml
