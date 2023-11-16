@@ -44,7 +44,7 @@ def calculer_moyenne(historique):
     return sum(historique[-10:]) / min(len(historique), 10)
 
 # Fonction pour écrire dans un fichier
-def write_to_file(room, data):
+def ecrire(room, data):
     try:
         with open(file_name, "a", encoding="utf-8") as file:
             if room not in values_by_room:
@@ -76,7 +76,7 @@ def on_message(client, userdata, msg):
             historique_par_salle[room] = {key: [] for key in sensor_data.keys()}
 
         # Mise à jour des historiques et calcul des moyennes
-        data_to_write = f"Valeurs pour {room}:\n"
+        texte = f"Valeurs pour {room}:\n"
         for key, value in sensor_data.items():
             if key.lower() in choixDonnees:  # Vérifie si la clé est dans les valeurs à afficher
                 historique_par_salle[room][key].append(value)
@@ -84,10 +84,10 @@ def on_message(client, userdata, msg):
                 if len(historique_par_salle[room][key]) > 10:
                     historique_par_salle[room][key].pop(0)  # Supprime la valeur la plus ancienne
                 moyenne = calculer_moyenne(historique_par_salle[room][key])
-                data_to_write += f"{key}: {value}, Moyenne (10 dernières): {moyenne}\n"
+                texte += f"{key}: {value}, Moyenne (10 dernières): {moyenne}\n"
 
-        print(data_to_write)
-        write_to_file(room, data_to_write)
+        print(texte)
+        ecrire(room, texte)
 
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
