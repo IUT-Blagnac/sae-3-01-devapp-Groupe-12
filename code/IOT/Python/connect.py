@@ -18,7 +18,9 @@ print("Répertoire de travail actuel :", os.getcwd())
 config = configparser.ConfigParser()
 found = config.read(config_file_path)
 
-frequence_affichage = config.getint('MQTT', 'frequence_affichage')
+# Récupèrer la fréquence d'affichage à partir des paramètres de configuration MQTT
+frequence_affichage = config.getint('MQTT', 'frequence_affichage') 
+
 print("Fichiers de configuration trouvés :", found)
 print("Sections trouvées :", config.sections())
 
