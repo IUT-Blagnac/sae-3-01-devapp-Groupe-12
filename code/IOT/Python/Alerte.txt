@@ -1,3 +1,33 @@
+Alertes pour E001:
+temperature a dépassé le seuil maximum de 15. Valeur actuelle : 20.5
+humidity a dépassé le seuil maximum de 0. Valeur actuelle : 60.5
+co2 a dépassé le seuil maximum de 0. Valeur actuelle : 614
+tvoc a dépassé le seuil maximum de 0. Valeur actuelle : 775
+illumination a dépassé le seuil maximum de 0. Valeur actuelle : 16
+infrared a dépassé le seuil maximum de 0. Valeur actuelle : 8
+infrared_and_visible a dépassé le seuil maximum de 0. Valeur actuelle : 23
+pressure a dépassé le seuil maximum de 0. Valeur actuelle : 996.8
+
+Alertes pour B234:
+temperature a dépassé le seuil maximum de 15. Valeur actuelle : 22.1
+humidity a dépassé le seuil maximum de 0. Valeur actuelle : 47.5
+co2 a dépassé le seuil maximum de 0. Valeur actuelle : 964
+tvoc a dépassé le seuil maximum de 0. Valeur actuelle : 116
+illumination a dépassé le seuil maximum de 0. Valeur actuelle : 1
+infrared a dépassé le seuil maximum de 0. Valeur actuelle : 1
+infrared_and_visible a dépassé le seuil maximum de 0. Valeur actuelle : 1
+pressure a dépassé le seuil maximum de 0. Valeur actuelle : 995.5
+
+Alertes pour B212:
+temperature a dépassé le seuil maximum de 15. Valeur actuelle : 18.6
+humidity a dépassé le seuil maximum de 0. Valeur actuelle : 59
+co2 a dépassé le seuil maximum de 0. Valeur actuelle : 708
+tvoc a dépassé le seuil maximum de 0. Valeur actuelle : 200
+illumination a dépassé le seuil maximum de 0. Valeur actuelle : 55
+infrared a dépassé le seuil maximum de 0. Valeur actuelle : 16
+infrared_and_visible a dépassé le seuil maximum de 0. Valeur actuelle : 57
+pressure a dépassé le seuil maximum de 0. Valeur actuelle : 996
+
 Alertes pour B112:
 temperature a dépassé le seuil maximum de 15. Valeur actuelle : 19.9
 humidity a dépassé le seuil maximum de 0. Valeur actuelle : 52
