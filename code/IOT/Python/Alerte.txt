@@ -1,0 +1,21 @@
+Alertes pour B112:
+temperature a dépassé le seuil maximum de 15. Valeur actuelle : 19.9
+humidity a dépassé le seuil maximum de 0. Valeur actuelle : 52
+co2 a dépassé le seuil maximum de 0. Valeur actuelle : 489
+tvoc a dépassé le seuil maximum de 0. Valeur actuelle : 99
+illumination a dépassé le seuil maximum de 0. Valeur actuelle : 16
+infrared a dépassé le seuil maximum de 0. Valeur actuelle : 6
+infrared_and_visible a dépassé le seuil maximum de 0. Valeur actuelle : 19
+pressure a dépassé le seuil maximum de 0. Valeur actuelle : 997.2
+
+Alertes pour hall-entrée-principale:
+temperature a dépassé le seuil maximum de 15. Valeur actuelle : 20
+humidity a dépassé le seuil maximum de 0. Valeur actuelle : 52
+activity a dépassé le seuil maximum de 0. Valeur actuelle : 40
+co2 a dépassé le seuil maximum de 0. Valeur actuelle : 562
+tvoc a dépassé le seuil maximum de 0. Valeur actuelle : 253
+illumination a dépassé le seuil maximum de 0. Valeur actuelle : 29
+infrared a dépassé le seuil maximum de 0. Valeur actuelle : 17
+infrared_and_visible a dépassé le seuil maximum de 0. Valeur actuelle : 46
+pressure a dépassé le seuil maximum de 0. Valeur actuelle : 998.3
+
