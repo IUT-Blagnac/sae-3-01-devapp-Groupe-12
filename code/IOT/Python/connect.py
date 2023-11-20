@@ -4,6 +4,7 @@ import configparser
 import os
 import time
 from datetime import datetime
+import signal
 
 # Chemin du fichier de configuration
 config_file_path = r'code\IOT\Python\config.ini'
@@ -41,6 +42,9 @@ file_name = os.path.join(config_dir, "donnee.txt")
 if os.path.exists(file_name):
     os.remove(file_name)
 
+
+pending_data = {}
+
 # Fonction pour calculer la moyenne des 10 dernières valeurs
 def calculer_moyenne(historique):
     return sum(historique[-10:]) / min(len(historique), 10)
@@ -53,9 +57,16 @@ def ecrire(room, data):
                 file.write(f"\nSalle : {room}\n")
                 values_by_room[room] = []  # Initialise la liste pour la nouvelle salle
             file.write(data + "\n")
-        time.sleep(frequence_affichage)  # Attendre avant d'afficher la prochaine salle
+        #time.sleep(frequence_affichage)  # Attendre avant d'afficher la prochaine salle
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier : {e}")
+
+def handler(signum, frame):
+    for room, data in pending_data.items():
+        ecrire(room, data)  
+    signal.alarm(frequence_affichage)
+signal.signal(signal.SIGALRM, handler)
+
 
 # Fonction appelée lors de la connexion au broker
 def on_connect(client, userdata, flags, rc):
@@ -89,6 +100,10 @@ def on_message(client, userdata, msg):
                 texte += f"{key}: {value}, Moyenne (10 dernières): {moyenne}\n"
 
         print(texte)
+
+        pending_data[room] = texte
+        signal.alarm(0)
+
         ecrire(room, texte)
 
     except Exception as e:
