@@ -42,14 +42,18 @@ file_name = os.path.join(config_dir, "donnee.txt")
 if os.path.exists(file_name):
     os.remove(file_name)
 
+# Dictionnaire permettant de stocker les données en attente d'écriture
 pending_data = {}
 
+# On appel cette fonction lors de la réception du signal d'alarme
 def handler(signum, frame):
+    # Parcours les données en attente et les écrit dans le fichier
     for room, data in pending_data.items():
         ecrire(room, data)
-
+    # Programmation d'une nouvelle alarme pour la prochaine écriture
     signal.alarm(frequence_affichage)
 
+# Association du handler au signal d'alarme
 signal.signal(signal.SIGALRM, handler)
 
 # Fonction pour calculer la moyenne des 10 dernières valeurs
@@ -126,7 +130,7 @@ def on_message(client, userdata, msg):
         pending_data[room] = texte
         signal.alarm(0)
 
-        #ecrire(room, texte)
+        ecrire(room, texte)
 
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
