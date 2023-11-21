@@ -4,7 +4,6 @@ import configparser
 import os
 import time
 from datetime import datetime
-import threading
 
 # Chemin du fichier de configuration
 config_file_path = r'code\IOT\Python\config.ini'
@@ -42,21 +41,6 @@ file_name = os.path.join(config_dir, "donnee.txt")
 if os.path.exists(file_name):
     os.remove(file_name)
 
-pending_data = {}
-
-def handler(signum, frame):
-    # Réagir à l'alarme en écrivant les données
-    for room, data in pending_data.items():
-        ecrire(room, data)
-
-def alarm_handler():
-    while True:
-        time.sleep(frequence_affichage)
-        handler(None, None)
-alarm_thread = threading.Thread(target=alarm_handler, daemon=True)
-alarm_thread.start()
-
-
 # Fonction pour calculer la moyenne des 10 dernières valeurs
 def calculer_moyenne(historique):
     return sum(historique[-10:]) / min(len(historique), 10)
@@ -69,7 +53,7 @@ def ecrire(room, data):
                 file.write(f"\nSalle : {room}\n")
                 values_by_room[room] = []  # Initialise la liste pour la nouvelle salle
             file.write(data + "\n")
-        #time.sleep(frequence_affichage)  # Attendre avant d'afficher la prochaine salle
+        time.sleep(frequence_affichage)  # Attendre avant d'afficher la prochaine salle
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier : {e}")
 
@@ -127,11 +111,7 @@ def on_message(client, userdata, msg):
             ecrire_alerte(alerte_texte)  # S'il y a des alertes, les écrire dans le fichier
 
         print(texte)
-
-        pending_data[room] = texte
-        alarm_handler()
-
-        #ecrire(room, texte)
+        ecrire(room, texte)
 
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
