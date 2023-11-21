@@ -1,16 +1,29 @@
 package application.visualEffects;
 
-import javafx.animation.RotateTransition;
-import javafx.scene.image.ImageView;
+import javafx.animation.ScaleTransition;
+import javafx.scene.control.Button;
 import javafx.util.Duration;
 
 public class Animations {
 
-    public static void planterArbreAnimation(ImageView _hommeArbre) {
-        RotateTransition rotation = new RotateTransition(Duration.millis(500), _hommeArbre);
+    public static void setAnimatedButton(Button _butt, double _scale) {
+        ScaleTransition scaleInTransition = new ScaleTransition(Duration.millis(100),
+                _butt);
+        scaleInTransition.setToX(_scale);
+        scaleInTransition.setToY(_scale);
+        _butt.setOnMouseEntered(event -> {
+            scaleInTransition.playFromStart();
+        });
 
-        rotation.setByAngle(360);
-        rotation.setCycleCount(1);
-        rotation.play();
+        ScaleTransition scaleOutTransition = new ScaleTransition(Duration.millis(150),
+                _butt);
+        scaleOutTransition.setToX(1);
+        scaleOutTransition.setToY(1);
+
+        _butt.setOnMouseExited(event -> {
+            scaleOutTransition.play();
+            // _butt.setScaleX(1);
+            // _butt.setScaleY(1);
+        });
     }
 }

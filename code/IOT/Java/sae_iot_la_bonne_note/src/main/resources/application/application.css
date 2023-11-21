@@ -1,3 +1,17 @@
+.background {
+    -fx-background-image: url('images/entrepot_fond.jpg');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+
+.labLogo {
+    -fx-background-color: white;
+    -fx-background-radius : 30px;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 25;
+}
+
 .txtArea {
     -fx-background-radius: 10;
     -fx-border-width: 3.5px;
@@ -26,62 +40,30 @@
     -fx-background-color: grey;
 }
 
-.button:hover {
-    -fx-border-color: black;
-    -fx-border-radius: 10px;
-    -fx-border-width: 2.5px;
-}
-
 .button:pressed {
     -fx-background-color: white;
-    -fx-border-color: black;
-    -fx-border-radius: 10px;
-    -fx-border-width: 2.5px;
 }
 
-.connectionTestButton {
+.checkHistoryButton {
     -fx-background-radius: 15;
-    -fx-background-color: rgba(150, 207, 26, 0.837)
+    -fx-background-color: rgb(187, 128, 19);
 }
 
-.deleteFileButton {
+.checkWharehouseButton {
     -fx-background-radius: 15;
-    -fx-background-color: rgba(19, 136, 107, 0.534)
+    -fx-background-color: rgb(19, 187, 19);
 }
 
-.fileChooserButton {
-    -fx-background-radius: 15;
-    -fx-background-color: rgba(8, 151, 139, 0.74);
-}
-
-.fileTestButton {
-    -fx-background-radius: 15;
-    -fx-background-color: rgba(150, 207, 26, 0.837)
-}
-
-.startButton {
-    -fx-background-radius: 15;
-    -fx-background-color: rgba(19, 187, 19, 0.847);
-}
-
-.stopButton {
-    -fx-background-radius: 15;
-    -fx-background-color: rgba(187, 128, 19, 0.847);
-}
-
-.confButton {
+.settingsButton {
     -fx-background-radius: 15;
     -fx-background-color: #30afb8;
 }
 
 .leaveButton {
     -fx-background-radius: 15;
-    -fx-background-color: rgba(252, 0, 0, 0.669);
-}
+    -fx-background-color: rgb(216, 73, 73);
+    -fx-opacity: 1.0; /* Opacité totale (non transparente) */
 
-.resetButton {
-    -fx-background-radius: 15;
-    -fx-background-color: rgb(187, 153, 80);
 }
 
 .mainButtonOnHover:hover {

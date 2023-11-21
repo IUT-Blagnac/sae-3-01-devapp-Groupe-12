@@ -1,7 +1,7 @@
 package application.control;
 
 import application.Main;
-import application.view.AppMainMenuController;
+import application.view.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,9 +9,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * Classe de controleur de Dialogue de la fenêtre du menu principal de l'application.
+ * Classe de controleur de Dialogue de la fenêtre du menu principal de
+ * l'application.
  */
-public class AppMainMenu extends Application {
+public class MainMenu extends Application {
 
     // Stage de la fenêtre principale construite par DailyBankMainFrame
     private Stage primaryStage;
@@ -20,25 +21,26 @@ public class AppMainMenu extends Application {
      * Méthode de démarrage (JavaFX).
      */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage _primaryStage) {
 
-        this.primaryStage = primaryStage;
+        this.primaryStage = _primaryStage;
 
         try {
 
             // Chargement du source fxml
             FXMLLoader loader = new FXMLLoader(
-                    AppMainMenuController.class.getResource("AppMainMenu.fxml"));
+                    MainMenuController.class.getResource("MainMenu.fxml"));
             BorderPane root = loader.load();
 
             // Paramétrage du Stage : feuille de style, titre
-            Scene scene = new Scene(root, root.getPrefWidth() + 20, root.getPrefHeight() + 10);
+            Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
             scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
-            
+
             primaryStage.setScene(scene);
             primaryStage.setTitle("Menu Principal");
+            primaryStage.setResizable(false);
 
-            AppMainMenuController mainMenu = loader.getController();
+            MainMenuController mainMenu = loader.getController();
             mainMenu.initContext(this, primaryStage);
 
             mainMenu.displayDialog();
