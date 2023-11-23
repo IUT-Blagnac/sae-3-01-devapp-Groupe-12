@@ -1,4 +1,6 @@
 @startuml
+skinparam defaultFontSize 22
+
 skinparam actorStyle awesome
 
 left to right direction
@@ -12,7 +14,7 @@ actor Client as Client #black
 actor Admin as Admin #SkyBlue
 
 rectangle "Utilisateur" {
-    usecase "Gérer son compte" as ManageAccount #grey
+    usecase "Gérer son compte" as ManageAccount #white
     usecase "Créer son compte" as CreateAccount #LightCoral
     usecase "Se connecter à son compte" as Login #LightCoral
     usecase "Modifier les informations du compte" as ModifyAccountInfo #LightCoral
@@ -28,7 +30,7 @@ rectangle "Utilisateur" {
 }
 
 rectangle "Achat" {
-    usecase "Acheter" as Purchase #grey
+    usecase "Acheter" as Purchase #white
     usecase "Chercher des produits" as SearchProducts #LightSkyBlue
     usecase "Partager des produits sur les réseaux sociaux" as shareProduct #LightSkyBlue
     usecase "Ajouter au panier" as AddToCart #LightSkyBlue
@@ -44,7 +46,7 @@ rectangle "Achat" {
 }
 
 rectangle "Service Client" {
-    usecase "Contacter le service client" as customerService #grey
+    usecase "Contacter le service client" as customerService #white
 
     Client --> customerService
 }
