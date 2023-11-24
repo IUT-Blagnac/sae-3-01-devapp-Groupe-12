@@ -107,8 +107,10 @@ De plus ce fichier `README.adoc` devra être à jour des informations suivantes 
 Voici un exemple d'évaluation :
 
 ifdef::env-github[]
-image:https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image]
+image:https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=935875429&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=935875429&format=image]
 endif::[]
+
+Pensez à effacer du readme tout template inutile et à le mettre à jour avec les informations sur votre équipe. Je n'ai pas soit un scumboard , soit un doc dédié au backlog produit. Du coup où est votre backlog de sprint et les taches(task) à faire ? Pensez à faire un scrumboard par sprint. Je n'ai rien sur les tests (cahier ou fiche à révoir), les docs ne sont pas initialisées (au moins page de garde, sommaire ...), je n'ai pas de release ou au moins par de compte rendu du travail déjà effectué. On est vendredi je n'ai aucune activite depuis plus de 3 jours  de Rayan et Yanis que faites-vous ?!! 
 
 ifndef::env-github[]
 ++++
