@@ -114,6 +114,23 @@ Lien vers les tests Javafx :
 |
 |===
 
+=== Partie WEB
+
+Lien vers le diagramme de séquence système : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/DSS_exemple_WEB.png[DSS IoT]
+
+Lien vers le use case : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[UC IoT]
+
+**Partie PHP**
+
+Lien vers les docs PHP : 
+
+Lien vers les tests PHP : 
+
+**Partie BD**
+
+Lien vers les docs BD : 
+
+Lien vers les tests BD :
 
 == Gestion de projet & Qualité
 
