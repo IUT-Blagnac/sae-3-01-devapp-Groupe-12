@@ -89,7 +89,9 @@ TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
 
 === Partie IoT
 
-Lien vers les diagrammes de séquence système : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20Séquence%20Système[DSS IoT]
+Lien vers le diagramme de séquence système : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20Séquence%20Système/DSS_exemple_IOT.png[DSS IoT]
+
+Lien vers le use case : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[UC IoT]
 
 ==== Partie Python
 
