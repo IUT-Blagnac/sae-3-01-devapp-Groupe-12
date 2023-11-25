@@ -95,6 +95,7 @@ Lien vers le use case : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12
 
 **Partie Python**
 
+
 Lien vers les docs Python : 
 
 Lien vers les tests Python : 
@@ -110,7 +111,7 @@ Lien vers les tests Javafx :
 [cols="1,1"]
 |===
 |Sprint 1
-|
+|pipicacaprout
 |===
 
 
@@ -124,7 +125,7 @@ De plus ce fichier `README.adoc` devra être à jour des informations suivantes 
 - Version courante : https://github.com/IUT-Blagnac/sae3-01-template/releases/tag/v0.1.2[v0.1.2]
 - Lien vers la doc technique
 - Lien vers la doc utilisateur
-- Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant
+- Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : https://github.com/orgs/IUT-Blagnac/projects/142[US]
 - Tests unitaires et plans de test
 - Indicateurs de qualité du code (dette technique)
 - ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
