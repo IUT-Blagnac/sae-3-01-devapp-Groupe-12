@@ -93,7 +93,11 @@ TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
 
 Lien vers les docs Python : 
 
+Lien vers les tests Python : 
+
 ==== Partie Javafx
+
+Lien vers les docs Javafx : 
 
 Lien vers les tests Javafx : 
 
