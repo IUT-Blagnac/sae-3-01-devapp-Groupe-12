@@ -111,7 +111,7 @@ Lien vers les tests Javafx :
 [cols="1,1"]
 |===
 |Sprint 1
-|pipicacaprout
+|
 |===
 
 
