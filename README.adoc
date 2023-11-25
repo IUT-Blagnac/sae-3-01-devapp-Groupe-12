@@ -93,13 +93,13 @@ Lien vers le diagramme de séquence système : https://github.com/IUT-Blagnac/sa
 
 Lien vers le use case : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[UC IoT]
 
-==== Partie Python
+**Partie Python**
 
 Lien vers les docs Python : 
 
 Lien vers les tests Python : 
 
-==== Partie Javafx
+**Partie Javafx**
 
 Lien vers les docs Javafx : 
 
