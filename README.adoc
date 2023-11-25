@@ -87,7 +87,42 @@ TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
 
 == Réalisations 
 
-TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
+=== Partie IoT
+
+==== Partie Python
+
+Lien vers les docs Python : 
+
+==== Partie Javafx
+
+Lien vers les tests Javafx : 
+
+
+
+[cols="1,1"]
+|===
+|Sprint 3
+|
+|===
+
+[cols="1,1"]
+|===
+|Sprint 4
+|
+|===
+
+[cols="1,1"]
+|===
+|Sprint 5
+|
+|===
+
+[cols="1,1"]
+|===
+|Sprint 6
+|
+|===
+
 
 == Gestion de projet & Qualité
 
