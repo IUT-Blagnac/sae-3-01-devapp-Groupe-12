@@ -11,7 +11,6 @@ config_file_path = r'code\IOT\Python\config.ini'
 # Obtenir le répertoire du fichier de configuration
 config_dir = os.path.dirname(config_file_path)
 
-
 print("Répertoire de travail actuel :", os.getcwd())
 
 # Lire les paramètres de configuration
@@ -34,41 +33,83 @@ print("Vous avez choisi d'afficher les données suivante : ", choix_donnees)
 values_by_room = {}
 historique_par_salle = {}
 
-# Nom du fichier pour écrire les données
-file_name = os.path.join(config_dir, "donnee.txt")
+# Nom du fichier pour écrire les logs
+fichier_logs = os.path.join(config_dir, config.get('CONFIG','fichier_logs') + '.json')
 
-# Supprimer un fichier existant
-if os.path.exists(file_name):
-    os.remove(file_name)
+# Nom du fichier pour écrire les données
+fichier_donnees = os.path.join(config_dir, config.get('CONFIG','fichier_donnees') + '.json')
+
+# Nom du fichier pour écrire les alertes
+fichier_alertes = os.path.join(config_dir, config.get('CONFIG','fichier_alerte') + '.json')
+
+# Supprimer le fichier existant
+if os.path.exists(fichier_donnees):
+    os.remove(fichier_donnees)
 
 # Fonction pour calculer la moyenne des 10 dernières valeurs
 def calculer_moyenne(historique):
     return sum(historique[-10:]) / min(len(historique), 10)
 
-# Fonction pour écrire dans un fichier
-def ecrire(room, data):
+def ecrire(ecrire_log, nom_fichier, room, data):
     try:
-        fd = os.open(file_name, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
-        if room not in values_by_room:
-            os.write(fd, f"\nSalle : {room}\n".encode())
-            values_by_room[room] = []
-        os.write(fd, (data + "\n").encode())
-        os.close(fd)
-        time.sleep(frequence_affichage)
+        # Ouverture du fichier JSON en mode Lecture / Ecriture, le créer s'il n'existe pas avec les droits 644(User rw, Group rx, Others rx)
+        fichier = os.open(nom_fichier, os.O_RDWR | os.O_CREAT, 0o644)
+        
+        # Écriture d'un objet JSON vide si le fichier est nouveau
+        if os.path.getsize(fichier) == 0:
+            os.write(fichier, json.dumps({}).encode())
+        
+        # Lecture des données JSON existantes
+        os.lseek(fichier, 0, os.SEEK_SET)
+        contenu = os.read(fichier, os.path.getsize(fichier)).decode()
+        if contenu:
+            donnees = json.loads(contenu)
+        else:
+            donnees = {}
+        # Mise à jour des données avec les nouvelles informations
+        if room not in donnees:
+            donnees[room] = []
+        # Si écriture dans le fichier de log, on ajoute les données au lieu de les remplacer
+        if(ecrire_log):
+            donnees[room].append(data)
+        else: 
+            donnees[room] = data
+        # Écriture des données mises à jour dans le fichier sans effacer le contenu existant
+        os.lseek(fichier, 0, os.SEEK_SET)
+        os.write(fichier, json.dumps(donnees, indent=4).encode())
+        # Fermeture du descripteur de fichier
+        os.close(fichier)
+        # Mise en "sommeil" avant la prochaine écriture
+        if(ecrire_log):
+            time.sleep(frequence_affichage)
     except Exception as e:
-        print(f"Erreur lors de l'écriture dans le fichier : {e}")
+        print(f"Erreur lors de l'écriture dans le fichier données : {e}")
 
-
-def ecrire_alerte(alerte):
+def ecrire_alerte(room, alerte):
     try:
-        alert_file = os.path.join(config_dir, "Alerte.txt")
-        fd = os.open(alert_file, os.O_RDONLY)
-        content = os.read(fd, 10000).decode()  # Lire une quantité limitée de données
-        os.close(fd)
+        # Ouverture du fichier JSON en mode Lecture / Ecriture, le créer s'il n'existe pas avec les droits 644(User rw, Group rx, Others rx)
+        fic_alertes = os.open(fichier_alertes, os.O_RDWR | os.O_CREAT, 0o644)
+        
+        # Écriture d'un objet JSON vide si le fichier est nouveau
+        if os.path.getsize(fichier_alertes) == 0:
+            os.write(fic_alertes, json.dumps({}).encode())
+        
+        # Lecture des données JSON existantes
+        os.lseek(fic_alertes, 0, os.SEEK_SET)
+        contenu = os.read(fic_alertes, os.path.getsize(fichier_alertes)).decode()
+        if contenu:
+            donnees = json.loads(contenu)
+        else:
+            donnees = {}
+        # Mise à jour des données avec les nouvelles informations
+        if room not in donnees:
+            donnees[room] = []
+        donnees[room].append(alerte)
 
-        fd = os.open(alert_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
-        os.write(fd, (alerte + "\n" + content).encode())
-        os.close(fd)
+        os.lseek(fic_alertes, 0, os.SEEK_SET)
+        os.write(fic_alertes, json.dumps(donnees, indent=4).encode())
+        # Fermeture du descripteur de fichier
+        os.close(fic_alertes)
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier d'alerte : {e}")
         
@@ -76,6 +117,7 @@ def ecrire_alerte(alerte):
 def on_connect(client, userdata, flags, rc):
     print("Connecté avec le code résultat " + str(rc))
     client.subscribe(topic)
+
 
 # Fonction appelée à la réception d'un message
 def on_message(client, userdata, msg):
@@ -92,8 +134,26 @@ def on_message(client, userdata, msg):
         if room not in historique_par_salle:
             historique_par_salle[room] = {key: [] for key in sensor_data.keys()}
 
-        alerte_texte = f"Alertes pour {room}:\n"
-        texte = f"Valeurs pour {room}:\n"
+        maintenant = datetime.now()
+        date_heure = maintenant.strftime("%d-%m-%Y %H:%M:%S")  
+
+        envoyer_alerte = False
+        
+        alerte = {
+            "date": date_heure,
+            "donnees": {}
+            }
+        alerte_texte = ""
+
+        salle_donnees = {
+            "date": date_heure,
+            "donnees": {}
+            }
+
+        donnees_logs = {
+            "date": date_heure,
+            "donnees": {}
+            }
 
         for key, value in sensor_data.items():
             if key.lower() in choix_donnees:  # Vérifie si la clé est dans les valeurs à afficher
@@ -102,23 +162,33 @@ def on_message(client, userdata, msg):
                 if len(historique_par_salle[room][key]) > 10:
                     historique_par_salle[room][key].pop(0)  # Supprime la valeur la plus ancienne
                 moyenne = calculer_moyenne(historique_par_salle[room][key])
-                texte += f"{key}: {value}, Moyenne (10 dernières): {moyenne}\n"
-
+                salle_donnees["donnees"][key] = {
+                    "valeur": value,
+                    "moyenne": moyenne
+                }
+                donnees_logs["donnees"][key] = value
                 # Vérification des seuils pour déclencher une alerte
                 seuil_key = f"seuil_{key.lower()}"
                 if config.has_option('ALERT', seuil_key):
                     seuil_max = config.getint('ALERT', seuil_key)
                     if value > seuil_max:
-                        alerte_texte += f"{key} a dépassé le seuil maximum de {seuil_max}. Valeur actuelle : {value}\n"
+                        alerte["donnees"][key] = {
+                            "valeur": value,
+                            "seuil_max": seuil_max
+                            }
+                        alerte_texte += f"- {key} a dépassé le seuil maximum de {seuil_max}, valeur actuelle : {value}\n"
+                        envoyer_alerte = True
 
-        if len(alerte_texte) > len(f"Alertes pour {room}:\n"):
-            ecrire_alerte(alerte_texte)  # S'il y a des alertes, les écrire dans le fichier
-
-        print(texte)
-        ecrire(room, texte)
+        print(salle_donnees)
+        if(envoyer_alerte):
+            print ("Alertes : \n" + alerte_texte)
+            ecrire_alerte(room, alerte)  # S'il y a des alertes, les écrire dans le fichier
+        ecrire(False, fichier_donnees, room, salle_donnees)
+        ecrire(True, fichier_logs, room, salle_donnees)
 
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
+
 
 # Création et configuration du client MQTT
 client = mqtt.Client()
