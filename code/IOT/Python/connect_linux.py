@@ -20,7 +20,7 @@ config = configparser.ConfigParser()
 found = config.read(config_file_path)
 
 # Récupèrer la fréquence d'affichage à partir des paramètres de configuration MQTT
-frequence_affichage = config.getint('MQTT', 'frequence_affichage') 
+frequence_affichage = config.getint('CONFIG', 'frequence_affichage') 
 
 print("Fichiers de configuration trouvés :", found)
 print("Sections trouvées :", config.sections())
@@ -28,7 +28,7 @@ print("Sections trouvées :", config.sections())
 broker = config.get('MQTT', 'broker')
 port = config.getint('MQTT', 'port')
 topic = config.get('MQTT', 'topic')
-choix_donnees = config.get('MQTT', 'choix_donnees').split(',')  # Récupère les valeurs à afficher
+choix_donnees = config.get('CONFIG', 'choix_donnees').split(',')  # Récupère les valeurs à afficher
 print("Vous avez choisi d'afficher les données suivante : ", choix_donnees)
 
 # Dictionnaire pour stocker les valeurs
@@ -63,23 +63,26 @@ def calculer_moyenne(historique):
 # Fonction pour écrire dans un fichier
 def ecrire(room, data):
     try:
-        with open(file_name, "a", encoding="utf-8") as file:
-            if room not in values_by_room:
-                file.write(f"\nSalle : {room}\n")
-                values_by_room[room] = []  # Initialise la liste pour la nouvelle salle
-            file.write(data + "\n")
-        time.sleep(frequence_affichage)  # Attendre avant d'afficher la prochaine salle
+        fd = os.open(file_name, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
+        if room not in values_by_room:
+            os.write(fd, f"\nSalle : {room}\n".encode())
+            values_by_room[room] = []
+        os.write(fd, (data + "\n").encode())
+        os.close(fd)
+        time.sleep(frequence_affichage)
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier : {e}")
 
 def ecrire_alerte(alerte):
     try:
         alert_file = os.path.join(config_dir, "Alerte.txt")
-        with open(alert_file, "r", encoding="utf-8") as file:
-            content = file.read()  # Lire le contenu actuel du fichier
-        with open(alert_file, "w", encoding="utf-8") as file:
-            file.write(alerte + "\n")  # Ajouter la nouvelle alerte au début
-            file.write(content)  # Réécrire le contenu actuel après la nouvelle alerte
+        fd = os.open(alert_file, os.O_RDONLY)
+        content = os.read(fd, 10000).decode()  # Lire une quantité limitée de données
+        os.close(fd)
+
+        fd = os.open(alert_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
+        os.write(fd, (alerte + "\n" + content).encode())
+        os.close(fd)
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier d'alerte : {e}")
         
@@ -117,8 +120,8 @@ def on_message(client, userdata, msg):
 
                 # Vérification des seuils pour déclencher une alerte
                 seuil_key = f"seuil_{key.lower()}"
-                if config.has_option('MQTT', seuil_key):
-                    seuil_max = config.getint('MQTT', seuil_key)
+                if config.has_option('ALERT', seuil_key):
+                    seuil_max = config.getint('ALERT', seuil_key)
                     if value > seuil_max:
                         alerte_texte += f"{key} a dépassé le seuil maximum de {seuil_max}. Valeur actuelle : {value}\n"
 
