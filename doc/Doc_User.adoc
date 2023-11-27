@@ -1,0 +1,57 @@
+= Documentation Utilisateur - Partie IoT
+
+== Introduction
+
+Bienvenue dans la documentation utilisateur du projet IoT. Ce projet utilise le langage de programmation Python et la bibliothèque Paho MQTT pour collecter et traiter des données provenant de capteurs. Cette documentation vous guidera à travers les étapes d'installation, de configuration et d'utilisation du code.
+
+== Contenu
+
+* <<installation, Installation>>
+* <<configuration, Configuration>>
+* <<utilisation, Utilisation>>
+
+[[installation]]
+=== 1. Installation
+
+==== Prérequis
+
+- Python installé sur votre machine.
+
+==== Étapes
+
+1. Téléchargez le code source depuis le dépôt GitHub.
+2. Ouvrez un terminal et accédez au répertoire du code.
+3. Installez les dépendances en exécutant la commande suivante :
+   [source,bash]
+   ----
+   pip install paho-mqtt
+   ----
+4. Assurez-vous que le fichier de configuration (`config.ini`) est correctement configuré.
+
+[[configuration]]
+=== 2. Configuration
+
+Le fichier de configuration (`config.ini`) est essentiel pour le bon fonctionnement du projet. Assurez-vous de configurer les paramètres suivants :
+
+* **MQTT** : Configurez le broker, le port et le topic MQTT selon votre configuration.
+* **CONFIG** : Choisissez les fichiers de sortie, la fréquence d'affichage, et les données à afficher.
+* **ALERT** : Définissez les seuils d'alerte pour chaque type de données.
+
+[[utilisation]]
+=== 3. Utilisation
+
+Une fois le projet installé et configuré, suivez ces étapes pour lancer le programme :
+
+1. Exécutez le fichier Python (`votre_code.py`) dans un terminal.
+   [source,bash]
+   ----
+   python votre_code.py
+   ----
+2. Le programme se connectera au broker MQTT et commencera à recevoir des données des capteurs.
+3. Les données seront traitées et enregistrées dans les fichiers spécifiés dans le fichier de configuration.
+
+== Conclusion
+
+Vous avez maintenant installé, configuré et utilisé avec succès le projet IoT. N'hésitez pas à explorer les fichiers de sortie, tels que les journaux et les alertes, pour obtenir des informations détaillées sur les données capturées par les capteurs.
+
+Pour toute question ou problème, veuillez consulter la documentation complète ou contacter l'assistance technique.
