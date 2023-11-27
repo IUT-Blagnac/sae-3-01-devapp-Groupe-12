@@ -150,8 +150,8 @@ De plus ce fichier `README.adoc` devra être à jour des informations suivantes 
 - Lien vers le backlog général : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Backlog/Backlog%20Produit%20générale.pdf[BL Général]
 - Lien vers le backlog du sprint 1 : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Backlogs/Backlog%20Sprint%201.pdf[BL Sprint 1]
 - Lien vers les Ordres du jour et les CR des réunions : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/doc/Réunions[Réunions]
-- Lien vers la doc technique
-- Lien vers la doc utilisateur
+- Lien vers la https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique.adoc[doc technique] 
+- Lien vers la https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User.adoc[doc utilisateur]
 - Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : https://github.com/orgs/IUT-Blagnac/projects/142[US]
 - Tests unitaires et plans de test
 - Indicateurs de qualité du code (dette technique)
