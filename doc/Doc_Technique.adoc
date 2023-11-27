@@ -1,0 +1,84 @@
+= Document Technique Utilisateur SAE 3.01 Version : 2.0 Date : 27 novembre 2023 - Groupe 12
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
+
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
+
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
+
+Équipe de développement :
+- Développeurs : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU
+
+toc::[]
+
+== Présentation de l'application
+=== Contexte général
+
+=== Description du besoin
+
+=== Cas d'utilisation
+
+== Architecture du projet 
+
+=== Schéma globale
+
+=== Diagramme de classe
+
+=== Packages et ressources utilisées
+
+== Configurer et lancer l'application
+
+=== Pré-requis nécéssaires 
+
+=== Se connecter
+
+=== Configurez la base de données
+
+== Fonctionnalités développées
+
+=== Fonctionnalite x (développé par x x)
+
+Partie du UseCase :
+
+Partie du diagramme de classe : 
+
+Diagramme de séquence : 
+
+Classes utilisées : 
+
+package Application.control :
+
+- ComptesManagement -> la méthode *creerNouveauCompte* appelée par doNouveauCompte (ComptesManagementController)
+
+- CompteEditorPane -> *constructeur de CompteEditorPane* && la méthode *doCompteEditorDialog* appelée par creerNouveauCompte (ComptesManagement)
+
+package Application.view :
+
+- ComptesManagementController -> la méthode *doNouveauCompte* appelée par comptesmanagement.fxml (bouton nouveau compte sur la scène)
+
+- ComptesEditorPaneController -> la méthode *displayDialog* appelée par doCompteEditorDialog (CompteEditorPane)
+
+package Model.orm :
+
+- Access_BD_CompteCourant -> la méthode *addCompte* appelée par creerNouveauCompte (ComptesManagement)
