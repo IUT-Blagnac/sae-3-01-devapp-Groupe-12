@@ -1,0 +1,170 @@
+{
+    "E103": [
+        {
+            "date": "27-11-2023 14:46:09",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.5,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 44,
+                    "seuil_max": 0
+                },
+                "activity": {
+                    "valeur": 360,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 1141,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ],
+    "E207": [
+        {
+            "date": "27-11-2023 14:47:09",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.4,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 46,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 577,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ],
+    "amphi1": [
+        {
+            "date": "27-11-2023 14:47:48",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.9,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 50,
+                    "seuil_max": 0
+                },
+                "activity": {
+                    "valeur": 50,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 1330,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ],
+    "B112": [
+        {
+            "date": "27-11-2023 14:52:48",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.6,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 42,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 976,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ],
+    "E106": [
+        {
+            "date": "27-11-2023 14:56:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.1,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 46,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 517,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ],
+    "B103": [
+        {
+            "date": "27-11-2023 15:11:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 23.1,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 43,
+                    "seuil_max": 0
+                },
+                "activity": {
+                    "valeur": 10,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 3674,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ],
+    "B201": [
+        {
+            "date": "27-11-2023 15:27:12",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 48.5,
+                    "seuil_max": 0
+                },
+                "activity": {
+                    "valeur": 296,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 1690,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ],
+    "Foyer-personnels": [
+        {
+            "date": "27-11-2023 15:42:12",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20,
+                    "seuil_max": 0
+                },
+                "humidity": {
+                    "valeur": 44,
+                    "seuil_max": 0
+                },
+                "co2": {
+                    "valeur": 1253,
+                    "seuil_max": 0
+                }
+            }
+        }
+    ]
+}

@@ -207,10 +207,10 @@ def on_message(client, userdata, msg):
         ecrire(True, fichier_logs, room, salle_donnees)
 
         #pending_data[room] = salle_donnees
-        signal.alarm(0)
+        #signal.alarm(0)
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
-
+    signal.alarm(frequence_affichage)
 
 # Création et configuration du client MQTT
 client = mqtt.Client()
