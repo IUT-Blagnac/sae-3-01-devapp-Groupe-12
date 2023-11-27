@@ -1,4 +1,4 @@
-= Document Technique Utilisateur DailyBank - Version : 2.0 - Date : 26 mai 2023 Groupe 4B02 - Rédigé par Ahmad KHALIL
+= Document Technique Utilisateur SAE 3.01 Version : 2.0 Date : 27 novembre 2023 - Groupe 12
 :icons: font
 :models: models
 :experimental:
