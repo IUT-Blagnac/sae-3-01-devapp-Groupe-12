@@ -6,10 +6,41 @@
 
 .labLogo {
     -fx-background-color: white;
-    -fx-background-radius : 30px;
+    -fx-background-radius: 30px;
     -fx-border-color: black;
     -fx-border-width: 5;
     -fx-border-radius: 25;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2.5;
+
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+    -fx-background-color: black;
+}
+
+.choiceBox {
+    -fx-background-radius: 10;
+    -fx-border-width: 3.5px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.choiceBox:focused {
+    -fx-border-color: #30afb8;
 }
 
 .txtArea {
@@ -28,10 +59,10 @@
 }
 
 .undefined-txtArea {
-    -fx-background-radius: 10;
-    -fx-border-width: 3.5px;
+    /* -fx-background-radius: 10; */
+    /* -fx-border-width: 3.5px; */
     -fx-border-color: rgba(252, 0, 0, 0.669);
-    -fx-border-radius: 5px;
+    /* -fx-border-radius: 5px; */
     -fx-focus-color: rgba(252, 0, 0, 0.669);
 }
 
@@ -61,9 +92,27 @@
 
 .leaveButton {
     -fx-background-radius: 15;
-    -fx-background-color: rgb(216, 73, 73);
-    -fx-opacity: 1.0; /* Opacité totale (non transparente) */
+    -fx-background-color: rgba(252, 0, 0, 0.669);
+}
 
+.confirmButton {
+    -fx-background-radius: 15;
+    -fx-background-color: rgba(19, 187, 19, 0.847);
+}
+
+.resetButton {
+    -fx-background-radius: 15;
+    -fx-background-color: rgb(187, 153, 80);
+}
+
+.connectionTestButton {
+    -fx-background-radius: 15;
+    -fx-background-color: rgba(26, 189, 207, 0.837);
+}
+
+.infoButton {
+    -fx-background-radius: 15;
+    -fx-background-color: rgba(26, 186, 207, 0.395);
 }
 
 .mainButtonOnHover:hover {

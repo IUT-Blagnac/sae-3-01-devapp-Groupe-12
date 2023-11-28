@@ -43,12 +43,16 @@ public class MainMenu extends Application {
             MainMenuController mainMenu = loader.getController();
             mainMenu.initContext(this, primaryStage);
 
-            mainMenu.displayDialog();
+            this.show();
 
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
         }
+    }
+
+    public void show() {
+        this.primaryStage.show();
     }
 
     /**

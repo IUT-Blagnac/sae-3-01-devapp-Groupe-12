@@ -1,13 +1,17 @@
 package application.view;
 
+import application.control.Configuration;
 import application.control.MainMenu;
 import application.tools.AlertUtilities;
 import application.visualEffects.Animations;
+import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 public class MainMenuController {
 
@@ -21,7 +25,7 @@ public class MainMenuController {
     private Button buttCheckHistory;
 
     @FXML
-    private Button buttSettings;
+    private Button buttConfiguration;
 
     @FXML
     private Button buttLeave;
@@ -36,19 +40,11 @@ public class MainMenuController {
         this.primaryStage = _primaryStage;
         this.primaryStage.setOnCloseRequest(e -> this.closeWindow(e));
 
-        Animations.setAnimatedButton(buttCheckWhareHouse, 1.12);
-        Animations.setAnimatedButton(buttCheckHistory, 1.12);
-        Animations.setAnimatedButton(buttSettings, 1.12);
-        Animations.setAnimatedButton(buttLeave, 1.12);
+        Animations.setAnimatedButton(buttCheckWhareHouse, 1.12, 100);
+        Animations.setAnimatedButton(buttCheckHistory, 1.12, 100);
+        Animations.setAnimatedButton(buttConfiguration, 1.12, 100);
+        Animations.setAnimatedButton(buttLeave, 1.12, 100);
 
-    }
-
-    /*
-     * Méthode qui affiche la scène.
-     * 
-     */
-    public void displayDialog() {
-        this.primaryStage.show();
     }
 
     /*
@@ -65,12 +61,22 @@ public class MainMenuController {
         _e.consume();
     }
 
+    @FXML
+    private void doConfiguration() {
+        Animations.sceneSwapAnimation(buttConfiguration, 1.3, 50, () -> {
+            Configuration conf = new Configuration(primaryStage);
+            conf.show();
+        });
+    }
+
     /*
      * Méthode associé au bouton FXML qui permet de fermer la fenêtre.
      * 
      */
     @FXML
     private void doLeave() {
-        this.primaryStage.close();
+        Animations.sceneSwapAnimation(buttLeave, 1.3, 100, () -> {
+            this.primaryStage.close();
+        });
     }
 }

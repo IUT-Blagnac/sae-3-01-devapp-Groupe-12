@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -15,7 +22,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="background" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.MainMenuController">
+<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="background" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.MainMenuController">
    <top>
       <HBox maxHeight="200.0" maxWidth="1024.0" minHeight="200.0" minWidth="1024.0" prefHeight="200.0" prefWidth="1024.0" style="-fx-border-width: 0 0 10 0; -fx-border-color: black; -fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -63,9 +70,9 @@
             <RowConstraints maxHeight="125.0" minHeight="80.0" prefHeight="125.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="buttSettings" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Fichier de configuration" textAlignment="CENTER" GridPane.rowIndex="3">
+            <Button fx:id="buttConfiguration" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" onAction="#doConfiguration" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Fichier de configuration" textAlignment="CENTER" GridPane.rowIndex="3">
                <GridPane.margin>
-                  <Insets bottom="10.0" left="300.0" top="10.0" />
+                  <Insets bottom="10.0" left="280.0" top="10.0" />
                </GridPane.margin>
                <font>
                   <Font name="Arial Bold" size="30.0" />
@@ -76,16 +83,16 @@
                   <String fx:value="mainButtonOnHover" />
                </styleClass>
                <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="55.0" translateX="5.0">
+                  <ImageView fitHeight="55.0" fitWidth="55.0" translateX="10.0">
                      <image>
                         <Image url="@../images/settings_icon.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttLeave" contentDisplay="RIGHT" maxHeight="60.0" minHeight="60.0" mnemonicParsing="false" onAction="#doLeave" opacity="0.95" prefHeight="60.0" prefWidth="206.0" stylesheets="@../application.css" text="Quitter" GridPane.rowIndex="4">
+            <Button fx:id="buttLeave" contentDisplay="RIGHT" maxHeight="60.0" maxWidth="220.0" minHeight="60.0" minWidth="220.0" mnemonicParsing="false" onAction="#doLeave" opacity="0.95" prefHeight="60.0" prefWidth="220.0" stylesheets="@../application.css" text="Quitter" GridPane.rowIndex="4">
                <GridPane.margin>
-                  <Insets bottom="10.0" left="435.0" top="10.0" />
+                  <Insets bottom="10.0" left="415.0" top="10.0" />
                </GridPane.margin>
                <font>
                   <Font name="Arial Bold" size="32.0" />
@@ -105,7 +112,7 @@
             </Button>
             <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Visualiser l'historique" textAlignment="CENTER" GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets bottom="10.0" left="300.0" top="10.0" />
+                  <Insets bottom="10.0" left="280.0" top="10.0" />
                </GridPane.margin>
                <font>
                   <Font name="Arial Bold" size="30.0" />
@@ -125,7 +132,7 @@
             </Button>
             <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Visualiser l'entrepôt" textAlignment="CENTER" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="10.0" left="300.0" top="10.0" />
+                  <Insets bottom="10.0" left="280.0" top="10.0" />
                </GridPane.margin>
                <font>
                   <Font name="Arial Bold" size="30.0" />

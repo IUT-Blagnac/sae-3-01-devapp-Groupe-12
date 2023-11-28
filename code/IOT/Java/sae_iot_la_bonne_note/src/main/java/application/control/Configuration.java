@@ -29,7 +29,7 @@ public class Configuration {
 
             // Chargement du source fxml
             FXMLLoader loader = new FXMLLoader(
-                    MainMenuController.class.getResource("MainMenu.fxml"));
+                    MainMenuController.class.getResource("Configuration.fxml"));
             BorderPane root = loader.load();
 
             // Paramétrage du Stage : feuille de style, titre
@@ -52,7 +52,7 @@ public class Configuration {
     /**
      * Méthode principale de lancement de l'application.
      */
-    public void runApp() {
-        this.controller.displayDialog();
+    public void show() {
+        this.primaryStage.show();
     }
 }
