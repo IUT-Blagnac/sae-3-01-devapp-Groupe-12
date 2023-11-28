@@ -60,8 +60,9 @@ def handler(signum, frame):
     # for room, data in pending_data.items():
     #     ecrire(room, data)
     # Programmation d'une nouvelle alarme pour la prochaine écriture
-    signal.alarm(frequence_affichage)
-
+    
+    pass
+    #signal.alarm(frequence_affichage)
 
 # Association du handler au signal d'alarme
 signal.signal(signal.SIGALRM, handler)
@@ -101,6 +102,10 @@ def ecrire(ecrire_log, nom_fichier, room, data):
         os.write(fichier, json.dumps(donnees, indent=4).encode())
         # Fermeture du descripteur de fichier
         os.close(fichier)
+        if(ecrire_log):
+            signal.alarm(frequence_affichage)
+            signal.pause()
+
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier données : {e}")
 
@@ -221,4 +226,14 @@ client.on_message = on_message
 client.connect(broker, port, 60)
 
 # Boucle de traitement des messages
-client.loop_forever()
+try:
+    # Boucle de traitement des messages
+    client.loop_forever()
+
+except KeyboardInterrupt:
+    print("Interruption du script par l'utilisateur.")
+
+finally:
+    # Nettoyer et désactiver le signal SIGALRM à la fin du script
+    signal.alarm(0)
+    signal.signal(signal.SIGALRM, signal.SIG_DFL)
