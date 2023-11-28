@@ -28,22 +28,7 @@ ifdef::env-github[]
 :icongit: Git
 endif::[]
 
-// /!\ A MODIFIER !!!
-:baseURL: https://github.com/IUT-Blagnac/sae3-01-template
 
-// Tags
-image:{baseURL}/actions/workflows/blank.yml/badge.svg[Bidon] 
-image:{baseURL}/actions/workflows/build.yml/badge.svg[Build] 
-image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests] 
-image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License: MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
-//---------------------------------------------------------------
-
-TIP: Pensez à mettre à jour les infos dans ce fichier pour que les badges pointent sur les résultats effectifs de vos intégrations continue ou sur la bonne licence logicielle.
-
-WARNING: Ce dépôt présente le projet à développer dans le cadre de la SAÉ 3.01 du BUT1 Informatique de l'IUT de Blagnac.
-
-Ce fichier `README.adoc` (dont vous lisez sûrement le rendu HTML automatiquement effectué par GitHUb), fait partie du dépôt initial cloné à partir du lien GitHub classroom qui vous a été donné en cours (https://classroom.github.com/a/fePVlfpN).
-Vous trouverez le dépôt "template" qui a servi de base ici : https://github.com/IUT-Blagnac/sae3-01-template. En complément du cours Moodle de la SAE 3.01 (cf. <<liensUtiles>>), ce dépôt template vous permet d'accéder à des exemples d'https://github.com/IUT-Blagnac/sae3-01-template/issues[issues], de https://github.com/IUT-Blagnac/sae3-01-template/releases[releases], ou d'autres artefacts à venir.
 
 toc::[]
 
