@@ -43,8 +43,6 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 == Contexte général
 
-TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
-
 === Dépôt initial
 
 Ce dépôt initial a été créé pour que tous les groupes de 2ème année aient les mêmes informations de départ.
@@ -59,8 +57,6 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 *** `us.yml` => Exemple de template pour les User Stories
 *** `bug.yml` => Exemple de template pour les issues de bug report
 
-TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-vous en pour en ajouter.
-
 [[liensUtiles]]
 === Liens utiles
 
@@ -68,31 +64,33 @@ TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-
 - Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
 - Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
 
-TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
-
 == Réalisations 
 
 === Partie IoT
 
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20Séquence%20Système/DSS_exemple_IOT.png[Lien vers le diagramme de séquence système]
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_IOT.adoc[Documentation Utilisateur]
 
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[Lien vers le use case]
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_IOT.adoc[Documentation Technique] 
+
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[Cas d'utilisation (Use case)]
+
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20Séquence%20Système/DSS_exemple_IOT.png[Diagramme de séquence système]
 
 **Partie Python**
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Python[fichiers sources] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Python[Fichiers sources] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[docs (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[tests (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)] 
 
 **Partie Javafx**
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[fichiers sources (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Java/sae_iot_la_bonne_note/src[Fichiers sources] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[docs (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[tests (A INSERER)]
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)]
 
 [cols="1,1"]
 |===
@@ -102,47 +100,45 @@ Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[tests (A 
 
 === Partie WEB
 
-[Lien vers les fichiers sources] 
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_WEB.adoc[Documentation Utilisateur]
 
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/DSS_exemple_WEB.png[Lien vers le diagramme de séquence système]
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_WEB.adoc[Documentation Technique]
 
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[Lien vers le use case]
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[Cas d'utilisation (Use Case)]
+
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/DSS_exemple_WEB.png[Diagramme de séquence système]
 
 **Partie PHP**
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[fichiers sources (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Fichiers sources (A INSERER)] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[docs (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[tests (A INSERER)]
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)]
 
 **Partie BD**
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[fichiers sources (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Fichiers sources (A INSERER)] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[docs (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-Lien vers les https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[tests (A INSERER)]
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)]
 
 == Gestion de projet & Qualité
 
-Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
-Utilisez pour cela les fonctionnalités de GitHub pour les https://docs.github.com/en/repositories/releasing-projects-on-github[Releases].
-
-De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
-
-- Version courante : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/releases/tag/Sprint1[v1.1]
-- Lien vers le backlog général : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Backlog/Backlog%20Produit%20générale.pdf[BL Général]
-- Lien vers le backlog du sprint 1 : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Backlogs/Backlog%20Sprint%201.pdf[BL Sprint 1]
-- Lien vers les Ordres du jour et les CR des réunions : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/doc/Réunions[Réunions]
-- Lien vers la https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique.adoc[doc technique] 
-- Lien vers la https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User.adoc[doc utilisateur]
+- Version courante : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/releases/tag/Sprint2[v1.2]
+- Backlog général : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Backlog/Backlog%20Produit%20générale.pdf[BL Général]
+- Backlog du sprint 1 : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Backlogs/Backlog%20Sprint%201.pdf[BL Sprint 1]
+- Ordres du jour et les CR des réunions : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/doc/Réunions[Réunions]
+- https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_IOT.adoc[Documentation Utilisateur IOT]
+- https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_IOT.adoc[Documentation Technique IOT] 
+- https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_WEB.adoc[Documentation Utilisateur WEB]
+- https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_WEB.adoc[Documentation Technique WEB]
 - Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : https://github.com/orgs/IUT-Blagnac/projects/142[US]
 - Tests unitaires et plans de test
 - Indicateurs de qualité du code (dette technique)
-- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
 
-Voici un exemple d'évaluation :
+Suivi de l'évaluation :
 
 ifdef::env-github[]
 image:https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=935875429&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=935875429&format=image]
