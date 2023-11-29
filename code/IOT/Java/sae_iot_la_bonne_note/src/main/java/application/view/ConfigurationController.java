@@ -1,5 +1,8 @@
 package application.view;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.function.Consumer;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
@@ -147,6 +150,30 @@ public class ConfigurationController {
         initConnexionTestTask();
     }
 
+    @FXML
+    private void handleCheckBoxAction(){
+        temperature = cbTemperature.isSelected();
+        humidity = cbHumidity.isSelected();
+        activity = cbActivity.isSelected();
+        co2 = cbCo2.isSelected();
+    }
+
+    private void garderConfigFichier(){
+        try{
+            Properties properties = new Properties();
+            properties.setProperty("temperature", String.valueOf(temperature));
+            properties.setProperty("humidite", String.valueOf(humidity));
+            properties.setProperty("activite", String.valueOf(activity));
+            properties.setProperty("co2", String.valueOf(co2));
+
+            properties.store(new FileOutputStream("config.ini"), null);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+
     /**
      * Initializes the view elements and their respective functionalities.
      */
@@ -293,6 +320,7 @@ public class ConfigurationController {
         this.imgConnexion.setVisible(true);
     }
 
+
     /**
      * Sets the elements in the configuration view based on the existing
      * configuration data.
@@ -397,6 +425,7 @@ public class ConfigurationController {
      */
     @FXML
     private void doLeave() {
+        garderConfigFichier(); //pour enregistrer   
         MainMenu menu = new MainMenu();
         menu.start(primaryStage);
         menu.show();

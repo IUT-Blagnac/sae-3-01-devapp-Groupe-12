@@ -54,15 +54,10 @@ if os.path.exists(fichier_donnees):
 pending_data = {}
 
 
-# On appel cette fonction lors de la réception du signal d'alarme
+# Gestion du système d'alarme
 def handler(signum, frame):
-    # Parcours les données en attente et les écrit dans le fichier
-    # for room, data in pending_data.items():
-    #     ecrire(room, data)
-    # Programmation d'une nouvelle alarme pour la prochaine écriture
-    
+    # Cette fonction sera appelée lorsque le signal SIGALRM sera déclenché
     pass
-    #signal.alarm(frequence_affichage)
 
 # Association du handler au signal d'alarme
 signal.signal(signal.SIGALRM, handler)
