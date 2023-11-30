@@ -132,6 +132,8 @@ public class ConfigurationController {
     private String alertFile;
     private String dataFile;
     private String logsFile;
+    private String donneesDeBase;
+    private String frequence;
     private boolean temperature;
     private boolean humidity;
     private boolean activity;
@@ -330,6 +332,23 @@ public class ConfigurationController {
             txtDataFile.setText(dataFile == null ? "" : dataFile);
             logsFile = properties.getProperty("fichier_logs");
             txtLogsFile.setText(logsFile == null ? "" : logsFile);
+            donneesDeBase = properties.getProperty("choix_donnees");
+            if (donneesDeBase.contains("temperature")){
+                cbTemperature.setSelected(true);
+            }
+            if(donneesDeBase.contains("humidity")){
+                cbHumidity.setSelected(true);
+            }
+            if(donneesDeBase.contains("activity")){
+                cbActivity.setSelected(true);
+            }
+            if(donneesDeBase.contains("co2")){
+                cbCo2.setSelected(true);
+            }
+            frequence = properties.getProperty("frequence_affichage");
+            //int freq = getIntFromString(frequence);
+
+        
         } else {
             AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
                     "Aucune configuration existante trouvé.",
@@ -360,6 +379,21 @@ public class ConfigurationController {
             writer.write("fichier_alerte=" + alertFile + "\n");
             writer.write("fichier_donnees=" + dataFile + "\n");
             writer.write("fichier_logs=" + logsFile + "\n");
+            String choixDonnee="";
+            if(cbTemperature.isSelected()){
+                choixDonnee+= "temperature," + " ";
+            }
+            if(cbHumidity.isSelected()){
+                choixDonnee+= "humidity," + " ";
+            }
+            if(cbActivity.isSelected()){
+                choixDonnee+= "activity," + " ";
+            }
+            if(cbCo2.isSelected()){
+                choixDonnee+= "co2," + " ";
+            }
+            writer.write("choix_donnees=" + choixDonnee + "\n");
+            writer.write("frequence_affichage=" + frequency + "\n");
 
             AlertUtilities.showAlert(primaryStage, "Opération réussie.",
                     "Sauvegarde effectuée !",

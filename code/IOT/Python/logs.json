@@ -182,5 +182,36 @@
                 }
             }
         }
+    ],
+    "Salle-conseil": [
+        {
+            "date": "30-11-2023 11:29:15",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.4,
+                    "moyenne": 20.4
+                }
+            }
+        },
+        {
+            "date": "30-11-2023 11:29:50",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.4,
+                    "moyenne": 20.4
+                }
+            }
+        }
+    ],
+    "B111": [
+        {
+            "date": "30-11-2023 11:30:25",
+            "donnees": {
+                "temperature": {
+                    "valeur": 22.7,
+                    "moyenne": 22.7
+                }
+            }
+        }
     ]
 }
