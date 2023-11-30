@@ -134,6 +134,8 @@ public class ConfigurationController {
     private String logsFile;
     private String donneesDeBase;
     private String frequence;
+    private String typeDuTemps;
+    private String tpTemps;  
     private boolean temperature;
     private boolean humidity;
     private boolean activity;
@@ -174,7 +176,7 @@ public class ConfigurationController {
         tooltipTopic.setShowDuration(Duration.INDEFINITE);
         Tooltip.install(imgInfoTopic, tooltipTopic);
 
-        cbTimeUnit.getItems().addAll("secondes", "minutes", "heures", "jours");
+        cbTimeUnit.getItems().addAll("seconde(s)", "minute(s)", "heure(s)", "jour(s)");
         cbTimeUnit.setStyle("-fx-font-size: 18px;");
 
         setElementsByConf();
@@ -347,6 +349,8 @@ public class ConfigurationController {
             }
             frequence = properties.getProperty("frequence_affichage");
             //int freq = getIntFromString(frequence);
+            typeDuTemps = properties.getProperty("typeTemps");
+            cbTimeUnit.setValue(typeDuTemps);
 
         
         } else {
@@ -393,7 +397,24 @@ public class ConfigurationController {
                 choixDonnee+= "co2," + " ";
             }
             writer.write("choix_donnees=" + choixDonnee + "\n");
+
+            tpTemps = cbTimeUnit.getValue();
+            if(tpTemps == "minute(s)"){
+                frequency = getIntFromString(txtFrequency.getText()) * 60;
+                //frequency = frequency * 60;
+                writer.write("typeTemps=" + tpTemps + "\n");
+            }
+            if(tpTemps == "heure(s)"){
+                frequency = getIntFromString(txtFrequency.getText()) * 3600;
+                writer.write("typeTemps=" + tpTemps + "\n");
+            }
+            if(tpTemps == "jour(s)"){
+                frequency = getIntFromString(txtFrequency.getText()) * 86400;
+                writer.write("typeTemps=" + tpTemps + "\n");
+            }
             writer.write("frequence_affichage=" + frequency + "\n");
+            
+
 
             AlertUtilities.showAlert(primaryStage, "Opération réussie.",
                     "Sauvegarde effectuée !",
