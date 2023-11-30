@@ -1,9 +1,14 @@
 package application.view;
 
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
-import java.util.function.Consumer;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -19,8 +24,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -32,7 +35,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -40,6 +42,9 @@ public class ConfigurationController {
 
     private Configuration configuration;
     private Stage primaryStage;
+
+    private final String confFilePath = "code\\IOT\\Python\\config.ini";
+    private Properties properties = new Properties();
 
     @FXML
     private Button buttReset;
@@ -95,7 +100,7 @@ public class ConfigurationController {
     private CheckBox cbCo2;
 
     @FXML
-    private ChoiceBox cbTimeUnit;
+    private ChoiceBox<String> cbTimeUnit;
 
     @FXML
     private TextField txtFrequency;
@@ -132,10 +137,10 @@ public class ConfigurationController {
     private boolean activity;
     private boolean co2;
     private int frequency;
-    private double maxTemperature;
-    private double maxHumidity;
-    private double maxActivity;
-    private double maxCo2;
+    private int maxTemperature;
+    private int maxHumidity;
+    private int maxActivity;
+    private int maxCo2;
 
     public void initContext(Configuration _configuration, Stage _primaryStage) {
         configuration = _configuration;
@@ -150,33 +155,6 @@ public class ConfigurationController {
         initConnexionTestTask();
     }
 
-    @FXML
-    private void handleCheckBoxAction(){
-        temperature = cbTemperature.isSelected();
-        humidity = cbHumidity.isSelected();
-        activity = cbActivity.isSelected();
-        co2 = cbCo2.isSelected();
-    }
-
-    private void garderConfigFichier(){
-        try{
-            Properties properties = new Properties();
-            properties.setProperty("temperature", String.valueOf(temperature));
-            properties.setProperty("humidite", String.valueOf(humidity));
-            properties.setProperty("activite", String.valueOf(activity));
-            properties.setProperty("co2", String.valueOf(co2));
-
-            properties.store(new FileOutputStream("config.ini"), null);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-
-
-    /**
-     * Initializes the view elements and their respective functionalities.
-     */
     private void initViewElements() {
         // Sets action on closing the primary stage
         primaryStage.setOnCloseRequest(e -> {
@@ -197,9 +175,11 @@ public class ConfigurationController {
         cbTimeUnit.getItems().addAll("secondes", "minutes", "heures", "jours");
         cbTimeUnit.setStyle("-fx-font-size: 18px;");
 
+        setElementsByConf();
+
         // Initialize listeners for text areas, file choosers, and other elements
         initTxtFieldListeners();
-        setElementsByConf();
+
     }
 
     private void updateStyle(Node node, boolean isFilled, BooleanProperty boolProp, ImageView img) {
@@ -214,7 +194,7 @@ public class ConfigurationController {
     }
 
     private void initConnexionTestTask() {
-        this.connexionTestTask = new Task<Void>() {
+        connexionTestTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 try {
@@ -227,32 +207,32 @@ public class ConfigurationController {
                 return null;
             }
         };
-        this.connexionTestTask.setOnSucceeded(e -> {
-            this.loadingIconAnimation.stop();
+        connexionTestTask.setOnSucceeded(e -> {
+            loadingIconAnimation.stop();
             if (isConnected) {
-                this.setNewIcon("SuccesIcon.png");
-                AlertUtilities.showAlert(this.primaryStage, "Connexion établie.",
+                setNewIcon("SuccesIcon.png");
+                AlertUtilities.showAlert(primaryStage, "Connexion établie.",
                         "Connexion réussie !", "La connexion au serveur MQTT a été établie.",
                         AlertType.INFORMATION);
             } else {
-                this.setNewIcon("FailedIcon.png");
-                AlertUtilities.showAlert(this.primaryStage, "Échec de la connexion.", "Échec de la connexion !",
+                setNewIcon("FailedIcon.png");
+                AlertUtilities.showAlert(primaryStage, "Échec de la connexion.", "Échec de la connexion !",
                         "Veuillez saisir les paramètres corrects du serveur MQTT.", AlertType.ERROR);
             }
         });
-        this.connexionTestTask.setOnFailed(e -> {
-            this.loadingIconAnimation.stop();
-            this.setNewIcon("FailedIcon.png");
-            Animations.stopLoadingAnimation(this.imgConnexion, this.loadingIconAnimation);
-            AlertUtilities.showAlert(this.primaryStage, "Échec de la connexion.", "Échec de la connexion !",
+        connexionTestTask.setOnFailed(e -> {
+            loadingIconAnimation.stop();
+            setNewIcon("FailedIcon.png");
+            Animations.stopLoadingAnimation(imgConnexion, loadingIconAnimation);
+            AlertUtilities.showAlert(primaryStage, "Échec de la connexion.", "Échec de la connexion !",
                     "Veuillez saisir les paramètres corrects pour votre serveur MQTT.", AlertType.ERROR);
         });
-        this.connexionTestTask.setOnCancelled(e -> {
-            this.loadingIconAnimation.stop();
+        connexionTestTask.setOnCancelled(e -> {
+            loadingIconAnimation.stop();
         });
-        this.connexionTestTask.setOnRunning(e -> {
-            this.setNewIcon("LoadingIcon.jpg");
-            this.loadingIconAnimation = Animations.startLoadingAnimation(this.imgConnexion);
+        connexionTestTask.setOnRunning(e -> {
+            setNewIcon("LoadingIcon.jpg");
+            loadingIconAnimation = Animations.startLoadingAnimation(imgConnexion);
         });
     }
 
@@ -265,11 +245,11 @@ public class ConfigurationController {
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
 
-            // Temps d'attente pour la connexion
             connOpts.setConnectionTimeout(10);
 
             mqttClient.connect(connOpts);
             mqttClient.disconnect();
+            mqttClient.close();
             return true;
         } catch (Exception e) {
             return false;
@@ -278,15 +258,15 @@ public class ConfigurationController {
 
     @FXML
     private void doConnectionTest() {
-        if (this.connexionTestTask.isRunning()) {
-            AlertUtilities.showAlert(this.primaryStage, "Erreur.", "Un test est déjà en cours. Veuillez patienter.",
+        if (connexionTestTask.isRunning()) {
+            AlertUtilities.showAlert(primaryStage, "Erreur.", "Un test est déjà en cours. Veuillez patienter.",
                     "Veuillez attendre que le test en cours se termine.", AlertType.INFORMATION);
         } else {
-            if (this.serverConfIsFilled.getValue()) {
-                this.initConnexionTestTask();
-                new Thread(this.connexionTestTask).start();
+            if (serverConfIsFilled.getValue()) {
+                initConnexionTestTask();
+                new Thread(connexionTestTask).start();
             } else {
-                AlertUtilities.showAlert(this.primaryStage, "Opération impossible.",
+                AlertUtilities.showAlert(primaryStage, "Opération impossible.",
                         "Impossible d'initier le test de connexion.",
                         "Veuillez remplir tous les champs requis pour le test ! (en rouge)",
                         AlertType.INFORMATION);
@@ -300,8 +280,8 @@ public class ConfigurationController {
      * @param _disable Boolean value to enable or disable elements.
      */
     private void disableMinConfWhileTest(boolean _disable) {
-        this.txtHost.setDisable(_disable);
-        this.txtPort.setDisable(_disable);
+        txtHost.setDisable(_disable);
+        txtPort.setDisable(_disable);
     }
 
     /**
@@ -312,21 +292,104 @@ public class ConfigurationController {
      * @param _imgName Name of the image file to be displayed.
      */
     private void setNewIcon(String _imgName) {
-        this.imgConnexion.setRotate(0);
+        imgConnexion.setRotate(0);
         String imagePath = "/application/images/" + _imgName;
-        this.imgConnexion.setImage(new Image(getClass().getResourceAsStream(imagePath),
-                this.imgConnexion.getFitWidth(), this.imgConnexion.getFitHeight(), true,
+        imgConnexion.setImage(new Image(getClass().getResourceAsStream(imagePath),
+                imgConnexion.getFitWidth(), imgConnexion.getFitHeight(), true,
                 true));
-        this.imgConnexion.setVisible(true);
+        imgConnexion.setVisible(true);
     }
 
-
-    /**
-     * Sets the elements in the configuration view based on the existing
-     * configuration data.
-     * Also performs validations for certain fields.
-     */
     private void setElementsByConf() {
+        if (checkConfFile()) {
+            host = properties.getProperty("broker");
+            txtHost.setText(host == null ? "" : host);
+            port = getIntFromString(properties.getProperty("port"));
+            txtPort.setText(port == 0 ? "" : "" + port);
+            topic = properties.getProperty("topic");
+            if (topic != null) {
+                if (topic.contains("AM107/by-room/#")) {
+                    txtTopic.setText("#");
+                } else {
+                    String[] rooms = topic.split(",");
+                    List<String> roomNames = new ArrayList<>();
+                    for (String room : rooms) {
+                        String[] parts = room.split("/");
+                        if (parts.length >= 3) {
+                            String roomName = parts[2];
+                            roomNames.add(roomName);
+                        }
+                    }
+                    String concatenatedRooms = String.join(",", roomNames);
+                    txtTopic.setText(concatenatedRooms);
+                }
+            }
+            alertFile = properties.getProperty("fichier_alerte");
+            txtAlertFile.setText(alertFile == null ? "" : alertFile);
+            dataFile = properties.getProperty("fichier_donnees");
+            txtDataFile.setText(dataFile == null ? "" : dataFile);
+            logsFile = properties.getProperty("fichier_logs");
+            txtLogsFile.setText(logsFile == null ? "" : logsFile);
+        } else {
+            AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
+                    "Aucune configuration existante trouvé.",
+                    "Aucune configuration n'a pu être chargé.", AlertType.INFORMATION);
+        }
+    }
+
+    private boolean checkConfFile() {
+        try (FileInputStream fileInputStream = new FileInputStream(confFilePath)) {
+            properties.load(fileInputStream);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    @FXML
+    private void doValider() {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter(confFilePath))) {
+            setNewValues();
+            properties.clear();
+            writer.write("[MQTT]\n");
+            writer.write("broker=" + host + "\n");
+            writer.write("port=" + String.valueOf(port) + "\n");
+            writer.write("topic=" + topic + "\n");
+            writer.write("[CONFIG]\n");
+            writer.write("fichier_alerte=" + alertFile + "\n");
+            writer.write("fichier_donnees=" + dataFile + "\n");
+            writer.write("fichier_logs=" + logsFile + "\n");
+
+            AlertUtilities.showAlert(primaryStage, "Opération réussie.",
+                    "Sauvegarde effectuée !",
+                    "La configuration a bien été sauvegardé.", AlertType.INFORMATION);
+        } catch (IOException e) {
+            AlertUtilities.showAlert(primaryStage, "Opération échouée.",
+                    "Une erreur est survenue !",
+                    "Une erreur est survenue lors de la sauvegarde.", AlertType.INFORMATION);
+        }
+    }
+
+    private void setNewValues() {
+        topic = txtTopic.getText().trim();
+        alertFile = txtAlertFile.getText().trim();
+        dataFile = txtDataFile.getText().trim();
+        logsFile = txtLogsFile.getText().trim();
+        frequency = getIntFromString(txtFrequency.getText().trim());
+        maxTemperature = getIntFromString(txtMaxTemperature.getText().trim());
+        maxActivity = getIntFromString(txtMaxActivity.getText().trim());
+        maxHumidity = getIntFromString(txtMaxHumidity.getText().trim());
+        maxCo2 = getIntFromString(txtMaxCo2.getText().trim());
+    }
+
+    private int getIntFromString(String _string) {
+        try {
+            int val = Integer.parseInt(_string);
+            return val;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     private void initTxtFieldListeners() {
@@ -347,18 +410,13 @@ public class ConfigurationController {
             } else if (newValue.length() > 7 || !newValue.matches("\\d*")) {
                 txtPort.setText(oldValue);
             } else {
-                try {
-                    port = Integer.parseInt(newValue);
-                    portIsFilled.setValue(port <= 0 ? false : true);
-                } catch (NumberFormatException e) {
-                    portIsFilled.setValue(false);
-                }
+                port = getIntFromString(newValue);
+                portIsFilled.setValue(port <= 0 ? false : true);
             }
         });
         setupTextValidation(txtHost, hostIsFilled, imgUndefinedHost);
         setupTextValidation(txtPort, portIsFilled, imgUndefinedPort);
 
-        setupTextValidation(txtTopic, 200, "^[\\p{L}0-9.,]*$", alertFile);
         setupTextValidation(txtAlertFile, 15, "^[a-zA-Z]*$", alertFile);
         setupTextValidation(txtDataFile, 15, "^[a-zA-Z]*$", dataFile);
         setupTextValidation(txtLogsFile, 15, "^[a-zA-Z]*$", logsFile);
@@ -369,10 +427,18 @@ public class ConfigurationController {
         setupNumberTextValidation(txtMaxActivity, 7, "-?\\d*", maxActivity);
         setupNumberTextValidation(txtMaxCo2, 7, "-?\\d*", maxCo2);
 
-        setupCheckBoxListener(cbTemperature, temperature);
-        setupCheckBoxListener(cbHumidity, humidity);
-        setupCheckBoxListener(cbActivity, activity);
-        setupCheckBoxListener(cbCo2, co2);
+        cbTemperature.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            temperature = newValue;
+        });
+        cbHumidity.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            humidity = newValue;
+        });
+        cbActivity.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            activity = newValue;
+        });
+        cbCo2.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            co2 = newValue;
+        });
     }
 
     private void setupTextValidation(TextField _txtField, BooleanProperty _boolProp, ImageView _img) {
@@ -385,12 +451,10 @@ public class ConfigurationController {
         });
     }
 
-    private void setupTextValidation(TextField textField, int maxLength, String regex, Object value) {
+    private void setupTextValidation(TextField textField, int maxLength, String regex, String value) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > maxLength || !newValue.matches(regex)) {
                 textField.setText(oldValue);
-            } else {
-                updateValue(value, newValue.trim());
             }
         });
     }
@@ -399,24 +463,8 @@ public class ConfigurationController {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.isEmpty() && (newValue.length() > maxLength || !newValue.matches(regex))) {
                 textField.setText(oldValue);
-            } else {
-                try {
-                    updateValue(value, newValue.trim());
-                } catch (NumberFormatException e) {
-                    textField.setText(oldValue);
-                }
             }
         });
-    }
-
-    private void setupCheckBoxListener(CheckBox checkBox, Object value) {
-        checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            updateValue(value, newValue);
-        });
-    }
-
-    private void updateValue(Object _oldValue, Object _newValue) {
-        _oldValue = _newValue;
     }
 
     /*
@@ -425,7 +473,6 @@ public class ConfigurationController {
      */
     @FXML
     private void doLeave() {
-        garderConfigFichier(); //pour enregistrer   
         MainMenu menu = new MainMenu();
         menu.start(primaryStage);
         menu.show();
