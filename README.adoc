@@ -61,8 +61,6 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 === Liens utiles
 
 - Le https://webetud.iut-blagnac.fr/course/view.php?id=841[cours Moodle] sur la SAE
-- Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
-- Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
 
 == Réalisations 
 
