@@ -100,7 +100,21 @@ Les alertes sont bien écrites dans le fichier JSON qui se créer si il n'existe
 |====
 
 === 2. Partie Java :
+==== 2.1 Sauvegarde des données dans le fichier de configuration :
 
+|====
+
+>|Cas de test 4+|Test-02-01-01
+>|Titre 4+|Ouverture de la scène pour entrer les données de configuration
+>|Objectif 4+| Vérifier que la configuration entrée est bien sauvegardé dans le fichier de configuration
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rentrer dans la partie configuration du fichier. ^|La scène de configuration du fichier doit apparaître. ^| L'application doit être lancé.^|OK
+^|All_G_C.1 ^|Lancer le programme. ^|Les valeurs affichés sont précises et correspondent aux données réelles du capteur ^| La temps d'attente de la fréquence doit être écoulé ^|OK
+^|All_G_C.1 ^|Lancer le programme. ^|Les données doivent être récupérées pour chaque salle disponible ^| Aucune ^|OK
+^|All_G_C.1 ^|Lancer le programme. ^|Les données doivent être clairement différenciées par salle ^| Aucune ^|OK
+
+5+|
 
 
 
