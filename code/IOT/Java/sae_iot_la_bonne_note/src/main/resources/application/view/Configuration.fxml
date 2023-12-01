@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationController">
+<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationController">
    <center>
       <GridPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -101,7 +101,7 @@
             </HBox>
             <HBox maxHeight="70.0" maxWidth="1024.0" minHeight="70.0" minWidth="1024.0" prefHeight="70.0" prefWidth="1024.0" GridPane.rowIndex="9">
                <children>
-                  <Button fx:id="buttReset" maxHeight="50.0" maxWidth="220.0" minHeight="50.0" minWidth="220.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="220.0" stylesheets="@../application.css" text="Réinitialiser">
+                  <Button fx:id="buttReset" maxHeight="50.0" maxWidth="220.0" minHeight="50.0" minWidth="220.0" mnemonicParsing="false" onAction="#doReset" prefHeight="50.0" prefWidth="220.0" stylesheets="@../application.css" text="Réinitialiser">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

@@ -1,7 +1,5 @@
 package application.view;
 
-
-
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -138,7 +136,7 @@ public class ConfigurationController {
     private String seuilAlerte;
     private String frequence;
     private String typeDuTemps;
-    private String tpTemps;  
+    private String tpTemps;
     private boolean temperature;
     private boolean humidity;
     private boolean activity;
@@ -338,21 +336,21 @@ public class ConfigurationController {
             logsFile = properties.getProperty("fichier_logs");
             txtLogsFile.setText(logsFile == null ? "" : logsFile);
             donneesDeBase = properties.getProperty("choix_donnees");
-            
-            if (donneesDeBase.contains("temperature")){
+
+            if (donneesDeBase.contains("temperature")) {
                 cbTemperature.setSelected(true);
             }
-            if(donneesDeBase.contains("humidity")){
+            if (donneesDeBase.contains("humidity")) {
                 cbHumidity.setSelected(true);
             }
-            if(donneesDeBase.contains("activity")){
+            if (donneesDeBase.contains("activity")) {
                 cbActivity.setSelected(true);
             }
-            if(donneesDeBase.contains("co2")){
+            if (donneesDeBase.contains("co2")) {
                 cbCo2.setSelected(true);
             }
             frequence = properties.getProperty("frequence_affichage");
-            //int freq = getIntFromString(frequence);
+            // int freq = getIntFromString(frequence);
             typeDuTemps = properties.getProperty("typeTemps");
             cbTimeUnit.setValue(typeDuTemps);
             maxTemperature = getIntFromString(properties.getProperty("seuil_Temperature"));
@@ -388,37 +386,50 @@ public class ConfigurationController {
             writer.write("[MQTT]\n");
             writer.write("broker=" + host + "\n");
             writer.write("port=" + String.valueOf(port) + "\n");
+            if (topic.equals("#")) {
+                topic = "AM107/by-room/#";
+            } else {
+                String[] rooms = topic.split(",");
+                topic = "";
+                for (int i = 0; i < rooms.length; i++) {
+                    topic += "AM107/by-room/" + rooms[i];
+                    if (i + 1 < rooms.length) {
+                        topic += ",";
+                    }
+                }
+                
+            }
             writer.write("topic=" + topic + "\n");
             writer.write("[CONFIG]\n");
             writer.write("fichier_alerte=" + alertFile + "\n");
             writer.write("fichier_donnees=" + dataFile + "\n");
             writer.write("fichier_logs=" + logsFile + "\n");
-            String choixDonnee="";
-            if(cbTemperature.isSelected()){
-                choixDonnee+= "temperature," + " ";
+            String choixDonnee = "";
+            if (cbTemperature.isSelected()) {
+                choixDonnee += "temperature," + " ";
             }
-            if(cbHumidity.isSelected()){
-                choixDonnee+= "humidity," + " ";
+            if (cbHumidity.isSelected()) {
+                choixDonnee += "humidity," + " ";
             }
-            if(cbActivity.isSelected()){
-                choixDonnee+= "activity," + " ";
+            if (cbActivity.isSelected()) {
+                choixDonnee += "activity," + " ";
             }
-            if(cbCo2.isSelected()){
-                choixDonnee+= "co2," + " ";
+            if (cbCo2.isSelected()) {
+                choixDonnee += "co2," + " ";
             }
             writer.write("choix_donnees=" + choixDonnee + "\n");
 
             tpTemps = cbTimeUnit.getValue();
-            if(tpTemps == "minute(s)"){
+            if (tpTemps == "minute(s)") {
                 frequency = getIntFromString(txtFrequency.getText()) * 60;
-                //frequency = frequency * 60;
+                // frequency = frequency * 60;
                 writer.write("typeTemps=" + tpTemps + "\n");
             }
-            if(tpTemps == "heure(s)"){
+            if (tpTemps == "heure(s)") {
                 frequency = getIntFromString(txtFrequency.getText()) * 3600;
                 writer.write("typeTemps=" + tpTemps + "\n");
             }
-            if(tpTemps == "jour(s)"){
+            if (tpTemps == "jour(s)") {
                 frequency = getIntFromString(txtFrequency.getText()) * 86400;
                 writer.write("typeTemps=" + tpTemps + "\n");
             }
@@ -438,7 +449,35 @@ public class ConfigurationController {
         }
     }
 
+    @FXML
+    private void doReset() {
+        if (AlertUtilities.confirmYesCancel(primaryStage, "Confirmation", "Réinitialiser la configuration ?",
+                "Voulez vous vraiment réinitialiser ?", AlertType.CONFIRMATION)) {
+            this.txtHost.setText("");
+            this.txtPort.setText("");
+            this.txtTopic.setText("");
+            this.txtAlertFile.setText("");
+            this.txtDataFile.setText("");
+            this.txtLogsFile.setText("");
+            this.txtHost.setText("");
+            this.txtHost.setText("");
+            this.cbTemperature.setSelected(false);
+            this.cbHumidity.setSelected(false);
+            this.cbActivity.setSelected(false);
+            this.cbCo2.setSelected(false);
+            this.cbTimeUnit.setValue("minute(s)");
+            this.txtFrequency.setText("");
+            this.txtMaxTemperature.setText("");
+            this.txtMaxHumidity.setText("");
+            this.txtMaxActivity.setText("");
+            this.txtMaxCo2.setText("");
+            this.setNewValues();
+        }
+    }
+
     private void setNewValues() {
+        host = txtHost.getText().trim();
+        port = getIntFromString(txtPort.getText().trim());
         topic = txtTopic.getText().trim();
         alertFile = txtAlertFile.getText().trim();
         dataFile = txtDataFile.getText().trim();
