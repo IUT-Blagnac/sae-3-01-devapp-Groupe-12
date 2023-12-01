@@ -84,7 +84,7 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc[Tests] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc#1-partie-python[Tests] 
 
 **Partie Javafx**
 
@@ -92,7 +92,7 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc[Tests]
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc#2-partie-java[Tests]
 
 [cols="1,1"]
 |===
