@@ -355,9 +355,13 @@ public class ConfigurationController {
             //int freq = getIntFromString(frequence);
             typeDuTemps = properties.getProperty("typeTemps");
             cbTimeUnit.setValue(typeDuTemps);
+            maxTemperature = getIntFromString(properties.getProperty("seuil_Temperature"));
             txtMaxTemperature.setText(maxTemperature == 0 ? "" : String.valueOf(maxTemperature));
+            maxActivity = getIntFromString(properties.getProperty("seuil_Activity"));
             txtMaxActivity.setText(maxActivity == 0 ? "" : String.valueOf(maxActivity));
+            maxCo2 = getIntFromString(properties.getProperty("seuil_CO2"));
             txtMaxCo2.setText(maxCo2 == 0 ? "" : String.valueOf(maxCo2));
+            maxHumidity = getIntFromString(properties.getProperty("seuil_Humidity"));
             txtMaxHumidity.setText(maxHumidity == 0 ? "" : String.valueOf(maxHumidity));
         } else {
             AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
