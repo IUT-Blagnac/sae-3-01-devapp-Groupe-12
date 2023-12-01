@@ -1,9 +1,7 @@
 package application.tools;
 
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -18,21 +16,22 @@ import javafx.stage.Stage;
 public class StageManagement {
 
     /**
-     * Static method for centering primary Stage over its parent Stage.
+     * Centre la fenêtre secondaire (primary) sur la fenêtre parente.
      *
-     * @param parent  Stage on which primary is centered on
-     * @param primary Stage to be centered (with regards to parent)
+     * @param parent  Fenêtre parente sur laquelle la fenêtre principale est
+     *                centrée.
+     * @param primary Fenêtre à centrer par rapport à la fenêtre parente.
      */
     public static void manageCenteringStage(Stage parent, Stage primary) {
 
-        // Calculate the center position of the parent Stage
+        // Calcul des coordonnées du centre de la fenêtre parente
         double centerXPosition = parent.getX() + parent.getWidth() / 2d;
         double centerYPosition = parent.getY() + parent.getHeight() / 2d;
 
-        // Hide the pop-up stage before it is shown and becomes relocated
+        // Cachage de la fenêtre secondaire avant de la repositionner
         primary.setOnShowing(ev -> primary.hide());
 
-        // Relocate the pop-up Stage
+        // Repositionnement de la fenêtre secondaire pour la centrer
         primary.setOnShown(ev -> {
             primary.setX(centerXPosition - primary.getWidth() / 2d);
             primary.setY(centerYPosition - primary.getHeight() / 2d);
@@ -40,6 +39,12 @@ public class StageManagement {
         });
     }
 
+    /**
+     * Centre la fenêtre sur l'écran principal.
+     *
+     * @param _Stage Fenêtre à centrer.
+     * @param _scene Scène de la fenêtre à centrer.
+     */
     public static void setCenterStageOnStage(Stage _Stage, Scene _scene) {
 
         // Récupérez la taille de l'écran
@@ -50,11 +55,18 @@ public class StageManagement {
         double windowX = (screenWidth) / 2;
         double windowY = (screenHeight) / 2;
 
-        // Définissez les coordonnées de la fenêtre pour la centrer
+        // Définition des coordonnées de la fenêtre pour la centrer
         _Stage.setX(windowX);
         _Stage.setY(windowY);
     }
 
+    /**
+     * Centre la fenêtre sur l'écran principal en utilisant les dimensions de la
+     * scène.
+     *
+     * @param _Stage Fenêtre à centrer.
+     * @param _scene Scène de la fenêtre à centrer.
+     */
     public static void setCenterStageOnScreen(Stage _Stage, Scene _scene) {
 
         // Obtenez les dimensions de la scène au lieu de primaryStage
@@ -69,27 +81,19 @@ public class StageManagement {
         double windowX = (screenWidth - sceneWidth) / 2;
         double windowY = (screenHeight - sceneHeight) / 2;
 
-        // Définissez les coordonnées de la fenêtre pour la centrer
+        // Définition des coordonnées de la fenêtre pour la centrer
         _Stage.setX(windowX);
         _Stage.setY(windowY);
     }
 
-    public static void removeKeysEvents(Scene _scene) {
-
-        // Créez un gestionnaire d'événements pour les événements clavier
-        EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                // Empêchez l'événement de se propager à d'autres composants
-                event.consume();
-            }
-        };
-
-        // Ajoutez le gestionnaire d'événements à la scène
-        _scene.addEventFilter(KeyEvent.ANY, keyEventHandler);
-    }
-
+    /**
+     * Désactive tous les éléments de la scène.
+     *
+     * @param _scene   Scène dont les éléments doivent être désactivés.
+     * @param _disable true pour désactiver les éléments, false pour les activer.
+     */
     public static void disableItems(Scene _scene, boolean _disable) {
+        // Désactivation ou activation des éléments de la scène en fonction du paramètre
         for (Node node : _scene.getRoot().getChildrenUnmodifiable()) {
             node.setDisable(_disable);
         }

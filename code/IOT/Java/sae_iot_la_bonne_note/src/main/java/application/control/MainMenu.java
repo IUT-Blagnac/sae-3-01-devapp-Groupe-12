@@ -1,16 +1,20 @@
 package application.control;
 
 import application.Main;
+import application.tools.AlertUtilities;
 import application.view.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * Classe de controleur de Dialogue de la fenêtre du menu principal de
+ * Classe de contrôleur de dialogue de la fenêtre du menu principal de
  * l'application.
+ * Cette classe gère l'affichage et la manipulation de la fenêtre du menu
+ * principal.
  */
 public class MainMenu extends Application {
 
@@ -19,6 +23,11 @@ public class MainMenu extends Application {
 
     /**
      * Méthode de démarrage (JavaFX).
+     * Cette méthode est appelée lors du démarrage de l'application JavaFX.
+     * Elle initialise la fenêtre du menu principal en chargeant le fichier FXML
+     * correspondant.
+     * 
+     * @param _primaryStage Le stage de la fenêtre principale.
      */
     @Override
     public void start(Stage _primaryStage) {
@@ -27,12 +36,12 @@ public class MainMenu extends Application {
 
         try {
 
-            // Chargement du source fxml
+            // Chargement du fichier FXML du menu principal
             FXMLLoader loader = new FXMLLoader(
                     MainMenuController.class.getResource("MainMenu.fxml"));
             BorderPane root = loader.load();
 
-            // Paramétrage du Stage : feuille de style, titre
+            // Création de la scène et configuration du stage
             Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
             scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 
@@ -40,25 +49,32 @@ public class MainMenu extends Application {
             primaryStage.setTitle("Menu Principal");
             primaryStage.setResizable(false);
 
+            // Récupération du contrôleur associé au fichier FXML chargé
             MainMenuController mainMenu = loader.getController();
+            // Initialisation du contexte du contrôleur
             mainMenu.initContext(this, primaryStage);
 
-            this.show();
+            this.show(); // Affichage de la fenêtre du menu principal
 
         } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(-1);
+            AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML MainMenu.fxml",
+                    "Merci de réessayer.", AlertType.ERROR);
+            System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }
     }
 
+    /**
+     * Méthode permettant d'afficher la fenêtre du menu principal.
+     */
     public void show() {
         this.primaryStage.show();
     }
 
     /**
      * Méthode principale de lancement de l'application.
+     * Cette méthode est appelée pour lancer l'application.
      */
     public static void runApp() {
-        Application.launch();
+        Application.launch(); // Lancement de l'application JavaFX
     }
 }

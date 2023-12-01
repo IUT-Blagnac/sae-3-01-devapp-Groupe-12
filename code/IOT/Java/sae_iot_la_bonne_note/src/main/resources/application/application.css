@@ -41,6 +41,7 @@
 
 .choiceBox:focused {
     -fx-border-color: #30afb8;
+    -fx-text-alignment: center;
 }
 
 .txtArea {

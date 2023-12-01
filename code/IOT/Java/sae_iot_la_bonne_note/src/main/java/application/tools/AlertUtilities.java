@@ -8,21 +8,21 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 /**
- * Utilitaire pour afficher une fenêtre de message ou de confirmation.
+ * Classe utilitaire pour la gestion des boîtes de dialogue d'alerte.
+ * Cette classe fournit des méthodes pour afficher différents types d'alertes.
  */
 public class AlertUtilities {
 
 	/**
-	 * Affiche une message de confirmation d'un message avec boutons Oui/Non.
-	 *
-	 * @param _fen     Fenêtre (Stage) sur laquelle le dialogue se centre et est
-	 *                 modal.
-	 * @param _title   Titre du dialogue
-	 * @param _message Message à confirmer
-	 * @param _content Détail d'information
-	 * @param _at      Type d'alerte (icône associé) (constante définie par
-	 *                 AlertType)
-	 * @return true si dialogue confirmé, false sinon
+	 * Affiche une boîte de dialogue de confirmation avec les boutons "Oui" et
+	 * "Annuler".
+	 * 
+	 * @param _fen     Le stage de la fenêtre propriétaire de la boîte de dialogue.
+	 * @param _title   Le titre de la boîte de dialogue.
+	 * @param _message Le message d'en-tête de la boîte de dialogue.
+	 * @param _content Le contenu de la boîte de dialogue.
+	 * @param _at      Le type d'alerte (par défaut INFORMATION si non spécifié).
+	 * @return true si le bouton "Oui" est sélectionné, sinon false.
 	 */
 	public static boolean confirmYesCancel(Stage _fen, String _title, String _message, String _content, AlertType _at) {
 
@@ -44,15 +44,13 @@ public class AlertUtilities {
 	}
 
 	/**
-	 * Affiche une message simple avec bouton de fermeture.
-	 *
-	 * @param _fen     Fenêtre (Stage) sur laquelle le dialogue se centre et est
-	 *                 modal.
-	 * @param _title   Titre du dialogue
-	 * @param _message Message à donner
-	 * @param _content Détail d'information
-	 * @param _at      Type d'alerte (icône associé) (constante définie par
-	 *                 AlertType)
+	 * Affiche une boîte de dialogue d'alerte.
+	 * 
+	 * @param _fen     Le stage de la fenêtre propriétaire de la boîte de dialogue.
+	 * @param _title   Le titre de la boîte de dialogue.
+	 * @param _message Le message d'en-tête de la boîte de dialogue.
+	 * @param _content Le contenu de la boîte de dialogue.
+	 * @param _at      Le type d'alerte (par défaut INFORMATION si non spécifié).
 	 */
 	public static void showAlert(Stage _fen, String _title, String _message, String _content, AlertType _at) {
 
@@ -70,12 +68,11 @@ public class AlertUtilities {
 	}
 
 	/**
-	 * Affiche une message simple avec bouton de fermeture.
-	 *
-	 * @param _title   Titre du dialogue
-	 * @param _message Message à donner
-	 * @param _at      Type d'alerte (icône associé) (constante définie par
-	 *                 AlertType)
+	 * Affiche une boîte de dialogue d'alerte sans spécifier le stage propriétaire.
+	 * 
+	 * @param _title   Le titre de la boîte de dialogue.
+	 * @param _message Le message d'en-tête de la boîte de dialogue.
+	 * @param _at      Le type d'alerte (par défaut INFORMATION si non spécifié).
 	 */
 	public static void showAlert(String _title, String _message, AlertType _at) {
 

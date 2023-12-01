@@ -2,21 +2,16 @@ package application.view;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Properties;
-
-import org.eclipse.paho.client.mqttv3.IMqttClient;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 
 import application.control.Configuration;
 import application.control.MainMenu;
 import application.tools.AlertUtilities;
+import application.tools.MQTTConnection;
 import application.visualEffects.Animations;
 import application.visualEffects.Style;
 import javafx.animation.RotateTransition;
@@ -33,19 +28,30 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Contrôleur de la fenêtre de configuration.
+ * Ce contrôleur gère les interactions et la logique de la fenêtre de
+ * configuration du fichier dans l'application.
+ */
 public class ConfigurationController {
 
+    // Référence à la classe Configuration
     private Configuration configuration;
+
+    // Référence au stage de la fenêtre principale
     private Stage primaryStage;
 
+    // Chemin vers le fichier de configuration
     private final String confFilePath = "code\\IOT\\Python\\config.ini";
+
+    // Propriétés pour stocker des configurations
     private Properties properties = new Properties();
 
+    // Éléments FXML
     @FXML
     private Button buttReset;
 
@@ -57,21 +63,26 @@ public class ConfigurationController {
 
     @FXML
     private TextField txtHost;
+
     @FXML
     private ImageView imgUndefinedHost;
 
     @FXML
     private TextField txtPort;
+
     @FXML
     private ImageView imgUndefinedPort;
 
     @FXML
     private ImageView imgConnexion;
+
+    // Animation pour l'icône de chargement
     private RotateTransition loadingIconAnimation;
 
     @FXML
     private ImageView imgInfoTopic;
 
+    // Tooltip associé à txtTopic
     private final Tooltip tooltipTopic = new Tooltip(
             "Rentrer le nom des salles à surveiller en séparant chaque salle par une virgule.\nExemple : \"B104,B105,B106\". Entrer \"#\" pour surveiller toutes les salles.");
 
@@ -117,6 +128,8 @@ public class ConfigurationController {
     @FXML
     private TextField txtMaxCo2;
 
+    // Variables pour stocker les valeurs des champs de l'IHM
+
     private String host;
     private BooleanProperty hostIsFilled = new SimpleBooleanProperty();
 
@@ -125,7 +138,10 @@ public class ConfigurationController {
 
     private BooleanProperty serverConfIsFilled = new SimpleBooleanProperty();
 
+    // Tâche de test de connexion
     private Task<Void> connexionTestTask;
+
+    // État de la connexion
     private boolean isConnected;
 
     private String topic;
@@ -133,78 +149,113 @@ public class ConfigurationController {
     private String dataFile;
     private String logsFile;
     private String donneesDeBase;
-    private String seuilAlerte;
-    private String frequence;
     private String typeDuTemps;
     private String tpTemps;
-    private boolean temperature;
-    private boolean humidity;
-    private boolean activity;
-    private boolean co2;
     private int frequency;
     private int maxTemperature;
     private int maxHumidity;
     private int maxActivity;
     private int maxCo2;
 
+    /**
+     * Initialise le contexte du contrôleur avec la configuration et le stage de la
+     * fenêtre principale.
+     * 
+     * @param _configuration La configuration de l'application.
+     * @param _primaryStage  Le stage de la fenêtre principale.
+     */
     public void initContext(Configuration _configuration, Stage _primaryStage) {
+        // Affecte la configuration et le stage reçus en paramètres aux variables
+        // correspondantes
         configuration = _configuration;
         primaryStage = _primaryStage;
+
+        // Crée un binding combiné entre les propriétés hostIsFilled et portIsFilled
         BooleanBinding combinedBinding = Bindings.and(hostIsFilled, portIsFilled);
+
+        // Lie le boolean serverConfIsFilled au binding combiné
         serverConfIsFilled.bind(combinedBinding);
+
+        // Initialise les propriétés hostIsFilled et portIsFilled à true
         hostIsFilled.set(true);
         portIsFilled.set(true);
 
+        // Initialise les éléments visuels de l'IHM
         initViewElements();
 
+        // Initialise la tâche de test de connexion
         initConnexionTestTask();
     }
 
     private void initViewElements() {
-        // Sets action on closing the primary stage
+        // Définit l'action à effectuer lorsque la fenêtre est fermée
         primaryStage.setOnCloseRequest(e -> {
             doLeave();
         });
 
+        // Crée un binding combiné entre les propriétés hostIsFilled et portIsFilled
         BooleanBinding combinedBinding = Bindings.and(hostIsFilled, portIsFilled);
-        serverConfIsFilled.bind(combinedBinding);
-        hostIsFilled.set(true);
-        portIsFilled.set(true);
 
-        // Tooltip settings and installations
+        // Lie le boolean serverConfIsFilled au binding combiné
+        serverConfIsFilled.bind(combinedBinding);
+
+        // Initialise le style du Tooltip associé à txtTopic
         tooltipTopic.setStyle("-fx-font-size: 18px;");
         tooltipTopic.setShowDelay(Duration.ZERO);
         tooltipTopic.setShowDuration(Duration.INDEFINITE);
+
+        // Installe le Tooltip sur l'ImageView imgInfoTopic
         Tooltip.install(imgInfoTopic, tooltipTopic);
 
+        // Ajoute des éléments à la ChoiceBox cbTimeUnit et définit son style
         cbTimeUnit.getItems().addAll("seconde(s)", "minute(s)", "heure(s)", "jour(s)");
         cbTimeUnit.setStyle("-fx-font-size: 18px;");
 
+        // Initialise les éléments de l'IHM à partir des configurations existantes
         setElementsByConf();
 
-        // Initialize listeners for text areas, file choosers, and other elements
+        // Initialise les écouteurs pour les champs de texte
         initTxtFieldListeners();
-
     }
 
-    private void updateStyle(Node node, boolean isFilled, BooleanProperty boolProp, ImageView img) {
-        // boolProp.set(isFilled);
+    /**
+     * Met à jour le style d'un élément visuel en fonction de son contenu.
+     * 
+     * @param node     Le nœud à mettre à jour.
+     * @param isFilled Un booléen indiquant si le champ est rempli ou non.
+     * @param img      L'ImageView associé à l'état de remplissage.
+     */
+    private void updateStyle(Node node, boolean isFilled, ImageView img) {
         if (!isFilled) {
+            // Applique un style spécifique lorsque le champ n'est pas valide
             Style.setUndefinedTextAreaStyle(node);
             img.setVisible(true);
         } else {
+            // Réinitialise le style lorsque le champ est valide
             Style.resetTextAreaStyle(node);
             img.setVisible(false);
         }
     }
 
+    /**
+     * Initialise la tâche de test de connexion MQTT.
+     * Cette tâche vérifie la connexion au serveur MQTT à l'aide des paramètres
+     * d'hôte et de port.
+     * Elle met à jour l'IHM en conséquence, affichant une icône et des alertes en
+     * cas de succès ou d'échec de connexion.
+     */
     private void initConnexionTestTask() {
         connexionTestTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 try {
+                    // Désactive les éléments de configuration minimale pendant le test
                     disableMinConfWhileTest(true);
-                    isConnected = testMQTTConnection(host, port);
+
+                    // Effectue le test de connexion MQTT
+                    isConnected = MQTTConnection.testMQTTConnection(host, port);
+
+                    // Réactive les éléments de configuration minimale après le test
                     disableMinConfWhileTest(false);
                 } catch (Exception e) {
                     cancel();
@@ -212,65 +263,68 @@ public class ConfigurationController {
                 return null;
             }
         };
+
+        // Actions à effectuer lorsque la tâche réussit, échoue, est annulée ou en cours
+
+        // En cas de succès, arrête l'animation, met à jour l'IHM avec une icône de
+        // réussite et affiche une alerte d'information
         connexionTestTask.setOnSucceeded(e -> {
             loadingIconAnimation.stop();
             if (isConnected) {
-                setNewIcon("SuccesIcon.png");
-                AlertUtilities.showAlert(primaryStage, "Connexion établie.",
-                        "Connexion réussie !", "La connexion au serveur MQTT a été établie.",
-                        AlertType.INFORMATION);
+                Style.setNewIcon(imgConnexion, "SuccesIcon.png");
+                AlertUtilities.showAlert(primaryStage, "Connexion établie.", "Connexion réussie !",
+                        "La connexion au serveur MQTT a été établie.", AlertType.INFORMATION);
             } else {
-                setNewIcon("FailedIcon.png");
+                Style.setNewIcon(imgConnexion, "FailedIcon.png");
                 AlertUtilities.showAlert(primaryStage, "Échec de la connexion.", "Échec de la connexion !",
                         "Veuillez saisir les paramètres corrects du serveur MQTT.", AlertType.ERROR);
             }
         });
+
+        // En cas d'échec, arrête l'animation, met à jour l'IHM avec une icône d'échec
+        // et affiche une alerte d'erreur
         connexionTestTask.setOnFailed(e -> {
             loadingIconAnimation.stop();
-            setNewIcon("FailedIcon.png");
+            Style.setNewIcon(imgConnexion, "FailedIcon.png");
             Animations.stopLoadingAnimation(imgConnexion, loadingIconAnimation);
             AlertUtilities.showAlert(primaryStage, "Échec de la connexion.", "Échec de la connexion !",
                     "Veuillez saisir les paramètres corrects pour votre serveur MQTT.", AlertType.ERROR);
         });
+
+        // En cas d'annulation, arrête l'animation
         connexionTestTask.setOnCancelled(e -> {
             loadingIconAnimation.stop();
         });
+
+        // Au démarrage de la tâche, met à jour l'IHM avec une icône de chargement et
+        // démarre une animation de chargement
         connexionTestTask.setOnRunning(e -> {
-            setNewIcon("LoadingIcon.jpg");
+            Style.setNewIcon(imgConnexion, "LoadingIcon.jpg");
             loadingIconAnimation = Animations.startLoadingAnimation(imgConnexion);
         });
     }
 
-    public static boolean testMQTTConnection(String host, int port) {
-        String broker = String.format("tcp://%s:%d", host, port);
-        String clientId = MqttClient.generateClientId();
-
-        try {
-            IMqttClient mqttClient = new MqttClient(broker, clientId);
-            MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setCleanSession(true);
-
-            connOpts.setConnectionTimeout(10);
-
-            mqttClient.connect(connOpts);
-            mqttClient.disconnect();
-            mqttClient.close();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
+    /**
+     * Effectue un test de connexion au serveur MQTT.
+     * Si un test est déjà en cours, affiche une alerte informant l'utilisateur de
+     * patienter.
+     * Sinon, initialise et lance une nouvelle tâche de test de connexion.
+     */
     @FXML
     private void doConnectionTest() {
         if (connexionTestTask.isRunning()) {
+            // Si un test est déjà en cours, affiche une alerte pour informer l'utilisateur
             AlertUtilities.showAlert(primaryStage, "Erreur.", "Un test est déjà en cours. Veuillez patienter.",
                     "Veuillez attendre que le test en cours se termine.", AlertType.INFORMATION);
         } else {
             if (serverConfIsFilled.getValue()) {
+                // Si tous les champs requis pour le test sont remplis, initialise et lance la
+                // tâche de test
                 initConnexionTestTask();
                 new Thread(connexionTestTask).start();
             } else {
+                // Si des champs requis pour le test sont vides, affiche une alerte pour
+                // informer l'utilisateur
                 AlertUtilities.showAlert(primaryStage, "Opération impossible.",
                         "Impossible d'initier le test de connexion.",
                         "Veuillez remplir tous les champs requis pour le test ! (en rouge)",
@@ -280,9 +334,10 @@ public class ConfigurationController {
     }
 
     /**
-     * Disables specified elements during the test connection process.
+     * Désactive ou active les éléments de configuration minimale pendant le test de
+     * connexion.
      *
-     * @param _disable Boolean value to enable or disable elements.
+     * @param _disable true pour désactiver les éléments, false pour les activer.
      */
     private void disableMinConfWhileTest(boolean _disable) {
         txtHost.setDisable(_disable);
@@ -290,23 +345,14 @@ public class ConfigurationController {
     }
 
     /**
-     * Sets a new icon for the loading icon element based on the provided image
-     * name.
-     * Updates the image and makes the loading icon visible.
-     *
-     * @param _imgName Name of the image file to be displayed.
+     * Charge les éléments de l'interface utilisateur à partir d'un fichier de
+     * configuration existant, s'il est trouvé. Remplit les champs correspondants
+     * avec les valeurs du fichier. Sinon, affiche une alerte informant qu'aucun
+     * fichier de configuration n'a été trouvé.
      */
-    private void setNewIcon(String _imgName) {
-        imgConnexion.setRotate(0);
-        String imagePath = "/application/images/" + _imgName;
-        imgConnexion.setImage(new Image(getClass().getResourceAsStream(imagePath),
-                imgConnexion.getFitWidth(), imgConnexion.getFitHeight(), true,
-                true));
-        imgConnexion.setVisible(true);
-    }
-
     private void setElementsByConf() {
         if (checkConfFile()) {
+            // Récupère les valeurs depuis le fichier de configuration
             host = properties.getProperty("broker");
             txtHost.setText(host == null ? "" : host);
             port = getIntFromString(properties.getProperty("port"));
@@ -349,8 +395,8 @@ public class ConfigurationController {
             if (donneesDeBase.contains("co2")) {
                 cbCo2.setSelected(true);
             }
-            frequence = properties.getProperty("frequence_affichage");
-            // int freq = getIntFromString(frequence);
+            frequency = getIntFromString(properties.getProperty("frequence_affichage"));
+            txtFrequency.setText("" + frequency);
             typeDuTemps = properties.getProperty("typeTemps");
             cbTimeUnit.setValue(typeDuTemps);
             maxTemperature = getIntFromString(properties.getProperty("seuil_Temperature"));
@@ -362,27 +408,45 @@ public class ConfigurationController {
             maxHumidity = getIntFromString(properties.getProperty("seuil_Humidity"));
             txtMaxHumidity.setText(maxHumidity == 0 ? "" : String.valueOf(maxHumidity));
         } else {
+            // Si aucun fichier de configuration n'est trouvé, affiche une alerte
             AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
                     "Aucune configuration existante trouvé.",
                     "Aucune configuration n'a pu être chargé.", AlertType.INFORMATION);
         }
     }
 
+    /**
+     * Vérifie la présence du fichier de configuration.
+     *
+     * @return true si le fichier est trouvé et chargé avec succès, false sinon.
+     */
     private boolean checkConfFile() {
         try (FileInputStream fileInputStream = new FileInputStream(confFilePath)) {
             properties.load(fileInputStream);
-            return true;
+            return true; // Le fichier de configuration a été trouvé et chargé
         } catch (IOException e) {
-            return false;
+            return false; // Aucun fichier de configuration trouvé
         }
     }
 
+    /**
+     * Valide et sauvegarde les nouvelles valeurs spécifiées dans l'interface
+     * utilisateur
+     * vers le fichier de configuration.
+     * Affiche une alerte en cas de succès ou d'échec de l'opération.
+     */
     @FXML
     private void doValider() {
         try (BufferedWriter writer = new BufferedWriter(
                 new FileWriter(confFilePath))) {
+
+            // Récupère les nouvelles valeurs spécifiées dans l'interface utilisateur
             setNewValues();
+
+            // Remet à vide le fichier de configuration avant l'écriture des données
             properties.clear();
+
+            // Écrit les nouvelles valeurs dans le fichier de configuration
             writer.write("[MQTT]\n");
             writer.write("broker=" + host + "\n");
             writer.write("port=" + String.valueOf(port) + "\n");
@@ -392,12 +456,12 @@ public class ConfigurationController {
                 String[] rooms = topic.split(",");
                 topic = "";
                 for (int i = 0; i < rooms.length; i++) {
-                    topic += "AM107/by-room/" + rooms[i];
+                    topic += "AM107/by-room/" + rooms[i] + "/data";
                     if (i + 1 < rooms.length) {
                         topic += ",";
                     }
                 }
-                
+
             }
             writer.write("topic=" + topic + "\n");
             writer.write("[CONFIG]\n");
@@ -422,23 +486,21 @@ public class ConfigurationController {
             tpTemps = cbTimeUnit.getValue();
             if (tpTemps == "minute(s)") {
                 frequency = getIntFromString(txtFrequency.getText()) * 60;
-                // frequency = frequency * 60;
-                writer.write("typeTemps=" + tpTemps + "\n");
             }
             if (tpTemps == "heure(s)") {
                 frequency = getIntFromString(txtFrequency.getText()) * 3600;
-                writer.write("typeTemps=" + tpTemps + "\n");
             }
             if (tpTemps == "jour(s)") {
                 frequency = getIntFromString(txtFrequency.getText()) * 86400;
-                writer.write("typeTemps=" + tpTemps + "\n");
             }
+            writer.write("typeTemps=" + tpTemps + "\n");
             writer.write("frequence_affichage=" + frequency + "\n");
             writer.write("[ALERT]\n");
             writer.write("seuil_Temperature=" + maxTemperature + "\n");
             writer.write("seuil_Humidity=" + maxHumidity + "\n");
             writer.write("seuil_CO2=" + maxCo2 + "\n");
             writer.write("seuil_Activity=" + maxActivity + "\n");
+            // Affiche une alerte en cas de succès de la sauvegarde
             AlertUtilities.showAlert(primaryStage, "Opération réussie.",
                     "Sauvegarde effectuée !",
                     "La configuration a bien été sauvegardé.", AlertType.INFORMATION);
@@ -449,33 +511,48 @@ public class ConfigurationController {
         }
     }
 
+    /**
+     * Réinitialise les champs de l'interface utilisateur avec les valeurs par
+     * défaut. Affiche une confirmation avant la réinitialisation. En cas de
+     * confirmation, réinitialise les champs et applique les nouvelles valeurs.
+     */
     @FXML
     private void doReset() {
+        // Affiche une alerte de confirmation
         if (AlertUtilities.confirmYesCancel(primaryStage, "Confirmation", "Réinitialiser la configuration ?",
                 "Voulez vous vraiment réinitialiser ?", AlertType.CONFIRMATION)) {
-            this.txtHost.setText("");
-            this.txtPort.setText("");
-            this.txtTopic.setText("");
-            this.txtAlertFile.setText("");
-            this.txtDataFile.setText("");
-            this.txtLogsFile.setText("");
-            this.txtHost.setText("");
-            this.txtHost.setText("");
-            this.cbTemperature.setSelected(false);
-            this.cbHumidity.setSelected(false);
-            this.cbActivity.setSelected(false);
-            this.cbCo2.setSelected(false);
+            // Réinitialisation des champs de l'interface utilisateur avec les valeurs par
+            // défaut
+            this.txtHost.setText("chirpstack.iut-blagnac.fr");
+            this.txtPort.setText("1883");
+            this.txtTopic.setText("#");
+            this.txtAlertFile.setText("alerte");
+            this.txtDataFile.setText("donnees");
+            this.txtLogsFile.setText("logs");
+            this.cbTemperature.setSelected(true);
+            this.cbHumidity.setSelected(true);
+            this.cbActivity.setSelected(true);
+            this.cbCo2.setSelected(true);
             this.cbTimeUnit.setValue("minute(s)");
-            this.txtFrequency.setText("");
-            this.txtMaxTemperature.setText("");
-            this.txtMaxHumidity.setText("");
-            this.txtMaxActivity.setText("");
-            this.txtMaxCo2.setText("");
+            this.txtFrequency.setText("1");
+            this.txtMaxTemperature.setText("0");
+            this.txtMaxHumidity.setText("0");
+            this.txtMaxActivity.setText("0");
+            this.txtMaxCo2.setText("0");
+
+            // Applique les nouvelles valeurs
             this.setNewValues();
         }
     }
 
+    /**
+     * Récupère les nouvelles valeurs des champs de l'interface utilisateur et les
+     * stocke. Ces valeurs sont destinées à être utilisées pour la sauvegarde ou la
+     * réinitialisation.
+     */
     private void setNewValues() {
+        // Récupération des nouvelles valeurs des champs et stockage dans les variables
+        // associées
         host = txtHost.getText().trim();
         port = getIntFromString(txtPort.getText().trim());
         topic = txtTopic.getText().trim();
@@ -489,6 +566,13 @@ public class ConfigurationController {
         maxCo2 = getIntFromString(txtMaxCo2.getText().trim());
     }
 
+    /**
+     * Convertit une chaîne en entier.
+     * 
+     * @param _string La chaîne à convertir en entier.
+     * @return La valeur entière de la chaîne si la conversion réussit, sinon
+     *         retourne 0.
+     */
     private int getIntFromString(String _string) {
         try {
             int val = Integer.parseInt(_string);
@@ -498,6 +582,12 @@ public class ConfigurationController {
         }
     }
 
+    /**
+     * Initialise les écouteurs de champs texte.
+     * Configure les validateurs pour différents types de champs texte.
+     * Configure les actions lorsque le texte change dans les champs d'hôte, de
+     * port, de fichiers, de fréquence et de seuils.
+     */
     private void initTxtFieldListeners() {
         txtHost.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.trim().isEmpty()) {
@@ -508,6 +598,7 @@ public class ConfigurationController {
                 hostIsFilled.setValue(true);
                 host = newValue.trim();
             }
+            updateStyle(txtHost, hostIsFilled.getValue(), imgUndefinedHost);
         });
         txtPort.textProperty().addListener((observable, oldValue, newValue) -> {
             newValue = newValue.trim();
@@ -519,9 +610,8 @@ public class ConfigurationController {
                 port = getIntFromString(newValue);
                 portIsFilled.setValue(port <= 0 ? false : true);
             }
+            updateStyle(txtPort, portIsFilled.getValue(), imgUndefinedPort);
         });
-        setupTextValidation(txtHost, hostIsFilled, imgUndefinedHost);
-        setupTextValidation(txtPort, portIsFilled, imgUndefinedPort);
 
         setupTextValidation(txtAlertFile, 15, "^[a-zA-Z]*$", alertFile);
         setupTextValidation(txtDataFile, 15, "^[a-zA-Z]*$", dataFile);
@@ -532,31 +622,17 @@ public class ConfigurationController {
         setupNumberTextValidation(txtMaxHumidity, 7, "-?\\d*", maxHumidity);
         setupNumberTextValidation(txtMaxActivity, 7, "-?\\d*", maxActivity);
         setupNumberTextValidation(txtMaxCo2, 7, "-?\\d*", maxCo2);
-
-        cbTemperature.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            temperature = newValue;
-        });
-        cbHumidity.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            humidity = newValue;
-        });
-        cbActivity.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            activity = newValue;
-        });
-        cbCo2.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            co2 = newValue;
-        });
     }
 
-    private void setupTextValidation(TextField _txtField, BooleanProperty _boolProp, ImageView _img) {
-        _boolProp.addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                updateStyle(_txtField, true, _boolProp, _img);
-            } else {
-                updateStyle(_txtField, false, _boolProp, _img);
-            }
-        });
-    }
-
+    /**
+     * Configure un validateur pour un champ de texte spécifié avec une longueur
+     * maximale et une expression régulière.
+     * 
+     * @param textField Le champ de texte à valider.
+     * @param maxLength Longueur maximale autorisée pour le champ de texte.
+     * @param regex     Expression régulière utilisée pour la validation.
+     * @param value     Valeur de référence pour le champ de texte.
+     */
     private void setupTextValidation(TextField textField, int maxLength, String regex, String value) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > maxLength || !newValue.matches(regex)) {
@@ -565,6 +641,15 @@ public class ConfigurationController {
         });
     }
 
+    /**
+     * Configure un validateur pour un champ de texte numérique spécifié avec une
+     * longueur maximale et une expression régulière.
+     * 
+     * @param textField Le champ de texte à valider.
+     * @param maxLength Longueur maximale autorisée pour le champ de texte.
+     * @param regex     Expression régulière utilisée pour la validation.
+     * @param value     Valeur de référence pour le champ de texte.
+     */
     private void setupNumberTextValidation(TextField textField, int maxLength, String regex, Object value) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.isEmpty() && (newValue.length() > maxLength || !newValue.matches(regex))) {
@@ -573,9 +658,9 @@ public class ConfigurationController {
         });
     }
 
-    /*
-     * Méthode associé au bouton FXML qui permet de fermer la fenêtre.
-     * 
+    /**
+     * Méthode associée au bouton FXML qui permet de fermer la fenêtre.
+     * Initialise et affiche le menu principal lors de l'action de quitter.
      */
     @FXML
     private void doLeave() {
