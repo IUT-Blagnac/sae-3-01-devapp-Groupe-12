@@ -120,7 +120,7 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Fichiers sources (A INSERER)] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/Web/BD/Documentation[Docs] 
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)]
 
