@@ -1,0 +1,56 @@
+= Cahier De Recette - E-Commerce La Bonne Note
+:toc:
+:toc-title: Sommaire
+
+:Entreprise: La Bonne Note
+:Equipe: 12
+
+Créé par : Yannis Gibert, Ahmad Khalil, Rayan Sellou
+Créé pour :  La Bonne Note
+
+ 
+
+
+
+== I. Introduction
+=== 1. Objet :
+[.text-justify]
+Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce document traitera de la partie IOT de l'application.
+
+
+== II. Pre-Requis :
+[.text-justify]
+L'exécution des tests spécifiés au chapitre suivant requiert :
+
+* Un environnement python bien configuré (référence document technique).
+* L'environnement de test tel que spécifié dans la partie "Environnement de test" de ce document.
+* Les fiches de tests. *À vérifier*
+
+
+=== 1. Éléments à tester :
+[.text-justify]
+Les éléments testés concernent les Use-Cases spécifiés dans la *documentation technique*.
+
+
+=== 2. Environnement de test :
+[.text-justify]
+Ordinateur capable d'executer Java 17, JavaFX et Python.
+Peu importe le système d'exploitation.
+(Nous avons fait un programme pour les ordinateurs sous Windows s'appellant connect.py et un programme pour les ordinateurs sous Linux s'appellant connect_linux.py)
+
+
+
+
+== III. Cas de test :
+=== 1. Partie Python :
+
+
+=== 2. Partie Java :
+
+
+
+
+
+
+
+

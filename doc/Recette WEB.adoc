@@ -1,0 +1,38 @@
+= Cahier De Recette - E-Commerce La Bonne Note
+:toc:
+:toc-title: Sommaire
+
+:Entreprise: La Bonne Note
+:Equipe: 12
+
+Créé par : Yannis Gibert, Ahmad Khalil, Rayan Sellou
+Créé pour :  La Bonne Note
+
+ 
+
+
+
+== I. Introduction
+=== 1. Objet :
+[.text-justify]
+Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce Document traitera de la partie Web.
+
+
+== II. Pre-Requis :
+[.text-justify]
+L'exécution des tests spécifiés au chapitre suivant requiert :
+
+* Une connexion internet stable.
+* Les fiches de tests. *À vérifier*
+
+
+=== 1. Éléments à tester :
+[.text-justify]
+Les éléments testés concernent les Use-Cases spécifiés dans la *documentation technique*.
+
+
+== III. Cas de test :
+=== 1. Partie Base de données :
+
+
+=== 2. Partie Web :
