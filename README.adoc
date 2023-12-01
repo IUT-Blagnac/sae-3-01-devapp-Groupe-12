@@ -139,7 +139,8 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 - https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_WEB.adoc[Documentation Utilisateur WEB]
 - https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_WEB.adoc[Documentation Technique WEB]
 - Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant : https://github.com/orgs/IUT-Blagnac/projects/142[US]
-- Tests unitaires et plans de test
+- Tests unitaires et plans de test IOT : https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc[Test Partie IOT]
+- https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20WEB.adoc[Test Partie Web]
 - Indicateurs de qualité du code (dette technique)
 
 Suivi de l'évaluation :
