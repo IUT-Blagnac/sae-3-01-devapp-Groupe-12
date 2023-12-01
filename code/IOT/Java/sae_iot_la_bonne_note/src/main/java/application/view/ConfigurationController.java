@@ -1,5 +1,7 @@
 package application.view;
 
+
+
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -133,6 +135,7 @@ public class ConfigurationController {
     private String dataFile;
     private String logsFile;
     private String donneesDeBase;
+    private String seuilAlerte;
     private String frequence;
     private String typeDuTemps;
     private String tpTemps;  
@@ -335,6 +338,7 @@ public class ConfigurationController {
             logsFile = properties.getProperty("fichier_logs");
             txtLogsFile.setText(logsFile == null ? "" : logsFile);
             donneesDeBase = properties.getProperty("choix_donnees");
+            
             if (donneesDeBase.contains("temperature")){
                 cbTemperature.setSelected(true);
             }
@@ -413,9 +417,11 @@ public class ConfigurationController {
                 writer.write("typeTemps=" + tpTemps + "\n");
             }
             writer.write("frequence_affichage=" + frequency + "\n");
-            
-
-
+            writer.write("[ALERT]\n");
+            writer.write("seuil_Temperature=" + maxTemperature + "\n");
+            writer.write("seuil_Humidity=" + maxHumidity + "\n");
+            writer.write("seuil_CO2=" + maxCo2 + "\n");
+            writer.write("seuil_Activity=" + maxActivity + "\n");
             AlertUtilities.showAlert(primaryStage, "Opération réussie.",
                     "Sauvegarde effectuée !",
                     "La configuration a bien été sauvegardé.", AlertType.INFORMATION);
