@@ -44,6 +44,60 @@ Peu importe le système d'exploitation.
 == III. Cas de test :
 === 1. Partie Python :
 
+==== 1.1 Récupération des données :
+
+|====
+
+>|Cas de test 4+|Test-01-01-01
+>|Titre 4+|Récupération des données dans un fichier JSON
+>|Objectif 4+| Vérifier que les données sont bien récupérées et écrite dans un fichier JSON 
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Lancer le programme. ^|Les données sont écrites dans le fichier JSON ^| La temps d'attente de la fréquence doit être écoulé ^|OK
+^|All_G_C.1 ^|Lancer le programme. ^|Les valeurs affichés sont précises et correspondent aux données réelles du capteur ^| La temps d'attente de la fréquence doit être écoulé ^|OK
+^|All_G_C.1 ^|Lancer le programme. ^|Les données doivent être récupérées pour chaque salle disponible ^| Aucune ^|OK
+^|All_G_C.1 ^|Lancer le programme. ^|Les données doivent être clairement différenciées par salle ^| Aucune ^|OK
+
+5+|
+
+5+|Commentaire :
+Les données sont bien écrites dans le fichier JSON qui se créer si il n'existe pas encore.
+|====
+
+|====
+
+>|Cas de test 4+|Test-01-01-02
+>|Titre 4+|Récupération des alertes dans un fichier JSON
+>|Objectif 4+| Vérifier que les alertes sont bien récupérées et écrite dans un fichier JSON 
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Une donnée capturée dépasse son seuil maximale ^|L'alerte s'envoie et s'écrit dans le fichier JSON d'alerte' ^| Une donnée doit dépasser son seuil maximale ^|OK
+
+5+|
+
+5+|Commentaire :
+Les alertes sont bien écrites dans le fichier JSON qui se créer si il n'existe pas encore.
+|====
+
+==== 1.2 Configuration du programme :
+|====
+
+>|Cas de test 4+|Test-01-02-01
+>|Titre 4+|Prise en compte du fichier de configuration
+>|Objectif 4+| Vérifier que le programme prend bien en compte les données du fichier de configuration "config.ini"
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|L'utilisateur modifies les données à récupérer ^|Seul les données écrites dans le fichier de configuration doivent être écrite ^| La temps d'attente de la fréquence doit être écoulé ^|OK
+^|All_G_C.1 ^|L'utilisateur modifies la fréquence de récupération ^|Le programme doit attendre la fin de la fréquence pour écrire les données qu'il a récupéré depuis la dernière écriture ^| La temps d'attente de la fréquence doit être écoulé en n'écrivant dans le cas de plusieurs capture pour une même salle que la dernière capture ^|OK
+^|All_G_C.1 ^|L'utilisateur modifies les seuils d'alerte des données ^|Le programme doit envoyer des alertes dés qu'une des données capturé dépasse son seuil ^| Aucune ^|OK
+5+|
+
+5+|Commentaire :
+
+|====
 
 === 2. Partie Java :
 
