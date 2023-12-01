@@ -76,13 +76,15 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 
 -> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20Séquence%20Système/DSS_exemple_IOT.png[Diagramme de séquence système]
 
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc[Test Partie IOT]
+
 **Partie Python**
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Python[Fichiers sources] 
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc[Tests] 
 
 **Partie Javafx**
 
@@ -90,7 +92,7 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)]
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc[Tests]
 
 [cols="1,1"]
 |===
@@ -108,13 +110,15 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 
 -> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/DSS_exemple_WEB.png[Diagramme de séquence système]
 
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20WEB.adoc[Test Partie Web]
+
 **Partie PHP**
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Fichiers sources (A INSERER)] 
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/Web/BD/Documentation[Docs] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)]
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20WEB.adoc[Tests]
 
 **Partie BD**
 
@@ -122,7 +126,7 @@ Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pa
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/Web/BD/Documentation[Docs] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Tests (A INSERER)]
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20WEB.adoc[Tests]
 
 == Gestion de projet & Qualité
 
