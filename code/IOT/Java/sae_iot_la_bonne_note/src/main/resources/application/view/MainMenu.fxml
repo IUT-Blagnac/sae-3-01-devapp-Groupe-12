@@ -110,7 +110,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Visualiser l'historique" textAlignment="CENTER" GridPane.rowIndex="2">
+            <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" onAction="#doCheckHistory" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Visualiser l'historique" textAlignment="CENTER" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" left="280.0" top="10.0" />
                </GridPane.margin>
@@ -130,7 +130,7 @@
                   <String fx:value="mainButtonOnHover" />
                </styleClass>
             </Button>
-            <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Visualiser l'entrepôt" textAlignment="CENTER" GridPane.rowIndex="1">
+            <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" maxHeight="75.0" maxWidth="468.0" minHeight="75.0" minWidth="468.0" mnemonicParsing="false" onAction="#doWharehouseMonitor" opacity="0.95" prefHeight="75.0" prefWidth="468.0" stylesheets="@../application.css" text="Surveiller l'entrepôt" textAlignment="CENTER" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="10.0" left="280.0" top="10.0" />
                </GridPane.margin>

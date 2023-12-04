@@ -1,5 +1,6 @@
 package application.visualEffects;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
@@ -23,23 +24,32 @@ public class Animations {
      * @param _scale    L'échelle de l'animation.
      * @param _duration La durée de l'animation en millisecondes.
      */
-    public static void setAnimatedButton(Button _butt, double _scale, double _duration) {
+    public static void setAnimatedButton(Button _butt, double _scaleIn, double _scaleOut, double _duration) {
         ScaleTransition scaleInTransition = new ScaleTransition(Duration.millis(_duration),
                 _butt);
-        scaleInTransition.setToX(_scale);
-        scaleInTransition.setToY(_scale);
+        scaleInTransition.setToX(_scaleIn);
+        scaleInTransition.setToY(_scaleIn);
         _butt.setOnMouseEntered(event -> {
             scaleInTransition.playFromStart();
         });
 
         ScaleTransition scaleOutTransition = new ScaleTransition(Duration.millis(150),
                 _butt);
-        scaleOutTransition.setToX(1);
-        scaleOutTransition.setToY(1);
+        scaleOutTransition.setToX(_scaleOut);
+        scaleOutTransition.setToY(_scaleOut);
 
         _butt.setOnMouseExited(event -> {
             scaleOutTransition.play();
         });
+    }
+
+    public static void setSelectedMenuAnimation(Button _butt, double _fadeFrom, double _fadeTo, double _duration) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(_duration), _butt);
+        fadeTransition.setFromValue(_fadeFrom);
+        fadeTransition.setToValue(_fadeTo);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.setCycleCount(FadeTransition.INDEFINITE);
+        fadeTransition.play();
     }
 
     /**
@@ -54,6 +64,7 @@ public class Animations {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration), button);
         scaleTransition.setToX(scale);
         scaleTransition.setToY(scale);
+        scaleTransition.setInterpolator(Interpolator.EASE_BOTH); // Départ rapide
         scaleTransition.setOnFinished(event -> {
             if (onFinished != null) {
                 onFinished.run();

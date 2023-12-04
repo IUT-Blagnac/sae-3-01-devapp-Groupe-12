@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Properties;
 
 import application.control.Configuration;
+import application.control.LogHistory;
 import application.control.MainMenu;
+import application.control.WharehouseMonitor;
 import application.tools.AlertUtilities;
 import application.tools.MQTTConnection;
 import application.visualEffects.Animations;
@@ -53,13 +55,25 @@ public class ConfigurationController {
 
     // Éléments FXML
     @FXML
+    private Button buttMenu;
+
+    @FXML
+    private Button buttCheckWhareHouse;
+
+    @FXML
+    private Button buttCheckHistory;
+
+    @FXML
+    private Button buttConfiguration;
+
+    @FXML
+    private Button buttTestConnection;
+
+    @FXML
     private Button buttReset;
 
     @FXML
-    private Button buttLeave;
-
-    @FXML
-    private Button buttConfirm;
+    private Button buttSave;
 
     @FXML
     private TextField txtHost;
@@ -187,11 +201,28 @@ public class ConfigurationController {
         initConnexionTestTask();
     }
 
+    /**
+     * Initialise les éléments de l'interface utilisateur (IHM) dans la fenêtre
+     * principale.
+     * Cette méthode configure les différentes actions et animations des éléments
+     * IHM,
+     * initialise les tooltips, les ChoiceBox, et met en place les valeurs initiales
+     * à partir des configurations existantes.
+     */
     private void initViewElements() {
         // Définit l'action à effectuer lorsque la fenêtre est fermée
         primaryStage.setOnCloseRequest(e -> {
-            doLeave();
+            doMenu();
         });
+
+        // Applique des animations aux boutons de l'IHM
+        Animations.setAnimatedButton(buttMenu, 1.1, 1, 100);
+        Animations.setAnimatedButton(buttCheckWhareHouse, 1.1, 1, 100);
+        Animations.setAnimatedButton(buttCheckHistory, 1.1, 1, 100);
+        Animations.setAnimatedButton(buttTestConnection, 1.06, 1, 100);
+        Animations.setAnimatedButton(buttReset, 1.06, 1, 100);
+        Animations.setAnimatedButton(buttSave, 1.06, 1, 100);
+        Animations.setSelectedMenuAnimation(buttConfiguration, 0.5, 0.8, 1000);
 
         // Crée un binding combiné entre les propriétés hostIsFilled et portIsFilled
         BooleanBinding combinedBinding = Bindings.and(hostIsFilled, portIsFilled);
@@ -216,6 +247,290 @@ public class ConfigurationController {
 
         // Initialise les écouteurs pour les champs de texte
         initTxtFieldListeners();
+    }
+
+    /**
+     * Méthode associée au bouton FXML qui permet de fermer la fenêtre.
+     * Initialise et affiche le menu principal lors de l'action de quitter.
+     */
+    @FXML
+    private void doMenu() {
+        Animations.sceneSwapAnimation(buttMenu, 1.15, 100, () -> {
+            MainMenu menu = new MainMenu();
+            menu.start(primaryStage);
+            menu.show();
+        });
+    }
+
+    /**
+     * Démarre la surveillance de l'entrepôt en lançant la fenêtre dédiée.
+     * Cette méthode réalise une animation de transition vers la surveillance de
+     * l'entrepôt en créant une nouvelle fenêtre WharehouseMonitor.
+     */
+    @FXML
+    private void doWharehouseMonitor() {
+        Animations.sceneSwapAnimation(buttCheckWhareHouse, 1.15, 50, () -> {
+            WharehouseMonitor wharehouse = new WharehouseMonitor(primaryStage);
+            wharehouse.show();
+        });
+    }
+
+    /**
+     * Affiche l'historique des journaux en lançant la fenêtre dédiée.
+     * Cette méthode réalise une animation de transition vers l'historique des
+     * journaux en créant une nouvelle fenêtre LogHistory.
+     */
+    @FXML
+    private void doCheckHistory() {
+        Animations.sceneSwapAnimation(buttCheckHistory, 1.15, 100, () -> {
+            LogHistory history = new LogHistory(primaryStage);
+            history.show();
+        });
+    }
+
+    /**
+     * Effectue un test de connexion au serveur MQTT.
+     * Si un test est déjà en cours, affiche une alerte informant l'utilisateur de
+     * patienter.
+     * Sinon, initialise et lance une nouvelle tâche de test de connexion.
+     */
+    @FXML
+    private void doConnectionTest() {
+        if (connexionTestTask.isRunning()) {
+            // Si un test est déjà en cours, affiche une alerte pour informer l'utilisateur
+            AlertUtilities.showAlert(primaryStage, "Erreur.", "Un test est déjà en cours. Veuillez patienter.",
+                    "Veuillez attendre que le test en cours se termine.", AlertType.INFORMATION);
+        } else {
+            if (serverConfIsFilled.getValue()) {
+                // Si tous les champs requis pour le test sont remplis, initialise et lance la
+                // tâche de test
+                initConnexionTestTask();
+                new Thread(connexionTestTask).start();
+            } else {
+                // Si des champs requis pour le test sont vides, affiche une alerte pour
+                // informer l'utilisateur
+                AlertUtilities.showAlert(primaryStage, "Opération impossible.",
+                        "Impossible d'initier le test de connexion.",
+                        "Veuillez remplir tous les champs requis pour le test ! (en rouge)",
+                        AlertType.INFORMATION);
+            }
+        }
+    }
+
+    /**
+     * Réinitialise les champs de l'interface utilisateur avec les valeurs par
+     * défaut. Affiche une confirmation avant la réinitialisation. En cas de
+     * confirmation, réinitialise les champs et applique les nouvelles valeurs.
+     */
+    @FXML
+    private void doReset() {
+        // Affiche une alerte de confirmation
+        if (AlertUtilities.confirmYesCancel(primaryStage, "Confirmation", "Réinitialiser la configuration ?",
+                "Voulez vous vraiment réinitialiser ?", AlertType.CONFIRMATION)) {
+            // Réinitialisation des champs de l'interface utilisateur avec les valeurs par
+            // défaut
+            this.txtHost.setText("chirpstack.iut-blagnac.fr");
+            this.txtPort.setText("1883");
+            this.txtTopic.setText("#");
+            this.txtAlertFile.setText("alerte");
+            this.txtDataFile.setText("donnees");
+            this.txtLogsFile.setText("logs");
+            this.cbTemperature.setSelected(true);
+            this.cbHumidity.setSelected(true);
+            this.cbActivity.setSelected(true);
+            this.cbCo2.setSelected(true);
+            this.cbTimeUnit.setValue("minute(s)");
+            this.txtFrequency.setText("1");
+            this.txtMaxTemperature.setText("0");
+            this.txtMaxHumidity.setText("0");
+            this.txtMaxActivity.setText("0");
+            this.txtMaxCo2.setText("0");
+
+            // Applique les nouvelles valeurs
+            this.setNewValues();
+        }
+    }
+
+    /**
+     * Valide et sauvegarde les nouvelles valeurs spécifiées dans l'interface
+     * utilisateur vers le fichier de configuration.
+     * Affiche une alerte en cas de succès ou d'échec de l'opération.
+     */
+    @FXML
+    private void doSave() {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter(confFilePath))) {
+
+            // Récupère les nouvelles valeurs spécifiées dans l'interface utilisateur
+            setNewValues();
+
+            // Remet à vide le fichier de configuration avant l'écriture des données
+            properties.clear();
+
+            // Écrit les nouvelles valeurs dans le fichier de configuration
+            writer.write("[MQTT]\n");
+            writer.write("broker=" + host + "\n");
+            writer.write("port=" + String.valueOf(port) + "\n");
+            if (topic.equals("#")) {
+                topic = "AM107/by-room/#";
+            } else {
+                String[] rooms = topic.split(",");
+                topic = "";
+                for (int i = 0; i < rooms.length; i++) {
+                    topic += "AM107/by-room/" + rooms[i] + "/data";
+                    if (i + 1 < rooms.length) {
+                        topic += ",";
+                    }
+                }
+
+            }
+            writer.write("topic=" + topic + "\n");
+            writer.write("[CONFIG]\n");
+            writer.write("fichier_alerte=" + alertFile + "\n");
+            writer.write("fichier_donnees=" + dataFile + "\n");
+            writer.write("fichier_logs=" + logsFile + "\n");
+            String choixDonnee = "";
+            if (cbTemperature.isSelected()) {
+                choixDonnee += "temperature,";
+            }
+            if (cbHumidity.isSelected()) {
+                choixDonnee += "humidity,";
+            }
+            if (cbActivity.isSelected()) {
+                choixDonnee += "activity,";
+            }
+            if (cbCo2.isSelected()) {
+                choixDonnee += "co2,";
+            }
+            writer.write("choix_donnees=" + choixDonnee + "\n");
+
+            tpTemps = cbTimeUnit.getValue();
+            if (tpTemps == "minute(s)") {
+                frequency = getIntFromString(txtFrequency.getText()) * 60;
+            }
+            if (tpTemps == "heure(s)") {
+                frequency = getIntFromString(txtFrequency.getText()) * 3600;
+            }
+            if (tpTemps == "jour(s)") {
+                frequency = getIntFromString(txtFrequency.getText()) * 86400;
+            }
+            writer.write("typeTemps=" + tpTemps + "\n");
+            writer.write("frequence_affichage=" + frequency + "\n");
+            writer.write("[ALERT]\n");
+            writer.write("seuil_Temperature=" + maxTemperature + "\n");
+            writer.write("seuil_Humidity=" + maxHumidity + "\n");
+            writer.write("seuil_CO2=" + maxCo2 + "\n");
+            writer.write("seuil_Activity=" + maxActivity + "\n");
+            // Affiche une alerte en cas de succès de la sauvegarde
+            AlertUtilities.showAlert(primaryStage, "Opération réussie.",
+                    "Sauvegarde effectuée !",
+                    "La configuration a bien été sauvegardé.", AlertType.INFORMATION);
+        } catch (IOException e) {
+            AlertUtilities.showAlert(primaryStage, "Opération échouée.",
+                    "Une erreur est survenue !",
+                    "Une erreur est survenue lors de la sauvegarde.", AlertType.INFORMATION);
+        }
+    }
+
+    /**
+     * Charge les éléments de l'interface utilisateur à partir d'un fichier de
+     * configuration existant, s'il est trouvé. Remplit les champs correspondants
+     * avec les valeurs du fichier. Sinon, affiche une alerte informant qu'aucun
+     * fichier de configuration n'a été trouvé.
+     */
+    private void setElementsByConf() {
+        if (checkConfFile()) {
+            // Récupère les valeurs depuis le fichier de configuration
+            host = properties.getProperty("broker");
+            txtHost.setText(host == null ? "" : host);
+            port = getIntFromString(properties.getProperty("port"));
+            txtPort.setText(port == 0 ? "" : "" + port);
+            topic = properties.getProperty("topic");
+            if (topic != null) {
+                if (topic.contains("AM107/by-room/#")) {
+                    txtTopic.setText("#");
+                } else {
+                    String[] rooms = topic.split(",");
+                    List<String> roomNames = new ArrayList<>();
+                    for (String room : rooms) {
+                        String[] parts = room.split("/");
+                        if (parts.length >= 3) {
+                            String roomName = parts[2];
+                            roomNames.add(roomName);
+                        }
+                    }
+                    String concatenatedRooms = String.join(",", roomNames);
+                    txtTopic.setText(concatenatedRooms);
+                }
+            }
+            alertFile = properties.getProperty("fichier_alerte");
+            txtAlertFile.setText(alertFile == null ? "" : alertFile);
+            dataFile = properties.getProperty("fichier_donnees");
+            txtDataFile.setText(dataFile == null ? "" : dataFile);
+            logsFile = properties.getProperty("fichier_logs");
+            txtLogsFile.setText(logsFile == null ? "" : logsFile);
+            donneesDeBase = properties.getProperty("choix_donnees");
+
+            if (donneesDeBase.contains("temperature")) {
+                cbTemperature.setSelected(true);
+            }
+            if (donneesDeBase.contains("humidity")) {
+                cbHumidity.setSelected(true);
+            }
+            if (donneesDeBase.contains("activity")) {
+                cbActivity.setSelected(true);
+            }
+            if (donneesDeBase.contains("co2")) {
+                cbCo2.setSelected(true);
+            }
+            frequency = getIntFromString(properties.getProperty("frequence_affichage"));
+            typeDuTemps = properties.getProperty("typeTemps");
+            if (typeDuTemps.equals("minute(s)")) {
+                frequency /= 60;
+            }
+            if (typeDuTemps.equals("heure(s)")) {
+                frequency /= 3600;
+            }
+            if (typeDuTemps.equals("jour(s)")) {
+                frequency /= 86400;
+            }
+            txtFrequency.setText("" + frequency);
+            cbTimeUnit.setValue(typeDuTemps);
+            maxTemperature = getIntFromString(properties.getProperty("seuil_Temperature"));
+            txtMaxTemperature.setText(maxTemperature == 0 ? "" : String.valueOf(maxTemperature));
+            maxActivity = getIntFromString(properties.getProperty("seuil_Activity"));
+            txtMaxActivity.setText(maxActivity == 0 ? "" : String.valueOf(maxActivity));
+            maxCo2 = getIntFromString(properties.getProperty("seuil_CO2"));
+            txtMaxCo2.setText(maxCo2 == 0 ? "" : String.valueOf(maxCo2));
+            maxHumidity = getIntFromString(properties.getProperty("seuil_Humidity"));
+            txtMaxHumidity.setText(maxHumidity == 0 ? "" : String.valueOf(maxHumidity));
+        } else {
+            // Si aucun fichier de configuration n'est trouvé, affiche une alerte
+            AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
+                    "Aucune configuration existante trouvé.",
+                    "Aucune configuration n'a pu être chargé.", AlertType.INFORMATION);
+        }
+    }
+
+    /**
+     * Récupère les nouvelles valeurs des champs de l'interface utilisateur et les
+     * stocke. Ces valeurs sont destinées à être utilisées pour la sauvegarde ou la
+     * réinitialisation.
+     */
+    private void setNewValues() {
+        // Récupération des nouvelles valeurs des champs et stockage dans les variables
+        // associées
+        host = txtHost.getText().trim();
+        port = getIntFromString(txtPort.getText().trim());
+        topic = txtTopic.getText().trim();
+        alertFile = txtAlertFile.getText().trim();
+        dataFile = txtDataFile.getText().trim();
+        logsFile = txtLogsFile.getText().trim();
+        frequency = getIntFromString(txtFrequency.getText().trim());
+        maxTemperature = getIntFromString(txtMaxTemperature.getText().trim());
+        maxActivity = getIntFromString(txtMaxActivity.getText().trim());
+        maxHumidity = getIntFromString(txtMaxHumidity.getText().trim());
+        maxCo2 = getIntFromString(txtMaxCo2.getText().trim());
     }
 
     /**
@@ -305,31 +620,18 @@ public class ConfigurationController {
     }
 
     /**
-     * Effectue un test de connexion au serveur MQTT.
-     * Si un test est déjà en cours, affiche une alerte informant l'utilisateur de
-     * patienter.
-     * Sinon, initialise et lance une nouvelle tâche de test de connexion.
+     * Convertit une chaîne en entier.
+     * 
+     * @param _string La chaîne à convertir en entier.
+     * @return La valeur entière de la chaîne si la conversion réussit, sinon
+     *         retourne 0.
      */
-    @FXML
-    private void doConnectionTest() {
-        if (connexionTestTask.isRunning()) {
-            // Si un test est déjà en cours, affiche une alerte pour informer l'utilisateur
-            AlertUtilities.showAlert(primaryStage, "Erreur.", "Un test est déjà en cours. Veuillez patienter.",
-                    "Veuillez attendre que le test en cours se termine.", AlertType.INFORMATION);
-        } else {
-            if (serverConfIsFilled.getValue()) {
-                // Si tous les champs requis pour le test sont remplis, initialise et lance la
-                // tâche de test
-                initConnexionTestTask();
-                new Thread(connexionTestTask).start();
-            } else {
-                // Si des champs requis pour le test sont vides, affiche une alerte pour
-                // informer l'utilisateur
-                AlertUtilities.showAlert(primaryStage, "Opération impossible.",
-                        "Impossible d'initier le test de connexion.",
-                        "Veuillez remplir tous les champs requis pour le test ! (en rouge)",
-                        AlertType.INFORMATION);
-            }
+    private int getIntFromString(String _string) {
+        try {
+            int val = Integer.parseInt(_string);
+            return val;
+        } catch (Exception e) {
+            return 0;
         }
     }
 
@@ -345,77 +647,6 @@ public class ConfigurationController {
     }
 
     /**
-     * Charge les éléments de l'interface utilisateur à partir d'un fichier de
-     * configuration existant, s'il est trouvé. Remplit les champs correspondants
-     * avec les valeurs du fichier. Sinon, affiche une alerte informant qu'aucun
-     * fichier de configuration n'a été trouvé.
-     */
-    private void setElementsByConf() {
-        if (checkConfFile()) {
-            // Récupère les valeurs depuis le fichier de configuration
-            host = properties.getProperty("broker");
-            txtHost.setText(host == null ? "" : host);
-            port = getIntFromString(properties.getProperty("port"));
-            txtPort.setText(port == 0 ? "" : "" + port);
-            topic = properties.getProperty("topic");
-            if (topic != null) {
-                if (topic.contains("AM107/by-room/#")) {
-                    txtTopic.setText("#");
-                } else {
-                    String[] rooms = topic.split(",");
-                    List<String> roomNames = new ArrayList<>();
-                    for (String room : rooms) {
-                        String[] parts = room.split("/");
-                        if (parts.length >= 3) {
-                            String roomName = parts[2];
-                            roomNames.add(roomName);
-                        }
-                    }
-                    String concatenatedRooms = String.join(",", roomNames);
-                    txtTopic.setText(concatenatedRooms);
-                }
-            }
-            alertFile = properties.getProperty("fichier_alerte");
-            txtAlertFile.setText(alertFile == null ? "" : alertFile);
-            dataFile = properties.getProperty("fichier_donnees");
-            txtDataFile.setText(dataFile == null ? "" : dataFile);
-            logsFile = properties.getProperty("fichier_logs");
-            txtLogsFile.setText(logsFile == null ? "" : logsFile);
-            donneesDeBase = properties.getProperty("choix_donnees");
-
-            if (donneesDeBase.contains("temperature")) {
-                cbTemperature.setSelected(true);
-            }
-            if (donneesDeBase.contains("humidity")) {
-                cbHumidity.setSelected(true);
-            }
-            if (donneesDeBase.contains("activity")) {
-                cbActivity.setSelected(true);
-            }
-            if (donneesDeBase.contains("co2")) {
-                cbCo2.setSelected(true);
-            }
-            frequency = getIntFromString(properties.getProperty("frequence_affichage"));
-            txtFrequency.setText("" + frequency);
-            typeDuTemps = properties.getProperty("typeTemps");
-            cbTimeUnit.setValue(typeDuTemps);
-            maxTemperature = getIntFromString(properties.getProperty("seuil_Temperature"));
-            txtMaxTemperature.setText(maxTemperature == 0 ? "" : String.valueOf(maxTemperature));
-            maxActivity = getIntFromString(properties.getProperty("seuil_Activity"));
-            txtMaxActivity.setText(maxActivity == 0 ? "" : String.valueOf(maxActivity));
-            maxCo2 = getIntFromString(properties.getProperty("seuil_CO2"));
-            txtMaxCo2.setText(maxCo2 == 0 ? "" : String.valueOf(maxCo2));
-            maxHumidity = getIntFromString(properties.getProperty("seuil_Humidity"));
-            txtMaxHumidity.setText(maxHumidity == 0 ? "" : String.valueOf(maxHumidity));
-        } else {
-            // Si aucun fichier de configuration n'est trouvé, affiche une alerte
-            AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
-                    "Aucune configuration existante trouvé.",
-                    "Aucune configuration n'a pu être chargé.", AlertType.INFORMATION);
-        }
-    }
-
-    /**
      * Vérifie la présence du fichier de configuration.
      *
      * @return true si le fichier est trouvé et chargé avec succès, false sinon.
@@ -426,159 +657,6 @@ public class ConfigurationController {
             return true; // Le fichier de configuration a été trouvé et chargé
         } catch (IOException e) {
             return false; // Aucun fichier de configuration trouvé
-        }
-    }
-
-    /**
-     * Valide et sauvegarde les nouvelles valeurs spécifiées dans l'interface
-     * utilisateur
-     * vers le fichier de configuration.
-     * Affiche une alerte en cas de succès ou d'échec de l'opération.
-     */
-    @FXML
-    private void doValider() {
-        try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter(confFilePath))) {
-
-            // Récupère les nouvelles valeurs spécifiées dans l'interface utilisateur
-            setNewValues();
-
-            // Remet à vide le fichier de configuration avant l'écriture des données
-            properties.clear();
-
-            // Écrit les nouvelles valeurs dans le fichier de configuration
-            writer.write("[MQTT]\n");
-            writer.write("broker=" + host + "\n");
-            writer.write("port=" + String.valueOf(port) + "\n");
-            if (topic.equals("#")) {
-                topic = "AM107/by-room/#";
-            } else {
-                String[] rooms = topic.split(",");
-                topic = "";
-                for (int i = 0; i < rooms.length; i++) {
-                    topic += "AM107/by-room/" + rooms[i] + "/data";
-                    if (i + 1 < rooms.length) {
-                        topic += ",";
-                    }
-                }
-
-            }
-            writer.write("topic=" + topic + "\n");
-            writer.write("[CONFIG]\n");
-            writer.write("fichier_alerte=" + alertFile + "\n");
-            writer.write("fichier_donnees=" + dataFile + "\n");
-            writer.write("fichier_logs=" + logsFile + "\n");
-            String choixDonnee = "";
-            if (cbTemperature.isSelected()) {
-                choixDonnee += "temperature," + " ";
-            }
-            if (cbHumidity.isSelected()) {
-                choixDonnee += "humidity," + " ";
-            }
-            if (cbActivity.isSelected()) {
-                choixDonnee += "activity," + " ";
-            }
-            if (cbCo2.isSelected()) {
-                choixDonnee += "co2," + " ";
-            }
-            writer.write("choix_donnees=" + choixDonnee + "\n");
-
-            tpTemps = cbTimeUnit.getValue();
-            if (tpTemps == "minute(s)") {
-                frequency = getIntFromString(txtFrequency.getText()) * 60;
-            }
-            if (tpTemps == "heure(s)") {
-                frequency = getIntFromString(txtFrequency.getText()) * 3600;
-            }
-            if (tpTemps == "jour(s)") {
-                frequency = getIntFromString(txtFrequency.getText()) * 86400;
-            }
-            writer.write("typeTemps=" + tpTemps + "\n");
-            writer.write("frequence_affichage=" + frequency + "\n");
-            writer.write("[ALERT]\n");
-            writer.write("seuil_Temperature=" + maxTemperature + "\n");
-            writer.write("seuil_Humidity=" + maxHumidity + "\n");
-            writer.write("seuil_CO2=" + maxCo2 + "\n");
-            writer.write("seuil_Activity=" + maxActivity + "\n");
-            // Affiche une alerte en cas de succès de la sauvegarde
-            AlertUtilities.showAlert(primaryStage, "Opération réussie.",
-                    "Sauvegarde effectuée !",
-                    "La configuration a bien été sauvegardé.", AlertType.INFORMATION);
-        } catch (IOException e) {
-            AlertUtilities.showAlert(primaryStage, "Opération échouée.",
-                    "Une erreur est survenue !",
-                    "Une erreur est survenue lors de la sauvegarde.", AlertType.INFORMATION);
-        }
-    }
-
-    /**
-     * Réinitialise les champs de l'interface utilisateur avec les valeurs par
-     * défaut. Affiche une confirmation avant la réinitialisation. En cas de
-     * confirmation, réinitialise les champs et applique les nouvelles valeurs.
-     */
-    @FXML
-    private void doReset() {
-        // Affiche une alerte de confirmation
-        if (AlertUtilities.confirmYesCancel(primaryStage, "Confirmation", "Réinitialiser la configuration ?",
-                "Voulez vous vraiment réinitialiser ?", AlertType.CONFIRMATION)) {
-            // Réinitialisation des champs de l'interface utilisateur avec les valeurs par
-            // défaut
-            this.txtHost.setText("chirpstack.iut-blagnac.fr");
-            this.txtPort.setText("1883");
-            this.txtTopic.setText("#");
-            this.txtAlertFile.setText("alerte");
-            this.txtDataFile.setText("donnees");
-            this.txtLogsFile.setText("logs");
-            this.cbTemperature.setSelected(true);
-            this.cbHumidity.setSelected(true);
-            this.cbActivity.setSelected(true);
-            this.cbCo2.setSelected(true);
-            this.cbTimeUnit.setValue("minute(s)");
-            this.txtFrequency.setText("1");
-            this.txtMaxTemperature.setText("0");
-            this.txtMaxHumidity.setText("0");
-            this.txtMaxActivity.setText("0");
-            this.txtMaxCo2.setText("0");
-
-            // Applique les nouvelles valeurs
-            this.setNewValues();
-        }
-    }
-
-    /**
-     * Récupère les nouvelles valeurs des champs de l'interface utilisateur et les
-     * stocke. Ces valeurs sont destinées à être utilisées pour la sauvegarde ou la
-     * réinitialisation.
-     */
-    private void setNewValues() {
-        // Récupération des nouvelles valeurs des champs et stockage dans les variables
-        // associées
-        host = txtHost.getText().trim();
-        port = getIntFromString(txtPort.getText().trim());
-        topic = txtTopic.getText().trim();
-        alertFile = txtAlertFile.getText().trim();
-        dataFile = txtDataFile.getText().trim();
-        logsFile = txtLogsFile.getText().trim();
-        frequency = getIntFromString(txtFrequency.getText().trim());
-        maxTemperature = getIntFromString(txtMaxTemperature.getText().trim());
-        maxActivity = getIntFromString(txtMaxActivity.getText().trim());
-        maxHumidity = getIntFromString(txtMaxHumidity.getText().trim());
-        maxCo2 = getIntFromString(txtMaxCo2.getText().trim());
-    }
-
-    /**
-     * Convertit une chaîne en entier.
-     * 
-     * @param _string La chaîne à convertir en entier.
-     * @return La valeur entière de la chaîne si la conversion réussit, sinon
-     *         retourne 0.
-     */
-    private int getIntFromString(String _string) {
-        try {
-            int val = Integer.parseInt(_string);
-            return val;
-        } catch (Exception e) {
-            return 0;
         }
     }
 
@@ -656,16 +734,5 @@ public class ConfigurationController {
                 textField.setText(oldValue);
             }
         });
-    }
-
-    /**
-     * Méthode associée au bouton FXML qui permet de fermer la fenêtre.
-     * Initialise et affiche le menu principal lors de l'action de quitter.
-     */
-    @FXML
-    private void doLeave() {
-        MainMenu menu = new MainMenu();
-        menu.start(primaryStage);
-        menu.show();
     }
 }

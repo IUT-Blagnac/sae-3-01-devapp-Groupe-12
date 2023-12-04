@@ -16,6 +16,26 @@
     </properties>
 
     <dependencies>
+    <!-- Jackson Core -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.13.0</version> <!-- Assure-toi d'utiliser la dernière version disponible -->
+    </dependency>
+
+    <!-- Jackson Databind -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.13.0</version> <!-- Assure-toi d'utiliser la dernière version disponible -->
+    </dependency>
+
+    <!-- Jackson Annotations (optionnel, si nécessaire) -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>2.13.0</version> <!-- Assure-toi d'utiliser la dernière version disponible -->
+    </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -32,7 +52,6 @@
         <version>1.2.5</version> <!-- Mettez à jour la version si nécessaire -->
     </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

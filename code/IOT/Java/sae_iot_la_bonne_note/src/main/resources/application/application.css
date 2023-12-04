@@ -60,10 +60,7 @@
 }
 
 .undefined-txtArea {
-    /* -fx-background-radius: 10; */
-    /* -fx-border-width: 3.5px; */
     -fx-border-color: rgba(252, 0, 0, 0.669);
-    /* -fx-border-radius: 5px; */
     -fx-focus-color: rgba(252, 0, 0, 0.669);
 }
 
@@ -108,7 +105,7 @@
 
 .connectionTestButton {
     -fx-background-radius: 15;
-    -fx-background-color: rgba(26, 189, 207, 0.837);
+    -fx-background-color: rgba(26, 207, 150, 0.99);
 }
 
 .infoButton {
@@ -118,6 +115,13 @@
 
 .mainButtonOnHover:hover {
     -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-border-width: 4.5px;
+}
+
+.mainButtonAlreadySelected {
+    -fx-border-color: black;
+    -fx-background-radius: 15;
     -fx-border-radius: 10px;
     -fx-border-width: 4.5px;
 }
@@ -141,6 +145,14 @@
     -fx-border-radius: 10px;
     -fx-border-width: 3px;
 }
+
+.listViewLogs {
+    -fx-background-radius: 10;
+    -fx-border-color: #30afb8;
+    -fx-border-radius: 5;
+    -fx-border-width: 4.5;
+}
+
 
 .list-cell:hover {
     -fx-background-color: grey;

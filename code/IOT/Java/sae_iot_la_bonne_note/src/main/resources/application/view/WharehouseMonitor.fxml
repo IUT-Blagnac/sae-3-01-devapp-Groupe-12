@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WharehouseMonitorController">
+   <center>
+      <GridPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" prefHeight="58.0" prefWidth="1063.0" stylesheets="@../application.css" text="Surveillance de l'entrepôt" textAlignment="CENTER" GridPane.rowIndex="1">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <HBox maxHeight="80.0" minHeight="80.0" prefHeight="80.0" style="-fx-border-color: black; -fx-border-width: 0 0 6 0;">
+               <children>
+                  <Button fx:id="buttMenu" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="160.0" minHeight="55.0" minWidth="141.0" mnemonicParsing="false" onAction="#doMenu" prefHeight="55.0" prefWidth="141.0" stylesheets="@../application.css" text="Menu">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" translateX="3.0">
+                           <image>
+                              <Image url="@../images/menu_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="leaveButton" />
+                        <String fx:value="mainButtonOnHover" />
+                        <String fx:value="mainButtonOnClick" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="28.0" right="15.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" disable="true" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" opacity="0.5" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Entrepôt" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" translateX="5.0">
+                           <image>
+                              <Image url="@../images/entrepot_logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="checkWharehouseButton" />
+                        <String fx:value="mainButtonOnClick" />
+                        <String fx:value="mainButtonOnHover" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" onAction="#doCheckHistory" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Historique" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0">
+                           <image>
+                              <Image url="@../images/historique_logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="checkHistoryButton" />
+                        <String fx:value="mainButtonOnClick" />
+                        <String fx:value="mainButtonOnHover" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttConfiguration" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" onAction="#doConfiguration" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Configuration" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" translateX="5.0">
+                           <image>
+                              <Image url="@../images/settings_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="settingsButton" />
+                        <String fx:value="mainButtonOnClick" />
+                        <String fx:value="mainButtonOnHover" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

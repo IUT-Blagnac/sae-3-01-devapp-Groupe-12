@@ -3,46 +3,49 @@ package application.control;
 import application.Main;
 import application.tools.AlertUtilities;
 import application.view.MainMenuController;
+import application.view.WharehouseMonitorController;
 import application.view.ConfigurationController;
+import application.view.LogHistoryController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.scene.layout.StackPane;
+import javafx.stage.StageStyle;
 
 /**
- * Classe de contrôleur de dialogue de la fenêtre de configuration.
+ * Classe de contrôleur de dialogue de la fenêtre de surveillance de l'entrepôt.
  * Cette classe gère l'affichage et la manipulation de la fenêtre de
- * configuration.
+ * surveillance de l'entrepôt.
  */
-public class Configuration {
+public class WharehouseMonitor {
 
     // Stage de la fenêtre principale
     private Stage primaryStage;
     // Controller
-    private ConfigurationController controller;
+    private WharehouseMonitorController controller;
 
     /**
-     * Constructeur de la classe Configuration.
+     * Constructeur de la classe WharehouseMonitor.
      * 
      * @param _primaryStage Le stage de la fenêtre principale.
      */
-    public Configuration(Stage _primaryStage) {
+    public WharehouseMonitor(Stage _primaryStage) {
         this.primaryStage = _primaryStage;
 
         try {
-            // Chargement du fichier FXML de configuration
+            // Chargement du fichier FXML de surveillance de l'entrepôt
             FXMLLoader loader = new FXMLLoader(
-                    MainMenuController.class.getResource("Configuration.fxml"));
+                    MainMenuController.class.getResource("WharehouseMonitor.fxml"));
             BorderPane root = loader.load();
 
             // Création de la scène et configuration du stage
             Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
             scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
-
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Configuration");
+            primaryStage.setTitle("Surveillance de l'entrepôt");
             primaryStage.setResizable(false);
 
             // Récupération du contrôleur associé au fichier FXML chargé
@@ -51,16 +54,16 @@ public class Configuration {
             this.controller.initContext(this, primaryStage);
 
         } catch (Exception e) {
-            AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML Configuration.fxml",
+            AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML WharehouseMonitor.fxml",
                     "Merci de réessayer.", AlertType.ERROR);
             System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }
     }
 
     /**
-     * Méthode permettant de démarrer l'affichage de la fenêtre de configuration.
+     * Méthode permettant de démarrer l'affichage de surveillance de l'entrepôt.
      */
     public void show() {
-        this.primaryStage.show(); // Affichage de la fenêtre de configuration
+        this.primaryStage.show(); // Affichage de la fenêtre de surveillance de l'entrepôt.
     }
 }
