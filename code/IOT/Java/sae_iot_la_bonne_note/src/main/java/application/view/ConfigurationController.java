@@ -32,6 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 /**
@@ -211,9 +212,7 @@ public class ConfigurationController {
      */
     private void initViewElements() {
         // Définit l'action à effectuer lorsque la fenêtre est fermée
-        primaryStage.setOnCloseRequest(e -> {
-            doMenu();
-        });
+        this.primaryStage.setOnCloseRequest(e -> this.closeWindow(e));
 
         // Applique des animations aux boutons de l'IHM
         Animations.setAnimatedButton(buttMenu, 1.1, 1, 100);
@@ -734,5 +733,18 @@ public class ConfigurationController {
                 textField.setText(oldValue);
             }
         });
+    }
+
+    /**
+     * Méthode de fermeture de la fenêtre par la croix.
+     *
+     * @param _e L'événement de fermeture de fenêtre.
+     */
+    private void closeWindow(WindowEvent _e) {
+        if (AlertUtilities.confirmYesCancel(this.primaryStage, "Quitter l'application",
+                "Etes-vous sûr de vouloir quitter l'application ?", null, AlertType.CONFIRMATION)) {
+            this.primaryStage.close();
+        }
+        _e.consume();
     }
 }

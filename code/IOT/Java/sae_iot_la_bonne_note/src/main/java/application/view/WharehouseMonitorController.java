@@ -57,7 +57,7 @@ public class WharehouseMonitorController {
      */
     private void closeWindow(WindowEvent _e) {
         if (AlertUtilities.confirmYesCancel(this.primaryStage, "Quitter l'application",
-                "Etes-vous sûr de vouloir quitter le jeu ?", null, AlertType.CONFIRMATION)) {
+                "Etes-vous sûr de vouloir quitter l'application ?", null, AlertType.CONFIRMATION)) {
             this.primaryStage.close();
         }
         _e.consume();

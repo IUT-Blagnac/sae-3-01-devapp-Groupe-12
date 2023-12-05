@@ -129,6 +129,26 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </ListView>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="txtSearch" prefHeight="50.0" prefWidth="277.0" promptText="Rechercher une salle..." styleClass="txtArea" stylesheets="@../application.css">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold Italic" size="19.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <ImageView fitHeight="40.0" fitWidth="40.0">
+               <image>
+                  <Image url="@../images/search_icon.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="240.0" top="260.0" />
+               </GridPane.margin>
+            </ImageView>
          </children>
       </GridPane>
    </center>

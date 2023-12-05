@@ -4,13 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,7 +22,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -52,12 +53,31 @@ public class LogHistoryController {
     @FXML
     private ListView<String> lvHistory;
     private ObservableList<String> olLogs = FXCollections.observableArrayList();
+    private ArrayList<Data> listLogs = new ArrayList<>();
+
+    @FXML
+    private TextField txtSearch;
+
+    private class Data {
+        String id;
+        Date date;
+        double temperature;
+        double humidity;
+        double activity;
+        double co2;
+
+        private Data(String _id, Date _date, double _temperature, double _humidity, double _activity, double _co2) {
+            this.id = _id;
+            this.date = _date;
+            this.temperature = _temperature;
+            this.humidity = _humidity;
+            this.activity = _activity;
+            this.co2 = _co2;
+        }
+    }
 
     private final String alertFilePath = "code\\IOT\\Python\\alertes.json";
     private final String logsFilePath = "code\\IOT\\Python\\logs.json";
-
-    private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    private long lastCheckedTime = 0;
 
     /**
      * Initialise le contrôleur de vue LogHistoryController.
@@ -75,19 +95,10 @@ public class LogHistoryController {
         Animations.setAnimatedButton(buttCheckWhareHouse, 1.1, 1, 100);
         Animations.setAnimatedButton(buttConfiguration, 1.1, 1, 100);
         Animations.setSelectedMenuAnimation(buttCheckHistory, 0.5, 0.8, 1000);
-        executor.scheduleAtFixedRate(this::checkFileForUpdates, 0, 1, TimeUnit.SECONDS);
+        // executor.scheduleAtFixedRate(this::checkFileForUpdates, 0, 1,
+        // TimeUnit.SECONDS);
 
         updateHistory();
-    }
-
-    private void checkFileForUpdates() {
-        File file = new File(logsFilePath);
-        long lastModifiedTime = file.lastModified();
-
-        if (lastModifiedTime > lastCheckedTime) {
-            lastCheckedTime = lastModifiedTime;
-            updateHistory();
-        }
     }
 
     @FXML
@@ -112,21 +123,74 @@ public class LogHistoryController {
                     JsonNode dataNode = sensorDataNode.get("donnees");
 
                     double temperature = dataNode.get("temperature").get("valeur").asDouble();
-                    double humidity = dataNode.get("humidity").get("valeur").asDouble();
-                    int activity = dataNode.get("activity").get("valeur").asInt();
+                    double humidite = dataNode.get("humidity").get("valeur").asDouble();
+                    int activite = dataNode.get("activity").get("valeur").asInt();
                     int co2 = dataNode.get("co2").get("valeur").asInt();
 
-                    String item = sensorId + " - Date: " + date + ", Temp: " + temperature + ", Humidity: " + humidity
-                            + ", Activity: " + activity + ", CO2: " + co2;
-                    olLogs.add(item);
+                    String element = " " + sensorId + ",  " + sdf.format(date) + ",  Température : " + temperature
+                            + ",  Humidité : " + humidite + ",  Activité : " + activite + ",  Co2 : " + co2;
+                    listLogs.add(new Data(sensorId, date, temperature, humidite, activite, co2));
+                    olLogs.add(element);
                 }
+
             }
+            lvHistory.setCellFactory(param -> new ListCell<String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null); // Réinitialise le contenu graphique
+                    } else {
+                        String[] data = item.split(", "); // Sépare les différentes données
+
+                        HBox hbox = new HBox(); // Crée une HBox pour contenir les labels
+                        hbox.setSpacing(5);
+
+                        Label label = new Label(data[0] + " ");
+                        label.getStyleClass().add("labelRoom");
+                        hbox.getChildren().add(label);
+                        label = new Label(data[1] + " ");
+                        label.getStyleClass().add("labelDate");
+                        hbox.getChildren().add(label);
+
+                        for (int i = 2; i < data.length; i++) {
+                            String dat = data[i];
+                            label = new Label(dat + " ");
+                            if (dat.contains("Date")) {
+                                label.getStyleClass().add("labelDate");
+                            } else if (dat.contains("Température")) {
+                                label.getStyleClass().add("labelTemperature");
+                            } else if (dat.contains("Humidité")) {
+                                label.getStyleClass().add("labelHumidity");
+                            } else if (dat.contains("Activité")) {
+                                label.getStyleClass().add("labelActivity");
+                            } else if (dat.contains("Co2")) {
+                                label.getStyleClass().add("labelCo2");
+                            }
+                            hbox.getChildren().add(label); // Ajoute le label à la HBox
+                        }
+                        setGraphic(hbox); // Affiche la HBox dans la cellule
+                    }
+                }
+            });
+            // System.out.println(listLogs.get(0).toString());
+            lvHistory.setItems(olLogs);
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+    }
 
-        lvHistory.setItems(olLogs);
+    private String randomColorString() {
+        double red = Math.random();
+        double green = Math.random();
+        double blue = Math.random();
+        return String.format("#%02X%02X%02X",
+                (int) (red * 255),
+                (int) (green * 255),
+                (int) (blue * 255));
     }
 
     @FXML

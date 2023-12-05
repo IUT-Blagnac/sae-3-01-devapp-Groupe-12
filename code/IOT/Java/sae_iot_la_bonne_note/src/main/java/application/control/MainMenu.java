@@ -54,7 +54,10 @@ public class MainMenu extends Application {
             // Initialisation du contexte du contrôleur
             mainMenu.initContext(this, primaryStage);
 
-            this.show(); // Affichage de la fenêtre du menu principal
+            // this.show(); // Affichage de la fenêtre du menu principal
+
+            LogHistory a = new LogHistory(_primaryStage);
+            a.show();
 
         } catch (Exception e) {
             AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML MainMenu.fxml",
@@ -76,5 +79,6 @@ public class MainMenu extends Application {
      */
     public static void runApp() {
         Application.launch(); // Lancement de l'application JavaFX
+
     }
 }
