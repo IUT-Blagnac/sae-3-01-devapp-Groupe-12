@@ -1,3 +1,18 @@
+DROP TABLE IF EXISTS CarteBancaire;
+DROP TABLE IF EXISTS TypePaiement;
+DROP TABLE IF EXISTS Paypal;
+DROP TABLE IF EXISTS Paiement;
+DROP TABLE IF EXISTS Client;
+DROP TABLE IF EXISTS Commande;
+DROP TABLE IF EXISTS TypeProduit;
+DROP TABLE IF EXISTS Categorie;
+DROP TABLE IF EXISTS Produit;
+DROP TABLE IF EXISTS Description;
+DROP TABLE IF EXISTS ListePrix; 
+DROP TABLE IF EXISTS AdresseLivraison; 
+DROP TABLE IF EXISTS Livraison; 
+DROP TABLE IF EXISTS LigneCde;
+
 CREATE TABLE CarteBancaire (
     numCarte DECIMAL,
     dateExpiration DATE,
@@ -9,7 +24,9 @@ CREATE TABLE CarteBancaire (
 CREATE TABLE TypePaiement(
     idType DECIMAL (5),
     libelleType VARCHAR (80),
-    CONSTRAINT pk_TypePaiement PRIMARY KEY (idType)
+    idPaiement DECIMAL (15),
+    CONSTRAINT pk_TypePaiement PRIMARY KEY (idType),
+    CONSTRAINT fk_TypePaiement_idPaiement FOREIGN KEY (idPaiement) REFERENCES Paiement (idPaiement),
 );
 
 CREATE TABLE Paypal(
@@ -22,24 +39,19 @@ CREATE TABLE Paiement(
     idPaiement DECIMAL (15),
     montantTotal DECIMAL (10),
     status VARCHAR (30),
+    numCommande DECIMAL (15),
     CONSTRAINT pk_Paiement PRIMARY KEY (idPaiement),
+    CONSTRAINT fk_Paiement_numCommande FOREIGN KEY (numCommande) REFERENCES Commande (numCommande),
     CONSTRAINT ck_Paiement_montantTotal CHECK (montantTotal > 0), 
     CONSTRAINT ck_Paiement_status CHECK (status IN ('accepté', 'annulé', 'échoué'))
 );
 
-CREATE TABLE Commande(
-    numCommande DECIMAL (15),
-    dateCommande DATE,
-    montantFrais DECIMAL (15), 
-    montant DECIMAL (15),
-    codeEtiquette DECIMAL (15),
-    numClient DECIMAL (15),
-    CONSTRAINT pk_Commande PRIMARY KEY (numCommande),
-    CONSTRAINT fk_Commande_codeEtiquette FOREIGN KEY (codeEtiquette) REFERENCES Etiquette (codeEtiquette),
-    CONSTRAINT fk_Commande_numClient FOREIGN KEY (numClient) REFERENCES Client (numClient),
-    CONSTRAINT ck_Commande_montantFrais CHECK (montantFrais > 0),
-    CONSTRAINT ck_Commande_montant CHECK (montant > 0)
-);
+CREATE TABLE ListeSouhait(
+    idListeSouhait DECIMAL (15),
+    libelleListeSouhait VARCHAR (50),
+    listeProduit VARCHAR (40),
+    CONSTRAINT pk_ListeSouhait_idListeSouhait PRIMARY KEY (idListeSouhait)
+)
 
 CREATE TABLE Client(
     numClient DECIMAL (15),
@@ -50,20 +62,41 @@ CREATE TABLE Client(
     adrVilleClient VARCHAR (50),
     adrPaysClient VARCHAR (50),
     telephoneClient VARCHAR (10),
-    mailClient VARCHAR2 (80),
-    codeEtiquette DECIMAL (15),
-    codeListe VARCHAR (5),
+    UNIQUE mailClient VARCHAR2 (80),
     mdpClient VARCHAR (50) NOT NULL,
+    CA_cumule DECIMAL (15),
+    idListeSouhait DECIMAL (15),
+    pseudoClient VARCHAR (50),
     CONSTRAINT pk_Client PRIMARY KEY (numClient),
-    CONSTRAINT fk_Client_codeEtiquette FOREIGN KEY (codeEtiquette) REFERENCES Etiquette (codeEtiquette),
-    CONSTRAINT fk_Client_codeListe FOREIGN KEY (codeListe) REFERENCES ListePrix (codeListe)
+    CONSTRAINT fk_Client_idListeSouhait FOREIGN KEY (idListeSouhait) REFERENCES ListeSouhait (idListeSouhait),
 );
 
-CREATE TABLE Etiquette(
-    codeEtiquette DECIMAL (15),
-    libelleEtiquette VARCHAR2(80),
-    codeTypeTVA CHAR(3),
-    CONSTRAINT pk_Etiquette PRIMARY KEY (codeEtiquette)
+CREATE TABLE Commande(
+    numCommande DECIMAL (15),
+    dateCommande DATE,
+    montantFrais DECIMAL (15), 
+    montant DECIMAL (15),
+    numClient DECIMAL (15),
+    codeListe VARCHAR (5),
+    idDescription DECIMAL (15),
+    CONSTRAINT pk_Commande PRIMARY KEY (numCommande),
+    CONSTRAINT fk_Commande_numClient FOREIGN KEY (numClient) REFERENCES Client (numClient),
+    CONSTRAINT fk_Commande_codeListe FOREIGN KEY (codeListe) REFERENCES ListePrix (codeListe),
+    CONSTRAINT fk_Commande_idDescription FOREIGN KEY (idDescription) REFERENCES Description (idDescription),
+    CONSTRAINT ck_Commande_montantFrais CHECK (montantFrais > 0),
+    CONSTRAINT ck_Commande_montant CHECK (montant > 0),
+);
+
+CREATE TABLE TypeProduit (
+    codeType CHAR (3),
+    libelleType VARCHAR2 (40),
+    CONSTRAINT pk_TypeProduit PRIMARY KEY (codeType)
+);
+
+CREATE TABLE Categorie(
+    numCategorie DECIMAL (5),
+    libelleCategorie VARCHAR (50),
+    CONSTRAINT pk_Categorie PRIMARY KEY (numCategorie)
 );
 
 CREATE TABLE Produit(
@@ -75,24 +108,13 @@ CREATE TABLE Produit(
     nomProduit VARCHAR2 (50),
     seuilReapprovisionnement DECIMAL (10),
     stockMax DECIMAL (10),
+    stock DECIMAL (10),
     fraisSupplementaires DECIMAL (10),
     numCategorie DECIMAL (35),
     codeType CHAR (3) NOT NULL,
     CONSTRAINT pk_Produit PRIMARY KEY (numProduit),
     CONSTRAINT fk_Produit_codeType FOREIGN KEY (codeType) REFERENCES TypeProduit (codeType),
     CONSTRAINT fk_Produit_numCategorie FOREIGN KEY (numCategorie) REFERENCES Categorie (numCategorie)
-);
-
-CREATE TABLE Categorie(
-    numCategorie DECIMAL (5),
-    libelleCategorie VARCHAR (50),
-    CONSTRAINT pk_Categorie PRIMARY KEY (numCategorie)
-);
-
-CREATE TABLE TypeProduit (
-    codeType CHAR (3),
-    libelleType VARCHAR2 (40),
-    CONSTRAINT pk_TypeProduit PRIMARY KEY (codeType)
 );
 
 CREATE TABLE Description(
@@ -144,8 +166,98 @@ CREATE SEQUENCE seq_id_client
   MINVALUE 1  MAXVALUE 999999999999  
   START WITH 1 INCREMENT BY 1;
 
--- On crée une séquence afin de générer la clé primaire des commande
+-- On crée une séquence afin de générer la clé primaire des commandes
 DROP SEQUENCE seq_id_commande;
 CREATE SEQUENCE seq_id_commande
   MINVALUE 1  MAXVALUE 999999999999  
   START WITH 1 INCREMENT BY 1;
+
+CREATE OR REPLACE PACKAGE GestionCommandes AS 
+    PROCEDURE CreerCommande(p_numClient Client.numClient%TYPE, p_montant Commande.montant%TYPE);
+    FUNCTION CalculerMontantTotal(p_numCommande Commande.numCommande%TYPE);
+    PROCEDURE SupprimerCommande(p_numClient Commande.numClient%TYPE, p_numCommande Commande.numCommande%TYPE);
+END GestionCommandes;
+
+CREATE OR REPLACE PACKAGE BODY GestionCommandes AS
+    PROCEDURE CreerCommande(p_numClient Client.numClient%TYPE, p_montant Commande.montant%TYPE) AS
+    BEGIN 
+        INSERT INTO Commande (numCommande, numClient, montant);
+        VALUES (seq_id_commande.NEXTVAL, p_numClient, p_montant);
+    END;
+
+    FUNCTION CalculerMontantTotal(p_numCommande Commande.numCommande%TYPE) RETURN DECIMAL AS 
+    v_montant DECIMAL;
+    BEGIN
+        SELECT montant INTO v_montant 
+        FROM Commande
+        WHERE numCommande = p_numCommande;
+        RETURN v_montant;
+    END;
+END GestionCommandes;
+
+CREATE OR REPLACE PROCEDURE CalculerMontantTotalCmd (p_numCommande Commande.numCommande%TYPE) AS 
+    v_montantTotal DECIMAL;
+BEGIN 
+    SELECT SUM (quantiteCommandee * prixVente)
+    INTO v_montant
+    FROM LigneCde
+    JOIN Produit ON LigneCde*.numProduit = Produit.numProduit
+    WHERE numCommande = p_numCommande
+
+    UPDATE Commande 
+    SET montant = v_montantTotal
+    WHERE numCommande = p_numCommande
+END;
+
+CREATE OR REPLACE TRIGGER Maj_Depense_Client
+BEFORE INSERT ON Commande 
+FOR EACH ROW 
+BEGIN 
+    UPDATE Client
+    SET CA_cumule = IFNULL(CA_cumule, 0) + :NEW.montant
+    WHERE numClient = :NEW.numClient;
+END;
+
+
+
+CREATE OR REPLACE TRIGGER MajCoutTotalCmd
+BEFORE INSERT ON LigneCde
+FOR EACH ROW
+BEGIN 
+    UPDATE Commande 
+    SET montant = montant + (:NEW.quantiteCommandee *(SELECT coutAchat
+                                                      FROM Produit 
+                                                      WHERE numProduit = :NEW.numProduit))
+    WHERE numCommande = :NEW.numCommande;
+END;
+
+CREATE OR REPLACE TRIGGER GererFraisLivraison
+BEFORE INSERT ON Commande 
+FOR EACH ROW
+BEGIN
+    --IF :NEW.montant > 1000 THEN 
+       -- UPDATE Commande
+       -- SET montantFrais = 0.05 * :NEW.montant
+      --  WHERE numCommande = :NEW.numCommande
+   -- ELSE
+      --  UPDATE Commande
+    --    SET montantFrais = 0.1 * :NEW.montant
+    --    WHERE numCommande = :NEW.numCommande
+    --END IF;
+    UPDATE Commande 
+    SET montantFrais = :NEW.montant * Produit.fraisSupplementaires
+    WHERE numCommande = :NEW.numCommande
+END;
+
+CREATE OR REPLACE TRIGGER MajStock
+AFTER INSERT ON Livraison
+FOR EACH ROW
+BEGIN
+    UPDATE Produit
+    SET stock = stock - (SELECT quantiteLivree
+                         FROM LigneCde
+                         WHERE numProduit = :NEW.numProduit
+                         AND numCommande = :NEW.numCommande)
+    WHERE numProduit = :NEW.numProduit
+END;
+
