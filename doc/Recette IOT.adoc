@@ -1,24 +1,19 @@
-= Cahier De Recette - E-Commerce La Bonne Note
+= Cahier de recette de l'application - La Bonne Note
 :toc:
-:toc-title: Sommaire
+:toc-title:
 
 :Entreprise: La Bonne Note
 :Equipe: 12
 
-Créé par : Yannis Gibert, Ahmad Khalil, Rayan Sellou
-Créé pour :  La Bonne Note
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
 
- 
-
-
-
-== I. Introduction
+= I. Introduction
 === 1. Objet :
 [.text-justify]
 Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce document traitera de la partie IOT de l'application.
 
 
-== II. Pre-Requis :
+= II. Pre-Requis :
 [.text-justify]
 L'exécution des tests spécifiés au chapitre suivant requiert :
 
@@ -27,12 +22,12 @@ L'exécution des tests spécifiés au chapitre suivant requiert :
 * Les fiches de tests. *À vérifier*
 
 
-=== 1. Éléments à tester :
+== 1. Éléments à tester :
 [.text-justify]
 Les éléments testés concernent les Use-Cases spécifiés dans la *documentation technique*.
 
 
-=== 2. Environnement de test :
+== 2. Environnement de test :
 [.text-justify]
 Ordinateur capable d'executer Java 17, JavaFX et Python.
 Peu importe le système d'exploitation.
@@ -41,10 +36,10 @@ Peu importe le système d'exploitation.
 
 
 
-== III. Cas de test :
-=== 1. Partie Python :
+= III. Cas de test :
+== 1. Partie Python :
 
-==== 1.1 Récupération des données :
+=== 1.1 Récupération des données :
 
 |====
 
@@ -99,8 +94,8 @@ Les alertes sont bien écrites dans le fichier JSON qui se créer si il n'existe
 
 |====
 
-=== 2. Partie Java :
-==== 2.1 Paramétrer le fichier de configuration :
+== 2. Partie Java :
+=== 2.1 Paramétrer le fichier de configuration :
 
 |====
 
@@ -139,14 +134,21 @@ Les alertes sont bien écrites dans le fichier JSON qui se créer si il n'existe
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Modifier la configuration en entrant de nouvelles valeurs puis appuyer sur "Sauvegarder" ^|Les valeurs doivent pouvoir êtres saisies ^| L'interface de configuration du fichier doit être lancé ^|OK
-^|All_G_C.1 ^|Réintialiser la configuration en appuyant sur le bouton "Reinitialiser" puis confirmer la suppression ^|Un message de confirmation de la réinitialisation doit apparaître ^| Le bouton de sauvegarde doit avoir été appuyé ^|OK
-^|All_G_C.1 ^|Vérifier la bonne mise à jour des valeurs par défaut dans le fichier de configuration en ouvrant le fichier "config.ini" " ^|Les valeurs doivent êtres mises à jour ^| Il faut que la configuration entré soit différente de celle par défaut et que la réinitialisation ait été effectué pour voir la différence ^|OK
+^|All_G_C.2 ^|Réintialiser la configuration en appuyant sur le bouton "Reinitialiser" puis confirmer la suppression ^|Un message de confirmation de la réinitialisation doit apparaître ^| Le bouton de sauvegarde doit avoir été appuyé ^|OK
+^|All_G_C.3 ^|Vérifier la bonne mise à jour des valeurs par défaut dans le fichier de configuration en ouvrant le fichier "config.ini" " ^|Les valeurs doivent êtres mises à jour ^| Il faut que la configuration entré soit différente de celle par défaut et que la réinitialisation ait été effectué pour voir la différence ^|OK
 
 5+|
 
 5+|Commentaire : Les valeurs par défaut sont bien dans le fichier de configuration en écrasant les anciennes valeurs.
 
 |====
+
+=== 2.2 Visualiser les données des logs  :
+
+=== 2.3 Visualiser les données en temps réel :
+
+=== 2.4 Visualisation des alertes lors des dépassements :
+
 
 
 
