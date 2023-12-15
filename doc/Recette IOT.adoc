@@ -7,11 +7,9 @@
 
 Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
 
-= I. Introduction
-=== 1. Objet :
+= I. Contexte
 [.text-justify]
-Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce document traitera de la partie IOT de l'application.
-
+Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce document traitera de la partie IOT de l'application. Celle-ci vise à établir une interaction entre un programme Python et Java. Le programme Python récupère les données des capteurs déployés dans l'entrepôt et les stockent dans des fichiers, tandis que le programme Java configure le comportement du premier via un fichier de configuration et affichera en temps réel les données captées, différenciées par salle. De plus, l'application permet la visualisation des données des fichiers logs, l'affichage continu des alertes de dépassement de seuil.
 
 = II. Pre-Requis :
 [.text-justify]
@@ -19,13 +17,12 @@ L'exécution des tests spécifiés au chapitre suivant requiert :
 
 * Un environnement python bien configuré (référence document technique).
 * L'environnement de test tel que spécifié dans la partie "Environnement de test" de ce document.
-* Les fiches de tests. *À vérifier*
 
-
-== 1. Éléments à tester :
+== 1. Fonctionnalités de l'application :
 [.text-justify]
-Les éléments testés concernent les Use-Cases spécifiés dans la *documentation technique*.
+Les éléments testés concernent les cas d'utilisations ci-contre :
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[]
 
 == 2. Environnement de test :
 [.text-justify]
