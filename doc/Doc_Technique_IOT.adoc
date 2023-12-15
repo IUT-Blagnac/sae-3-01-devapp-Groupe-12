@@ -43,23 +43,38 @@ L'application de "La Bonne Note" propose plusieurs cas d'utilisation essentiels 
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[]
 
-= Architecture du projet 
+= Structure du projet 
 
-== Schéma globale
+== Packages Java
+- application : comporte le main permettant de lancer l'application ainsi que la classe qui permet de connaître l'état de l'application
+- application.control : contient les contrôleurs et l'accès aux données, regroupés dans le package "application.control", sont responsables de la gestion des fonctionnalités de l'application. Ils traitent les requêtes des utilisateurs et assurent la liaison avec la base de données Oracle via les classes du package "model.orm".
+- application.tools : fournit des outils d'aide supplémentaires facilitant ainsi le développement et la maintenance de l'application.
+- application.view : contient les vues de l'application, gérée par le package "application.view", est basée sur des fichiers FXML et leurs contrôleurs associés. Chaque page FXML possède sa propre vue, garantissant une interface utilisateur claire et intuitive.
 
-== Diagramme de classe
+== Fichiers Python
+  - connect_linux.py : version Linux du script.
+  - connect.py : version Windows du script.
 
-== Packages et ressources utilisées
+== Fichiers de données 
+  - un fichier Json stockant tout l'historique des alertes
+  - un fichier Json stockant tout l'historique des données
+  - un fichier Json stockant juste les données récupérées en temps réel (fichier qui est remis à vide à chaque lancement)
+
+== Ressources Utilisées
+
+- Maven : Utilisé pour la compilation, la création du JAR, la génération de la JavaDoc et la gestion des dépendances via le fichier pom.xml.
+
+- JDK : Version 17 nécessaire pour l'exécution du projet.
+
+- Fichiers Fichier FXML : Créés avec SceneBuilder pour les vues de l'application.
+
+- Base de données : Utilisée pour stocker les données de l'application.
 
 = Configurer et lancer l'application
 
 == Pré-requis nécéssaires 
 
-== Se connecter
-
-== Configurez la base de données
-
-== Fonctionnalités développées
+= Fonctionnalités développées
 
 == Fonctionnalite x (développé par x x)
 
