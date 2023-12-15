@@ -60,7 +60,7 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 -> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[Cas d'utilisations (Uses cases)]
 
--> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20Séquence%20Système/DSS_exemple_IOT.png[Diagramme de séquence système]
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/IOT_DSS_D%C3%A9taill%C3%A9[Diagrammes de séquences système]
 
 **Partie Python**
 
