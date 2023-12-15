@@ -1,4 +1,4 @@
-= Document Technique Utilisateur SAE 3.01 Version : 2.0 Date : 27 novembre 2023 - Groupe 12
+= Documentation Technique de l’application - La Bonne Note
 :icons: font
 :models: models
 :experimental:
@@ -27,8 +27,7 @@ ifdef::env-github[]
 :icongit: Git
 endif::[]
 
-Équipe de développement :
-- Développeurs : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
 
 toc::[]
 
