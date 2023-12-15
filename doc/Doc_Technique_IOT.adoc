@@ -32,32 +32,37 @@ endif::[]
 
 toc::[]
 
-== Présentation de l'application
-=== Contexte général
+= Présentation de l'application
+== Contexte général
+L'entreprise "La Bonne Note", spécialisée dans la vente d'instruments de musique, ambitionne d'améliorer la gestion de son entrepôt par le biais d'une application Java. Cette dernière sera conçue pour optimiser l'accès aux données des capteurs, l'écriture de ces informations dans des fichiers, et pour paramétrer le fonctionnement d'une application Python associée. L'objectif est de permettre une gestion précise et efficace des capteurs déployés à l'IUT, diffusant des données relatives au CO2, à la température et à l'humidité via le bus MQTT.
 
-=== Description du besoin
+== Description du besoin
+L'application Java de "La Bonne Note" vise à fournir une interface ergonomique et fonctionnelle pour gérer les capteurs et les données qu'ils génèrent. Elle proposera différentes fonctionnalités telles que la configuration des types de données récupérées, la fréquence de lecture des capteurs, les seuils d'alerte, et les noms de fichiers associés. Cette application Java servira également à afficher en temps réel les données captées, différenciées par salle pour offrir une représentation terrain réaliste. Elle permettra également la visualisation graphique des fichiers logs, l'affichage des alertes de dépassement de seuils, tout en mettant l'accent sur une architecture logicielle proposée par les étudiants, justifiée et analysée en profondeur.
 
-=== Cas d'utilisation
+== Cas d'utilisation
+L'application de "La Bonne Note" propose plusieurs cas d'utilisation essentiels pour optimiser la gestion de son entrepôt. Tout d'abord, elle permet la configuration des capteurs en offrant la possibilité de sélectionner les types de données à récupérer, de définir la fréquence de lecture des capteurs et de fixer les seuils d'alerte pour chaque type de donnée. Ensuite, elle offre une interface conviviale pour afficher en temps réel les données captées par les capteurs, distinguant ces données par salle pour une représentation précise de l'état actuel de l'entrepôt. De plus, elle facilite la visualisation graphique des fichiers logs, permettant aux utilisateurs de consulter l'historique des données captées. Enfin, elle assure une gestion proactive des alertes en affichant en permanence les dépassements de seuils détectés par les capteurs, fournissant ainsi un aperçu immédiat des situations critiques et nécessitant une attention particulière.
 
-== Architecture du projet 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[]
 
-=== Schéma globale
+= Architecture du projet 
 
-=== Diagramme de classe
+== Schéma globale
 
-=== Packages et ressources utilisées
+== Diagramme de classe
 
-== Configurer et lancer l'application
+== Packages et ressources utilisées
 
-=== Pré-requis nécéssaires 
+= Configurer et lancer l'application
 
-=== Se connecter
+== Pré-requis nécéssaires 
 
-=== Configurez la base de données
+== Se connecter
+
+== Configurez la base de données
 
 == Fonctionnalités développées
 
-=== Fonctionnalite x (développé par x x)
+== Fonctionnalite x (développé par x x)
 
 Partie du UseCase :
 
