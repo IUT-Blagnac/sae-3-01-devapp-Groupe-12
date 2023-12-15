@@ -1,4 +1,4 @@
-= Cahier de recettes (Tests) de l’application - La Bonne Note
+= Cahier de recettes (Tests) de l’application (Partie IOT) - La Bonne Note
 :icons: font
 :models: models
 :experimental:
@@ -39,7 +39,7 @@ Ce document a été produit dans le cadre d'un projet d'élaboration d'un site d
 [.text-justify]
 L'exécution des tests spécifiés au chapitre suivant requiert :
 
-* Un environnement python bien configuré (référence document technique).
+* Un environnement python bien configuré https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_IOT.adoc#pr%C3%A9-requis-pour-lancer-lapplication[(tutoriel sur la documentation technique)].
 * L'environnement de test tel que spécifié dans la partie "Environnement de test" de ce document.
 
 == 1. Fonctionnalités de l'application
