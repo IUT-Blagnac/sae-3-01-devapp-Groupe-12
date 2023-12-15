@@ -11,20 +11,20 @@
 [.text-justify]
 Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce document traitera de la partie IOT de l'application. Celle-ci vise à établir une interaction entre un programme Python et Java. Le programme Python récupère les données des capteurs déployés dans l'entrepôt et les stockent dans des fichiers, tandis que le programme Java configure le comportement du premier via un fichier de configuration et affichera en temps réel les données captées, différenciées par salle. De plus, l'application permet la visualisation des données des fichiers logs, l'affichage continu des alertes de dépassement de seuil.
 
-= II. Pre-Requis :
+= II. Pre-Requis
 [.text-justify]
 L'exécution des tests spécifiés au chapitre suivant requiert :
 
 * Un environnement python bien configuré (référence document technique).
 * L'environnement de test tel que spécifié dans la partie "Environnement de test" de ce document.
 
-== 1. Fonctionnalités de l'application :
+== 1. Fonctionnalités de l'application
 [.text-justify]
 Les éléments testés concernent les cas d'utilisations ci-contre :
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[]
 
-== 2. Environnement de test :
+== 2. Environnement de test
 [.text-justify]
 Ordinateur capable d'executer Java 17, JavaFX et Python.
 Peu importe le système d'exploitation.
@@ -33,11 +33,10 @@ Peu importe le système d'exploitation.
 
 
 
-= III. Cas de test :
-== 1. Partie Python :
+= III. Cas de test
+== 1. Partie Python
 
-
-Voici la version corrigée de tes tests :
+=== 1.1 Récupération des données
 
 |====
 |Cas de test 4+|Test-01-01-01
@@ -73,7 +72,8 @@ Les données sont bien écrites dans le fichier JSON qui se crée s'il n'existe 
 Les alertes sont bien écrites dans le fichier JSON qui se crée s'il n'existe pas encore.
 |====
 
-1.2 Configuration du programme :
+=== 1.2 Configuration du programme
+
 |====
 
 |Cas de test 4+|Test-01-02-01
@@ -90,8 +90,8 @@ Les alertes sont bien écrites dans le fichier JSON qui se crée s'il n'existe p
 
 |====
 
-== 2. Partie Java :
-=== 2.1 Paramétrer le fichier de configuration :
+== 2. Partie Java
+=== 2.1 Paramétrer le fichier de configuration
 
 |====
 |Cas de test 4+|Test-02-01-01
@@ -138,7 +138,7 @@ Les alertes sont bien écrites dans le fichier JSON qui se crée s'il n'existe p
 
 |====
 
-=== 2.2 Visualiser les données des logs  :
+=== 2.2 Visualiser les données des logs 
 
 Certains tests présents ici sont aussi valables pour la partie "Visualisation des données en temps réel" car des options de tri / selection sont les mêmes.
 
@@ -266,7 +266,7 @@ Certains tests présents ici sont aussi valables pour la partie "Visualisation d
 
 |====
 
-=== 2.3 Visualiser les données en temps réel :
+=== 2.3 Visualiser les données en temps réel
 |====
 
 |Cas de test 4+|Test-02-03-01
@@ -292,7 +292,7 @@ Certains tests présents ici sont aussi valables pour la partie "Visualisation d
 
 |====
 
-=== 2.4 Visualisation des alertes lors des dépassements :
+=== 2.4 Visualisation des alertes lors des dépassements
 
 |====
 
