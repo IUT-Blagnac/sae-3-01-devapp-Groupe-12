@@ -68,15 +68,19 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 - Fichiers Fichier FXML : Créés avec SceneBuilder pour les vues de l'application.
 
-= Pré-requis pour lancer l'application
+= Tutoriel d'installation
 
-Pour exécuter l'application, vérifiez que Java est installé sur votre ordinateur en ouvrant une invite de commande et en saisissant la commande suivante :
+== Installer java
+
+Pour exécuter l'application Java et Python, vérifiez d'abord que Java est installé sur votre ordinateur en ouvrant une invite de commande et en saisissant la commande suivante :
 
 - java -version
 
 Si JAVA n'est pas installé, vous pouvez le télécharger depuis https://www.java.com/fr/download/.
 
-Pour que l'application Java puisse exécuter le script Python, assurez-vous d'avoir les bibliothèques requises installées. Voici les bibliothèques nécessaires :
+== Installer Python
+
+Ensuite, pour que l'application Java puisse exécuter le script Python, assurez-vous d'avoir les bibliothèques requises installées pour Python. Voici les bibliothèques nécessaires :
 
 1. `paho.mqtt.client`: Bibliothèque MQTT pour Python.
 2. `json`: Module Python pour travailler avec JSON.
@@ -85,7 +89,9 @@ Pour que l'application Java puisse exécuter le script Python, assurez-vous d'av
 5. `time` (sous Windows uniquement) : Module Python pour le temps.
 6. `datetime`: Module Python pour manipuler les dates et heures.
 
-Vous pouvez installer ces bibliothèques en utilisant `pip`. Ouvrez une invite de commande ou un terminal et saisissez les commandes suivantes :
+Si Python n'est pas installé, vous pouvez le télécharger depuis https://www.python.org/downloads/.
+
+Pour installer les bibliothèques Python, ouvrez une invite de commande ou un terminal et saisissez les commandes suivantes :
 
 [source,cmd]
 ----
@@ -95,6 +101,7 @@ pip install configparser
 pip install datetime
 ----
 
+== Lancer l'application
 
 Pour lancer l'application :
 
@@ -120,28 +127,84 @@ Si vous préférez exécuter le projet à partir d'Eclipse, veuillez installer l
 
 = Fonctionnalités développées
 
-== Fonctionnalite x (développé par x x)
+== Paramétrer le fichier de configuration
+
+L'application JavaFX permet à l'utilisateur de configurer un fichier utilisé par le programme Python. Cette configuration inclut divers paramètres comme les types de données récupérées des capteurs (température, CO2, humidité etc), la fréquence de lecture des données, les valeurs seuils d'alerte pour chaque type de donnée, ainsi que les noms des fichiers.
 
 Partie du UseCase :
 
-Partie du diagramme de classe : 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_1.jpg[]
 
 Diagramme de séquence : 
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/IOT_DSS_D%C3%A9taill%C3%A9/dss_iot_1.png[]
+
+Lorsqu'un utilisateur déclenche l'action en cliquant sur le bouton de configuration, le contrôleur de l'historique des logs (LogHistoryController) oui celui d'entrepôt (WhareHouseMonitorController) interagissent pour instancier la classe Configuration. Cette classe déclenche alors le contrôleur de configuration (ConfigurationController) via la méthode initContext(), permettant ainsi l'initialisation des éléments visuels de l'IHM et la mise en place des actions associées aux différents éléments graphiques de la fenêtre de configuration. Enfin, cette fenêtre de configuration est affichée, fournissant à l'utilisateur une interface pour configurer l'application.
+
 Classes utilisées : 
 
-package Application.control :
+- LogHistoryController : Contrôleur pour la gestion des historiques de logs.
+- WhareHouseMonitorController : Contrôleur pour surveiller l'entrepôt.
+- Configuration : Classe responsable de la fenêtre de configuration.
+- ConfigurationController : Contrôleur pour la fenêtre de configuration, gère les interactions et la logique.
 
-- ComptesManagement -> la méthode *creerNouveauCompte* appelée par doNouveauCompte (ComptesManagementController)
 
-- CompteEditorPane -> *constructeur de CompteEditorPane* && la méthode *doCompteEditorDialog* appelée par creerNouveauCompte (ComptesManagement)
+== Visualiser l'historique de logs
 
-package Application.view :
+L'application JavaFX permet de visualiser graphiquement les données des fichiers de logs.
 
-- ComptesManagementController -> la méthode *doNouveauCompte* appelée par comptesmanagement.fxml (bouton nouveau compte sur la scène)
+Partie du UseCase :
 
-- ComptesEditorPaneController -> la méthode *displayDialog* appelée par doCompteEditorDialog (CompteEditorPane)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_4.jpg[]
 
-package Model.orm :
+Diagramme de séquence : 
 
-- Access_BD_CompteCourant -> la méthode *addCompte* appelée par creerNouveauCompte (ComptesManagement)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/IOT_DSS_D%C3%A9taill%C3%A9/dss_iot_2.png[]
+
+Ce diagramme de séquence illustre l'interaction lorsqu'un utilisateur déclenche l'action de visualiser l'historique des logs. L'utilisateur peut initier cette action depuis le contrôleur de configuration ou celui de surveillance de l'entrepôt. Suite à cela, l'instanciation de la classe LogHistory est appelée depuis les deux contrôleurs concernés. Ensuite, la méthode initContext() du LogHistoryController est invoquée pour initialiser les éléments visuels de l'interface. Enfin, le contrôleur transmet la scène de l'historique des logs à l'utilisateur.
+
+Classes utilisées : 
+
+- ConfigurationController : Contrôleur pour la scène de configuration.
+- WhareHouseMonitorController : Contrôleur pour surveiller l'entrepôt.
+- LogHistory : Classe responsable de la fenêtre de l'historique.
+- LogHistoryController : Contrôleur pour la fenêtre de l'historique, gère les interactions et la logique.
+
+== Visualiser les données par salle (temps réel)
+
+L'application JavaFX permet de visualiser graphiquement les données en temps réel.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_2.jpg[]
+
+Diagramme de séquence : 
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/IOT_DSS_D%C3%A9taill%C3%A9/dss_iot_3.png[]
+
+Ce diagramme de séquence illustre le processus déclenché par l'utilisateur lorsqu'il clique sur le bouton de configuration à partir de deux interfaces distinctes de l'application. Lorsque l'utilisateur effectue cette action depuis l'interface gérée par le LogHistoryController, une instance de la classe Configuration est créée, suivie de l'initialisation des éléments visuels et du thread de test de connexion par le ConfigurationController. De manière similaire, le même processus est enclenché à partir de l'interface gérée par le WhareHouseMonitorController, générant une autre instance de la classe Configuration.
+
+Classes utilisées :
+
+- ConfigurationController : Contrôleur pour la scène de configuration.
+- LogHistoryController : Contrôleur pour la scène de l'historique.
+- WhareHouseMonitor : Classe responsable de la fenêtre de l'entrepôt.
+- WhareHouseMonitorController : Contrôleur pour la fenêtre de l'entrepôt, gère les interactions et la logique.
+
+== Recevoir des alertes pour les seuils de dépassement
+
+Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_3.jpg[]
+
+Diagramme de séquence : 
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Diagramme%20de%20S%C3%A9quence%20Syst%C3%A8me/IOT_DSS_D%C3%A9taill%C3%A9/dss_iot_4.png[]
+
+Ce schéma représente un processus automatisé où le système de fichiers modifie le fichier "donnees.json". Lorsqu'une modification est détectée, un thread est activé pour mettre à jour l'historique via JsonUtilities. En parallèle, le contrôleur de l'historique (LogHistoryController) vérifie les alertes pour les dernières données et les seuils. Une fois les données mises à jour, le contrôleur crée des notifications d'alerte, si les seuils sont dépassés, grâce à la classe de notification. Ce processus garantit une surveillance continue des données, avec une réactivité en temps réel pour informer les utilisateurs en cas de dépassement des seuils.
+
+Classes utilisées : 
+
+- WhareHouseMonitorController : Contrôleur pour la fenêtre de l'entrepôt, gère les interactions et la logique.
