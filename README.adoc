@@ -94,7 +94,7 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 **Partie PHP**
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Fichiers sources (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/Web/HTML-PHP[Fichiers sources] 
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/Web/BD/Documentation[Docs] 
 
@@ -102,7 +102,7 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 **Partie BD**
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Fichiers sources (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/Web/BD[Fichiers sources] 
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/Web/BD/Documentation[Docs] 
 
