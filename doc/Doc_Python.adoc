@@ -38,13 +38,15 @@ toc::[]
   - connect.py : version Windows du script.
 
 == Fichiers de données 
-  - un fichier Json stockant tout l'historique des alertes
-  - un fichier Json stockant tout l'historique des données
-  - un fichier Json stockant juste les données récupérées en temps réel (fichier qui est remis à vide à chaque lancement)
+  - un fichier Json stockant tout l'historique des alertes (le script le crée s'il n'existe pas déjà)
+  - un fichier Json stockant tout l'historique des données (le script le crée s'il n'existe pas déjà)
+  - un fichier Json stockant juste les données récupérées en temps réel (fichier qui est supprimé puis crée à nouveau à chaque lancement)
 
 = Tutoriel d'installation
 
-Pour que l'application Java puisse exécuter le script Python, assurez-vous d'avoir les bibliothèques requises installées pour Python. Voici les bibliothèques nécessaires :
+== Installer Python
+
+Pour lancer le script Python, assurez-vous d'avoir les bibliothèques requises installées. Voici les bibliothèques nécessaires :
 
 1. `paho.mqtt.client`: Bibliothèque MQTT pour Python.
 2. `json`: Module Python pour travailler avec JSON.
@@ -79,16 +81,13 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 Deux méthodes pour lancer l'application :
 
-- Ouvrez une invite de commande et exécutez la commande suivante : 
+- Ouvrez une invite de commande et exécutez la commande suivante :
 
 [source,cmd]
 ----
-java -jar sae_iot_la_bonne_note.jar
+Python3 connect.py
 ----
 
-- Double-cliquez sur le fichier exécutable (sae_iot_la_bonne_note.jar)
-
-Si vous préférez exécuter le projet à partir d'Eclipse, veuillez installer le JDK 17. De plus, l'installation de JavaFX depuis Eclipse Marketplace est nécessaire (version recommandée : 3.8.0).
 
 
 
