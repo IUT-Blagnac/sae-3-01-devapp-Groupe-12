@@ -1,0 +1,94 @@
+= Documentation Python (Partie IOT) - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
+
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
+
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
+
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
+
+toc::[]
+
+= Structure du dossier 
+
+== Fichiers Python
+  - connect_linux.py : version Linux du script.
+  - connect.py : version Windows du script.
+
+== Fichiers de données 
+  - un fichier Json stockant tout l'historique des alertes
+  - un fichier Json stockant tout l'historique des données
+  - un fichier Json stockant juste les données récupérées en temps réel (fichier qui est remis à vide à chaque lancement)
+
+= Tutoriel d'installation
+
+Pour que l'application Java puisse exécuter le script Python, assurez-vous d'avoir les bibliothèques requises installées pour Python. Voici les bibliothèques nécessaires :
+
+1. `paho.mqtt.client`: Bibliothèque MQTT pour Python.
+2. `json`: Module Python pour travailler avec JSON.
+3. `configparser`: Module Python pour lire les fichiers de configuration.
+4. `os`: Module Python pour des fonctionnalités liées au système d'exploitation.
+5. `time` (sous Windows uniquement) : Module Python pour le temps.
+6. `datetime`: Module Python pour manipuler les dates et heures.
+
+Si Python n'est pas installé, vous pouvez le télécharger depuis https://www.python.org/downloads/.
+
+Pour installer les bibliothèques Python, ouvrez une invite de commande ou un terminal et saisissez les commandes suivantes :
+
+[source,cmd]
+----
+pip install paho-mqtt
+pip install jsonlib-python3
+pip install configparser
+pip install datetime
+----
+
+== Utiliser le script
+
+Pour lancer l'application :
+
+- Télécharger tous les fichiers du https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Application%20finale[dossier de l'application finale] comprenant le .JAR (exécutable qui nous sera pas utile ici), les fichiers Python et le fichier de configuration, 
+
+- Assurez-vous que les fichiers Python (scripts python .py), le fichier de configuration (.ini) et les fichiers JSON s'ils sont déjà crées (alerte.json, données.json, logs.json) sont placés dans le même répertoire que le fichier JAR de l'application.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/img_dossier_application.png[]
+
+(En jaunes les fichiers de données JSON, en bleu les script python et en rouge l'exécutable de l'application)
+
+Deux méthodes pour lancer l'application :
+
+- Ouvrez une invite de commande et exécutez la commande suivante : 
+
+[source,cmd]
+----
+java -jar sae_iot_la_bonne_note.jar
+----
+
+- Double-cliquez sur le fichier exécutable (sae_iot_la_bonne_note.jar)
+
+Si vous préférez exécuter le projet à partir d'Eclipse, veuillez installer le JDK 17. De plus, l'installation de JavaFX depuis Eclipse Marketplace est nécessaire (version recommandée : 3.8.0).
+
+
+
