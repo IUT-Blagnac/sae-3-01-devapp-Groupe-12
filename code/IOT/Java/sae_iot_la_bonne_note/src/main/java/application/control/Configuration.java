@@ -7,7 +7,6 @@ import application.view.ConfigurationController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -51,6 +50,7 @@ public class Configuration {
             this.controller.initContext(this, primaryStage);
 
         } catch (Exception e) {
+            System.out.println(e);
             AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML Configuration.fxml",
                     "Merci de réessayer.", AlertType.ERROR);
             System.exit(-1); // En cas d'erreur, arrêt brutal de l'application

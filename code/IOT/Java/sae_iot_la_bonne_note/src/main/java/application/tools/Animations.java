@@ -1,4 +1,4 @@
-package application.visualEffects;
+package application.tools;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -50,27 +50,6 @@ public class Animations {
         fadeTransition.setAutoReverse(true);
         fadeTransition.setCycleCount(FadeTransition.INDEFINITE);
         fadeTransition.play();
-    }
-
-    /**
-     * Anime le changement de scène en agrandissant le bouton spécifié.
-     *
-     * @param button     Le bouton à animer.
-     * @param scale      L'échelle de l'animation.
-     * @param duration   La durée de l'animation en millisecondes.
-     * @param onFinished Action à exécuter à la fin de l'animation.
-     */
-    public static void sceneSwapAnimation(Button button, double scale, double duration, Runnable onFinished) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration), button);
-        scaleTransition.setToX(scale);
-        scaleTransition.setToY(scale);
-        scaleTransition.setInterpolator(Interpolator.EASE_BOTH); // Départ rapide
-        scaleTransition.setOnFinished(event -> {
-            if (onFinished != null) {
-                onFinished.run();
-            }
-        });
-        scaleTransition.play();
     }
 
     /**

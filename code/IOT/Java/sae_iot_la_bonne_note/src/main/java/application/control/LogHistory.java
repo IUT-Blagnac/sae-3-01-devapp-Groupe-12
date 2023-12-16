@@ -3,16 +3,12 @@ package application.control;
 import application.Main;
 import application.tools.AlertUtilities;
 import application.view.MainMenuController;
-import application.view.ConfigurationController;
 import application.view.LogHistoryController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.layout.StackPane;
-import javafx.stage.StageStyle;
 
 /**
  * Classe de contrôleur de dialogue de la fenêtre de l'historique.
@@ -53,10 +49,10 @@ public class LogHistory {
             this.controller.initContext(this, primaryStage);
 
         } catch (Exception e) {
-            // AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML History.fxml",
-            //         "Merci de réessayer.", AlertType.ERROR);
+            AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML History.fxml",
+                    "Merci de réessayer.", AlertType.ERROR);
                     e.printStackTrace();
-            // System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
+            System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }
     }
 

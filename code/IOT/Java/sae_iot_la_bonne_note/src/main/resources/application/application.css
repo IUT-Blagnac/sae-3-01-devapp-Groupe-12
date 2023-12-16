@@ -39,6 +39,15 @@
     -fx-font-weight: bold;
 }
 
+.comboBox {
+    -fx-background-radius: 10;
+    -fx-border-width: 3.5;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
 .choiceBox:focused {
     -fx-border-color: #30afb8;
     -fx-text-alignment: center;
@@ -146,7 +155,14 @@
     -fx-border-width: 3px;
 }
 
-.listViewLogs {
+.list-view {
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-border-width: 5.5;
+}
+
+.vbox {
     -fx-background-radius: 10;
     -fx-border-color: black;
     -fx-border-radius: 5;
@@ -165,17 +181,18 @@
     -fx-background-color: #555555;
 }
 
-.list-cell:hover {
-    -fx-background-color: rgba(0, 0, 0, 0.25);
+.list-view .list-cell:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.446);
     -fx-text-fill: white;
 }
 
-.list-cell:selected {
-    -fx-background-color: rgba(0, 0, 0, 0.25);
+.list-view .list-cell:selected {
+    -fx-background-color: rgba(0, 0, 0, 0.706);
     -fx-text-fill: white;
 }
 
-.list-cell {
+.list-view .list-cell {
+    -fx-background-color: rgba(0, 0, 0, 0.155);
     -fx-font-size: 18px;
     -fx-alignment: center;
     -fx-border-width: 0 0 2.5 0;
@@ -183,8 +200,19 @@
     -fx-font-weight: bold;
 }
 
-.labelRoom {
+.labelNoGraphs {
     -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-border-width: 5.5;
+
+}
+
+.labelRoom {
+    -fx-font-size: 22px;
     -fx-text-fill: white;
     -fx-background-color: #079e64;
     -fx-background-radius: 10px;
@@ -196,7 +224,7 @@
 }
 
 .labelDate {
-    -fx-font-size: 20px;
+    -fx-font-size: 22px;
     -fx-text-fill: white;
     -fx-background-color: rgb(5, 34, 255);
     -fx-background-radius: 10px;
@@ -208,7 +236,7 @@
 }
 
 .labelTemperature {
-    -fx-font-size: 20px;
+    -fx-font-size: 21px;
     -fx-text-fill: white;
     -fx-background-color: rgb(255, 25, 25);
     -fx-background-radius: 10px;
@@ -218,7 +246,7 @@
 }
 
 .labelHumidity {
-    -fx-font-size: 20px;
+    -fx-font-size: 21px;
     -fx-text-fill: white;
     -fx-background-color: #1975b5;
     -fx-background-radius: 10px;
@@ -228,7 +256,7 @@
 }
 
 .labelActivity {
-    -fx-font-size: 20px;
+    -fx-font-size: 21px;
     -fx-text-fill: white;
     -fx-background-color: #a8783e;
     -fx-background-radius: 10px;
@@ -238,11 +266,144 @@
 }
 
 .labelCo2 {
-    -fx-font-size: 20px;
+    -fx-font-size: 21px;
     -fx-text-fill: white;
     -fx-background-color: #2a1c2b;
     -fx-background-radius: 10px;
     -fx-border-color: #2a1c2b;
     -fx-border-width: 3.5;
     -fx-border-radius: 5;
+}
+
+.chart {
+    -fx-font-size: 13px;
+    -fx-background-color: rgba(128, 128, 128, 0.191);
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(26, 207, 150, 0.99);
+    -fx-border-radius: 5;
+    -fx-border-width: 3;
+}
+
+.chart-plot-background {
+    -fx-background-color: rgba(128, 128, 128, 0.191);
+
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke-dash-array: none;
+    /* Lignes de la grille horizontales continues */
+
+    -fx-stroke: rgba(0, 0, 0, 0.100);
+    /* Couleur des lignes de la grille verticales */
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke-dash-array: none;
+    /* Lignes de la grille horizontales continues */
+
+    -fx-stroke: rgba(0, 0, 0, 0.100);
+    /* Couleur des lignes de la grille verticales */
+}
+
+.chart .chart-series-line {
+    -fx-stroke-width: 10px;
+}
+
+.chart-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.axis-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.tick-label {
+    -fx-font-size: 25px;
+}
+
+.chart-legend {
+    -fx-font-size: 10px;
+}
+
+.large-chart {
+    -fx-font-size: 20px;
+    -fx-background-color: rgba(128, 128, 128, 0.191);
+    -fx-background-radius: 10;
+}
+
+.large-chart .chart-series-line {
+    -fx-stroke-width: 12px;
+}
+
+.large-chart .chart-title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.large-chart .axis-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.large-chart .axis-tick {
+    -fx-font-size: 45px;
+    -fx-font-weight: bold;
+}
+
+.large-chart .tick-label {
+    -fx-font-size: 45px;
+}
+
+.large-chart .chart-legend {
+    -fx-font-size: 16px;
+}
+
+.notification-bar>.pane .title {
+    -fx-font-size: 18px;
+    -fx-text-fill: red;
+    /* Couleur du texte */
+    -fx-text-alignment: center;
+}
+
+.notification-bar>.pane {
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #000000c4;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.notification-bar>.pane .label {
+    -fx-font-size: 15.5px;
+    -fx-text-fill: #ffffff;
+}
+
+.notification-bar>.pane .close-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0 0 0;
+    -fx-alignment: center;
+}
+
+.notification-bar>.pane .close-button:hover {
+    -fx-background-color: linear-gradient(#a3a3a3, #8b8b8b 34%, #777777 36%, #777777 63%, #8b8b8b 65%, #adadad);
+}
+
+.notification-bar>.pane .close-button:pressed {
+    -fx-background-color: linear-gradient(#a3a3a3, #8b8b8b 34%, #777777 36%, #777777 63%, #8b8b8b 65%, #adadad);
+}
+
+/* application.css */
+.notification-bar>.pane .graphic > .imageView {
+    -fx-padding: 0 10 0 0; /* Ajustement de la marge pour décaler l'image vers la droite */
+}
+
+/* Style pour ajuster la taille de la police du titre */
+.notification-bar>.pane .title {
+    -fx-font-size: 20px;
+    -fx-text-fill: red;
+    -fx-alignment: center;
 }

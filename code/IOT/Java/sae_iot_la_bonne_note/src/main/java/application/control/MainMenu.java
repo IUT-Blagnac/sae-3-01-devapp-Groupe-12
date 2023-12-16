@@ -56,8 +56,14 @@ public class MainMenu extends Application {
 
             // this.show(); // Affichage de la fenêtre du menu principal
 
-            LogHistory a = new LogHistory(_primaryStage);
+            // LogHistory b = new LogHistory(_primaryStage);
+            // b.show();
+
+            WharehouseMonitor a = new WharehouseMonitor(_primaryStage);
             a.show();
+
+            // Configuration a = new Configuration(_primaryStage);
+            // a.show();
 
         } catch (Exception e) {
             AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML MainMenu.fxml",

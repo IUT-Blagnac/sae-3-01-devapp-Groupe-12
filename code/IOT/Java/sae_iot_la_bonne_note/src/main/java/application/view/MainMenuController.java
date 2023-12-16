@@ -5,7 +5,7 @@ import application.control.LogHistory;
 import application.control.MainMenu;
 import application.control.WharehouseMonitor;
 import application.tools.AlertUtilities;
-import application.visualEffects.Animations;
+import application.tools.Animations;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -65,18 +65,14 @@ public class MainMenuController {
 
     @FXML
     private void doWharehouseMonitor() {
-        Animations.sceneSwapAnimation(buttCheckWhareHouse, 1.3, 50, () -> {
-            WharehouseMonitor wharehouse = new WharehouseMonitor(primaryStage);
-            wharehouse.show();
-        });
+        WharehouseMonitor wharehouse = new WharehouseMonitor(primaryStage);
+        wharehouse.show();
     }
 
     @FXML
     private void doCheckHistory() {
-        Animations.sceneSwapAnimation(buttCheckHistory, 1.3, 50, () -> {
-            LogHistory history = new LogHistory(primaryStage);
-            history.show();
-        });
+        LogHistory history = new LogHistory(primaryStage);
+        history.show();
     }
 
     /**
@@ -85,10 +81,8 @@ public class MainMenuController {
      */
     @FXML
     private void doConfiguration() {
-        Animations.sceneSwapAnimation(buttConfiguration, 1.3, 50, () -> {
-            Configuration conf = new Configuration(primaryStage);
-            conf.show();
-        });
+        Configuration conf = new Configuration(primaryStage);
+        conf.show();
     }
 
     /**
@@ -97,8 +91,6 @@ public class MainMenuController {
      */
     @FXML
     private void doLeave() {
-        Animations.sceneSwapAnimation(buttLeave, 1.3, 100, () -> {
-            this.primaryStage.close();
-        });
+        this.primaryStage.close();
     }
 }

@@ -4,16 +4,11 @@ import application.Main;
 import application.tools.AlertUtilities;
 import application.view.MainMenuController;
 import application.view.WharehouseMonitorController;
-import application.view.ConfigurationController;
-import application.view.LogHistoryController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.layout.StackPane;
-import javafx.stage.StageStyle;
 
 /**
  * Classe de contrôleur de dialogue de la fenêtre de surveillance de l'entrepôt.
@@ -54,7 +49,9 @@ public class WharehouseMonitor {
             this.controller.initContext(this, primaryStage);
 
         } catch (Exception e) {
-            AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML WharehouseMonitor.fxml",
+            e.printStackTrace();
+            AlertUtilities.showAlert(primaryStage, "Erreur",
+                    "Échec du chargement du fichier FXML WharehouseMonitor.fxml",
                     "Merci de réessayer.", AlertType.ERROR);
             System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }

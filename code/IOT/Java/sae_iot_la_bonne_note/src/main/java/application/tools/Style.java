@@ -1,4 +1,6 @@
-package application.visualEffects;
+package application.tools;
+
+import java.util.Random;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;

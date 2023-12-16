@@ -74,7 +74,7 @@ public class AlertUtilities {
 	 * @param _message Le message d'en-tête de la boîte de dialogue.
 	 * @param _at      Le type d'alerte (par défaut INFORMATION si non spécifié).
 	 */
-	public static void showAlert(String _title, String _message, AlertType _at) {
+	public static void showAndWaitAlert(String _title, String _message, AlertType _at) {
 
 		if (_at == null) {
 			_at = AlertType.INFORMATION;
