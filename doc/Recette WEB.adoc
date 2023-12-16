@@ -60,4 +60,4 @@ Peu importe le système d'exploitation.
 = III. Cas de test
 == 1. Partie Base de données
 
-== 2. Partie Web
+== 2. Partie PHP
