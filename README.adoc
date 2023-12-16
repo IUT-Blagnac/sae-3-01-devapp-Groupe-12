@@ -52,6 +52,8 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 === Partie IoT
 
+-> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Application%20finale[Application finale] (JAR + Fichiers Python + Fichier de configuration)
+
 -> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_IOT.adoc[Documentation Utilisateur]
 
 -> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_IOT.adoc[Documentation Technique] 
