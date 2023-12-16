@@ -104,6 +104,11 @@ Si vous préférez exécuter le projet à partir d'Eclipse, veuillez installer l
 
 = Prise en main de l'application
 
+[WARNING]
+====
+Attention : Les éléments visuels présentés ne sont pas définitifs et peuvent être sujets à des évolutions ultérieures.
+====
+
 == Paramétrer le fichier de configuration
 
 L'application JavaFX permet à l'utilisateur de configurer un fichier utilisé par le programme Python. Cette configuration inclut divers paramètres comme les types de données récupérées des capteurs (température, CO2, humidité etc), la fréquence de lecture des données, les valeurs seuils d'alerte pour chaque type de donnée, ainsi que les noms des fichiers.
@@ -114,6 +119,18 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 La scène de configuration va apparaître, si le fichier de configuration n'a pas été trouvé, une alerte va apparaître (Rappel : le fichier de configuration et les fichiers Python doivent se trouver dans le même dossier que l'exécutable de l'application).
 Si aucune alerte n'appraît, cela veut dire que le fichier de configuration a bien été trouvé, vous pouvez faire votre configuration.
+
+Dans cette fenêtre vous pouvez : 
+
+- choisir l'host et le port
+- tester la connection pour vérifier que l'host et le port sont valides
+- choisir les salles spécifiques dont on va récupérer les données (topic)
+- choisir les noms des fichiers d'alertes, de logs et de données
+- choisir les température à récupérer (Température, Humidité, Activité, Co2)
+- choisir la fréquence et son unité (secondes, minutes, heures, jours)
+- définir les seuils d'alertes pour chaque donnée
+- réinitialiser toute la configuration
+- sauvegarder la nouvelle configuration
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppConf2.jpg[]
 
@@ -143,13 +160,16 @@ L'application JavaFX permet de visualiser graphiquement les données en temps r�
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppDirect1.jpg[]
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppDirect2.jpg[]
+La scène de visualisation des données en direct va apparaître, si le script python n'a pas été trouvé si son lancement a échoué, une alerte va apparaître.
+Cette fenêtre permet de voir les données émises en direct par les capteurs, elle propose principalement les mêmes options de seléction / tri des données que la scène de l'historique.
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppDirect2.jpg[]
 
 
 == Recevoir des alertes pour les seuils de dépassement
 
 Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppAlert.png[]
+Peu importe où vous vous trouvez dans l'application et si le script python et la connexion sont valides, à chaque fois qu'une nouvelle donnée reçue dépasse un certain seuil maximale défini, une alerte comme ci-dessous va apparaître pendant 5 secondes, il est possible de cliquer dessus pour avoir plus d'informations.
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppAlert.png[]
