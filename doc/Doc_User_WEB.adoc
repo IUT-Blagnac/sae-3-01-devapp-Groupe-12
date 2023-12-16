@@ -1,57 +1,60 @@
-= Documentation Utilisateur E-Commerce La Bonne Note
+= Document Utilisateur du site Web (Partie WEB) - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
 
-== Introduction
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
 
-Bienvenue dans la documentation utilisateur du projet IoT. Ce projet utilise le langage de programmation Python et la bibliothèque Paho MQTT pour collecter et traiter des données provenant de capteurs. Cette documentation vous guidera à travers les étapes d'installation, de configuration et d'utilisation du code.
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
 
-== Contenu
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
 
-* <<installation, Installation>>
-* <<configuration, Configuration>>
-* <<utilisation, Utilisation>>
+toc::[]
 
-[[installation]]
-=== 1. Installation
+= Présentation du site
+== Contexte général
 
-==== Prérequis
+== Description du besoin
 
-- Python installé sur votre machine.
+== Cas d'utilisation
 
-==== Étapes
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
 
-1. Téléchargez le code source depuis le dépôt GitHub.
-2. Ouvrez un terminal et accédez au répertoire du code.
-3. Installez les dépendances en exécutant la commande suivante :
-   [source,bash]
-   ----
-   pip install paho-mqtt
-   ----
-4. Assurez-vous que le fichier de configuration (`config.ini`) est correctement configuré.
+= Tutoriel d'installation
 
-[[configuration]]
-=== 2. Configuration
 
-Le fichier de configuration (`config.ini`) est essentiel pour le bon fonctionnement du projet. Assurez-vous de configurer les paramètres suivants :
+== Aller sur le site
 
-* **MQTT** : Configurez le broker, le port et le topic MQTT selon votre configuration.
-* **CONFIG** : Choisissez les fichiers de sortie, la fréquence d'affichage, et les données à afficher.
-* **ALERT** : Définissez les seuils d'alerte pour chaque type de données.
+Pour aller sur le site :
 
-[[utilisation]]
-=== 3. Utilisation
 
-Une fois le projet installé et configuré, suivez ces étapes pour lancer le programme :
+= Prise en main du site web
 
-1. Exécutez le fichier Python (`votre_code.py`) dans un terminal.
-   [source,bash]
-   ----
-   python votre_code.py
-   ----
-2. Le programme se connectera au broker MQTT et commencera à recevoir des données des capteurs.
-3. Les données seront traitées et enregistrées dans les fichiers spécifiés dans le fichier de configuration.
+== Fonctionnalité x
 
-== Conclusion
+Paragraphe de description de la fonctionnalité x
 
-Vous avez maintenant installé, configuré et utilisé avec succès le projet IoT. N'hésitez pas à explorer les fichiers de sortie, tels que les journaux et les alertes, pour obtenir des informations détaillées sur les données capturées par les capteurs.
+== Fonctionnalité x
 
-Pour toute question ou problème, veuillez consulter la documentation complète ou contacter l'assistance technique.
+Paragraphe de description de la fonctionnalité x
+Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
