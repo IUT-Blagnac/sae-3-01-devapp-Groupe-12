@@ -1,57 +1,125 @@
-= Documentation Utilisateur - Partie IoT
+= Document Utilisateur de l’application (Partie IOT) - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
 
-== Introduction
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
 
-Bienvenue dans la documentation utilisateur du projet IoT. Ce projet utilise le langage de programmation Python et la bibliothèque Paho MQTT pour collecter et traiter des données provenant de capteurs. Cette documentation vous guidera à travers les étapes d'installation, de configuration et d'utilisation du code.
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
 
-== Contenu
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
 
-* <<installation, Installation>>
-* <<configuration, Configuration>>
-* <<utilisation, Utilisation>>
+toc::[]
 
-[[installation]]
-=== 1. Installation
+= Présentation de l'application
+== Contexte général
+L'entreprise "La Bonne Note", spécialisée dans la vente d'instruments de musique, ambitionne d'améliorer la gestion de son entrepôt par le biais d'une application Java. Cette dernière sera conçue pour optimiser l'accès aux données des capteurs, l'écriture de ces informations dans des fichiers, et pour paramétrer le fonctionnement d'une application Python associée. L'objectif est de permettre une gestion précise et efficace des capteurs déployés à l'IUT, diffusant des données relatives au CO2, à la température et à l'humidité via le bus MQTT.
 
-==== Prérequis
+== Description du besoin
+L'application Java de "La Bonne Note" vise à fournir une interface ergonomique et fonctionnelle pour gérer les capteurs et les données qu'ils génèrent. Elle proposera différentes fonctionnalités telles que la configuration des types de données récupérées, la fréquence de lecture des capteurs, les seuils d'alerte, et les noms de fichiers associés. Cette application Java servira également à afficher en temps réel les données captées, différenciées par salle pour offrir une représentation terrain réaliste. Elle permettra également la visualisation graphique des fichiers logs, l'affichage des alertes de dépassement de seuils, tout en mettant l'accent sur une architecture logicielle proposée par les étudiants, justifiée et analysée en profondeur.
 
-- Python installé sur votre machine.
+== Cas d'utilisation
+L'application de "La Bonne Note" propose plusieurs cas d'utilisation essentiels pour optimiser la gestion de son entrepôt. Tout d'abord, elle permet la configuration des capteurs en offrant la possibilité de sélectionner les types de données à récupérer, de définir la fréquence de lecture des capteurs et de fixer les seuils d'alerte pour chaque type de donnée. Ensuite, elle offre une interface conviviale pour afficher en temps réel les données captées par les capteurs, distinguant ces données par salle pour une représentation précise de l'état actuel de l'entrepôt. De plus, elle facilite la visualisation graphique des fichiers logs, permettant aux utilisateurs de consulter l'historique des données captées. Enfin, elle assure une gestion proactive des alertes en affichant en permanence les dépassements de seuils détectés par les capteurs, fournissant ainsi un aperçu immédiat des situations critiques et nécessitant une attention particulière.
 
-==== Étapes
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[]
 
-1. Téléchargez le code source depuis le dépôt GitHub.
-2. Ouvrez un terminal et accédez au répertoire du code.
-3. Installez les dépendances en exécutant la commande suivante :
-   [source,bash]
-   ----
-   pip install paho-mqtt
-   ----
-4. Assurez-vous que le fichier de configuration (`config.ini`) est correctement configuré.
+= Tutoriel d'installation
 
-[[configuration]]
-=== 2. Configuration
+== Installer java
 
-Le fichier de configuration (`config.ini`) est essentiel pour le bon fonctionnement du projet. Assurez-vous de configurer les paramètres suivants :
+Pour exécuter l'application Java et Python, vérifiez d'abord que Java est installé sur votre ordinateur en ouvrant une invite de commande et en saisissant la commande suivante :
 
-* **MQTT** : Configurez le broker, le port et le topic MQTT selon votre configuration.
-* **CONFIG** : Choisissez les fichiers de sortie, la fréquence d'affichage, et les données à afficher.
-* **ALERT** : Définissez les seuils d'alerte pour chaque type de données.
+- java -version
 
-[[utilisation]]
-=== 3. Utilisation
+Si JAVA n'est pas installé, vous pouvez le télécharger depuis https://www.java.com/fr/download/.
 
-Une fois le projet installé et configuré, suivez ces étapes pour lancer le programme :
+== Installer Python
 
-1. Exécutez le fichier Python (`votre_code.py`) dans un terminal.
-   [source,bash]
-   ----
-   python votre_code.py
-   ----
-2. Le programme se connectera au broker MQTT et commencera à recevoir des données des capteurs.
-3. Les données seront traitées et enregistrées dans les fichiers spécifiés dans le fichier de configuration.
+Ensuite, pour que l'application Java puisse exécuter le script Python, assurez-vous d'avoir les bibliothèques requises installées pour Python. Voici les bibliothèques nécessaires :
 
-== Conclusion
+1. `paho.mqtt.client`: Bibliothèque MQTT pour Python.
+2. `json`: Module Python pour travailler avec JSON.
+3. `configparser`: Module Python pour lire les fichiers de configuration.
+4. `os`: Module Python pour des fonctionnalités liées au système d'exploitation.
+5. `time` (sous Windows uniquement) : Module Python pour le temps.
+6. `datetime`: Module Python pour manipuler les dates et heures.
 
-Vous avez maintenant installé, configuré et utilisé avec succès le projet IoT. N'hésitez pas à explorer les fichiers de sortie, tels que les journaux et les alertes, pour obtenir des informations détaillées sur les données capturées par les capteurs.
+Si Python n'est pas installé, vous pouvez le télécharger depuis https://www.python.org/downloads/.
 
-Pour toute question ou problème, veuillez consulter la documentation complète ou contacter l'assistance technique.
+Pour installer les bibliothèques Python, ouvrez une invite de commande ou un terminal et saisissez les commandes suivantes :
+
+[source,cmd]
+----
+pip install paho-mqtt
+pip install jsonlib-python3
+pip install configparser
+pip install datetime
+----
+
+== Lancer l'application
+
+Pour lancer l'application :
+
+- Télécharger tous les fichiers du https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Application%20finale[dossier de l'application finale] comprenant le .JAR (exécutable), les fichiers Python et le fichier de configuration 
+
+- Assurez-vous que les fichiers Python (scripts) et les fichiers JSON (alerte.json, données.json, logs.json) sont placés dans le même répertoire que le fichier JAR de l'application.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/img_dossier_application.png[]
+
+(En jaunes les fichiers de données JSON, en bleu les script python et en rouge l'exécutable de l'application)
+
+Deux méthodes pour lancer l'application :
+
+- Ouvrez une invite de commande et exécutez la commande suivante : 
+
+[source,cmd]
+----
+java -jar sae_iot_la_bonne_note.jar
+----
+
+- Double-cliquez sur le fichier exécutable (sae_iot_la_bonne_note.jar)
+
+Si vous préférez exécuter le projet à partir d'Eclipse, veuillez installer le JDK 17. De plus, l'installation de JavaFX depuis Eclipse Marketplace est nécessaire (version recommandée : 3.8.0).
+
+
+= Prise en main de l'application
+
+== Paramétrer le fichier de configuration
+
+L'application JavaFX permet à l'utilisateur de configurer un fichier utilisé par le programme Python. Cette configuration inclut divers paramètres comme les types de données récupérées des capteurs (température, CO2, humidité etc), la fréquence de lecture des données, les valeurs seuils d'alerte pour chaque type de donnée, ainsi que les noms des fichiers.
+
+
+
+== Visualiser l'historique de logs
+
+L'application JavaFX permet de visualiser graphiquement les données des fichiers de logs.
+
+
+== Visualiser les données par salle (temps réel)
+
+L'application JavaFX permet de visualiser graphiquement les données en temps réel.
+
+
+== Recevoir des alertes pour les seuils de dépassement
+
+Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
