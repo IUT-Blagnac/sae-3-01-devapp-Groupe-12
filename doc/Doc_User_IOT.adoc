@@ -84,7 +84,7 @@ Pour lancer l'application :
 
 - Assurez-vous que les fichiers Python (scripts) et les fichiers JSON (alerte.json, données.json, logs.json) sont placés dans le même répertoire que le fichier JAR de l'application.
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/img_dossier_application.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/img_dossier_application.png[]
 
 (En jaunes les fichiers de données JSON, en bleu les script python et en rouge l'exécutable de l'application)
 
@@ -110,12 +110,12 @@ L'application JavaFX permet à l'utilisateur de configurer un fichier utilisé p
 
 - Une fois l'application lancé, cliquer sur le menu "Configuration" comme ci-dessous : 
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/AppConf1.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppConf1.jpg[]
 
 La scène de configuration va apparaître, si le fichier de configuration n'a pas été trouvé, une alerte va apparaître (Rappel : le fichier de configuration et les fichiers Python doivent se trouver dans le même dossier que l'exécutable de l'application).
 Si aucune alerte n'appraît, cela veut dire que le fichier de configuration a bien été trouvé, vous pouvez faire votre configuration.
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/AppConf2.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppConf2.jpg[]
 
 
 == Visualiser l'historique de logs
@@ -124,7 +124,7 @@ L'application JavaFX permet de visualiser graphiquement les données des fichier
 
 - Cliquer sur le bonton "Historique" :
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/AppHistory1.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppHistory1.jpg[]
 
 La scène de l'historique va apparaître, si les fichiers de l'historique des alertes et des données existent et qu'ils ne sont pas vides, les données vont s'afficher graphiquement de base, vous avez la possibilité de :
 
@@ -135,16 +135,15 @@ La scène de l'historique va apparaître, si les fichiers de l'historique des al
 - choisir le format de la date pour l'affichage
 - agrandir les graphiques en cliquant dessus, cela vous ouvrir une nouvelle fenêtre avec le graphique en grand
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/AppHistory2.jpg[]
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppHistory2.jpg[]
 
 == Visualiser les données par salle (temps réel)
 
 L'application JavaFX permet de visualiser graphiquement les données en temps réel.
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/AppDirect1.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppDirect1.jpg[]
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/AppDirect2.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppDirect2.jpg[]
 
 
 
@@ -152,5 +151,5 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/AppAlert.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppAlert.png[]
 
