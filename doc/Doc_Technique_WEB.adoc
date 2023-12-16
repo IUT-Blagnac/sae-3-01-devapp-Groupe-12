@@ -1,4 +1,4 @@
-= Document Technique E-Commerce La Bonne Note
+= Documentation Technique du site Web (Partie Web) - La Bonne Note
 :icons: font
 :models: models
 :experimental:
@@ -27,58 +27,44 @@ ifdef::env-github[]
 :icongit: Git
 endif::[]
 
-Équipe de développement :
-- Développeurs : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
 
 toc::[]
 
-== Présentation de l'application
-=== Contexte général
+= Présentation du site
+== Contexte général
 
-=== Description du besoin
+== Description du besoin
 
-=== Cas d'utilisation
+== Cas d'utilisation
 
-== Architecture du projet 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
 
-=== Schéma globale
+= Structure du projet 
 
-=== Diagramme de classe
+== Ressources Utilisées
 
-=== Packages et ressources utilisées
+== Se rendre sur le site Web
 
-== Configurer et lancer l'application
+Pour se rendre sur le site web :
 
-=== Pré-requis nécéssaires 
+= Fonctionnalités développées
 
-=== Se connecter
+== Fonctionnalité X
 
-=== Configurez la base de données
-
-== Fonctionnalités développées
-
-=== Fonctionnalite x (développé par x x)
+Paragraphe décrivant la fonctionnalité x.
 
 Partie du UseCase :
 
-Partie du diagramme de classe : 
+Image partie du use de case
 
 Diagramme de séquence : 
 
-Classes utilisées : 
+Diagramme de séquence sur la fonctionnalité 
 
-package Application.control :
+Description du diagramme de séquence 
 
-- ComptesManagement -> la méthode *creerNouveauCompte* appelée par doNouveauCompte (ComptesManagementController)
+Pages PHP : 
 
-- CompteEditorPane -> *constructeur de CompteEditorPane* && la méthode *doCompteEditorDialog* appelée par creerNouveauCompte (ComptesManagement)
-
-package Application.view :
-
-- ComptesManagementController -> la méthode *doNouveauCompte* appelée par comptesmanagement.fxml (bouton nouveau compte sur la scène)
-
-- ComptesEditorPaneController -> la méthode *displayDialog* appelée par doCompteEditorDialog (CompteEditorPane)
-
-package Model.orm :
-
-- Access_BD_CompteCourant -> la méthode *addCompte* appelée par creerNouveauCompte (ComptesManagement)
+- X : que la page
+...
