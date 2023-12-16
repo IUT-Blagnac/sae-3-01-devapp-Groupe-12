@@ -82,7 +82,7 @@ Pour lancer l'application :
 
 - Télécharger tous les fichiers du https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Application%20finale[dossier de l'application finale] comprenant le .JAR (exécutable), les fichiers Python et le fichier de configuration 
 
-- Assurez-vous que les fichiers Python (scripts) et les fichiers JSON (alerte.json, données.json, logs.json) sont placés dans le même répertoire que le fichier JAR de l'application.
+- Assurez-vous que les fichiers Python (scripts python .py), le fichier de configuration (.ini) et les fichiers JSON s'ils sont déjà crées (alerte.json, données.json, logs.json) sont placés dans le même répertoire que le fichier JAR de l'application.
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/img_dossier_application.png[]
 
