@@ -109,7 +109,7 @@ Pour lancer l'application :
 
 - Assurez-vous que les fichiers Python (scripts) et les fichiers JSON (alerte.json, données.json, logs.json) sont placés dans le même répertoire que le fichier JAR de l'application.
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/img_dossier_application.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/img_dossier_application.png[]
 
 (En jaunes les fichiers de données JSON, en bleu les script python et en rouge l'exécutable de l'application)
 
@@ -135,7 +135,7 @@ L'application JavaFX permet à l'utilisateur de configurer un fichier utilisé p
 
 Partie du UseCase :
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_1.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/us_iot_1.jpg[]
 
 Diagramme de séquence : 
 
@@ -157,7 +157,7 @@ L'application JavaFX permet de visualiser graphiquement les données des fichier
 
 Partie du UseCase :
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_4.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/us_iot_4.jpg[]
 
 Diagramme de séquence : 
 
@@ -178,7 +178,7 @@ L'application JavaFX permet de visualiser graphiquement les données en temps r�
 
 Partie du UseCase :
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_2.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/us_iot_2.jpg[]
 
 Diagramme de séquence : 
 
@@ -199,7 +199,7 @@ Vérifie les données captées par les capteurs pour chaque salle surveillée. S
 
 Partie du UseCase :
 
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20la%20documentations/Image_IOT/us_iot_3.jpg[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/us_iot_3.jpg[]
 
 Diagramme de séquence : 
 
