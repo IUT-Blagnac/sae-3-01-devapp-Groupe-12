@@ -152,6 +152,12 @@ Classes utilisées :
 - Configuration : Classe responsable de la fenêtre de configuration.
 - ConfigurationController : Contrôleur pour la fenêtre de configuration, gère les interactions et la logique.
 
+Extrait de code commenté : 
+
+Ici, dans la méthode FXML "doSave" relié au bouton "Sauvegarder" permettant de sauvegarder la configuration, on écrit les nouvelles données saisies par l'utilisateur dans le fichier de configuration donc ici les noms des fichiers, le topic, les données choisies, la fréquence en convertissant en fonction de l'unité de temps choisit par l'utilisateur etc.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/javacode1.png[]
+
 
 == Visualiser l'historique de logs
 
@@ -174,6 +180,13 @@ Classes utilisées :
 - LogHistory : Classe responsable de la fenêtre de l'historique.
 - LogHistoryController : Contrôleur pour la fenêtre de l'historique, gère les interactions et la logique.
 
+Extrait de code commenté : 
+
+La fonction suivante "updateDatasHistory" met à vide l'observable list relié à la listview ainsi que l'ArrayList contenant les données recherchées. Elle met ensuite la scène à jour en fonction des données choisies par l'utilisateur (graphique de température seulement par exemple), puis si la variable "currentSearch" qui correspond à la recherche actuel de l'utilisateur et null ou vide, la liste des données recherchées va recevoir toute la liste contenant toutes les données. Si la recherche n'est ni null ni vide, on va remplir la liste seulement avec les données dont le nom correspond avec la recherche actuelle.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/javacode2.png[]
+
+
 == Visualiser les données par salle (temps réel)
 
 L'application JavaFX permet de visualiser graphiquement les données en temps réel.
@@ -195,6 +208,13 @@ Classes utilisées :
 - WhareHouseMonitor : Classe responsable de la fenêtre de l'entrepôt.
 - WhareHouseMonitorController : Contrôleur pour la fenêtre de l'entrepôt, gère les interactions et la logique.
 
+Extrait de code commenté : 
+
+La méthode suivante "initGetNewDatasThread" initialise et lance un thread permettant de récupérer les nouvelles données écrites dans le fichier de données JSON. Le thread vérifie en permanence la date de dernière modification du fichier, si une nouvelle modification a lieu, un appel à "updateHistoryFromFile" aura lieu pour mettre à jour l'ArrayList de données en parcourant de nouveau le fichier Json.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/javacode3.png[]
+
+
 == Recevoir des alertes pour les seuils de dépassement
 
 Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
@@ -212,3 +232,9 @@ Ce schéma représente un processus automatisé où le système de fichiers modi
 Classes utilisées : 
 
 - WhareHouseMonitorController : Contrôleur pour la fenêtre de l'entrepôt, gère les interactions et la logique.
+
+Extrait de code commenté : 
+
+La méthode "checkAlertForLastData" est appellée à chaque nouvel entrée dans l'Arraylist de données. Cette méthode va vérifier si les seuils d'alerte ont été atteint pour la nouvelle donnée. Si c'est le cas, un appel à "createAlertNotification" va avoir lieu pour créer une notification et alerter l'utilisateur des seuils dépassés.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/javacode4.png[]
