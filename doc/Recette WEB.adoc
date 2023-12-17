@@ -57,6 +57,102 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 = III. Cas de test
 == Partie Base de données
 
+|====
+|Cas de test 4+|Test-01-01-01
+|Titre 4+|Trigger MaJ du stock
+|Objectif 4+|Vérifier que le stock se met à jour après une commande
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Insérer une nouvelle commande dans la table LigneCde. ^|Le stock se met à jour ^| La quantité commandée doit être inférieur au stock actuel^|OK
+^|All_G_C.2 ^|Insérer une nouvelle commande dans la table LigneCde. ^|L'insertion ne se fait pas. ^| La quantité commandée doit être supérieur au stock actuel^|OK
+
+5+|
+
+5+|Commentaire :
+La mise à jour du stock marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-02-01-01
+|Titre 4+|Trigger insert stock produit
+|Objectif 4+|Vérifier que le stock inséré est valide
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.3 ^|Faire un insert du stock. ^|Le stock est rajouté correctement ^| Le nouveau stock doit être inférieur au stock Max^|OK
+^|All_G_C.4 ^|Faire un insert du stock. ^|L'insertion ne se fait pas. Une erreur est levée. ^| Le nouveau stock doit être supérieur au stock Max^|OK
+
+5+|
+
+5+|Commentaire :
+Le trigger marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-03-01-01
+|Titre 4+|Trigger update stock produit
+|Objectif 4+|Vérifier que la mise à jour du stock est valide
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.5 ^|Faire un update du stock. ^|Le stock est mis à jour correctement ^| Le nouveau stock doit être inférieur au stock Max^|OK
+^|All_G_C.6 ^|Faire un update du stock. ^|L'update ne se fait pas. Une erreur est levée. ^| Le nouveau stock doit être supérieur au stock Max^|OK
+
+5+|
+
+5+|Commentaire :
+Le trigger marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-04-01-01
+|Titre 4+|Trigger contrainte quantité commandée stock
+|Objectif 4+|Vérifier que la quantité commandée ne dépasse pas le stock
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.7 ^|Faire une commande. ^|La commande est valide ^| La quantité commandée est inférieur au stock^|OK
+^|All_G_C.8 ^|Faire une commande. ^|La commande n'est pas valide. Une erreur est levée. ^| La quantité commandée est supérieur au stock^|OK
+
+5+|
+
+5+|Commentaire :
+Le trigger marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-05-01-01
+|Titre 4+|Procédure pour passer commande
+|Objectif 4+|Pouvoir passer une commande
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.9 ^|Faire une commande en appelant la procédure. ^|La commande est insérée dans la bd ^| Le stock ne doit pas être nul, on doit commander au moins un produit et la quantité commandée doit être inférieur au stock^|OK
+^|All_G_C.10 ^|Faire une commande en appelant la procédure. ^|La commande n'est pas insérée dans la bd. Une erreur est levée. ^| Le stock est nul (il n'y a plus ce produit en stock)^|OK
+^|All_G_C.11 ^|Faire une commande en appelant la procédure. ^|La commande n'est pas insérée dans la bd. Une erreur est levée. ^| La quantité commandée est de 0^|OK
+^|All_G_C.12 ^|Faire une commande en appelant la procédure. ^|La commande n'est pas insérée dans la bd. Une erreur est levée. ^| La quantité commandée est supérieur au stock du produit^|OK
+
+5+|
+
+5+|Commentaire :
+La procédure fonctionne correctement
+|====
+
+|====
+|Cas de test 4+|Test-06-01-01
+|Titre 4+|Procédure pour mettre à jour le montant total d'une commande
+|Objectif 4+|Mettre à jour le montant total d'une commande
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.13 ^|Mettre à jour le montant total en appelant la procédure. ^|La mise à jour s'effectue ^| Le montant ne doit pas être négatif^|OK
+^|All_G_C.14 ^|Mettre à jour le montant total en appelant la procédure. ^|La mise à jour ne s'effectue pas ^| Le montant est négatif^|OK
+
+5+|
+
+5+|Commentaire :
+La procédure fonctionne correctement
+|====
+
 == Partie PHP
 === Connexion et Inscription
 
