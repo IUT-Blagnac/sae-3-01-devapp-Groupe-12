@@ -88,6 +88,64 @@ Deux méthodes pour lancer l'application :
 Python3 connect.py
 ----
 
+= Architecture du code
 
+== Le fichier de configuration
+
+Le fichier de configuration comporte plusieurs sections : 
+
+- MQTT : comporte le broker, le port et le topic sur lequel se mettre en écoute
+- CONFIG : se compose des noms des fichiers, des données choisies, de la fréquence et de l'unité de cette fréquence (utilisé pour l'application)
+- ALERT : les seuils d'alertes pour chaque donnée
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/python1.png[]
+
+Toutes ces données seront récupérés et utilisées dans le script Python : 
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/python2.png[]
+
+== Les différentes méthodes
+
+Le script python se compose de plusieurs méthodes : 
+
+- calculer_moyenne : permet de calculer la moyenne pour les 10 dernières valeurs, prend en paramètre le tableau de l'historique des valeurs
+- ecrire : permet d'écrire les logs / données dans le fichier, prend en paramètre un booléen pour savoir s'il s'agit d'une écriture de log ou de donnée, le nom du fichier dans lequel écrire, l'identifiant de la room (salle), cet identifiant permettra d'ajouter les données au même endroit dans le fichier Json au lieu de les ajouter n'importe où et enfin la data à écrire en elle même
+- ecrire_alerte : permet d'écrire les alertes dans le fichier, prend en paramètre l'identifiant de la room (salle) ainsi que l'alerte à écrire
+- on_connect : méthode pour se connecter au service MQTT
+- on_message : méthode permettant de récupérer les nouveaux messages arrivant sur le bus MQTT
+- handler (uniquement sur la version linux) : permet de gérer le signal d'alarme SIGALARM
+
+== Justification du choix pour les fichiers de données
+
+Nous avons examiné plusieurs critères pour déterminer lequel serait le plus adapté à nos besoins spécifiques. Le tableau ci-dessus met en lumière les principaux avantages et inconvénients de chaque format. Après une évaluation approfondie, nous avons conclu que le format JSON offre plusieurs avantages significatifs pour notre cas d'utilisation. Sa facilité de manipulation, sa capacité à stocker des structures complexes et sa lisibilité pour les humains ont été des facteurs décisifs dans notre choix final du format JSON pour le stockage de nos données.
+
+|===
+|Critère | JSON | CSV
+
+|Facilité de lecture
+|Facile à lire pour les humains grâce à sa structure hiérarchique
+|Peut être difficile à lire pour les humains en raison de sa structure tabulaire
+
+|Facilité de manipulation
+|Manipulation aisée grâce à sa structure d'objets et d'arrays
+|Peut nécessiter un traitement spécifique pour manipuler les données tabulaires
+
+|Taille du fichier
+|Peut être plus volumineux en raison de la nature textuelle et répétitive des données
+|Généralement plus compact en raison de la simplicité des données stockées
+
+|Compatibilité
+|Bien pris en charge par de nombreuses langages et plateformes grâce à sa popularité
+|Compatibilité étendue avec de nombreux logiciels et outils
+
+|Structure des données
+|Peut stocker des structures complexes et des types de données variés
+|Idéal pour des données tabulaires simples, peut nécessiter une transformation pour des structures complexes
+
+|Lisibilité des données
+|Les données sont souvent plus lisibles pour les humains en raison de leur structuration
+|Peut être moins lisible en raison des séparateurs et des éventuelles valeurs null
+
+|===
 
 
