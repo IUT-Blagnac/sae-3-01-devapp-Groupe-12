@@ -1,3 +1,5 @@
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
+
 = Cahier de recettes (Tests) du site Web (Partie Web) - La Bonne Note
 :icons: font
 :models: models
