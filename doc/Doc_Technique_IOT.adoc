@@ -1,5 +1,3 @@
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
-
 = Documentation Technique de l’application (Partie IOT) - La Bonne Note
 :icons: font
 :models: models
@@ -30,6 +28,8 @@ ifdef::env-github[]
 endif::[]
 
 Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
 
 toc::[]
 
