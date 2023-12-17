@@ -15,7 +15,7 @@ session_start();
             display: flex;
             align-items: center;
             justify-content: center; 
-            background-color: #131921;
+            background-color: #696969;
             color: white;
             margin: 0 auto; 
             padding: 0 20px; 
@@ -185,6 +185,18 @@ session_start();
                 max-height: 40px;
             }
         }
+                
+        .home-link {
+            position: absolute;
+            left: 80px;
+        }
+
+
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -193,36 +205,40 @@ session_start();
         <a href="/" class="logo">
             <img src="img/logo.jpg" alt="Logo de la boutique">
         </a>
-        <div class="search-bar">
-            <select name="categories" class="category-select">
-                <option value="all">Toutes nos catégories  ▼</option>
-                <option value="Cordes">Cordes</option>
-                <option value="Percussions">Percussions</option>
-                <option value="Clavier">Clavier</option>
-                <option value="Vent">Vent</option>
-                <option value="Livres">Livres</option>
-                <option value="Matériel Studio">Matériel Studio</option>
+        <a href="index.php" class="home-link">
+            <img src="img/accueil.png" alt="Accueil" style="height: 50px;">
+        </a>
+        <!-- Formulaires de recherche -->
+        <form id="search-form" action="index.php" method="GET">
+            <select name="category" class="category-select">
+                <option value="Tous nos produits" <?=  isset($selectedCategory) && ($selectedCategory == 'Tous nos produits' || empty($selectedCategory)) ? 'selected' : '' ?>>Tous nos produits</option>
+                <option value="Cordes" <?= ($selectedCategory == 'Cordes') ? 'selected' : '' ?>>Cordes</option>
+                <option value="Percussions" <?= ($selectedCategory == 'Percussions') ? 'selected' : '' ?>>Percussions</option>
+                <option value="Clavier" <?= ($selectedCategory == 'Clavier') ? 'selected' : '' ?>>Clavier</option>
+                <option value="Vent" <?= ($selectedCategory == 'Vent') ? 'selected' : '' ?>>Vent</option>
+                <option value="Livres" <?= ($selectedCategory == 'Livres') ? 'selected' : '' ?>>Livres</option>
+                <option value="Matériel Studio" <?= ($selectedCategory == 'Matériel Studio') ? 'selected' : '' ?>>Matériel Studio</option>
             </select>
-            <input type="text" placeholder="Rechercher LaBonneNote.fr" class="search-input">
+            <input type="text" name="search" placeholder="Rechercher LaBonneNote.fr" class="search-input" value="<?= isset($searchTerm) ? htmlspecialchars($searchTerm) : '' ?>">
             <button type="submit" class="search-button">
                 <img src="img/loupe.png" alt="Rechercher">
             </button>
-        </div>
+        </form>
         <nav class="main-nav">
             <ul>
-                <li><a href="/ServiceClient.php">Service Client</a></li>
-                <li><a href="/APropos.php">A Propos</a></li>
                 <?php
                 if (isset($_SESSION['Sgroupe12'])) {
                     echo '<li class="menu-item">
-                              <a href="#">Compte</a>
-                              <ul class="submenu">
-                              <li><a href="VotreCompte.php">Votre Compte</a></li>
-                              <li><a href="ListeDeSouhait.php">Liste de Souhait</a></li>
-                              <li><a href="Coupons.php">Coupons</a></li>
-                              <li><a href="Deconnexion.php">Déconnexion</a></li>
-                              </ul>
-                          </li>';
+                            <a href="#">
+                                <img src="img/compte.png" alt="Compte" style="height: 50px;">
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="VotreCompte.php">Votre Compte</a></li>
+                                <li><a href="ListeDeSouhait.php">Liste de Souhait</a></li>
+                                <li><a href="Coupons.php">Coupons</a></li>
+                                <li><a href="Deconnexion.php">Déconnexion</a></li>
+                            </ul>
+                        </li>';
                 } else {
                     echo '<li><a href="FormConnexion.php">Connexion</a></li>';
                 }
@@ -230,8 +246,8 @@ session_start();
             </ul>
         </nav>
         <div class="cart">
-            <a href="/panier">
-                <img src="img/panier.jpg" alt="Panier d'achat">
+            <a href="Panier.php">
+                <img src="img/panier.png" alt="Panier d'achat">
             </a>
         </div>
     </div>
