@@ -76,7 +76,7 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Java/sae_iot_la_bonne_note/src[Fichiers sources] 
 
-=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12[Docs (A INSERER)] 
+=> https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_IOT.adoc#1-packages-java[Docs] 
 
 => https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc#2-partie-java[Tests]
 
