@@ -299,7 +299,7 @@ La commande n'est pas encore développée
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
-^|All_G_C.2 ^|Cliquer sur "Par mail" ^|Votre application de mail va s'ouvrir et vous pourrez rédiger le mail ^|Aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur "Mail" ^|Votre application de mail va s'ouvrir et vous pourrez rédiger le mail ^|Aucune ^|OK
 
 5+|
 |====
@@ -312,7 +312,7 @@ La commande n'est pas encore développée
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
-^|All_G_C.2 ^|Cliquer sur "Par Téléphone" ^|Votre application pour appeler va s'ouvrir et vous pourrez appeler le service client ^|Aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur "Téléphone" ^|Votre application pour appeler va s'ouvrir et vous pourrez appeler le service client ^|Aucune ^|OK
 
 5+|
 |====
