@@ -264,3 +264,83 @@ Le CRUD du panier fonctionne correctement
 5+|Commentaire :
 La commande n'est pas encore développée
 |====
+
+=== Contacter le service client
+
+|====
+|Cas de test 4+|Test-02-04-01
+|Titre 4+|Se rendre sur la page "Service Client"
+|Objectif 4+|Vérifier que la page fonctionne bien
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+
+5+|
+|====
+
+|====
+|Cas de test 4+|Test-02-04-02
+|Titre 4+|Se rendre sur la page "Service Client" sans être connecté
+|Objectif 4+|Vérifier qu'il est impossible de se rendre sur la page du service client sans être connecté
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client sans vous être connecté ^|La page du service client s'affiche mais une alerte disant qu'il faut être connecté s'affiche, après avoir cliqué dessus, vous serez redirigé vers la page d'accueil index.php ^| Etre connecté au site et avoir cliqué sur le service client sans s'être connecté ^|OK
+
+5+|
+|====
+
+|====
+|Cas de test 4+|Test-02-04-03
+|Titre 4+|Contacter le service client par mail
+|Objectif 4+|Vérifier qu'il est de contacter le service client par mail
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+^|All_G_C.2 ^|Cliquer sur "Par mail" ^|Votre application de mail va s'ouvrir et vous pourrez rédiger le mail ^|Aucune ^|OK
+
+5+|
+|====
+
+|====
+|Cas de test 4+|Test-02-04-04
+|Titre 4+|Contacter le service client par téléphone
+|Objectif 4+|Vérifier qu'il est de contacter le service client par téléphone
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+^|All_G_C.2 ^|Cliquer sur "Par Téléphone" ^|Votre application pour appeler va s'ouvrir et vous pourrez appeler le service client ^|Aucune ^|OK
+
+5+|
+|====
+
+|====
+|Cas de test 4+|Test-02-04-05
+|Titre 4+|Contacter le service client par chat en direct
+|Objectif 4+|Vérifier qu'il est de contacter le service client par chat
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+^|All_G_C.2 ^|Cliquer sur "Chat" ^|Une fenêtre va s'afficher et vous pourrez rédiger votre message, cliquer sur envoyer pour envoyer le message ^|Le message ne doit pas être vide pour être envoyé ^|OK
+
+5+|
+|====
+
+
+|====
+|Cas de test 4+|Test-02-04-06
+|Titre 4+|Recevoir les réponses lors du chat en direct
+|Objectif 4+|Vérifier que les questions envoyées obtiennent bien des réponses
+
+5+|
+^| ID ^| Action ^| Comportement attendu ^| Pré-conditions ^| Résultat
+^| All_G_C.1 ^| Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connectez-vous à votre compte puis allez dans le menu "Service Client" ^| La page du service client s'affiche ^| Être connecté au site et avoir un compte ^| OK
+^| All_G_C.2 ^| Cliquer sur "Chat" ^| Une fenêtre va s'afficher et vous pourrez rédiger votre message, cliquer sur envoyer pour envoyer le message ^ | Le message ne doit pas être vide pour être envoyé ^| OK
+^| All_G_C.3 ^| Attendre le chargement (à droite du bouton "Envoyer") ^| Le message reçu va s'afficher ^| Ne pas avoir rafraîchi la page pendant le chargement ^| OK
+
+5+|
+|====
