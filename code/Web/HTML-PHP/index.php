@@ -76,6 +76,9 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
     // Récupérez les produits filtrés
     $products = getProduitFiltre($conn, $recherche, $categorie,$trie);
 }
+// Récupérer la liste de souhaits du cookie
+$wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
+
 ?>
 
 <!DOCTYPE html>
@@ -211,7 +214,27 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
     min-width: 500px; /* Ou toute autre largeur appropriée */
 }
 
+.wishlist-button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 5px; /* Ajustez au besoin */
+        display: inline-block; /* Assurez-vous que le bouton ne prend pas toute la largeur */
+    }
 
+    .wishlist-button img {
+        width: 24px; /* Ajustez la taille de l'icône ici */
+        height: auto; /* Conserve les proportions de l'image */
+    }
+
+    .product-link {
+    color: inherit; /* Utilise la couleur de texte actuelle */
+    text-decoration: none; /* Supprime le soulignement */
+}
+
+.product-link:hover {
+    text-decoration: none; /* Supprime le soulignement au survol */
+}
 
 
     </style>
@@ -224,13 +247,24 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
     <h2>Les plus vendus</h2>
     <div class="product-carousel">
         <?php foreach ($bestSellers as $produit): ?>
-            <div class="product">
-                <img src="img/youtube.png" alt="<?= $produit['nomProduit'] ?>">
-                <h3><?= $produit['nomProduit'] ?></h3>
-                <p><?= $produit['prixVente'] ?> €</p>
-                <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
 
-            </div>
+                <div class="product">
+                    <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
+                        <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+                        <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
+                    </a>
+                    <p><?= $produit['prixVente'] ?> €</p>
+                    <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
+                    <button class="wishlist-button" data-numproduit="<?= $produit['numProduit'] ?>">
+                        <?php if (in_array($produit['numProduit'], $wishlist)): ?>
+                            <img src="img/coeur-rempli.png" alt="Dans la liste de souhaits">
+                        <?php else: ?>
+                            <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
+                        <?php endif; ?>
+                    </button>
+
+                </div>
+
         <?php endforeach; ?>
     </div>
 </section>
@@ -239,13 +273,24 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
     <h2>Promotions</h2>
    <div class="product-carousel">
         <?php foreach ($promotions as $produit): ?>
+
             <div class="product">
-                <img src="img/youtube.png" alt="<?= $produit['nomProduit'] ?>">
-                <h3><?= $produit['nomProduit'] ?></h3>
+                <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
+                    <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+                    <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
+                </a>
                 <p><?= $produit['prixVente'] ?> €</p>
                 <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
+                <button class="wishlist-button" data-numproduit="<?= $produit['numProduit'] ?>">
+                    <?php if (in_array($produit['numProduit'], $wishlist)): ?>
+                        <img src="img/coeur-rempli.png" alt="Dans la liste de souhaits">
+                    <?php else: ?>
+                        <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
+                    <?php endif; ?>
+                </button>
 
             </div>
+
         <?php endforeach; ?>
     </div>
 </section>
@@ -254,13 +299,24 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
     <h2>Nouveautés</h2>
     <div class="product-carousel">
         <?php foreach ($newArrivals as $produit): ?>
+
             <div class="product">
-                <img src="img/youtube.png" alt="<?= $produit['nomProduit'] ?>">
-                <h3><?= $produit['nomProduit'] ?></h3>
+                <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
+                    <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+                    <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
+                </a>
                 <p><?= $produit['prixVente'] ?> €</p>
                 <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
+                <button class="wishlist-button" data-numproduit="<?= $produit['numProduit'] ?>">
+                    <?php if (in_array($produit['numProduit'], $wishlist)): ?>
+                        <img src="img/coeur-rempli.png" alt="Dans la liste de souhaits">
+                    <?php else: ?>
+                        <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
+                    <?php endif; ?>
+                </button>
 
             </div>
+
         <?php endforeach; ?>
     </div>
 </section>
@@ -280,12 +336,24 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
     <h2>Tous nos produits</h2>
     <div class="products-grid">
         <?php foreach ($products as $produit): ?>
+
             <div class="product-item">
-                <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
-                <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
+                <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
+                    <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+                    <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
+                </a>
                 <p><?= htmlspecialchars($produit['prixVente']) ?> €</p>
                 <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
+                <button class="wishlist-button" data-numproduit="<?= $produit['numProduit'] ?>">
+                    <?php if (in_array($produit['numProduit'], $wishlist)): ?>
+                        <img src="img/coeur-rempli.png" alt="Dans la liste de souhaits">
+                    <?php else: ?>
+                        <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
+                    <?php endif; ?>
+                </button>
+
             </div>
+
         <?php endforeach; ?>
     </div>
 </section>
@@ -293,8 +361,8 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
 <div id="help-circle">
     <span>?</span>
     <div class="circle-content">
-        <a href="lien1.html" class="circle-link" style="--angle: 0;"><img src="img/apropos.png" alt="À propos"></a>
-        <a href="lien2.html" class="circle-link" style="--angle: 90;"><img src="img/service.png" alt="Service"></a>
+        <a href="aPropos.php" class="circle-link" style="--angle: 0;"><img src="img/apropos.png" alt="À propos"></a>
+        <a href="ServiceClient.php" class="circle-link" style="--angle: 90;"><img src="img/service.png" alt="Service"></a>
     </div>
 </div>
 
@@ -400,7 +468,45 @@ $(document).ready(function() {
 
 
 
+$('.wishlist-button').on('click', function() {
+    var numProduit = $(this).data('numproduit');
+    var wishlist = JSON.parse(getCookie('wishlist') || '[]');
+    var index = wishlist.indexOf(numProduit);
 
+    if (index !== -1) {
+        // Si le produit est déjà dans la wishlist, on le retire
+        wishlist.splice(index, 1);
+        $(this).find('img').attr('src', 'img/coeur.png'); // Changez l'icône en cœur vide
+    } else {
+        // Sinon, on l'ajoute à la wishlist
+        wishlist.push(numProduit);
+        $(this).find('img').attr('src', 'img/coeur-rempli.png'); // Changez l'icône en cœur rempli
+    }
+
+    setCookie('wishlist', JSON.stringify(wishlist), 30); // Met à jour le cookie
+});
+
+
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
 
 
 
@@ -421,6 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 
 </body>
 </html>
