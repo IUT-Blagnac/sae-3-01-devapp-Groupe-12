@@ -256,13 +256,28 @@ Le CRUD du panier fonctionne correctement
 
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_C.1 ^|Cliquer sur le bouton "Commander" ^|Le formulaire des informations de livraison de la commande s'affiche ^| Etre connecté au site et être sur la page du panier ^|En Cours
-^|All_G_C.2 ^|Rentrer les informations de livraison ^|Le formulaire des informations de paiement de la commande s'affiche^| Etre connecté au site ^|En Cours
-^|All_G_C.3 ^|Rentrer les informations de paiement ^|le paiement s'effectue^| Etre connecté au site ^|En Cours
-^|All_G_C.4 ^|L'utilisateur reçoit la commande ^|Le formulaire d'avis s'affiche^| Etre connecté au site ^|En Cours
+^|All_G_C.1 ^|Cliquer sur le bouton "Commander" ^|Le formulaire des informations de livraison de la commande s'affiche ^| Etre connecté au site et être sur la page du panier, avoir au moins un produit dedans ^|OK
+^|All_G_C.2 ^|Rentrer les informations de livraison ^|Le formulaire des informations de paiement de la commande s'affiche^| Etre connecté au site et avoir au moins un produit dans le panier ^|OK
+^|All_G_C.3 ^|Rentrer les informations de paiement ^|le paiement s'effectue^| Etre connecté au site et avoir au moins un produit dans le panier ^|OK
+^|All_G_C.4 ^|Confirmer la commande sur le récapitulatif ^|Une alerte de confirmation s'affiche^| Etre connecté au site et avoir au moins un produit dans le panier ^|OK
 
 5+|Commentaire :
-La commande n'est pas encore développée
+La commande fonctionne parfaitement.
+|====
+
+|====
+|Cas de test 4+|Test-02-03-03
+|Titre 4+|Commander un produit hors stock
+|Objectif 4+|Vérifier qu'il n'est pas possible de commander un produit hors stock
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Ajouter un produit au panier puis rendez vous dans le panier ^|La page du panier s'affiche^| Etre connecté au site ^|OK
+^|All_G_C.2 ^|Modifier sa quantité jusqu'à 199 ^|La quantité du produit doit être modifié ^| Etre connecté au site et être sur la page du panier, avoir au moins un produit dedans ^|OK
+^|All_G_C.3 ^|Cliquer sur le bouton "Commander" ^|Une alerte indiquant les produits dont les quantitées commandés sont supérieurs aux quantitées en stock va s'afficher^| Etre connecté au site et avoir au moins un produit dans le panier avec une quantitée supérieur à celle en stock^|OK
+
+5+|Commentaire :
+Une alerte indiquant les différents produits hors stock s'affiche bien.
 |====
 
 === Contacter le service client
