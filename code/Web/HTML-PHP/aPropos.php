@@ -103,8 +103,8 @@ Au-delà des transactions, notre mission consiste à tisser des liens durables a
                 <img src="img/lilian.jpg" alt="Lilian">
                 <div>
                     <h2>Lilian</h2>
-                    <p>Directeur Logistique
-                    orchestre avec précision le flux des opérations pour assurer une chaîne d'approvisionnement efficace et fluide.
+                    <p>Directeur Logistique </br>
+                    <em>Orchestre avec précision le flux des opérations pour assurer une chaîne d'approvisionnement efficace et fluide.</em> 
                     </p>
                 </div>
             </td>
@@ -113,7 +113,9 @@ Au-delà des transactions, notre mission consiste à tisser des liens durables a
             <img src="img/alexandre.jpg" alt="Alexandre">
                 <div>
                     <h2>Alexandre </h2>
-                    <p>Directeur Commercial</p>
+                    <p>Directeur Commercial </br>
+                    <em>Guide habilement l'équipe vers le succès commercial en développant des stratégies innovantes et en cultivant des relations durables avec les clients.</em> 
+                    </p>
                 </div>
             </td>
         </tr>
@@ -123,7 +125,9 @@ Au-delà des transactions, notre mission consiste à tisser des liens durables a
             <img src="img/andriy.jpg" alt="Andriy">
                 <div>
                     <h2>Andriy </h2>
-                    <p>Directeur Financier</p>
+                    <p>Directeur Financier </br>
+                    <em>Excelle dans la gestion financière en assurant la stabilité et la croissance de l'entreprise grâce à une expertise pointue et à des décisions éclairées.</em> 
+                    </p>
                 </div>
             </td>
 
@@ -131,7 +135,9 @@ Au-delà des transactions, notre mission consiste à tisser des liens durables a
                 <img src="img/louis.jpg" alt="Louis">
                     <div>
                         <h2>Louis </h2>
-                        <p>Directeur des Ressources Humaines</p>
+                        <p>Directeur des Ressources Humaines </br>
+                        <em>Cultive un environnement professionnel épanouissant en mettant en valeur le potentiel des talents, favorisant le bien-être des employés et promouvant une culture d'entreprise solide.</em> 
+                        </p>
                     </div>
             </td>
         </tr>

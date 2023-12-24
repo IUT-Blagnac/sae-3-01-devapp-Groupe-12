@@ -100,6 +100,18 @@ foreach ($avis as $unAvis) {
     justify-content: space-around;
 }
 
+.shareOption {
+        display: inline-block; 
+        margin-right: 10px; 
+}
+
+.shareOption img {
+        width: 20px; 
+        height: 20px; 
+        margin-right: 5px; 
+        vertical-align: left; 
+    }
+
 /* Styles pour les avis */
 .product-reviews {
     max-width: 800px;
@@ -151,9 +163,9 @@ foreach ($avis as $unAvis) {
         <img class="share-icon" src="img/img_share.png" alt="Partager ce produit">
     </button>
         <div id="shareOptions" style="display: none;">
-            <a href="#" class="shareOption" data-network="facebook">Facebook</a>
-            <a href="#" class="shareOption" data-network="twitter">Twitter</a>
-            <a href="#" class="shareOption" data-network="instagram">Instagram</a>
+            <a href="#" class="shareOption" data-network="facebook"><img src="img/facebook.png" alt="Facebook"></a>
+            <a href="#" class="shareOption" data-network="twitter"><img src="img/twitter.png" alt="Twitter"></a>
+            <a href="#" class="shareOption" data-network="instagram"><img src="img/instagram.png" alt="Instagram"></a>
         </div>
     </div>
 
