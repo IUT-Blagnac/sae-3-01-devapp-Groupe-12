@@ -89,6 +89,15 @@ foreach ($avis as $unAvis) {
 .share-icon {
     width: 24px; 
     height: 24px; 
+    margin: 0px !important;
+}
+
+.bouton-share{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 /* Styles pour les avis */
@@ -138,7 +147,7 @@ foreach ($avis as $unAvis) {
 
     <!-- Boutons de partage sur les réseaux sociaux -->
     <div class="product-share">
-    <button id="shareButton">
+    <button id="shareButton" class="bouton-share">
         <img class="share-icon" src="img/img_share.png" alt="Partager ce produit">
     </button>
         <div id="shareOptions" style="display: none;">

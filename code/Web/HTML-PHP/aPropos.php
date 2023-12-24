@@ -9,10 +9,11 @@ $selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'Tous nos pro
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À Propos de Nous</title>
     <link rel="stylesheet" href="Css/CSS_aPropos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins|Georgia&display=swap">  
 </head>
 <body>
 <?php include 'include/header.php'; ?>
-
+    <div class="grande-box">
     <h1>Histoire de l'entreprise</h1>
 
     <p>Bienvenue chez laBonneNote !</p>
@@ -41,33 +42,60 @@ $selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'Tous nos pro
 
     <h2>Notre Mission</h2>
 
-    <div class="Passion"><p>Les Missions de La Bonne Note : Inspirez votre Passion Musicale</br>
+    <div><p><h3>Les Missions de La Bonne Note : Inspirez votre Passion Musicale</h3></br>
 
 Bienvenue chez La Bonne Note, votre complice musical depuis 2005 ! Notre mission est de cultiver et de partager la passion de la musique en proposant une expérience unique à chaque mélomane,</br> amateur ou professionnel.</br> 
 
-<img src="img/passion.jpg" alt="passion">
 </div>
-Élargir l'Harmonie Musicale</br>
-
+<container class="harmonie">
+    <div>
+        <h3>Élargir l'Harmonie Musicale</br></h3>
+        </br>
 Au cœur de notre mission, nous aspirons à élargir l'horizon musical de chacun. Que vous soyez un virtuose accompli ou un novice curieux, La Bonne Note s'engage à vous accompagner dans votre parcours musical. Notre boutique physique à Toulouse est le point de départ, et notre site d'e-commerce en cours de création sera la porte d'entrée vers une diversité d'instruments et de ressources éducatives, accessibles à tous, partout en France.</br>
+    </div>
+    <div class="harmonieimg">
+        <img src="img/harmonie_img.png" alt="harmonie">
+    </div>
+</container>
 
-Inspirer la Créativité</br>
-
+<container class="creativite">
+    <div class="creativiteimg">
+        <img src="img/creativite_img.png" alt="creativite">
+    </div>
+    <div>
+        <h3>Inspirer la Créativité</br></h3>
+    
 Nous croyons que la musique est une forme d'expression universelle. Notre mission est d'inspirer la créativité musicale en mettant à votre disposition une gamme complète d'instruments de qualité et de livres d'apprentissage soigneusement sélectionnés. La Bonne Note veut être le catalyseur de vos inspirations musicales, qu'elles soient naissantes ou bien établies.</br>
+    </div>
+</container>
 
-Favoriser l'Accessibilité</br>
-
+<container class="accessibilite">
+    <div>
+        <h3>Favoriser l'Accessibilité</br></h3>
+    
 La musique transcende les frontières, et chez La Bonne Note, nous souhaitons que notre passion soit accessible à tous, peu importe où vous vous trouvez. Notre futur site d'e-commerce a pour mission de rendre nos produits et conseils disponibles à l'échelle nationale. Plus qu'une boutique en ligne, il sera une plateforme facilitant votre exploration musicale et simplifiant l'acquisition de vos instruments préférés.</br>
+    </div>
+    <div class="accessibiliteimg">
+        <img src="img/accessibilite_img.png" alt="accessibilite">
+    </div>
+</container>
 
-Établir des Connexions Durables</br>
-
+<container class="durable">
+    <div class="durableimg">
+        <img src="img/durable_img.png" alt="durable">
+    </div>
+    <div>
+        <h3>Établir des Connexions Durables</br></h3>
+    
 Au-delà des transactions, notre mission consiste à tisser des liens durables avec notre clientèle. La Bonne Note se veut être bien plus qu'un fournisseur d'instruments ; nous sommes une communauté passionnée de mélomanes. À travers nos services, conseils et interactions, nous cherchons à créer des expériences musicales inoubliables et à accompagner nos clients tout au long de leur voyage musical.</br>
-
+    </div>
+    
+</container>
     </p>
 
     <h2>Notre Équipe</h2>
 
-    <p>La Bonne Note est fondée et dirigée par 4 passionnés de musique : VIGNAL Alexandre, DIDENKO Andriy, MONESTIER Lilian et PENET Louis.</p>
+    <p>La Bonne Note a été fondée et est dirigée par 4 passionnés de musique : VIGNAL Alexandre, DIDENKO Andriy, MONESTIER Lilian et PENET Louis.</p>
     
     <table class="team-table">
         <tr>
@@ -75,7 +103,9 @@ Au-delà des transactions, notre mission consiste à tisser des liens durables a
                 <img src="img/lilian.jpg" alt="Lilian">
                 <div>
                     <h2>Lilian</h2>
-                    <p>Directeur Logistique</p>
+                    <p>Directeur Logistique
+                    orchestre avec précision le flux des opérations pour assurer une chaîne d'approvisionnement efficace et fluide.
+                    </p>
                 </div>
             </td>
 
@@ -111,8 +141,10 @@ Au-delà des transactions, notre mission consiste à tisser des liens durables a
 
     <h2>Contact</h2>
 
-    <p>N'hésitez pas à nous contacter si vous avez des questions ou des commentaires. Vous pouvez nous joindre à l'adresse email@example.com.</p>
+    <p>N'hésitez pas à nous contacter si vous avez des questions ou des commentaires. </br> 
+    Vous pouvez nous joindre à l'adresse LaBonneNote@gmail.com.</p>
 
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         //Traitement de la recherche 
