@@ -42,7 +42,6 @@ public class Configuration {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Configuration");
-            primaryStage.setResizable(false);
 
             // Récupération du contrôleur associé au fichier FXML chargé
             this.controller = loader.getController();

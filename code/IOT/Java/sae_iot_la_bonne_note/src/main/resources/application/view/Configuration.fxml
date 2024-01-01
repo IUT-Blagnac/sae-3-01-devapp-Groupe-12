@@ -22,26 +22,28 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="768.0" minWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ConfigurationController">
    <center>
-      <GridPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+      <GridPane maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="BOTTOM" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <HBox maxHeight="70.0" maxWidth="1024.0" minHeight="70.0" minWidth="1024.0" prefHeight="70.0" prefWidth="1024.0" GridPane.rowIndex="1">
+            <HBox GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
                   <Label maxWidth="63.0" minWidth="63.0" prefHeight="50.0" prefWidth="63.0" text="Host :">
                      <font>
@@ -51,14 +53,22 @@
                         <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtHost" maxHeight="50.0" maxWidth="465.0" minHeight="50.0" minWidth="417.0" prefHeight="50.0" prefWidth="417.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtHost" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="50.0" prefWidth="350.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
+                  <ImageView fx:id="imgUndefinedHost" fitHeight="45.0" fitWidth="45.0" visible="false">
+                     <image>
+                        <Image url="@../images/undefined_icon.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="12.5" />
+                     </HBox.margin>
+                  </ImageView>
                   <Label maxWidth="58.0" minWidth="58.0" prefHeight="50.0" prefWidth="58.0" text="Port :">
                      <font>
                         <Font name="System Bold" size="22.0" />
@@ -67,15 +77,23 @@
                         <Insets bottom="10.0" right="5.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtPort" maxHeight="50.0" maxWidth="110.0" minHeight="50.0" minWidth="94.0" prefHeight="50.0" prefWidth="94.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtPort" maxHeight="50.0" maxWidth="180.0" minHeight="50.0" prefHeight="50.0" prefWidth="120.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="buttTestConnection" contentDisplay="RIGHT" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#doConnectionTest" prefHeight="50.0" prefWidth="315.0" stylesheets="@../application.css" text="Tester la connexion">
+                  <ImageView fx:id="imgUndefinedPort" fitHeight="45.0" fitWidth="45.0" visible="false">
+                     <image>
+                        <Image url="@../images/undefined_icon.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="12.5" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Button fx:id="buttTestConnection" contentDisplay="RIGHT" maxHeight="50.0" maxWidth="280.0" minHeight="50.0" minWidth="280.0" mnemonicParsing="false" onAction="#doConnectionTest" prefHeight="50.0" prefWidth="280.0" stylesheets="@../application.css" text="Tester la connexion">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -105,9 +123,9 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                <children>
-                  <Label contentDisplay="RIGHT" prefHeight="50.0" prefWidth="85.0" text="Topic :">
+                  <Label contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="85.0" text="Topic :">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -123,7 +141,7 @@
                         <Insets bottom="15.0" top="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <TextField fx:id="txtTopic" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="886.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtTopic" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="50.0" prefWidth="886.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -133,7 +151,7 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox maxHeight="70.0" maxWidth="1024.0" minHeight="70.0" minWidth="1024.0" prefHeight="70.0" prefWidth="1024.0" GridPane.rowIndex="3">
+            <HBox GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
                   <Label layoutX="20.0" layoutY="20.0" prefHeight="45.0" prefWidth="200.0" text="Nom des fichiers :">
                      <font>
@@ -151,7 +169,7 @@
                         <Insets bottom="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtAlertFile" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtAlertFile" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="50.0" prefWidth="150.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -167,7 +185,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtDataFile" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtDataFile" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="50.0" prefWidth="150.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -183,7 +201,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtLogsFile" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtLogsFile" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" prefHeight="50.0" prefWidth="150.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -193,7 +211,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="97.0" prefWidth="1065.0" text="Choix des données          :" GridPane.rowIndex="4">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Choix des données          :" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
@@ -205,102 +223,85 @@
                   </ImageView>
                </graphic>
             </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+            <HBox GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <CheckBox fx:id="cbTemperature" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" styleClass="checkBox" stylesheets="@../application.css">
+                  <Separator maxWidth="1.7976931348623157E308" prefWidth="200.0" visible="false" HBox.hgrow="ALWAYS" />
+                  <CheckBox fx:id="cbTemperature" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="120.0" right="5.0" top="10.0" />
+                        <Insets top="15.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <Label prefHeight="70.0" prefWidth="140.0" text="Température">
+                  <Label maxWidth="1.7976931348623157E308" text="Température" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <CheckBox fx:id="cbHumidity" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="0.0" styleClass="checkBox" stylesheets="@../application.css">
+                  <CheckBox fx:id="cbHumidity" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="80.0" right="5.0" top="10.0" />
+                        <Insets left="10.0" top="15.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <Label layoutX="59.0" layoutY="10.0" prefHeight="70.0" prefWidth="101.0" text="Humidité">
+                  <Label layoutX="59.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Humidité" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <CheckBox fx:id="cbActivity" layoutX="218.0" layoutY="10.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="0.0" styleClass="checkBox" stylesheets="@../application.css">
+                  <CheckBox fx:id="cbActivity" layoutX="218.0" layoutY="10.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="80.0" right="5.0" top="10.0" />
+                        <Insets left="10.0" top="15.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <Label layoutX="247.0" layoutY="10.0" prefHeight="70.0" prefWidth="85.0" text="Activité">
+                  <Label layoutX="247.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Activité" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <CheckBox fx:id="cbCo2" layoutX="406.0" layoutY="10.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="0.0" styleClass="checkBox" stylesheets="@../application.css">
+                  <CheckBox fx:id="cbCo2" layoutX="406.0" layoutY="10.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="80.0" right="5.0" top="10.0" />
+                        <Insets left="10.0" top="15.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <Label layoutX="435.0" layoutY="10.0" prefHeight="70.0" prefWidth="41.0" text="Co2">
+                  <Label layoutX="435.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Co2" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </HBox.margin>
                   </Label>
+                  <Separator maxWidth="1.7976931348623157E308" prefWidth="200.0" visible="false" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+            <HBox GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <Label contentDisplay="RIGHT" prefHeight="50.0" prefWidth="387.0" text="Fréquence d'affichage">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" translateX="5.0">
-                           <image>
-                              <Image url="@../images/frequency_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <Separator prefHeight="48.0" prefWidth="363.0" visible="false" HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="cbTimeUnit" maxWidth="1.7976931348623157E308" prefWidth="200.0" styleClass="choiceBox" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="175.0" top="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <ChoiceBox fx:id="cbTimeUnit" maxHeight="50.0" minHeight="30.0" prefHeight="50.0" prefWidth="145.0" styleClass="choiceBox" stylesheets="@../application.css">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <Label contentDisplay="CENTER" layoutX="20.0" layoutY="20.0" prefHeight="83.0" prefWidth="10.0" text=":">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtFrequency" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" prefHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtFrequency" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -308,9 +309,10 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
+                  <Separator layoutX="10.0" layoutY="10.0" prefHeight="53.0" prefWidth="309.0" visible="false" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="97.0" prefWidth="1065.0" text="Seuils d'alertes        :" GridPane.rowIndex="7">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Seuils d'alertes        :" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="9" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
@@ -322,17 +324,17 @@
                   </ImageView>
                </graphic>
             </Label>
-            <HBox maxHeight="70.0" maxWidth="1024.0" minHeight="70.0" minWidth="1024.0" prefHeight="70.0" prefWidth="1024.0" GridPane.rowIndex="8">
+            <HBox minHeight="70.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
                   <Label prefHeight="50.0" prefWidth="146.0" text="Température :">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtMaxTemperature" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" prefHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtMaxTemperature" maxWidth="1.7976931348623157E308" minHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -348,7 +350,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtMaxHumidity" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" prefHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtMaxHumidity" maxWidth="1.7976931348623157E308" minHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -364,7 +366,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtMaxActivity" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" prefHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtMaxActivity" maxWidth="1.7976931348623157E308" minHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -380,7 +382,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtMaxCo2" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" prefHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css">
+                  <TextField fx:id="txtMaxCo2" maxWidth="1.7976931348623157E308" minHeight="50.0" prefWidth="100.0" styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -390,9 +392,10 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox maxHeight="70.0" maxWidth="1024.0" minHeight="70.0" minWidth="1024.0" prefHeight="70.0" prefWidth="1024.0" GridPane.rowIndex="9">
+            <HBox maxHeight="70.0" minHeight="70.0" minWidth="1024.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="11" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="buttReset" contentDisplay="RIGHT" maxHeight="50.0" maxWidth="220.0" minHeight="50.0" minWidth="220.0" mnemonicParsing="false" onAction="#doReset" prefHeight="50.0" prefWidth="220.0" stylesheets="@../application.css" text="Réinitialiser">
+                  <Separator maxWidth="1.7976931348623157E308" prefHeight="68.0" prefWidth="150.0" visible="false" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="buttReset" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#doReset" stylesheets="@../application.css" text="Réinitialiser" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -402,7 +405,7 @@
                         <String fx:value="mainButtonOnClick" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="120.0" right="10.0" top="7.5" />
+                        <Insets bottom="10.0" />
                      </HBox.margin>
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" translateX="5.0">
@@ -412,9 +415,10 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="buttSave" contentDisplay="RIGHT" maxHeight="50.0" maxWidth="240.0" minHeight="50.0" minWidth="240.0" mnemonicParsing="false" onAction="#doSave" prefHeight="50.0" prefWidth="240.0" stylesheets="@../application.css" text="Sauvegarder">
+                  <Separator layoutX="754.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="68.0" prefWidth="150.0" visible="false" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="buttSave" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#doSave" stylesheets="@../application.css" text="Sauvegarder" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="25.0" />
                      </font>
                      <styleClass>
                         <String fx:value="confirmButton" />
@@ -422,7 +426,7 @@
                         <String fx:value="mainButtonOnClick" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="350.0" right="10.0" top="7.5" />
+                        <Insets bottom="10.0" />
                      </HBox.margin>
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" translateX="5.0">
@@ -432,11 +436,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Separator layoutX="359.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="68.0" prefWidth="150.0" visible="false" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox maxHeight="80.0" minHeight="80.0" prefHeight="80.0" style="-fx-border-color: black; -fx-border-width: 0 0 6 0;">
+            <HBox style="-fx-border-color: black; -fx-border-width: 0 0 6 0;">
                <children>
-                  <Button fx:id="buttMenu" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="160.0" minHeight="55.0" minWidth="141.0" mnemonicParsing="false" onAction="#doMenu" opacity="0.95" prefHeight="55.0" prefWidth="141.0" stylesheets="@../application.css" text="Menu">
+                  <Button fx:id="buttMenu" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" onAction="#doMenu" opacity="0.95" prefHeight="55.0" prefWidth="142.0" stylesheets="@../application.css" text="Menu" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -453,17 +458,17 @@
                         <String fx:value="mainButtonOnClick" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="28.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" onAction="#doWharehouseMonitor" opacity="0.95" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Entrepôt" textAlignment="CENTER">
+                  <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" onAction="#doWharehouseMonitor" opacity="0.95" prefHeight="55.0" stylesheets="@../application.css" text="Temps Réel" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" translateX="5.0">
+                        <ImageView fitHeight="40.0" fitWidth="40.0" translateX="7.5">
                            <image>
-                              <Image url="@../images/entrepot_logo.png" />
+                              <Image url="@../images/connection_fail.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -473,10 +478,10 @@
                         <String fx:value="mainButtonOnHover" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" onAction="#doCheckHistory" opacity="0.95" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Historique" textAlignment="CENTER">
+                  <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" onAction="#doCheckHistory" opacity="0.95" prefHeight="55.0" stylesheets="@../application.css" text="Historique" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -493,10 +498,10 @@
                         <String fx:value="mainButtonOnHover" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttConfiguration" alignment="CENTER" contentDisplay="RIGHT" disable="true" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" opacity="0.5" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Configuration" textAlignment="CENTER">
+                  <Button fx:id="buttConfiguration" alignment="CENTER" contentDisplay="RIGHT" disable="true" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" opacity="0.5" prefHeight="55.0" stylesheets="@../application.css" text="Configuration" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -513,27 +518,23 @@
                         <String fx:value="mainButtonOnHover" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                </children>
             </HBox>
-            <ImageView fx:id="imgUndefinedHost" fitHeight="45.0" fitWidth="45.0" visible="false">
-               <image>
-                  <Image url="@../images/undefined_icon.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets left="451.0" top="160.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fx:id="imgUndefinedPort" fitHeight="45.0" fitWidth="45.0" visible="false">
-               <image>
-                  <Image url="@../images/undefined_icon.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets left="618.0" top="160.0" />
-               </GridPane.margin>
-            </ImageView>
+            <Label alignment="CENTER" contentDisplay="RIGHT" text="Fréquence d'affichage        :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" translateX="-65.0">
+                     <image>
+                        <Image url="@../images/frequency_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
          </children>
       </GridPane>
    </center>

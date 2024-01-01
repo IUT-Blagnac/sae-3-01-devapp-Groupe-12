@@ -1,7 +1,5 @@
 package application.tools;
 
-import org.controlsfx.control.Notifications;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -10,23 +8,38 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
-public class ListViewUtilies {
+/**
+ * Classe utilitaire pour la configuration des cellules dans une ListView.
+ */
+public class ListViewUtilities {
 
     private static boolean isTemperatureSelected;
     private static boolean isHumiditySelected;
     private static boolean isActivitySelected;
     private static boolean isCo2Selected;
 
+    /**
+     * Met à jour les éléments sélectionnés pour l'affichage dans les cellules de la
+     * ListView.
+     *
+     * @param _temperature Indique si la température est sélectionnée.
+     * @param _humidity    Indique si l'humidité est sélectionnée.
+     * @param _activity    Indique si l'activité est sélectionnée.
+     * @param co2          Indique si le CO2 est sélectionné.
+     */
     public static void updateSelectedElements(boolean _temperature, boolean _humidity, boolean _activity, boolean co2) {
-        ListViewUtilies.isTemperatureSelected = _temperature;
-        ListViewUtilies.isHumiditySelected = _humidity;
-        ListViewUtilies.isActivitySelected = _activity;
-        ListViewUtilies.isCo2Selected = co2;
+        ListViewUtilities.isTemperatureSelected = _temperature;
+        ListViewUtilities.isHumiditySelected = _humidity;
+        ListViewUtilities.isActivitySelected = _activity;
+        ListViewUtilities.isCo2Selected = co2;
     }
 
+    /**
+     * Configure les cellules pour afficher des alertes dans une ListView.
+     *
+     * @param _listView ListView à configurer pour afficher des alertes.
+     */
     public static void setCellForAlert(ListView<String> _listView) {
         _listView.setCellFactory(param -> new ListCell<String>() {
             @Override
@@ -93,6 +106,11 @@ public class ListViewUtilies {
         });
     }
 
+    /**
+     * Configure les cellules pour afficher des données dans une ListView.
+     *
+     * @param _listView ListView à configurer pour afficher des données.
+     */
     public static void setCellForData(ListView<String> _listView) {
         _listView.setCellFactory(param -> new ListCell<String>() {
             @Override
@@ -140,6 +158,12 @@ public class ListViewUtilies {
         });
     }
 
+    /**
+     * Vérifie si un élément spécifique est sélectionné pour l'affichage.
+     *
+     * @param element Élément à vérifier.
+     * @return Vrai si l'élément est sélectionné pour l'affichage, sinon faux.
+     */
     private static boolean isElementSelected(String element) {
         if (element.contains("température")) {
             return isTemperatureSelected;

@@ -39,9 +39,9 @@ public class WharehouseMonitor {
             // Création de la scène et configuration du stage
             Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
             scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+
             primaryStage.setScene(scene);
             primaryStage.setTitle("Surveillance de l'entrepôt");
-            primaryStage.setResizable(false);
 
             // Récupération du contrôleur associé au fichier FXML chargé
             this.controller = loader.getController();

@@ -1,5 +1,6 @@
 package application.tools;
 
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -77,5 +78,20 @@ public class Animations {
     public static void stopLoadingAnimation(ImageView _img, RotateTransition _loadingAnimation) {
         _img.setVisible(false);
         _loadingAnimation.stop();
+    }
+
+    /**
+     * Démarre une animation de transition en fondu pour l'image spécifiée.
+     *
+     * @param _img L'imageView pour laquelle démarrer l'animation.
+     */
+    public static void startConnectedAnimation(ImageView _img) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), _img);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.3);
+        fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.setAutoReverse(true);
+
+        fadeTransition.play();
     }
 }

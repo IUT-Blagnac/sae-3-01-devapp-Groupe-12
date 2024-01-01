@@ -1,5 +1,8 @@
 package application.tools;
 
+/**
+ * Classe utilitaire pour la conversion des chaînes en nombres.
+ */
 public class NumbersUtilities {
     /**
      * Convertit une chaîne en entier.
@@ -29,7 +32,7 @@ public class NumbersUtilities {
             Double val = Double.parseDouble(_string);
             return val;
         } catch (Exception e) {
-            return 0.0;
+            return null;
         }
     }
 }

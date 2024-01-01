@@ -16,7 +16,7 @@ import application.tools.AlertUtilities;
 import application.tools.Animations;
 import application.tools.MQTTConnection;
 import application.tools.NumbersUtilities;
-import application.tools.PythonProcessUtilities;
+import application.tools.PythonAndThreadManagement;
 import application.tools.Style;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
@@ -47,7 +47,7 @@ public class ConfigurationController {
     private Stage primaryStage;
 
     // Chemin vers le fichier de configuration
-    private final String confFilePath = "code\\IOT\\Python\\config.ini";
+    private final String confFilePath = "config.ini";
 
     // Propriétés pour stocker des configurations
     private Properties properties = new Properties();
@@ -183,7 +183,8 @@ public class ConfigurationController {
         configuration = _configuration;
         primaryStage = _primaryStage;
 
-        PythonProcessUtilities.stopPythonThread();
+        // Arrêt du script python
+        PythonAndThreadManagement.stopPythonThread();
 
         // Initialise les éléments visuels de l'IHM
         initViewElements();
@@ -255,7 +256,7 @@ public class ConfigurationController {
     }
 
     /**
-     * Affiche l'historique des journaux en lançant la fenêtre dédiée.
+     * Affiche l'historique des logs en lançant la fenêtre dédiée.
      * Cette méthode réalise une animation de transition vers l'historique des
      * journaux en créant une nouvelle fenêtre LogHistory.
      */
@@ -329,7 +330,8 @@ public class ConfigurationController {
 
     /**
      * Valide et sauvegarde les nouvelles valeurs spécifiées dans l'interface
-     * utilisateur vers le fichier de configuration.
+     * utilisateur vers le fichier de configuration (crée le fichier s'il n'existe
+     * pas).
      * Affiche une alerte en cas de succès ou d'échec de l'opération.
      */
     @FXML
@@ -397,10 +399,18 @@ public class ConfigurationController {
             writer.write("typeTemps=" + tpTemps + "\n");
             writer.write("frequence_affichage=" + frequency + "\n");
             writer.write("[ALERT]\n");
-            writer.write("seuil_Temperature=" + maxTemperature + "\n");
-            writer.write("seuil_Humidity=" + maxHumidity + "\n");
-            writer.write("seuil_CO2=" + maxCo2 + "\n");
-            writer.write("seuil_Activity=" + maxActivity + "\n");
+            if (maxTemperature != null) {
+                writer.write("seuil_Temperature=" + maxTemperature + "\n");
+            }
+            if (maxHumidity != null) {
+                writer.write("seuil_Humidity=" + maxHumidity + "\n");
+            }
+            if (maxCo2 != null) {
+                writer.write("seuil_CO2=" + maxCo2 + "\n");
+            }
+            if (maxActivity != null) {
+                writer.write("seuil_Activity=" + maxActivity + "\n");
+            }
             // Affiche une alerte en cas de succès de la sauvegarde
             AlertUtilities.showAlert(primaryStage, "Opération réussie.",
                     "Sauvegarde effectuée !",
@@ -485,13 +495,13 @@ public class ConfigurationController {
             txtFrequency.setText("" + frequency);
             cbTimeUnit.setValue(typeDuTemps);
             maxTemperature = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Temperature"));
-            txtMaxTemperature.setText(maxTemperature == 0 ? "" : String.valueOf(maxTemperature));
+            txtMaxTemperature.setText(maxTemperature == null ? "" : String.valueOf(maxTemperature));
             maxActivity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Activity"));
-            txtMaxActivity.setText(maxActivity == 0 ? "" : String.valueOf(maxActivity));
+            txtMaxActivity.setText(maxActivity == null ? "" : String.valueOf(maxActivity));
             maxCo2 = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_CO2"));
-            txtMaxCo2.setText(maxCo2 == 0 ? "" : String.valueOf(maxCo2));
+            txtMaxCo2.setText(maxCo2 == null ? "" : String.valueOf(maxCo2));
             maxHumidity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Humidity"));
-            txtMaxHumidity.setText(maxHumidity == 0 ? "" : String.valueOf(maxHumidity));
+            txtMaxHumidity.setText(maxHumidity == null ? "" : String.valueOf(maxHumidity));
         } else {
             // Si aucun fichier de configuration n'est trouvé, affiche une alerte
             AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
@@ -686,9 +696,9 @@ public class ConfigurationController {
      * @param regex     Expression régulière utilisée pour la validation.
      * @param value     Valeur de référence pour le champ de texte.
      */
-    private void setupNumberTextValidation(TextField textField, int maxLength, String regex, Object value) {
+    private void setupNumberTextValidation(TextField textField, int maxLength, String regex, Double value) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty() && (newValue.length() > maxLength || !newValue.matches(regex))) {
+            if ((newValue.length() > maxLength || !newValue.matches(regex))) {
                 textField.setText(oldValue);
             }
         });
@@ -700,11 +710,7 @@ public class ConfigurationController {
      * @param _e L'événement de fermeture de fenêtre.
      */
     private void closeWindow(WindowEvent _e) {
-        if (AlertUtilities.confirmYesCancel(this.primaryStage, "Quitter l'application",
-                "Etes-vous sûr de vouloir quitter l'application ?", null, AlertType.CONFIRMATION)) {
-            this.primaryStage.close();
-            System.exit(0);
-        }
-        _e.consume();
+        this.primaryStage.close();
+        System.exit(0);
     }
 }

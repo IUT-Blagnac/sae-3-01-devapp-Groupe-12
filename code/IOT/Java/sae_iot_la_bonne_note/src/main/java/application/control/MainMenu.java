@@ -47,22 +47,26 @@ public class MainMenu extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Menu Principal");
-            primaryStage.setResizable(false);
+            primaryStage.setMinHeight(850);
+            primaryStage.setMinWidth(1200);
+            primaryStage.setWidth(_primaryStage.getWidth());
+            primaryStage.setHeight(_primaryStage.getHeight());
+            primaryStage.setResizable(true);
 
             // Récupération du contrôleur associé au fichier FXML chargé
             MainMenuController mainMenu = loader.getController();
             // Initialisation du contexte du contrôleur
             mainMenu.initContext(this, primaryStage);
 
-            // this.show(); // Affichage de la fenêtre du menu principal
+            this.show(); // Affichage de la fenêtre du menu principal
 
-            // LogHistory b = new LogHistory(_primaryStage);
+            // LogHistory a = new LogHistory(_primaryStage);
             // b.show();
 
-            WharehouseMonitor a = new WharehouseMonitor(_primaryStage);
-            a.show();
+            // WharehouseMonitor b = new WharehouseMonitor(_primaryStage);
+            // a.show();
 
-            // Configuration a = new Configuration(_primaryStage);
+            // Configuration c = new Configuration(_primaryStage);
             // a.show();
 
         } catch (Exception e) {
@@ -85,6 +89,5 @@ public class MainMenu extends Application {
      */
     public static void runApp() {
         Application.launch(); // Lancement de l'application JavaFX
-
     }
 }

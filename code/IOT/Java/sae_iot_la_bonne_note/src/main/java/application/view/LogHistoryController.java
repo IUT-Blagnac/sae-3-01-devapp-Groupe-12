@@ -2,6 +2,8 @@ package application.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import application.control.Configuration;
 import application.control.LogHistory;
@@ -12,10 +14,10 @@ import application.model.Data;
 import application.tools.AlertUtilities;
 import application.tools.Animations;
 import application.tools.DateUtilities;
-import application.tools.GraphUtilies;
-import application.tools.JsonUtilities;
-import application.tools.ListViewUtilies;
-import application.tools.PythonProcessUtilities;
+import application.tools.GraphMaker;
+import application.tools.JsonReader;
+import application.tools.ListViewUtilities;
+import application.tools.PythonAndThreadManagement;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ import javafx.scene.Cursor;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -40,6 +43,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
+/**
+ * Contrôleur pour la visualisation de l'historique des logs / alertes.
+ */
 public class LogHistoryController {
 
     // Référence à la classe de l'historique
@@ -47,6 +53,8 @@ public class LogHistoryController {
 
     // Référence au stage de la fenêtre principale
     private Stage primaryStage;
+
+    // Elements FXML
 
     @FXML
     private BorderPane borderpane;
@@ -56,6 +64,8 @@ public class LogHistoryController {
 
     @FXML
     private Button buttCheckWhareHouse;
+    @FXML
+    private ImageView imgConnexionState;
 
     @FXML
     private Button buttCheckHistory;
@@ -124,12 +134,10 @@ public class LogHistoryController {
 
     private List<Stage> listLargeGraphsStages = new ArrayList<>();
     private ArrayList<List<Data>> listSearchedDatasByLargeGraph = new ArrayList<>();
-    private List<LineChart<String, Number>> listLargeGraphs = new ArrayList<>();
+    private List<XYChart<String, Number>> listLargeGraphs = new ArrayList<>();
 
     private final Tooltip tooltipImgSearch = new Tooltip(
             "Rentrer le nom de la salle à vérifier, choix multiples possible en séparant les salles par ','.\n\"Exemple : \"B103,E006,Amphi\".");
-
-    private Thread loadDataThread;
 
     /**
      * Initialise le contrôleur de vue LogHistoryController.
@@ -141,31 +149,51 @@ public class LogHistoryController {
         this.logHistory = _mainMenu;
         this.primaryStage = _primaryStage;
 
-        if (!PythonProcessUtilities.isPythonRunning()) {
-            PythonProcessUtilities.startPythonThread(_primaryStage);
-        }
+        PythonAndThreadManagement.initImgConnexionState(imgConnexionState);
+        PythonAndThreadManagement.updateImgConnexionState();
 
-        initViewElements();
-        showLogs();
-        initializeCheckboxes(cbTemperature);
-        initializeCheckboxes(cbHumidity);
-        initializeCheckboxes(cbActivity);
-        initializeCheckboxes(cbCo2);
-        ListViewUtilies.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
-                cbActivity.isSelected(), cbCo2.isSelected());
-        setGraphView();
+        Platform.runLater(() -> {
+            JsonReader.updateHistoryFromFile(primaryStage, false, true, obsList,
+                    null, listAllRoomsAlerts, comboBoxRooms);
+            JsonReader.updateHistoryFromFile(primaryStage, false, false, obsList,
+                    listAllRoomsDatas, null, comboBoxRooms);
+            Comparator<Data> comparator = (data1, data2) -> {
+                return data1.getDate().compareTo(data2.getDate());
+            };
+            Collections.sort(listAllRoomsAlerts, comparator);
+            Collections.sort(listAllRoomsDatas, comparator);
+            Collections.reverse(listAllRoomsAlerts);
+            Collections.reverse(listAllRoomsDatas);
+
+            initViewElements();
+            if (WharehouseMonitorController.clickedNotif != null) {
+                setListView();
+                showAlerts();
+                if (!WharehouseMonitorController.clickedNotif.equals("")) {
+                    lvHistory.getSelectionModel().select(0);
+                }
+            } else {
+                setGraphView();
+                showLogs();
+            }
+        });
+
     }
 
+    /**
+     * Initialise les événements liés aux cases à cocher.
+     * À chaque modification de la sélection d'une case à cocher, cette méthode est
+     * appelée pour vérifier les actions à effectuer.
+     * Si la vue graphique est désactivée, met à jour les positions des graphiques
+     * en fonction des cases cochées.
+     * Sinon, met à jour la scène en fonction de la vue sélectionnée.
+     *
+     * @param _cb La checkbox concernée pour initialiser ses événements.
+     */
     private void initializeCheckboxes(CheckBox _cb) {
-        _cb.setOnMouseEntered(e -> {
-            _cb.getScene().setCursor(Cursor.HAND);
-        });
-        _cb.setOnMouseExited(e -> {
-            _cb.getScene().setCursor(Cursor.DEFAULT);
-        });
         _cb.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (buttGraphView.isDisabled()) {
-                GraphUtilies.updateGraphsPositions(
+                GraphMaker.updateGraphsPositions(
                         vboxGraphView, Arrays.asList(graphTemperature, graphHumidity, graphActivity, graphCo2),
                         cbTemperature.isSelected(), cbHumidity.isSelected(), cbActivity.isSelected(),
                         cbCo2.isSelected());
@@ -175,21 +203,26 @@ public class LogHistoryController {
         });
     }
 
+    /**
+     * Met à jour la scène en fonction de la vue actuellement sélectionnée.
+     * Si la vérification des alertes est désactivée, met à jour l'historique des
+     * alertes.
+     * Sinon, met à jour l'historique des données.
+     */
     private void updateSceneByView() {
         if (buttCheckAlerts.isDisabled()) {
-            updateAlertsHistory();
+            updateHistory(true);
         } else {
-            updateDatasHistory();
-        }
-        if (buttGraphView.isDisabled()) {
-            updateAllGraphs();
-        } else {
-            ListViewUtilies.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
-                    cbActivity.isSelected(), cbCo2.isSelected());
-            lvHistory.setItems(obsList);
+            updateHistory(false);
         }
     }
 
+    /**
+     * Initialise les éléments de la vue.
+     * Configurations des animations pour les boutons, les tooltips, les ComboBox.
+     * Gestion des événements sur les ComboBox, les cases à cocher, et les listes.
+     * Préparation des graphiques de température, humidité, activité et CO2.
+     */
     private void initViewElements() {
         this.primaryStage.setOnCloseRequest(e -> this.closeWindow(e));
 
@@ -218,12 +251,12 @@ public class LogHistoryController {
                 "JJ/MM/AAAA à hh:mm",
                 "JJ/MM/AAAA à hh:mm:ss");
         comboBoxDateFormat.setValue("JJ/MM à hh:mm");
-        comboBoxRooms.setValue("Toutes");
         comboBoxDateFormat.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 updateSceneByView();
             }
         });
+        comboBoxRooms.setValue("Toutes");
         comboBoxRooms.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 if (newValue.equals("Toutes")) {
@@ -236,79 +269,95 @@ public class LogHistoryController {
                 updateSceneByView();
             }
         });
+        initializeCheckboxes(cbTemperature);
+        initializeCheckboxes(cbHumidity);
+        initializeCheckboxes(cbActivity);
+        initializeCheckboxes(cbCo2);
         initTxtSearch(txtSearch, null, null);
+        ListViewUtilities.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
+                cbActivity.isSelected(), cbCo2.isSelected());
+        lvHistory.setItems(obsList);
+        initGraph(graphTemperature, "Température (°c)", "temperature", "°c", 0, 0);
+        initGraph(graphHumidity, "Humidité (%)", "humidity", "%", 1, 0);
+        initGraph(graphActivity, "Activité", "activity", "", 0, 1);
+        initGraph(graphCo2, "Co2 (ppm)", "co2", "ppm", 1, 1);
     }
 
-    private void initLoadDataThread(boolean _loadFromFile, boolean _isAlert) {
-        loadDataThread = new Thread(() -> {
-            Platform.runLater(() -> {
-                if (_loadFromFile) {
-                    JsonUtilities.updateHistoryFromFile(primaryStage, false, _isAlert, obsList,
-                            listAllRoomsDatas, null, comboBoxRooms);
-                }
-                updateSceneByView();
-                comboBoxDateFormat.setValue(comboBoxDateFormat.getValue());
-                // comboBoxDateFormat.setValue("JJ/MM à hh:mm");
-                // checkAlertForLastData();
-            });
-        });
-    }
-
+    /**
+     * Configure la scène en fonction de la vue souhaitée.
+     * Si _isGraphView est vrai, affiche la vue graphique avec les graphiques de
+     * température,
+     * humidité, activité et CO2. Sinon, affiche la liste d'historique des données.
+     * Met à jour les éléments sélectionnés en fonction des cases à cocher.
+     *
+     * @param _isGraphView Booléen indiquant si la vue graphique doit être affichée
+     *                     ou non.
+     */
     private void setSceneForView(boolean _isGraphView) {
         if (_isGraphView) {
-            vboxGraphView.getStyleClass().add("vbox");
             borderpane.setCenter(vboxGraphView);
             BorderPane.setMargin(vboxGraphView, new Insets(10));
+            GraphMaker.updateGraphsPositions(
+                    vboxGraphView, Arrays.asList(graphTemperature, graphHumidity, graphActivity, graphCo2),
+                    cbTemperature.isSelected(), cbHumidity.isSelected(), cbActivity.isSelected(),
+                    cbCo2.isSelected());
         } else {
-            if (lvHistory == null) {
-                lvHistory = new ListView<>();
-            }
             borderpane.setCenter(lvHistory);
             BorderPane.setMargin(lvHistory, new Insets(10));
+            ListViewUtilities.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
+                    cbActivity.isSelected(), cbCo2.isSelected());
         }
     }
 
+    /**
+     * Active la vue graphique.
+     * Désactive la vue en liste, active la vue graphique, et met à jour la scène en
+     * conséquence.
+     * Met à jour la scène en fonction de la vue actuelle.
+     */
     @FXML
     private void setGraphView() {
         buttListView.setDisable(false);
         buttGraphView.setDisable(true);
         buttCheckAlerts.setDisable(false);
         buttCheckLogs.setDisable(true);
-        setSceneForView(false);
-        initGraph(graphTemperature, "Température (°c)", "temperature", "°c", 0, 0);
-        initGraph(graphHumidity, "Humidité (%)", "humidity", "%", 1, 0);
-        initGraph(graphActivity, "Activité", "activity", "", 0, 1);
-        initGraph(graphCo2, "Co2 (ppm)", "co2", "ppm", 1, 1);
         setSceneForView(true);
-        GraphUtilies.updateGraphsPositions(
-                vboxGraphView, Arrays.asList(graphTemperature, graphHumidity, graphActivity, graphCo2),
-                cbTemperature.isSelected(), cbHumidity.isSelected(), cbActivity.isSelected(),
-                cbCo2.isSelected());
-        updateAllGraphs();
         updateSceneByView();
     }
 
+    /**
+     * Active la vue en liste.
+     * Désactive la vue graphique, active la vue en liste, et met à jour la scène en
+     * conséquence.
+     * Met à jour la scène en fonction de la vue actuelle.
+     */
     @FXML
     private void setListView() {
         buttListView.setDisable(true);
         buttGraphView.setDisable(false);
         setSceneForView(false);
-    }
-
-    @FXML
-    private void showLogs() {
-        if (buttGraphView.isDisabled()) {
-            setListView();
-        }
-        buttCheckLogs.setDisable(true);
-        buttCheckAlerts.setDisable(false);
-        if (listAllRoomsDatas.size() == 0) {
-            initLoadDataThread(true, false);
-            loadDataThread.start();
-        }
         updateSceneByView();
     }
 
+    /**
+     * Affiche les logs.
+     * Désactive l'affichage des alertes, active l'affichage des logs et met à jour
+     * la scène.
+     */
+    @FXML
+    private void showLogs() {
+        buttCheckLogs.setDisable(true);
+        buttCheckAlerts.setDisable(false);
+        updateSceneByView();
+
+    }
+
+    /**
+     * Affiche les alertes.
+     * Si la vue graphique est désactivée, active la vue en liste avant d'afficher
+     * les alertes.
+     * Active l'affichage des alertes et met à jour la scène.
+     */
     @FXML
     private void showAlerts() {
         if (buttGraphView.isDisabled()) {
@@ -316,17 +365,72 @@ public class LogHistoryController {
         }
         buttCheckLogs.setDisable(false);
         buttCheckAlerts.setDisable(true);
-        if (listAllRoomsAlerts.size() == 0) {
-            initLoadDataThread(true, true);
-            loadDataThread.start();
-            // JsonUtilities.updateHistoryFromFile(primaryStage, false, true, obsList,
-            // listAllRoomsDatas,
-            // listAllRoomsAlerts, comboBoxRooms);
-        }
         updateSceneByView();
     }
 
-    private void initGraph(LineChart<String, Number> _graph, String _tittle, String _dataName, String _dataUnit,
+    /**
+     * Supprime les logs.
+     * Appelle la méthode de suppression pour les logs (données).
+     */
+    @FXML
+    private void doDeleteLogs() {
+        doDelete(false);
+    }
+
+    /**
+     * Supprime les alertes.
+     * Appelle la méthode de suppression pour les alertes.
+     */
+    @FXML
+    private void doDeleteAlerts() {
+        doDelete(true);
+    }
+
+    /**
+     * Supprime les logs ou les alertes en fonction du paramètre _isAlert.
+     * Affiche une boîte de dialogue de confirmation avant la suppression.
+     * En cas de réussite, met à jour l'historique depuis le fichier, la vue et
+     * affiche un message de succès.
+     * En cas d'échec, affiche un message d'erreur.
+     *
+     * @param _isAlert Booléen indiquant s'il s'agit de la suppression d'alertes
+     *                 (true) ou de logs (false).
+     */
+    private void doDelete(boolean _isAlert) {
+        String type = _isAlert ? "alertes" : "logs";
+
+        if (AlertUtilities.confirmYesCancel(primaryStage, "Vider l'historique",
+                "Voulez-vous vraiment supprimer l'historique des " + type + " ?", null, AlertType.CONFIRMATION)) {
+            if (JsonReader.deleteHistory(_isAlert ? "fichier_alerte" : "fichier_logs")) {
+                JsonReader.updateHistoryFromFile(primaryStage, false, _isAlert, obsList,
+                        _isAlert ? null : listAllRoomsDatas, _isAlert ? listAllRoomsAlerts : null, comboBoxRooms);
+                updateSceneByView();
+                AlertUtilities.showAlert(primaryStage, "Opération réussie",
+                        "L'historique des " + type + " a bien été supprimé.", null, AlertType.INFORMATION);
+            } else {
+                AlertUtilities.showAlert(primaryStage, "Opération échouée",
+                        "Une erreur s'est produite lors de la suppression de l'historique.",
+                        "Veuillez vérifier que le fichier des " + type
+                                + " existe bien et est placé au même endroit que l'application (exécutable).",
+                        AlertType.ERROR);
+            }
+        }
+    }
+
+    /**
+     * Initialise le graphique avec le titre, les marges et les interactions
+     * utilisateur.
+     * Associe des actions en cliquant ou survolant le graphique pour afficher une
+     * vue détaillée.
+     *
+     * @param _graph     Le graphique à initialiser.
+     * @param _tittle    Le titre du graphique.
+     * @param _dataName  Le nom des données du graphique.
+     * @param _dataUnit  L'unité des données du graphique.
+     * @param _gridPaneX Position X dans le GridPane.
+     * @param _gridPaneY Position Y dans le GridPane.
+     */
+    private void initGraph(XYChart<String, Number> _graph, String _tittle, String _dataName, String _dataUnit,
             int _gridPaneX, int _gridPaneY) {
         _graph.setTitle(_tittle);
         GridPane.setMargin(_graph, new Insets(5, 5, 5, 5));
@@ -336,9 +440,10 @@ public class LogHistoryController {
             TextField largeTxtSearch = createLargeTxtSearch();
             ArrayList<Data> searchedDatasByGraph = new ArrayList<>(listSearchedDatas);
             listSearchedDatasByLargeGraph.add(searchedDatasByGraph);
-            LineChart<String, Number> largeGraph = GraphUtilies.displayLargeGraph(primaryStage, _graph,
-                    listLargeGraphsStages,
-                    largeTxtSearch, _dataUnit);
+            XYChart<String, Number> largeGraph = GraphMaker.displayLargeGraph(primaryStage, _graph,
+                    listLargeGraphsStages, largeTxtSearch, _dataUnit);
+            GraphMaker.updateGraphData(largeGraph, searchedDatasByGraph, largeGraphViewDataName,
+                    largeGraphViewDataUnit, comboBoxDateFormat.getValue(), false);
             initTxtSearch(largeTxtSearch, searchedDatasByGraph, largeGraph);
             listLargeGraphs.add(largeGraph);
         });
@@ -350,56 +455,92 @@ public class LogHistoryController {
         });
     }
 
-    private void updateDatasHistory() {
-        listSearchedDatas.clear();
+    /**
+     * Met à jour l'historique des données ou des alertes en fonction du paramètre
+     * _isAlert.
+     * Réinitialise les listes des données ou des alertes, la liste observable et
+     * les cellules de la ListView.
+     * Effectue une recherche selon le paramètre currentSearch, sinon affiche toutes
+     * les données ou alertes.
+     * Met à jour les graphiques si la vue graphique est activée et qu'il s'agit de
+     * l'historique des données.
+     *
+     * @param _isAlert Booléen indiquant s'il s'agit de mettre à jour les alertes
+     *                 (true) ou les données (false).
+     */
+    private void updateHistory(boolean _isAlert) {
+        if (_isAlert) {
+            listSearchedAlerts.clear();
+        } else {
+            listSearchedDatas.clear();
+        }
         obsList.clear();
-        ListViewUtilies.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
+        ListViewUtilities.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
                 cbActivity.isSelected(), cbCo2.isSelected());
-        ListViewUtilies.setCellForData(lvHistory);
+        if (_isAlert) {
+            ListViewUtilities.setCellForAlert(lvHistory);
+        } else {
+            ListViewUtilities.setCellForData(lvHistory);
+        }
+
         if (currentSearch == null || currentSearch.trim().isEmpty()) {
-            listSearchedDatas.addAll(listAllRoomsDatas);
-            for (Data data : listAllRoomsDatas) {
-                obsList.add(data.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
+            if (_isAlert) {
+                listSearchedAlerts.addAll(listAllRoomsAlerts);
+                for (Alert alert : listAllRoomsAlerts) {
+                    obsList
+                            .add(alert.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
+                }
+            } else {
+                listSearchedDatas.addAll(listAllRoomsDatas);
+                for (Data data : listAllRoomsDatas) {
+                    obsList.add(data.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
+                }
             }
         } else {
             String[] roomsToSearch = currentSearch.split(",");
-            for (Data data : listAllRoomsDatas) {
-                for (String room : roomsToSearch) {
-                    if (data.getId().toLowerCase().contains(room.trim().toLowerCase())) {
-                        listSearchedDatas.add(data);
-                        obsList.add(data.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
-                        break;
+            if (_isAlert) {
+                for (Alert alert : listAllRoomsAlerts) {
+                    for (String room : roomsToSearch) {
+                        if (alert.getId().toLowerCase().contains(room.trim().toLowerCase())) {
+                            listSearchedAlerts.add(alert);
+                            obsList.add(
+                                    alert.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (Data data : listAllRoomsDatas) {
+                    for (String room : roomsToSearch) {
+                        if (data.getId().toLowerCase().contains(room.trim().toLowerCase())) {
+                            listSearchedDatas.add(data);
+                            obsList.add(
+                                    data.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
+                            break;
+                        }
                     }
                 }
             }
         }
-    }
-
-    private void updateAlertsHistory() {
-        listSearchedAlerts.clear();
-        obsList.clear();
-        ListViewUtilies.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
-                cbActivity.isSelected(), cbCo2.isSelected());
-        ListViewUtilies.setCellForAlert(lvHistory);
-        if (currentSearch == null || currentSearch.trim().isEmpty()) {
-            listSearchedAlerts.addAll(listAllRoomsAlerts);
-            for (Alert alert : listAllRoomsAlerts) {
-                obsList.add(alert.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
-            }
-        } else {
-            String[] roomsToSearch = currentSearch.split(",");
-            for (Alert alert : listAllRoomsAlerts) {
-                for (String room : roomsToSearch) {
-                    if (alert.getId().toLowerCase().contains(room.trim().toLowerCase())) {
-                        listSearchedAlerts.add(alert);
-                        obsList.add(alert.toString(DateUtilities.transformDateFormat(comboBoxDateFormat.getValue())));
-                        break;
-                    }
-                }
-            }
+        if (!_isAlert && buttGraphView.isDisabled()) {
+            GraphMaker.updateGraphData(graphTemperature, listSearchedDatas, "temperature", "°c",
+                    comboBoxDateFormat.getValue(), false);
+            GraphMaker.updateGraphData(graphHumidity, listSearchedDatas, "humidity", "%",
+                    comboBoxDateFormat.getValue(), false);
+            GraphMaker.updateGraphData(graphActivity, listSearchedDatas, "activity", "",
+                    comboBoxDateFormat.getValue(), false);
+            GraphMaker.updateGraphData(graphCo2, listSearchedDatas, "co2", "ppm",
+                    comboBoxDateFormat.getValue(), false);
         }
     }
 
+    /**
+     * Crée un champ de texte pour la recherche dans la vue graphique étendue.
+     * Initialise le champ avec le texte de recherche actuel s'il existe, sinon
+     * affiche un message.
+     *
+     * @return Le champ de texte pour la recherche dans la vue graphique étendue.
+     */
     private TextField createLargeTxtSearch() {
         TextField largeViewTxtSearch = new TextField();
         largeViewTxtSearch.setFocusTraversable(false);
@@ -413,17 +554,24 @@ public class LogHistoryController {
         return largeViewTxtSearch;
     }
 
+    /**
+     * Initialise le champ de recherche pour les événements de modification du
+     * texte.
+     * Met à jour les données du graphique étendu si applicable, sinon met à jour la
+     * scène.
+     *
+     * @param _textField                   Le champ de texte à initialiser.
+     * @param _listSearchedDatasLargeGraph La liste des données du graphique étendu.
+     * @param _largeGraph                  Le graphique étendu à mettre à jour si
+     *                                     applicable.
+     */
     private void initTxtSearch(TextField _textField, ArrayList<Data> _listSearchedDatasLargeGraph,
-            LineChart<String, Number> _largeGraph) {
-        _textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            imgSearchIcon.setVisible(!newValue);
-            imgInfoSearch.setVisible(!newValue);
-        });
+            XYChart<String, Number> _largeGraph) {
         _textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (_largeGraph != null) {
                 updateDataForLargeGraph(_listSearchedDatasLargeGraph, newValue.trim());
-                GraphUtilies.updateGraphData(_largeGraph, _listSearchedDatasLargeGraph, largeGraphViewDataName,
-                        largeGraphViewDataUnit, comboBoxDateFormat.getValue());
+                GraphMaker.updateGraphData(_largeGraph, _listSearchedDatasLargeGraph, largeGraphViewDataName,
+                        largeGraphViewDataUnit, comboBoxDateFormat.getValue(), false);
             } else {
                 if (!currentSearch.toLowerCase().equals(newValue.trim().toLowerCase())) {
                     currentSearch = newValue.trim();
@@ -433,6 +581,16 @@ public class LogHistoryController {
         });
     }
 
+    /**
+     * Met à jour les données pour le graphique étendu en fonction des salles
+     * recherchées.
+     * Réinitialise la liste des données du graphique étendu avec les salles
+     * correspondantes.
+     *
+     * @param _listSearched  La liste des données à mettre à jour pour le graphique
+     *                       étendu.
+     * @param _searchedRooms Les salles recherchées pour la mise à jour des données.
+     */
     private void updateDataForLargeGraph(ArrayList<Data> _listSearched, String _searchedRooms) {
         _listSearched.clear();
         if (_searchedRooms == null || _searchedRooms.trim().isEmpty()) {
@@ -450,39 +608,33 @@ public class LogHistoryController {
         }
     }
 
-    private void updateAllGraphs() {
-        GraphUtilies.updateGraphData(graphTemperature, listSearchedDatas, "temperature", "°c",
-                comboBoxDateFormat.getValue());
-        GraphUtilies.updateGraphData(graphHumidity, listSearchedDatas, "humidity", "%", comboBoxDateFormat.getValue());
-        GraphUtilies.updateGraphData(graphActivity, listSearchedDatas, "activity", "", comboBoxDateFormat.getValue());
-        GraphUtilies.updateGraphData(graphCo2, listSearchedDatas, "co2", "ppm", comboBoxDateFormat.getValue());
-    }
-
+    /**
+     * Gère l'action liée au bouton de surveillance de l'entrepôt.
+     * Crée une instance de WharehouseMonitor et affiche la fenêtre.
+     */
     @FXML
     private void doWharehouseMonitor() {
-        closeLargeGraphsStages();
         WharehouseMonitor wharehouse = new WharehouseMonitor(primaryStage);
         wharehouse.show();
     }
 
     /**
      * Gère l'action liée au bouton de configuration.
-     * Lance une animation de changement de scène vers la configuration.
+     * Initialise une instance de Configuration et lance une animation de changement
+     * de scène vers la configuration.
      */
     @FXML
     private void doConfiguration() {
-        closeLargeGraphsStages();
         Configuration conf = new Configuration(primaryStage);
         conf.show();
     }
 
     /**
-     * Méthode associée au bouton FXML qui permet de fermer la fenêtre.
+     * Gère l'action liée au bouton du menu principal.
      * Initialise et affiche le menu principal lors de l'action de quitter.
      */
     @FXML
     private void doMenu() {
-        closeLargeGraphsStages();
         MainMenu menu = new MainMenu();
         menu.start(primaryStage);
         menu.show();
@@ -494,15 +646,14 @@ public class LogHistoryController {
      * @param _e L'événement de fermeture de fenêtre.
      */
     private void closeWindow(WindowEvent _e) {
-        if (AlertUtilities.confirmYesCancel(primaryStage, "Quitter l'application",
-                "Etes-vous sûr de vouloir quitter l'application ?", null, AlertType.CONFIRMATION)) {
-            closeLargeGraphsStages();
-            primaryStage.close();
-            System.exit(0);
-        }
-        _e.consume();
+        closeLargeGraphsStages();
+        primaryStage.close();
+        System.exit(0);
     }
 
+    /**
+     * Ferme toutes les fenêtres des graphiques étendus.
+     */
     private void closeLargeGraphsStages() {
         for (Stage largeGraph : listLargeGraphsStages) {
             largeGraph.close();

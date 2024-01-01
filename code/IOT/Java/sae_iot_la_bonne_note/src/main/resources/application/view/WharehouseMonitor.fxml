@@ -23,21 +23,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderpane" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WharehouseMonitorController">
+<BorderPane fx:id="borderpane" minHeight="768.0" minWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WharehouseMonitorController">
    <top>
-      <GridPane maxHeight="265.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1024.0" prefHeight="225.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+      <GridPane minHeight="-Infinity" minWidth="1024.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-            <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="80.0" minHeight="80.0" valignment="CENTER" />
+            <RowConstraints maxHeight="90.0" minHeight="90.0" valignment="CENTER" />
+            <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" valignment="CENTER" />
         </rowConstraints>
          <children>
-            <HBox maxHeight="80.0" minHeight="80.0" prefHeight="80.0" style="-fx-border-color: black; -fx-border-width: 0 0 6 0;">
+            <HBox style="-fx-border-color: black; -fx-border-width: 0 0 6 0;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="buttMenu" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="160.0" minHeight="55.0" minWidth="141.0" mnemonicParsing="false" onAction="#doMenu" opacity="0.95" prefHeight="55.0" prefWidth="141.0" stylesheets="@../application.css" text="Menu">
+                  <Button fx:id="buttMenu" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" onAction="#doMenu" opacity="0.95" prefHeight="55.0" stylesheets="@../application.css" text="Menu" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -54,17 +54,17 @@
                         <String fx:value="mainButtonOnClick" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="28.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" disable="true" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" opacity="0.5" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Temps Réel" textAlignment="CENTER">
+                  <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" disable="true" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" opacity="0.5" prefHeight="55.0" stylesheets="@../application.css" text="Temps Réel" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" translateX="10.0">
+                        <ImageView fx:id="imgConnexionState" fitHeight="40.0" fitWidth="40.0" translateX="7.5">
                            <image>
-                              <Image url="@../images/entrepot_logo.png" />
+                              <Image url="@../images/connection_fail.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -74,10 +74,10 @@
                         <String fx:value="mainButtonOnHover" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" onAction="#doCheckHistory" opacity="0.95" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Historique" textAlignment="CENTER">
+                  <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" onAction="#doCheckHistory" opacity="0.95" prefHeight="55.0" stylesheets="@../application.css" text="Historique" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -94,10 +94,10 @@
                         <String fx:value="mainButtonOnHover" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttConfiguration" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="244.0" minHeight="55.0" minWidth="244.0" mnemonicParsing="false" onAction="#doConfiguration" opacity="0.95" prefHeight="55.0" prefWidth="244.0" stylesheets="@../application.css" text="Configuration" textAlignment="CENTER">
+                  <Button fx:id="buttConfiguration" alignment="CENTER" contentDisplay="RIGHT" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" mnemonicParsing="false" onAction="#doConfiguration" opacity="0.95" prefHeight="55.0" stylesheets="@../application.css" text="Configuration" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -114,57 +114,73 @@
                         <String fx:value="mainButtonOnHover" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                </children>
             </HBox>
-            <HBox maxHeight="117.0" minHeight="70.0" prefHeight="113.0" prefWidth="1024.0" GridPane.rowIndex="2">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="70.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
                <children>
-                  <TextField fx:id="txtSearch" maxHeight="50.0" maxWidth="295.0" minHeight="50.0" minWidth="295.0" prefHeight="50.0" prefWidth="295.0" promptText="Rechercher une salle..." styleClass="txtArea" stylesheets="@../application.css">
+                  <ImageView fx:id="imgInfoSearch" fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../images/info_icon.jpg" />
+                     </image>
                      <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" top="5.0" />
+                        <Insets left="10.0" top="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField fx:id="txtSearch" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="233.0" prefHeight="50.0" promptText="Rechercher une salle..." styleClass="txtArea" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
                      </HBox.margin>
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
                   </TextField>
-                  <Label maxWidth="155.0" minWidth="57.0" prefHeight="45.0" prefWidth="57.0" text="Salle :">
+                  <ImageView fx:id="imgSearchIcon" fitHeight="40.0" fitWidth="40.0">
+                     <image>
+                        <Image url="@../images/search_icon.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label minWidth="57.0" text="Salle :">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="comboBoxRooms" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="276.0" styleClass="comboBox" stylesheets="@../application.css">
+                  <ComboBox fx:id="comboBoxRooms" maxWidth="500.0" minHeight="50.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="160.0" styleClass="comboBox" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <Label layoutX="577.0" layoutY="15.0" maxWidth="194.0" minWidth="181.0" prefHeight="45.0" prefWidth="181.0" text="Format de la date :">
+                  <Label layoutX="577.0" layoutY="15.0" minWidth="181.0" text="Format de la date :">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="comboBoxDateFormat" layoutX="742.0" layoutY="15.0" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="257.0" styleClass="comboBox" stylesheets="@../application.css">
+                  <ComboBox fx:id="comboBoxDateFormat" layoutX="742.0" layoutY="15.0" maxHeight="50.0" maxWidth="500.0" minHeight="50.0" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" styleClass="comboBox" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </ComboBox>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <HBox GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                <children>
-                  <HBox maxHeight="108.0" maxWidth="296.0" minHeight="70.0" minWidth="296.0" prefHeight="71.0" prefWidth="296.0" style="-fx-border-color: rgba(26, 207, 150, 0.99);;" styleClass="labLogo" stylesheets="@../application.css">
+                  <HBox maxWidth="296.0" minHeight="70.0" style="-fx-border-color: rgba(26, 207, 150, 0.99);;" styleClass="labLogo" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="showListView" prefHeight="40.0" prefWidth="164.0" text="Affichage :">
+                        <Label fx:id="showListView" maxWidth="1.7976931348623157E308" minWidth="140.0" text="Affichage :" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
                            </HBox.margin>
@@ -172,12 +188,12 @@
                               <Font name="System Bold" size="27.0" />
                            </font>
                         </Label>
-                        <Button fx:id="buttListView" contentDisplay="GRAPHIC_ONLY" maxHeight="50.0" maxWidth="55.0" minHeight="50.0" minWidth="55.0" mnemonicParsing="false" onAction="#setListView" prefHeight="50.0" prefWidth="55.0" stylesheets="@../application.css">
+                        <Button fx:id="buttListView" contentDisplay="GRAPHIC_ONLY" minHeight="50.0" minWidth="55.0" mnemonicParsing="false" onAction="#setListView" stylesheets="@../application.css" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets bottom="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                              <ImageView fitHeight="45.0" fitWidth="45.0">
                                  <image>
                                     <Image url="@../images/listview_icon.png" />
                                  </image>
@@ -189,137 +205,179 @@
                               <String fx:value="mainButtonOnClick" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="buttGraphView" contentDisplay="GRAPHIC_ONLY" maxHeight="50.0" maxWidth="55.0" minHeight="50.0" minWidth="55.0" mnemonicParsing="false" onAction="#setGraphView" prefHeight="50.0" prefWidth="55.0" stylesheets="@../application.css">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
-                                 <image>
-                                    <Image url="@../images/graph_icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="buttLineChartView" contentDisplay="GRAPHIC_ONLY" layoutX="236.0" layoutY="20.0" maxHeight="50.0" maxWidth="55.0" minHeight="50.0" minWidth="55.0" mnemonicParsing="false" onAction="#setLineChartView" prefHeight="50.0" prefWidth="55.0" stylesheets="@../application.css">
                            <styleClass>
                               <String fx:value="connectionTestButton" />
                               <String fx:value="mainButtonOnHover" />
                               <String fx:value="mainButtonOnClick" />
                            </styleClass>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0">
+                                 <image>
+                                    <Image url="@../images/line-chart_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttBarChartView" contentDisplay="GRAPHIC_ONLY" layoutX="300.0" layoutY="15.0" minHeight="50.0" minWidth="55.0" mnemonicParsing="false" onAction="#setBarChartView" stylesheets="@../application.css">
+                           <styleClass>
+                              <String fx:value="connectionTestButton" />
+                              <String fx:value="mainButtonOnHover" />
+                              <String fx:value="mainButtonOnClick" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets bottom="5.0" right="10.0" top="5.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                                 <image>
+                                    <Image url="@../images/bar-chart_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                      <HBox.margin>
                         <Insets bottom="15.0" left="10.0" right="15.0" top="15.0" />
                      </HBox.margin>
                   </HBox>
-                  <VBox prefHeight="90.0" prefWidth="189.0">
-                     <children>
-                        <HBox prefHeight="70.0" prefWidth="159.0">
-                           <children>
-                              <CheckBox fx:id="cbTemperature" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </CheckBox>
-                              <Label fx:id="labTemperature" prefHeight="70.0" prefWidth="134.0" text="Température">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="159.0">
-                           <children>
-                              <CheckBox fx:id="cbActivity" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </CheckBox>
-                              <Label fx:id="labActivity" prefHeight="70.0" prefWidth="134.0" text="Activité">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
+                  <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" minHeight="60.0" minWidth="220.0" mnemonicParsing="false" onAction="#showAlerts" prefHeight="60.0" prefWidth="220.0" stylesheets="@../application.css" text="Voir les alertes" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="connectionTestButton" />
+                        <String fx:value="SecondaryButtonOnClick" />
+                        <String fx:value="SecondaryButtonOnHover" />
+                     </styleClass>
                      <HBox.margin>
-                        <Insets left="380.0" />
+                        <Insets bottom="10.0" right="15.0" top="20.0" />
                      </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="70.0" prefWidth="155.0">
+                  </Button>
+                  <HBox>
                      <children>
-                        <HBox prefHeight="70.0" prefWidth="159.0">
+                        <CheckBox fx:id="cbAvg" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" styleClass="checkBox" stylesheets="@../application.css">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </CheckBox>
+                        <Label maxWidth="89.0" minWidth="89.0" prefHeight="90.0" prefWidth="89.0" text="Moyennes">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="imgInfoAvg" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@../images/info_icon.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" top="35.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox>
                            <children>
-                              <CheckBox fx:id="cbHumidity" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </CheckBox>
-                              <Label fx:id="labHumidity" prefHeight="70.0" prefWidth="134.0" text="Humidité">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Label>
+                              <HBox>
+                                 <children>
+                                    <CheckBox fx:id="cbTemperature" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Label fx:id="labTemperature" prefHeight="70.0" prefWidth="134.0" text="Température">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <CheckBox fx:id="cbActivity" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Label fx:id="labActivity" prefHeight="70.0" prefWidth="134.0" text="Activité">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
                            </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="159.0">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox>
                            <children>
-                              <CheckBox fx:id="cbCo2" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </CheckBox>
-                              <Label fx:id="labCo2" prefHeight="70.0" prefWidth="134.0" text="Co2">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Label>
+                              <HBox>
+                                 <children>
+                                    <CheckBox fx:id="cbHumidity" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Label fx:id="labHumidity" prefHeight="70.0" prefWidth="134.0" text="Humidité">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <CheckBox fx:id="cbCo2" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" selected="true" styleClass="checkBox" stylesheets="@../application.css">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Label fx:id="labCo2" prefHeight="70.0" prefWidth="134.0" text="Co2">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
                            </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
             </HBox>
-            <ImageView fx:id="imgSearchIcon" fitHeight="40.0" fitWidth="40.0">
-               <image>
-                  <Image url="@../images/search_icon.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets left="230.0" top="317.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fx:id="imgInfoSearch" fitHeight="25.0" fitWidth="25.0">
-               <image>
-                  <Image url="@../images/info_icon.jpg" />
-               </image>
-               <GridPane.margin>
-                  <Insets left="270.0" top="319.0" />
-               </GridPane.margin>
-            </ImageView>
          </children>
          <BorderPane.margin>
             <Insets />

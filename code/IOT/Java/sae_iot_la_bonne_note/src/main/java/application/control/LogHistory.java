@@ -39,9 +39,9 @@ public class LogHistory {
             // Création de la scène et configuration du stage
             Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
             scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+            
             primaryStage.setScene(scene);
             primaryStage.setTitle("Historique");
-            primaryStage.setResizable(false);
 
             // Récupération du contrôleur associé au fichier FXML chargé
             this.controller = loader.getController();
@@ -51,7 +51,7 @@ public class LogHistory {
         } catch (Exception e) {
             AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML History.fxml",
                     "Merci de réessayer.", AlertType.ERROR);
-                    e.printStackTrace();
+            e.printStackTrace();
             System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }
     }

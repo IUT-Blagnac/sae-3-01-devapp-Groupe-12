@@ -4,14 +4,16 @@ import application.control.Configuration;
 import application.control.LogHistory;
 import application.control.MainMenu;
 import application.control.WharehouseMonitor;
-import application.tools.AlertUtilities;
 import application.tools.Animations;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * Contrôleur pour la vue du menu principal de l'application.
+ * Gère les actions et les interactions associées aux éléments de cette vue.
+ */
 public class MainMenuController {
 
     // Référence à la classe du menu principal
@@ -56,19 +58,24 @@ public class MainMenuController {
      * @param _e L'événement de fermeture de fenêtre.
      */
     private void closeWindow(WindowEvent _e) {
-        if (AlertUtilities.confirmYesCancel(this.primaryStage, "Quitter l'application",
-                "Etes-vous sûr de vouloir quitter l'application ?", null, AlertType.CONFIRMATION)) {
-            this.primaryStage.close();
-        }
-        _e.consume();
+        this.primaryStage.close();
     }
 
+    /**
+     * Gère l'action liée au bouton de surveillance de l'entrepôt.
+     * Crée une instance de WharehouseMonitor et affiche la fenêtre.
+     */
     @FXML
     private void doWharehouseMonitor() {
         WharehouseMonitor wharehouse = new WharehouseMonitor(primaryStage);
         wharehouse.show();
     }
 
+    /**
+     * Affiche l'historique des logs en lançant la fenêtre dédiée.
+     * Cette méthode réalise une animation de transition vers l'historique des
+     * journaux en créant une nouvelle fenêtre LogHistory.
+     */
     @FXML
     private void doCheckHistory() {
         LogHistory history = new LogHistory(primaryStage);
