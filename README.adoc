@@ -119,7 +119,7 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 - https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_IOT.adoc[Documentation Utilisateur IOT]
 - https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_IOT.adoc[Documentation Technique IOT] 
 - https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20IOT.adoc[Cahier de Recettes IOT (Tests)]
-- https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_User_WEB.adoc[Documentation Utilisateur WEB]
+- https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Utilisateur_WEB.adoc[Documentation Utilisateur WEB]
 - https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_WEB.adoc[Documentation Technique WEB]
 - https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Recette%20WEB.adoc[Cahier de Recettes WEB (Tests)]
 - Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant IOT : https://github.com/orgs/IUT-Blagnac/projects/142[US]
