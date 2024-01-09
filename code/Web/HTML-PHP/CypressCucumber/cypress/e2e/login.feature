@@ -1,5 +1,5 @@
 Feature: Login to Application
-    As a valide user
+    As a valid user
     I want to log in into Application
 
     Scenario: Valid login 

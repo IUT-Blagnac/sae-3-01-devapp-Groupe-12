@@ -15,6 +15,5 @@ When('I submit login',() =>{
 
 //devrait etre dans homepageSteps.js
 Then('I should see homepage',() =>{
-    //get some element after login
-    cy.getByText('Déconnexion').parent().should('be.visible')
+    cy.get('.menu-item').should('be.visible')
 })
