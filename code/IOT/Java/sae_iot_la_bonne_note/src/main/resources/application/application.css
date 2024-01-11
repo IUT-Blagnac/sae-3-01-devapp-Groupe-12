@@ -19,8 +19,6 @@
     -fx-border-radius: 5px;
     -fx-border-width: 2.5;
     -fx-cursor: hand;
-    /* Curseur au survol */
-
 }
 
 .check-box:selected .mark {
@@ -304,18 +302,12 @@
 
 .chart-vertical-grid-lines {
     -fx-stroke-dash-array: none;
-    /* Lignes de la grille horizontales continues */
-
     -fx-stroke: rgba(0, 0, 0, 0.100);
-    /* Couleur des lignes de la grille verticales */
 }
 
 .chart-horizontal-grid-lines {
     -fx-stroke-dash-array: none;
-    /* Lignes de la grille horizontales continues */
-
     -fx-stroke: rgba(0, 0, 0, 0.100);
-    /* Couleur des lignes de la grille verticales */
 }
 
 .chart .chart-series-line {
@@ -424,4 +416,22 @@
 
 .notification-bar>.pane:hover {
     -fx-cursor: hand;
+}
+
+
+.slider {
+    -fx-cursor: hand;
+}
+
+.slider .track {
+    -fx-background-color: linear-gradient(to left, cyan, grey);
+    -fx-pref-height: 15px;
+
+}
+
+.slider .thumb {
+    -fx-pref-height: 40px;
+    -fx-pref-width: 12.5px;
+    -fx-background-color: linear-gradient(to top, black, grey);
+
 }

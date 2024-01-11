@@ -99,10 +99,13 @@ public class JsonReader {
             }
             fileInputStream.close();
         } catch (IOException e) {
-            AlertUtilities.showAlert(_primaryStage, "Aucun fichier trouvé.", "Aucune configuration existante trouvé.",
-                    "Aucune configuration n'a pu être chargé, merci d'effectuer une sauvegarde du fichier de configuration.",
-                    AlertType.INFORMATION);
-            return;
+            if (_isAlertFile) {
+                AlertUtilities.showAlert(_primaryStage, "Aucun fichier trouvé.",
+                        "Aucune configuration existante trouvé.",
+                        "Aucune configuration n'a pu être chargé, merci\nd'effectuer une sauvegarde du fichier de configuration.",
+                        AlertType.ERROR);
+                return;
+            }
         }
         _olAll.clear();
         if (_isAlertFile) {
@@ -119,49 +122,51 @@ public class JsonReader {
             _comboBoxRooms.getItems().add("Toutes");
             _comboBoxRooms.setValue("Toutes");
         }
-        if (isJsonFileOK(filePath)) {
-            try {
-                File jsonFile = new File(filePath);
-                FileInputStream inputStream = new FileInputStream(jsonFile);
-                if (jsonFile.canRead()) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    JsonNode rootNode = objectMapper.readTree(jsonFile);
-                    Iterator<Map.Entry<String, JsonNode>> fieldsIterator = rootNode.fields();
-                    while (fieldsIterator.hasNext()) {
-                        Map.Entry<String, JsonNode> entry = fieldsIterator.next();
-                        String _roomId = entry.getKey();
-                        JsonNode sensorDataArray = entry.getValue();
-                        if (_isAlertFile) {
-                            if (_listAllRoomsAlerts != null) {
-                                addAlertLog(_olAll, _listAllRoomsAlerts, _roomId, sensorDataArray);
+        if (filePath != null && filePath.length() > 0) {
+            if (isJsonFileOK(filePath)) {
+                try {
+                    File jsonFile = new File(filePath);
+                    FileInputStream inputStream = new FileInputStream(jsonFile);
+                    if (jsonFile.canRead()) {
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        JsonNode rootNode = objectMapper.readTree(jsonFile);
+                        Iterator<Map.Entry<String, JsonNode>> fieldsIterator = rootNode.fields();
+                        while (fieldsIterator.hasNext()) {
+                            Map.Entry<String, JsonNode> entry = fieldsIterator.next();
+                            String _roomId = entry.getKey();
+                            JsonNode sensorDataArray = entry.getValue();
+                            if (_isAlertFile) {
+                                if (_listAllRoomsAlerts != null) {
+                                    addAlertLog(_olAll, _listAllRoomsAlerts, _roomId, sensorDataArray);
+                                }
+                            } else {
+                                if (_listAllRoomsDatas != null) {
+                                    addDataLog(_olAll, _listAllRoomsDatas, _roomId, sensorDataArray);
+                                }
                             }
-                        } else {
-                            if (_listAllRoomsDatas != null) {
-                                addDataLog(_olAll, _listAllRoomsDatas, _roomId, sensorDataArray);
+                            if (_comboBoxRooms != null) {
+                                _comboBoxRooms.getItems().add(_roomId);
                             }
                         }
-                        if (_comboBoxRooms != null) {
-                            _comboBoxRooms.getItems().add(_roomId);
-                        }
+                    } else {
+                        AlertUtilities.showAlert(_primaryStage, "Erreur",
+                                "Lecture des données impossible.",
+                                "Erreur lors de la lecture des données sur le fichier JSON " + filePath,
+                                AlertType.ERROR);
                     }
-                } else {
+                    if (!_olAll.isEmpty()) {
+                        Collections.reverse(_olAll);
+                    }
+                    inputStream.close();
+                } catch (IOException e) {
                     AlertUtilities.showAlert(_primaryStage, "Erreur",
-                            "Lecture des données impossible.",
-                            "Erreur lors de la lecture des données sur le fichier JSON " + filePath, AlertType.ERROR);
+                            "Erreur lors de la lecture des données.",
+                            "Erreur lors de la lecture des données sur le fichier JSON " + filePath
+                                    + ".\nCode d'erreur : " + e,
+                            AlertType.ERROR);
                 }
-                if (!_olAll.isEmpty()) {
-                    Collections.reverse(_olAll);
-                }
-                inputStream.close();
-            } catch (IOException e) {
-                AlertUtilities.showAlert(_primaryStage, "Erreur",
-                        "Erreur lors de la lecture des données.",
-                        "Erreur lors de la lecture des données sur le fichier JSON " + filePath
-                                + ".\nCode d'erreur : " + e,
-                        AlertType.ERROR);
-            }
-        } else {
-            if (!_isCurrentDatas) {
+            } else {
+                System.out.println(filePath);
                 AlertUtilities.showAlert(_primaryStage, "Erreur",
                         "Fichier JSON introuvable.",
                         "Le fichier JSON " + filePath

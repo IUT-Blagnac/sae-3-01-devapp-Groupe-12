@@ -18,7 +18,9 @@ config = configparser.ConfigParser()
 found = config.read(config_file_path)
 
 # Récupèrer la fréquence d'affichage à partir des paramètres de configuration MQTT
-frequence_affichage = config.getfloat('CONFIG', 'frequence_affichage') 
+frequence_affichage = config.getfloat('CONFIG', 'frequence_affichage')
+# Conversion de la fréquence qui est un float en un int pour l'utiliser dans SIGALARM
+frequence_affichage = int(frequence_affichage) 
 
 print("Fichiers de configuration trouvés :", found)
 print("Sections trouvées :", config.sections())
@@ -50,14 +52,12 @@ fichier_alertes = os.path.join(config_dir, config.get('CONFIG', 'fichier_alerte'
 if os.path.exists(fichier_donnees):
     os.remove(fichier_donnees)
 
-# Dictionnaire permettant de stocker les données en attente d'écriture
-pending_data = {}
-
 
 # Gestion du système d'alarme
 def handler(signum, frame):
     # Cette fonction sera appelée lorsque le signal SIGALRM sera déclenché
     pass
+
 
 # Association du handler au signal d'alarme
 signal.signal(signal.SIGALRM, handler)
@@ -94,9 +94,6 @@ def ecrire(ecrire_log, nom_fichier, room, data):
         os.write(fichier, json.dumps(donnees, indent=4).encode())
         # Fermeture du descripteur de fichier
         os.close(fichier)
-        if(ecrire_log):
-            signal.alarm(frequence_affichage)
-            signal.pause()
 
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier données : {e}")
@@ -200,14 +197,19 @@ def on_message(client, userdata, msg):
         if(envoyer_alerte):
             print ("Alertes : \n" + alerte_texte)
             ecrire_alerte(room, alerte)  # S'il y a des alertes, les écrire dans le fichier
+        
+        # Permet d'écrire les données dans le fichier de logs (historique) et le fichier de données (temps réel)
         ecrire(False, fichier_donnees, room, salle_donnees)
         ecrire(True, fichier_logs, room, salle_donnees)
 
-        #pending_data[room] = salle_donnees
-        #signal.alarm(0)
+        # Mise en attente du programme avant la prochaine récéption (seulement si la fréquence d'affichage est > 0)
+        if(frequence_affichage > 0):
+            signal.alarm(frequence_affichage)
+            signal.pause()
+
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
-    signal.alarm(frequence_affichage)
+
 
 # Création et configuration du client MQTT
 client = mqtt.Client()
@@ -215,7 +217,11 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Connexion au broker
-client.connect(broker, port, 60)
+try:
+    client.connect(broker, port, 60)
+except Exception as e:
+    print(f"Echec de la connexion, code d'erreur : {e}")
+    exit(1)
 
 # Boucle de traitement des messages
 try:

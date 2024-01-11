@@ -47,6 +47,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -186,10 +187,12 @@ public class WharehouseMonitorController {
 
         PythonAndThreadManagement.initImgConnexionState(imgConnexionState);
         if (!PythonAndThreadManagement.isPythonRunning()) {
-            PythonAndThreadManagement.startPythonThread(_primaryStage);
+            PythonAndThreadManagement.startPythonThread(primaryStage);
         }
         PythonAndThreadManagement.updateImgConnexionState();
 
+        // Arrête et relance le thread de mise à jour des données pour éviter les
+        // doublons de ce Thread lors des changements de scène
         PythonAndThreadManagement.stopThreadByName("getNewDatasThread");
         initGetNewDatasThread();
 
@@ -263,9 +266,33 @@ public class WharehouseMonitorController {
             if (!alerts.equals("") && !lastRoomId.equals(data.getId())
                     || System.currentTimeMillis() - lastNotifTime > 30_000) {
                 createAlertNotification(data, alerts);
+                if (soundLvl != null) {
+                    playSoundAlert();
+                }
                 lastRoomId = data.getId();
                 lastNotifTime = System.currentTimeMillis();
             }
+        }
+    }
+
+    // volume du son
+    private Double soundLvl;
+    // chemin du fichier du son d'alerte
+    private final String audioFile = "/application/images/alert_sound.mp3";
+    // MediaPlayer qui permettra de manipuler le son
+    private final MediaPlayer mediaPlayer = new MediaPlayer(new javafx.scene.media.Media(
+            getClass().getResource(audioFile).toExternalForm()));
+
+    /**
+     * Joue le son d'alerte (remet le son au début pour les possibles alertes
+     * simultanées).
+     */
+    public void playSoundAlert() {
+        try {
+            mediaPlayer.seek(Duration.ZERO);
+            mediaPlayer.setVolume(soundLvl);
+            mediaPlayer.play();
+        } catch (Exception e) {
         }
     }
 
@@ -480,7 +507,8 @@ public class WharehouseMonitorController {
     @FXML
     private void showAlerts() {
         clickedNotif = "";
-        doCheckHistory();
+        LogHistory history = new LogHistory(primaryStage);
+        history.show();
     }
 
     /**
@@ -497,6 +525,12 @@ public class WharehouseMonitorController {
             setCheckBoxByConf(datasChosen, "activity", cbActivity, labActivity);
             setCheckBoxByConf(datasChosen, "co2", cbCo2, labCo2);
             fileDataPath = properties.getProperty("fichier_donnees");
+            soundLvl = NumbersUtilities.getDoubleFromString(properties.getProperty("son_Alertes"));
+            if (soundLvl != null && soundLvl > 0) {
+                soundLvl /= 100;
+            } else {
+                soundLvl = null;
+            }
             maxTemperature = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Temperature"));
             maxHumidity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Humidity"));
             maxActivity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Activity"));
@@ -507,7 +541,7 @@ public class WharehouseMonitorController {
         } catch (IOException e) {
             AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
                     "Aucune configuration existante trouvé.",
-                    "Aucune configuration n'a pu être chargé, merci d'effectuer une sauvegarde du fichier de configuration.",
+                    "Aucune configuration n'a pu être chargé, merci\nd'effectuer une sauvegarde du fichier de configuration.",
                     AlertType.ERROR);
         }
     }
@@ -613,6 +647,7 @@ public class WharehouseMonitorController {
             GraphMaker.updateGraphData(barChartCo2, listSearchedDatas, "co2", "ppm", comboBoxDateFormat.getValue(),
                     cbAvg.isSelected());
         }
+        updateDataForLargeGraph(listSearchedDatas, "");
     }
 
     /**
@@ -687,10 +722,16 @@ public class WharehouseMonitorController {
      * @param _e L'événement de fermeture de fenêtre.
      */
     private void closeWindow(WindowEvent _e) {
-        closeLargeGraphsStages();
-        PythonAndThreadManagement.stopPythonProcesses();
-        this.primaryStage.close();
-        System.exit(0);
+        if (AlertUtilities.confirmYesCancel(primaryStage, "Quitter l'application ?",
+                "Voulez-vous vraiment quitter l'application ?", null,
+                AlertType.CONFIRMATION)) {
+            closeLargeGraphsStages();
+            PythonAndThreadManagement.stopPythonThread();
+            primaryStage.close();
+            System.exit(0);
+        } else {
+            _e.consume();
+        }
     }
 
     /**
@@ -711,7 +752,6 @@ public class WharehouseMonitorController {
      */
     @FXML
     private void doConfiguration() {
-        PythonAndThreadManagement.stopPythonThread();
         Configuration conf = new Configuration(primaryStage);
         conf.show();
     }
@@ -722,7 +762,6 @@ public class WharehouseMonitorController {
      */
     @FXML
     private void doMenu() {
-        PythonAndThreadManagement.stopPythonThread();
         MainMenu menu = new MainMenu();
         menu.start(primaryStage);
         menu.show();
@@ -732,8 +771,8 @@ public class WharehouseMonitorController {
      * Ferme toutes les fenêtres des graphiques étendus.
      */
     private void closeLargeGraphsStages() {
-        for (Stage largeGraph : listLargeGraphsStages) {
-            largeGraph.close();
+        for (Stage stage : listLargeGraphsStages) {
+            stage.close();
         }
     }
 }

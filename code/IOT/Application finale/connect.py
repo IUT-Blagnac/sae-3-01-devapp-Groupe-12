@@ -197,7 +197,11 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Connexion au broker
-client.connect(broker, port, 60)
+try:
+    client.connect(broker, port, 60)
+except Exception as e:
+    print(f"Echec de la connexion, code d'erreur : {e}")
+    exit(1)
 
 # Boucle de traitement des messages
 client.loop_forever()

@@ -1,11 +1,9 @@
 package application.control;
 
-import application.Main;
 import application.tools.AlertUtilities;
 import application.view.MainMenuController;
 import application.view.LogHistoryController;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -36,11 +34,7 @@ public class LogHistory {
                     MainMenuController.class.getResource("LogHistory.fxml"));
             BorderPane root = loader.load();
 
-            // Création de la scène et configuration du stage
-            Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
-            scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
-            
-            primaryStage.setScene(scene);
+            primaryStage.getScene().setRoot(root);
             primaryStage.setTitle("Historique");
 
             // Récupération du contrôleur associé au fichier FXML chargé

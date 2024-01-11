@@ -160,8 +160,12 @@ public class LogHistoryController {
             Comparator<Data> comparator = (data1, data2) -> {
                 return data1.getDate().compareTo(data2.getDate());
             };
+
+            // Trie les données par date croissante
             Collections.sort(listAllRoomsAlerts, comparator);
             Collections.sort(listAllRoomsDatas, comparator);
+
+            // Inverse la liste pour avoir au début les données les plus récentes
             Collections.reverse(listAllRoomsAlerts);
             Collections.reverse(listAllRoomsDatas);
 
@@ -646,9 +650,16 @@ public class LogHistoryController {
      * @param _e L'événement de fermeture de fenêtre.
      */
     private void closeWindow(WindowEvent _e) {
-        closeLargeGraphsStages();
-        primaryStage.close();
-        System.exit(0);
+        if (AlertUtilities.confirmYesCancel(primaryStage, "Quitter l'application ?",
+                "Voulez-vous vraiment quitter l'application ?", null,
+                AlertType.CONFIRMATION)) {
+            closeLargeGraphsStages();
+            PythonAndThreadManagement.stopPythonThread();
+            primaryStage.close();
+            System.exit(0);
+        } else {
+            _e.consume();
+        }
     }
 
     /**

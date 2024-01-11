@@ -25,7 +25,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
@@ -58,6 +60,8 @@ public class ConfigurationController {
 
     @FXML
     private Button buttCheckWhareHouse;
+    @FXML
+    private ImageView imgConnexionState;
 
     @FXML
     private Button buttCheckHistory;
@@ -124,10 +128,25 @@ public class ConfigurationController {
     private CheckBox cbCo2;
 
     @FXML
-    private ChoiceBox<String> cbTimeUnit;
+    private ComboBox<String> cbTimeUnit;
 
     @FXML
     private TextField txtFrequency;
+
+    @FXML
+    private CheckBox cbSoundOn;
+
+    @FXML
+    private Label labSoundOn;
+
+    @FXML
+    private Label labSoundlvl;
+
+    @FXML
+    private Slider sliderSound;
+
+    @FXML
+    private Label labSoundLvlValue;
 
     @FXML
     private TextField txtMaxTemperature;
@@ -183,8 +202,8 @@ public class ConfigurationController {
         configuration = _configuration;
         primaryStage = _primaryStage;
 
-        // Arrêt du script python
-        PythonAndThreadManagement.stopPythonThread();
+        PythonAndThreadManagement.initImgConnexionState(imgConnexionState);
+        PythonAndThreadManagement.updateImgConnexionState();
 
         // Initialise les éléments visuels de l'IHM
         initViewElements();
@@ -230,7 +249,7 @@ public class ConfigurationController {
         setElementsByConf();
 
         // Initialise les écouteurs pour les champs de texte
-        initTxtFieldListeners();
+        initListeners();
     }
 
     /**
@@ -318,6 +337,7 @@ public class ConfigurationController {
             this.cbCo2.setSelected(true);
             this.cbTimeUnit.setValue("minute(s)");
             this.txtFrequency.setText("1");
+            this.sliderSound.setValue(50);
             this.txtMaxTemperature.setText("0");
             this.txtMaxHumidity.setText("0");
             this.txtMaxActivity.setText("0");
@@ -349,7 +369,7 @@ public class ConfigurationController {
             writer.write("[MQTT]\n");
             writer.write("broker=" + host + "\n");
             writer.write("port=" + String.valueOf(port) + "\n");
-            if (topic.equals("#")) {
+            if (topic.equals("#") || topic.trim().equals("")) {
                 topic = "AM107/by-room/#";
             } else {
                 String[] rooms = topic.split(",");
@@ -387,18 +407,25 @@ public class ConfigurationController {
             writer.write("choix_donnees=" + choixDonnee + "\n");
 
             tpTemps = cbTimeUnit.getValue();
-            if (tpTemps == "minute(s)") {
-                frequency = NumbersUtilities.getDoubleFromString(txtFrequency.getText()) * 60;
-            }
-            if (tpTemps == "heure(s)") {
-                frequency = NumbersUtilities.getDoubleFromString(txtFrequency.getText()) * 3600;
-            }
-            if (tpTemps == "jour(s)") {
-                frequency = NumbersUtilities.getDoubleFromString(txtFrequency.getText()) * 86400;
+            if (frequency != null) {
+                if (tpTemps == "minute(s)") {
+                    frequency = NumbersUtilities.getDoubleFromString(txtFrequency.getText()) * 60;
+                }
+                if (tpTemps == "heure(s)") {
+                    frequency = NumbersUtilities.getDoubleFromString(txtFrequency.getText()) * 3600;
+                }
+                if (tpTemps == "jour(s)") {
+                    frequency = NumbersUtilities.getDoubleFromString(txtFrequency.getText()) * 86400;
+                }
             }
             writer.write("typeTemps=" + tpTemps + "\n");
-            writer.write("frequence_affichage=" + frequency + "\n");
+            writer.write("frequence_affichage=" + (frequency != null ? frequency : 0) + "\n");
             writer.write("[ALERT]\n");
+            Double sound = null;
+            if (cbSoundOn.isSelected()) {
+                sound = sliderSound.getValue();
+            }
+            writer.write("son_Alertes=" + sound + "\n");
             if (maxTemperature != null) {
                 writer.write("seuil_Temperature=" + maxTemperature + "\n");
             }
@@ -411,10 +438,15 @@ public class ConfigurationController {
             if (maxActivity != null) {
                 writer.write("seuil_Activity=" + maxActivity + "\n");
             }
+
+            // Arrêt du script python
+            PythonAndThreadManagement.stopPythonThread();
+
             // Affiche une alerte en cas de succès de la sauvegarde
             AlertUtilities.showAlert(primaryStage, "Opération réussie.",
                     "Sauvegarde effectuée !",
-                    "La configuration a bien été sauvegardé.", AlertType.INFORMATION);
+                    "La configuration a bien été sauvegardé.\nSi une connexion MQTT était en cours, celle-ci a été arrêté, rendez-vous dans le menu \"Temps Réel pour la relancer\".",
+                    AlertType.INFORMATION);
         } catch (IOException e) {
             AlertUtilities.showAlert(primaryStage, "Opération échouée.",
                     "Une erreur est survenue !",
@@ -494,6 +526,16 @@ public class ConfigurationController {
             }
             txtFrequency.setText("" + frequency);
             cbTimeUnit.setValue(typeDuTemps);
+            Double soundLvl = NumbersUtilities.getDoubleFromString(properties.getProperty("son_Alertes"));
+            if (soundLvl != null) {
+                sliderSound.setValue(soundLvl.intValue());
+            }
+            cbSoundOn.setSelected(soundLvl == null ? false : true);
+            labSoundOn.setText(cbSoundOn.isSelected() ? "Activé" : "Désactivé");
+            labSoundlvl.setDisable(soundLvl == null ? true : false);
+            sliderSound.setDisable(soundLvl == null ? true : false);
+            labSoundLvlValue.setText(soundLvl == null ? "-" : "" + sliderSound.getValue());
+            labSoundLvlValue.setDisable(soundLvl == null ? true : false);
             maxTemperature = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Temperature"));
             txtMaxTemperature.setText(maxTemperature == null ? "" : String.valueOf(maxTemperature));
             maxActivity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Activity"));
@@ -506,7 +548,8 @@ public class ConfigurationController {
             // Si aucun fichier de configuration n'est trouvé, affiche une alerte
             AlertUtilities.showAlert(primaryStage, "Aucun fichier trouvé.",
                     "Aucune configuration existante trouvé.",
-                    "Aucune configuration n'a pu être chargé.", AlertType.INFORMATION);
+                    "Aucune configuration n'a pu être chargé.\nUn nouveau fichier sera crée lors de la sauvegarde.",
+                    AlertType.INFORMATION);
         }
     }
 
@@ -610,6 +653,7 @@ public class ConfigurationController {
      */
     private void disableMinConfWhileTest(boolean _disable) {
         buttReset.setDisable(_disable);
+        buttSave.setDisable(_disable);
         txtHost.setDisable(_disable);
         txtPort.setDisable(_disable);
     }
@@ -629,12 +673,31 @@ public class ConfigurationController {
     }
 
     /**
-     * Initialise les écouteurs de champs texte.
+     * Initialise les listeners des éléments de la scène.
      * Configure les validateurs pour différents types de champs texte.
      * Configure les actions lorsque le texte change dans les champs d'hôte, de
      * port, de fichiers, de fréquence et de seuils.
      */
-    private void initTxtFieldListeners() {
+    private void initListeners() {
+        cbSoundOn.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            labSoundOn.setText(newValue == true ? "Activé" : "Désactivé");
+            if (newValue) {
+                labSoundlvl.setDisable(false);
+                sliderSound.setDisable(false);
+                labSoundLvlValue.setText("" + sliderSound.getValue());
+                labSoundLvlValue.setDisable(false);
+            } else {
+                labSoundlvl.setDisable(true);
+                sliderSound.setDisable(true);
+                labSoundLvlValue.setText("-");
+                labSoundLvlValue.setDisable(true);
+            }
+        });
+
+        sliderSound.valueProperty().addListener((observable, oldValue, newValue) -> {
+            labSoundLvlValue.setText(String.valueOf(newValue.intValue() + "%"));
+        });
+
         txtHost.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.trim().isEmpty()) {
                 hostIsFilled = false;
@@ -710,7 +773,14 @@ public class ConfigurationController {
      * @param _e L'événement de fermeture de fenêtre.
      */
     private void closeWindow(WindowEvent _e) {
-        this.primaryStage.close();
-        System.exit(0);
+        if (AlertUtilities.confirmYesCancel(primaryStage, "Quitter l'application ?",
+                "Voulez-vous vraiment quitter l'application ?", null,
+                AlertType.CONFIRMATION)) {
+            PythonAndThreadManagement.stopPythonThread();
+            primaryStage.close();
+            System.exit(0);
+        } else {
+            _e.consume();
+        }
     }
 }

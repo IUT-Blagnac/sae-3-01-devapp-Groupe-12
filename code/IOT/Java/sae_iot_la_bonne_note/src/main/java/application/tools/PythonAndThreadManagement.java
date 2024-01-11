@@ -3,6 +3,7 @@ package application.tools;
 import java.io.IOException;
 import java.util.Map;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
@@ -18,6 +19,7 @@ public class PythonAndThreadManagement {
     private static Thread pythonThread;
     private static Process pythonProcess;
     private static ImageView imgConnexionState;
+    private static FadeTransition fdAnim;
 
     /**
      * Initialise l'image représentant l'état de la connexion.
@@ -30,17 +32,26 @@ public class PythonAndThreadManagement {
 
     /**
      * Met à jour l'image représentant l'état de la connexion en fonction de
-     * l'exécution de Python.
+     * l'exécution de Python. Le programme s'arrête si l'image est nulle.
      */
     public static void updateImgConnexionState() {
-        Platform.runLater(() -> {
-            if (isPythonRunning()) {
-                Style.setNewIcon(imgConnexionState, "connexion_icon.png");
-                Animations.startConnectedAnimation(imgConnexionState);
-            } else {
-                Style.setNewIcon(imgConnexionState, "connection_fail.png");
-            }
-        });
+        if (imgConnexionState == null) {
+            return;
+        } else {
+            Platform.runLater(() -> {
+                if (isPythonRunning()) {
+                    imgConnexionState.setVisible(true);
+                    Style.setNewIcon(imgConnexionState, "connexion_icon.png");
+                    fdAnim = Animations.startConnectedAnimation(imgConnexionState);
+                } else {
+                    Style.setNewIcon(imgConnexionState, "connection_fail.png");
+                    imgConnexionState.setOpacity(1);
+                    if (fdAnim != null) {
+                        fdAnim.stop();
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -54,11 +65,25 @@ public class PythonAndThreadManagement {
             ProcessBuilder processBuilder = new ProcessBuilder("python", scriptPath);
             try {
                 pythonProcess = processBuilder.start();
-                Style.setNewIcon(imgConnexionState, "connexion_icon.png");
-                Animations.startConnectedAnimation(imgConnexionState);
+                updateImgConnexionState();
+                try {
+                    pythonProcess.waitFor();
+                } catch (InterruptedException e) {
+                }
+                // System.out.println(exitValue);
+                // if (exitValue > 0) {
+                // Platform.runLater(() -> {
+                // AlertUtilities.showAlert(_primaryStage, "Erreur",
+                // "Lancement du script Python impossible.",
+                // "Une erreur est survenue lors du lancement du script Python.",
+                // AlertType.ERROR);
+                // });
+                // } else {
+                // Style.setNewIcon(imgConnexionState, "connexion_icon.png");
+                // Animations.startConnectedAnimation(imgConnexionState);
+                // }
             } catch (IOException e) {
                 Platform.runLater(() -> {
-                    Style.setNewIcon(imgConnexionState, "connection_fail.png");
                     AlertUtilities.showAlert(_primaryStage, "Erreur",
                             "Lancement du script Python impossible.",
                             "Une erreur est survenue lors du lancement du script Python."
@@ -66,6 +91,7 @@ public class PythonAndThreadManagement {
                             AlertType.ERROR);
                 });
             }
+            updateImgConnexionState();
         });
         pythonThread.start();
     }
@@ -90,10 +116,12 @@ public class PythonAndThreadManagement {
         if (pythonThread != null && pythonThread.isAlive()) {
             pythonThread.interrupt();
         }
+        updateImgConnexionState();
     }
 
     /**
      * Arrête tous les processus Python en cours.
+     * (Méthode utilisée pour le développement)
      */
     public static void stopPythonProcesses() {
         try {

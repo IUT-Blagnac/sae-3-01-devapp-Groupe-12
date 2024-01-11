@@ -26,12 +26,12 @@ public class Animations {
      * @param _duration La durée de l'animation en millisecondes.
      */
     public static void setAnimatedButton(Button _butt, double _scaleIn, double _scaleOut, double _duration) {
-        ScaleTransition scaleInTransition = new ScaleTransition(Duration.millis(_duration),
+        ScaleTransition scAnim = new ScaleTransition(Duration.millis(_duration),
                 _butt);
-        scaleInTransition.setToX(_scaleIn);
-        scaleInTransition.setToY(_scaleIn);
+        scAnim.setToX(_scaleIn);
+        scAnim.setToY(_scaleIn);
         _butt.setOnMouseEntered(event -> {
-            scaleInTransition.playFromStart();
+            scAnim.playFromStart();
         });
 
         ScaleTransition scaleOutTransition = new ScaleTransition(Duration.millis(150),
@@ -45,12 +45,12 @@ public class Animations {
     }
 
     public static void setSelectedMenuAnimation(Button _butt, double _fadeFrom, double _fadeTo, double _duration) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(_duration), _butt);
-        fadeTransition.setFromValue(_fadeFrom);
-        fadeTransition.setToValue(_fadeTo);
-        fadeTransition.setAutoReverse(true);
-        fadeTransition.setCycleCount(FadeTransition.INDEFINITE);
-        fadeTransition.play();
+        FadeTransition fdAnim = new FadeTransition(Duration.millis(_duration), _butt);
+        fdAnim.setFromValue(_fadeFrom);
+        fdAnim.setToValue(_fadeTo);
+        fdAnim.setAutoReverse(true);
+        fdAnim.setCycleCount(FadeTransition.INDEFINITE);
+        fdAnim.play();
     }
 
     /**
@@ -61,12 +61,12 @@ public class Animations {
      */
     public static RotateTransition startLoadingAnimation(ImageView _img) {
         _img.setVisible(true);
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(2), _img);
-        rotateTransition.setByAngle(360);
-        rotateTransition.setCycleCount(RotateTransition.INDEFINITE);
-        rotateTransition.setInterpolator(Interpolator.LINEAR);
-        rotateTransition.play();
-        return rotateTransition;
+        RotateTransition rtAnim = new RotateTransition(Duration.seconds(2), _img);
+        rtAnim.setByAngle(360);
+        rtAnim.setCycleCount(RotateTransition.INDEFINITE);
+        rtAnim.setInterpolator(Interpolator.LINEAR);
+        rtAnim.play();
+        return rtAnim;
     }
 
     /**
@@ -84,14 +84,21 @@ public class Animations {
      * Démarre une animation de transition en fondu pour l'image spécifiée.
      *
      * @param _img L'imageView pour laquelle démarrer l'animation.
+     * @return retourne l'animation crée
      */
-    public static void startConnectedAnimation(ImageView _img) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), _img);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.3);
-        fadeTransition.setCycleCount(Animation.INDEFINITE);
-        fadeTransition.setAutoReverse(true);
+    public static FadeTransition startConnectedAnimation(ImageView _img) {
+        if (_img != null) {
+            FadeTransition fdAnim = new FadeTransition(Duration.millis(1000), _img);
+            fdAnim.setFromValue(1.0);
+            fdAnim.setToValue(0.3);
+            fdAnim.setCycleCount(Animation.INDEFINITE);
+            fdAnim.setAutoReverse(true);
 
-        fadeTransition.play();
+            fdAnim.play();
+
+            return fdAnim;
+        } else {
+            return null;
+        }
     }
 }

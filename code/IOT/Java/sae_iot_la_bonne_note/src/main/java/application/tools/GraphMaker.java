@@ -248,6 +248,7 @@ public class GraphMaker {
         largeGraphStage.setHeight(_primaryStage.getHeight() / 1.5);
         largeGraphStage.setMinWidth(800);
         largeGraphStage.setMinHeight(600);
+        largeGraphStage.setTitle("Graphique");
         _listStages.add(largeGraphStage);
 
         XYChart<String, Number> largeGraph;

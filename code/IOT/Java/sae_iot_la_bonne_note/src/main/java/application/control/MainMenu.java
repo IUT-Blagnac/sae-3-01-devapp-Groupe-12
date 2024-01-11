@@ -42,15 +42,13 @@ public class MainMenu extends Application {
             BorderPane root = loader.load();
 
             // Création de la scène et configuration du stage
-            Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
+            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Menu Principal");
             primaryStage.setMinHeight(850);
             primaryStage.setMinWidth(1200);
-            primaryStage.setWidth(_primaryStage.getWidth());
-            primaryStage.setHeight(_primaryStage.getHeight());
             primaryStage.setResizable(true);
 
             // Récupération du contrôleur associé au fichier FXML chargé
@@ -60,6 +58,8 @@ public class MainMenu extends Application {
 
             this.show(); // Affichage de la fenêtre du menu principal
 
+            // Utilisé lors du développement
+            
             // LogHistory a = new LogHistory(_primaryStage);
             // b.show();
 

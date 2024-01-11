@@ -4,8 +4,11 @@ import application.control.Configuration;
 import application.control.LogHistory;
 import application.control.MainMenu;
 import application.control.WharehouseMonitor;
+import application.tools.AlertUtilities;
 import application.tools.Animations;
+import application.tools.PythonAndThreadManagement;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -58,7 +61,15 @@ public class MainMenuController {
      * @param _e L'événement de fermeture de fenêtre.
      */
     private void closeWindow(WindowEvent _e) {
-        this.primaryStage.close();
+        if (AlertUtilities.confirmYesCancel(primaryStage, "Quitter l'application ?",
+                "Voulez-vous vraiment quitter l'application ?", null,
+                AlertType.CONFIRMATION)) {
+            PythonAndThreadManagement.stopPythonThread();
+            primaryStage.close();
+            System.exit(0);
+        } else {
+            _e.consume();
+        }
     }
 
     /**
@@ -98,6 +109,7 @@ public class MainMenuController {
      */
     @FXML
     private void doLeave() {
+        PythonAndThreadManagement.stopPythonThread();
         this.primaryStage.close();
     }
 }
