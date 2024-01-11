@@ -34,13 +34,13 @@ values_by_room = {}
 historique_par_salle = {}
 
 # Nom du fichier pour écrire les logs
-fichier_logs = os.path.join(config_dir, config.get('CONFIG', 'fichier_logs') + '.json')
+fichier_logs = config.get('CONFIG', 'fichier_logs') + '.json'
 
 # Nom du fichier pour écrire les données
-fichier_donnees = os.path.join(config_dir, config.get('CONFIG', 'fichier_donnees') + '.json')
+fichier_donnees = config.get('CONFIG', 'fichier_donnees') + '.json'
 
 # Nom du fichier pour écrire les alertes
-fichier_alertes = os.path.join(config_dir, config.get('CONFIG', 'fichier_alerte') + '.json')
+fichier_alertes = config.get('CONFIG', 'fichier_alerte') + '.json'
 
 # Supprimer le fichier existant
 if os.path.exists(fichier_donnees):

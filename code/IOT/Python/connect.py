@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 # Chemin du fichier de configuration
-config_file_path = r'code\IOT\Python\config.ini'
+config_file_path = r'config.ini'
 
 # Obtenir le répertoire du fichier de configuration
 config_dir = os.path.dirname(config_file_path)
@@ -18,7 +18,7 @@ config = configparser.ConfigParser()
 found = config.read(config_file_path)
 
 # Récupèrer la fréquence d'affichage à partir des paramètres de configuration MQTT
-frequence_affichage = config.getint('CONFIG', 'frequence_affichage') 
+frequence_affichage = config.getfloat('CONFIG', 'frequence_affichage') 
 
 print("Fichiers de configuration trouvés :", found)
 print("Sections trouvées :", config.sections())
@@ -34,21 +34,23 @@ values_by_room = {}
 historique_par_salle = {}
 
 # Nom du fichier pour écrire les logs
-fichier_logs = os.path.join(config_dir, config.get('CONFIG','fichier_logs') + '.json')
+fichier_logs = config.get('CONFIG', 'fichier_logs') + '.json'
 
 # Nom du fichier pour écrire les données
-fichier_donnees = os.path.join(config_dir, config.get('CONFIG','fichier_donnees') + '.json')
+fichier_donnees = config.get('CONFIG', 'fichier_donnees') + '.json'
 
 # Nom du fichier pour écrire les alertes
-fichier_alertes = os.path.join(config_dir, config.get('CONFIG','fichier_alerte') + '.json')
+fichier_alertes = config.get('CONFIG', 'fichier_alerte') + '.json'
 
 # Supprimer le fichier existant
 if os.path.exists(fichier_donnees):
     os.remove(fichier_donnees)
 
+
 # Fonction pour calculer la moyenne des 10 dernières valeurs
 def calculer_moyenne(historique):
     return sum(historique[-10:]) / min(len(historique), 10)
+
 
 def ecrire(ecrire_log, nom_fichier, room, data):
     try:
@@ -69,11 +71,8 @@ def ecrire(ecrire_log, nom_fichier, room, data):
         # Mise à jour des données avec les nouvelles informations
         if room not in donnees:
             donnees[room] = []
-        # Si écriture dans le fichier de log, on ajoute les données au lieu de les remplacer
-        if(ecrire_log):
-            donnees[room].append(data)
-        else: 
-            donnees[room] = data
+        # Ajout des nouvelles données
+        donnees[room].append(data)
         # Écriture des données mises à jour dans le fichier sans effacer le contenu existant
         os.lseek(fichier, 0, os.SEEK_SET)
         os.write(fichier, json.dumps(donnees, indent=4).encode())
@@ -84,6 +83,7 @@ def ecrire(ecrire_log, nom_fichier, room, data):
             time.sleep(frequence_affichage)
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier données : {e}")
+
 
 def ecrire_alerte(room, alerte):
     try:
@@ -112,6 +112,7 @@ def ecrire_alerte(room, alerte):
         os.close(fic_alertes)
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier d'alerte : {e}")
+
         
 # Fonction appelée lors de la connexion au broker
 def on_connect(client, userdata, flags, rc):
@@ -170,7 +171,7 @@ def on_message(client, userdata, msg):
                 # Vérification des seuils pour déclencher une alerte
                 seuil_key = f"seuil_{key.lower()}"
                 if config.has_option('ALERT', seuil_key):
-                    seuil_max = config.getint('ALERT', seuil_key)
+                    seuil_max = config.getfloat('ALERT', seuil_key)
                     if value > seuil_max:
                         alerte["donnees"][key] = {
                             "valeur": value,
@@ -196,7 +197,11 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Connexion au broker
-client.connect(broker, port, 60)
+try:
+    client.connect(broker, port, 60)
+except Exception as e:
+    print(f"Echec de la connexion, code d'erreur : {e}")
+    exit(1)
 
 # Boucle de traitement des messages
 client.loop_forever()

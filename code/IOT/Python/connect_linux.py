@@ -18,7 +18,9 @@ config = configparser.ConfigParser()
 found = config.read(config_file_path)
 
 # Récupèrer la fréquence d'affichage à partir des paramètres de configuration MQTT
-frequence_affichage = config.getint('CONFIG', 'frequence_affichage') 
+frequence_affichage = config.getfloat('CONFIG', 'frequence_affichage')
+# Conversion de la fréquence qui est un float en un int pour l'utiliser dans SIGALARM
+frequence_affichage = int(frequence_affichage) 
 
 print("Fichiers de configuration trouvés :", found)
 print("Sections trouvées :", config.sections())
@@ -38,26 +40,24 @@ values_by_room = {}
 historique_par_salle = {}
 
 # Nom du fichier pour écrire les logs
-fichier_logs = os.path.join(config_dir, config.get('CONFIG', 'fichier_logs') + '.json')
+fichier_logs = config.get('CONFIG', 'fichier_logs') + '.json'
 
 # Nom du fichier pour écrire les données
-fichier_donnees = os.path.join(config_dir, config.get('CONFIG', 'fichier_donnees') + '.json')
+fichier_donnees = config.get('CONFIG', 'fichier_donnees') + '.json'
 
 # Nom du fichier pour écrire les alertes
-fichier_alertes = os.path.join(config_dir, config.get('CONFIG', 'fichier_alerte') + '.json')
+fichier_alertes = config.get('CONFIG', 'fichier_alerte') + '.json'
 
 # Supprimer le fichier existant
 if os.path.exists(fichier_donnees):
     os.remove(fichier_donnees)
-
-# Dictionnaire permettant de stocker les données en attente d'écriture
-pending_data = {}
 
 
 # Gestion du système d'alarme
 def handler(signum, frame):
     # Cette fonction sera appelée lorsque le signal SIGALRM sera déclenché
     pass
+
 
 # Association du handler au signal d'alarme
 signal.signal(signal.SIGALRM, handler)
@@ -87,19 +87,13 @@ def ecrire(ecrire_log, nom_fichier, room, data):
         # Mise à jour des données avec les nouvelles informations
         if room not in donnees:
             donnees[room] = []
-        # Si écriture dans le fichier de log, on ajoute les données au lieu de les remplacer
-        if(ecrire_log):
-            donnees[room].append(data)
-        else: 
-            donnees[room] = data
+        # Ajout des nouvelles données
+        donnees[room].append(data)
         # Écriture des données mises à jour dans le fichier sans effacer le contenu existant
         os.lseek(fichier, 0, os.SEEK_SET)
         os.write(fichier, json.dumps(donnees, indent=4).encode())
         # Fermeture du descripteur de fichier
         os.close(fichier)
-        if(ecrire_log):
-            signal.alarm(frequence_affichage)
-            signal.pause()
 
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier données : {e}")
@@ -191,7 +185,7 @@ def on_message(client, userdata, msg):
                 # Vérification des seuils pour déclencher une alerte
                 seuil_key = f"seuil_{key.lower()}"
                 if config.has_option('ALERT', seuil_key):
-                    seuil_max = config.getint('ALERT', seuil_key)
+                    seuil_max = config.getfloat('ALERT', seuil_key)
                     if value > seuil_max:
                         alerte["donnees"][key] = {
                             "valeur": value,
@@ -203,14 +197,19 @@ def on_message(client, userdata, msg):
         if(envoyer_alerte):
             print ("Alertes : \n" + alerte_texte)
             ecrire_alerte(room, alerte)  # S'il y a des alertes, les écrire dans le fichier
+        
+        # Permet d'écrire les données dans le fichier de logs (historique) et le fichier de données (temps réel)
         ecrire(False, fichier_donnees, room, salle_donnees)
         ecrire(True, fichier_logs, room, salle_donnees)
 
-        #pending_data[room] = salle_donnees
-        #signal.alarm(0)
+        # Mise en attente du programme avant la prochaine récéption (seulement si la fréquence d'affichage est > 0)
+        if(frequence_affichage > 0):
+            signal.alarm(frequence_affichage)
+            signal.pause()
+
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
-    signal.alarm(frequence_affichage)
+
 
 # Création et configuration du client MQTT
 client = mqtt.Client()
@@ -218,7 +217,11 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Connexion au broker
-client.connect(broker, port, 60)
+try:
+    client.connect(broker, port, 60)
+except Exception as e:
+    print(f"Echec de la connexion, code d'erreur : {e}")
+    exit(1)
 
 # Boucle de traitement des messages
 try:
