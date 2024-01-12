@@ -137,11 +137,11 @@ La fonctionnalité "Se Déconnecter" permet aux utilisateurs du site de mettre f
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp2.png[]
 
 Diagramme de séquence :
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys2.png[]
 
 Description du diagramme de séquence :
 
@@ -151,16 +151,19 @@ Pages PHP :
 
 deconnexion.php
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_deconnexion.png[]
+
 == Fonctionnalité "Suivre ses Commandes"
 
 La fonctionnalité "Suivre ses Commandes" offre aux clients la possibilité de consulter l'état et l'historique de leurs commandes passées. Elle fournit des informations détaillées sur le statut de chaque commande, de la validation à la livraison. Les clients peuvent ainsi suivre en temps réel l'évolution de leurs achats.
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp3.png[]
 
 Diagramme de séquence :
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys3.png[]
 
 Description du diagramme de séquence :
 
@@ -170,10 +173,9 @@ La base de données renvoie l'historique des commandes au site web.
 Le site web affiche l'historique des commandes à l'utilisateur.
 Pages PHP :
 
-suivi_commandes.php
+SuiviCommandes.php
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_suivicommande.png[]
 
 == Fonctionnalité "Modifier les Informations du Compte"
 
@@ -181,11 +183,11 @@ La fonctionnalité "Modifier les Informations du Compte" permet aux utilisateurs
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp4.png[]
 
 Diagramme de séquence :
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys4.png[]
 
 Description du diagramme de séquence :
 
@@ -207,12 +209,11 @@ La fonctionnalité "Se Connecter à son Compte" permet aux utilisateurs enregist
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp5.png[]
 
 Diagramme de séquence :
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys5.png[]
 
 Description du diagramme de séquence :
 
@@ -224,9 +225,10 @@ La base de données confirme la connexion.
 Le site web redirige l'utilisateur vers son compte.
 Pages PHP :
 
-FormConnexion.php
+FormConnexion.php / TraitConnexion.php
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_formconnexion.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_traitconnexion.png[]
 
 == Fonctionnalité "Créer un Compte"
 
@@ -234,12 +236,11 @@ La fonctionnalité "Créer un Compte" offre aux nouveaux clients la possibilité
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp6.png[]
 
 Diagramme de séquence :
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys6.png[]
 
 Description du diagramme de séquence :
 
@@ -251,4 +252,157 @@ La base de données confirme l'inscription.
 Le site web redirige l'utilisateur vers son nouveau compte.
 Pages PHP :
 
-Inscription.php
+Inscription.php / TraitInscription.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_inscription.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_traitinscription.png[]
+
+== Fonctionnalité "Noter un Produit"
+
+La fonctionnalité "Noter un Produit" permet aux utilisateurs de laisser des commentaires et des évaluations sur les produits disponibles sur le site. Cela offre une plateforme interactive où les clients peuvent partager leurs expériences avec les produits, aidant ainsi d'autres utilisateurs dans leurs décisions d'achat.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp7.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys7.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Noter un Produit" sur le site web.
+Le site web affiche un formulaire d'évaluation.
+L'utilisateur soumet l'évaluation du produit.
+Le site web enregistre l'évaluation du produit dans la base de données.
+La base de données confirme l'enregistrement.
+Le site web affiche une confirmation à l'utilisateur.
+Pages PHP :
+
+noter_produit.php
+
+
+
+== Fonctionnalité "Payer sa Commande"
+
+La fonctionnalité "Payer sa Commande" propose différentes méthodes de paiement sécurisées pour permettre aux utilisateurs de finaliser l'achat de leurs produits. Elle assure un processus de paiement fluide et sécurisé, garantissant la confidentialité des informations financières des clients.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp8.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys8.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Payer sa Commande" sur le site web.
+Le site web affiche les options de paiement disponibles.
+L'utilisateur sélectionne une méthode de paiement.
+Le site web valide la transaction avec la base de données.
+La base de données confirme le paiement.
+Le site web affiche une confirmation de paiement à l'utilisateur.
+Pages PHP :
+
+CommanderChoixPaiement.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_commanderchoixpaiement.png[]
+
+== Fonctionnalité "Ajouter au Panier"
+
+La fonctionnalité "Ajouter au Panier" permet aux utilisateurs de sélectionner des produits et de les ajouter à leur panier d'achat. Cela offre une expérience d'achat conviviale, permettant aux clients de rassembler les articles souhaités avant de passer à la caisse.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp9.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys9.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Ajouter au Panier" sur le site web.
+Le site web confirme l'ajout au panier.
+Pages PHP :
+
+addToCart.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_addtocart.png[]
+
+== Fonctionnalité "Partager des Produits sur les Réseaux Sociaux"
+
+La fonctionnalité "Partager des Produits sur les Réseaux Sociaux" facilite le partage des produits sur différentes plateformes de médias sociaux. Cela permet aux utilisateurs de recommander des produits à leur réseau, élargissant ainsi la visibilité de la boutique en ligne.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp10.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys10.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Partager sur Réseaux Sociaux" sur le site web.
+Le site web affiche les options de partage.
+L'utilisateur sélectionne une plateforme de médias sociaux.
+Le site web partage le lien du produit avec la plateforme sociale.
+La plateforme sociale confirme le partage à l'utilisateur.
+
+Pages PHP :
+
+detailsProduit.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_detailsproduit.png[]
+
+== Fonctionnalité "Chercher des Produits"
+
+La fonctionnalité "Chercher des Produits" offre une fonction de recherche permettant aux clients de trouver rapidement des produits spécifiques. Cela améliore l'efficacité de la navigation, permettant aux utilisateurs de filtrer et de trouver des articles en fonction de leurs besoins.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp11.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys11.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur saisit une recherche de produit sur le site web.
+Le site web envoie une requête de recherche à la base de données.
+La base de données renvoie les résultats de recherche au site web.
+Le site web affiche les résultats de recherche à l'utilisateur.
+Pages PHP :
+
+index.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_index.png[]
+
+== Fonctionnalité "Contacter le Service Client"
+
+La fonctionnalité "Contacter le Service Client" permet aux clients de communiquer directement avec le service client pour poser des questions, signaler des problèmes, ou demander de l'aide. Cette fonctionnalité utilise l'API ChatGPT pour offrir une assistance automatisée et répondre aux préoccupations des utilisateurs.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp12.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys12.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Contacter le Service Client" sur le site web.
+Le site web affiche un formulaire de contact.
+L'utilisateur soumet sa demande via le formulaire.
+Le site web transmet la demande à l'API ChatGPT.
+L'API ChatGPT génère une réponse automatique.
+Le site web affiche la réponse du service client à l'utilisateur.
+Pages PHP :
+
+ServiceClient.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_serviceclient.png[]
