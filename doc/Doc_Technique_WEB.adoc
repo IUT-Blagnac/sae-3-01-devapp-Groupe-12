@@ -79,9 +79,45 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 == Ressources Utilisées
 
+1. Technologies et Langages
+
+Hébergement : Le site est hébergé sur MobaXterm, fournissant une plateforme pour le développement et le déploiement du projet.
+
+Langages Frontend : Utilisation de HTML, CSS et JavaScript pour créer l'interface utilisateur interactive et dynamique.
+
+Langage Backend : Utilisation de PHP pour traiter les requêtes côté serveur, générer des pages dynamiques et interagir avec la base de données.
+
+Base de Données : Utilisation de phpMyAdmin pour la gestion de la base de données MySQL, stockant les informations relatives aux produits, utilisateurs et commandes.
+
+API ChatGPT : Intégration de l'API ChatGPT pour la fonctionnalité de service client, permettant des interactions conversationnelles automatisées.
+
+2. Outils de Développement
+
+Environnement de Développement : Utilisation de MobaXterm comme plateforme d'hébergement et de développement.
+
+Éditeur de Code : Utilisation de Visual Studio Code (VSCode) comme éditeur principal pour coder le frontend et le backend.
+
+Contrôle de Version : Utilisation de GitHub Desktop pour suivre les mises à jour du code, collaborer en équipe et gérer les versions du projet.
+
+3. Architecture du Projet
+
+Méthodologie Agile : Adoption de la méthodologie Agile Scrum, avec un Scrum Master, pour favoriser la flexibilité et la collaboration tout au long du cycle de développement.
+
+4. Tests et Débogage
+
+Tests et Débogage Manuel : Les tests et débogages sont réalisés manuellement sans l'utilisation d'un framework spécifique.
+
+5. Gestion de Projet
+
+Plateforme de Gestion de Projet : Utilisation de GitHub pour le suivi de l'avancement du projet, la gestion des tâches et la collaboration au sein de l'équipe.
+
+Cette combinaison de technologies, outils et méthodologies a été choisie pour créer un site web dynamique, fonctionnel et collaboratif, répondant aux besoins de La Bonne Note. La méthodologie Agile Scrum, associée à GitHub, a permis une gestion efficace du projet, tandis que l'utilisation de MobaXterm et de phpMyAdmin a facilité le développement et la gestion de l'infrastructure technique.
+
 == Se rendre sur le site Web
 
 Pour se rendre sur le site web :
+
+Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de recherche de votre navigateur web : http://193.54.227.208/~saephp12/index.php 
 
 = Fonctionnalités développées
 
