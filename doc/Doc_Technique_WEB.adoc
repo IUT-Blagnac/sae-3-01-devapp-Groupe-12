@@ -350,7 +350,7 @@ La plateforme sociale confirme le partage à l'utilisateur.
 
 Pages PHP :
 
-index.php
+detailsProduit.php
 
 
 == Fonctionnalité "Chercher des Produits"
