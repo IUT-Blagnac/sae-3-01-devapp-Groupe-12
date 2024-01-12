@@ -52,6 +52,27 @@ L'entreprise "La Bonne Note" a identifié le besoin crucial de mettre en place u
 
 == Cas d'utilisation
 
+1. Administration
+Gérer les Produits : Permet à l'administrateur de gérer le catalogue de produits, y compris l'ajout, la modification et la suppression d'articles.
+Gérer les Promotions : Autorise l'administrateur à créer et gérer des offres spéciales et des promotions.
+Accéder aux Statistiques de Ventes : Offre à l'administrateur une vue détaillée des performances de vente, permettant une analyse approfondie.
+2. Utilisateur
+Gérer son Compte : Fonction principale pour les clients, offrant plusieurs options pour gérer leur compte en ligne.
+Se Déconnecter : Permet aux utilisateurs de se déconnecter de leur compte.
+Suivre ses Commandes : Permet aux clients de suivre l'état et l'historique de leurs commandes.
+Modifier les Informations du Compte : Autorise les utilisateurs à mettre à jour leurs informations personnelles.
+Se Connecter à son Compte : Permet aux utilisateurs de se connecter à leur compte existant.
+Créer un Compte : Permet aux nouveaux clients de créer un compte sur la plateforme.
+3. Achat
+Acheter : Fonction principale pour les clients, facilitant le processus d'achat en ligne.
+Noter un Produit : Permet aux clients de laisser des commentaires et des évaluations sur les produits.
+Payer sa Commande : Propose différentes méthodes de paiement sécurisées pour finaliser l'achat.
+Ajouter au Panier : Permet aux clients de sélectionner des produits et de les ajouter à leur panier d'achat.
+Partager des Produits sur les Réseaux Sociaux : Facilite le partage de produits sur les plateformes de médias sociaux.
+Chercher des Produits : Offre une fonction de recherche permettant aux clients de trouver rapidement des produits spécifiques.
+4. Service Client
+Contacter le Service Client : Permet aux clients de communiquer directement avec le service client pour poser des questions, signaler des problèmes ou demander de l'aide.
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
 
 = Structure du projet 
