@@ -48,6 +48,11 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 = Structure du projet 
 
 == Packages et classes Java
+
+Justification du Choix du Pattern MVC
+
+Le choix du pattern Modèle-Vue-Contrôleur (MVC) pour le développement de cette application repose sur sa capacité à fournir une structure organisée et modulaire. En adoptant MVC, nous séparons clairement la logique métier (Modèle) de l'interface utilisateur (Vue) et des interactions utilisateur (Contrôleur). Cette séparation des responsabilités améliore la maintenabilité du code, facilite les modifications et extensions futures, et encourage la réutilisabilité des composants. En outre, MVC offre une clarté architecturale, simplifiant le processus de développement et permettant une évolution plus fluide de l'application au fil du temps. Ce choix vise à créer une base solide pour garantir la robustesse, la flexibilité et la pérennité de l'application.
+
 * **application** : comporte le main permettant de lancer l'application ainsi que la classe qui permet de connaître l'état de l'application
 ** Classes :
 *** Main.java : Classe principale permettant de lancer l'application.
