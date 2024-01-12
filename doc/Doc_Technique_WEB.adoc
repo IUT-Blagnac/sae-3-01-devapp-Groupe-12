@@ -137,7 +137,7 @@ La fonctionnalité "Se Déconnecter" permet aux utilisateurs du site de mettre f
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp2.png[]
 
 Diagramme de séquence :
 
@@ -157,7 +157,7 @@ La fonctionnalité "Suivre ses Commandes" offre aux clients la possibilité de c
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp3.png[]
 
 Diagramme de séquence :
 
@@ -182,7 +182,7 @@ La fonctionnalité "Modifier les Informations du Compte" permet aux utilisateurs
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp4.png[]
 
 Diagramme de séquence :
 
@@ -208,7 +208,7 @@ La fonctionnalité "Se Connecter à son Compte" permet aux utilisateurs enregist
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp5.png[]
 
 Diagramme de séquence :
 
@@ -234,7 +234,7 @@ La fonctionnalité "Créer un Compte" offre aux nouveaux clients la possibilité
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp6.png[]
 
 Diagramme de séquence :
 
@@ -261,7 +261,7 @@ La fonctionnalité "Noter un Produit" permet aux utilisateurs de laisser des com
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp7.png[]
 
 Diagramme de séquence :
 
@@ -287,7 +287,7 @@ La fonctionnalité "Payer sa Commande" propose différentes méthodes de paiemen
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp8.png[]
 
 Diagramme de séquence :
 
@@ -312,7 +312,7 @@ La fonctionnalité "Ajouter au Panier" permet aux utilisateurs de sélectionner 
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp9.png[]
 
 Diagramme de séquence :
 
@@ -334,7 +334,7 @@ La fonctionnalité "Partager des Produits sur les Réseaux Sociaux" facilite le 
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp10.png[]
 
 Diagramme de séquence :
 
@@ -359,7 +359,7 @@ La fonctionnalité "Chercher des Produits" offre une fonction de recherche perme
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp11.png[]
 
 Diagramme de séquence :
 
@@ -382,7 +382,7 @@ La fonctionnalité "Contacter le Service Client" permet aux clients de communiqu
 
 Partie du UseCase :
 
-Image partie du use case (à remplir)
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp12.png[]
 
 Diagramme de séquence :
 
