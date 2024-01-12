@@ -141,7 +141,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys2.png[]
 
 Description du diagramme de séquence :
 
@@ -161,6 +161,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys3.png[]
 
 Description du diagramme de séquence :
 
@@ -185,7 +186,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys4.png[]
 
 Description du diagramme de séquence :
 
@@ -211,8 +212,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys5.png[]
 
 Description du diagramme de séquence :
 
@@ -238,8 +238,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys6.png[]
 
 Description du diagramme de séquence :
 
@@ -266,10 +265,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
-
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys7.png[]
 
 Description du diagramme de séquence :
 
@@ -295,7 +291,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys8.png[]
 
 Description du diagramme de séquence :
 
@@ -320,10 +316,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
-
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys9.png[]
 
 Description du diagramme de séquence :
 
@@ -345,8 +338,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys10.png[]
 
 Description du diagramme de séquence :
 
@@ -371,8 +363,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys11.png[]
 
 Description du diagramme de séquence :
 
@@ -395,7 +386,7 @@ Image partie du use case (à remplir)
 
 Diagramme de séquence :
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys12.png[]
 
 Description du diagramme de séquence :
 
