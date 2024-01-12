@@ -170,7 +170,7 @@ La base de données renvoie l'historique des commandes au site web.
 Le site web affiche l'historique des commandes à l'utilisateur.
 Pages PHP :
 
-suivi_commandes.php
+SuiviCommandes.php
 
 
 
@@ -383,3 +383,28 @@ Le site web affiche les résultats de recherche à l'utilisateur.
 Pages PHP :
 
 index.php
+
+
+== Fonctionnalité "Contacter le Service Client"
+
+La fonctionnalité "Contacter le Service Client" permet aux clients de communiquer directement avec le service client pour poser des questions, signaler des problèmes, ou demander de l'aide. Cette fonctionnalité utilise l'API ChatGPT pour offrir une assistance automatisée et répondre aux préoccupations des utilisateurs.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Contacter le Service Client" sur le site web.
+Le site web affiche un formulaire de contact.
+L'utilisateur soumet sa demande via le formulaire.
+Le site web transmet la demande à l'API ChatGPT.
+L'API ChatGPT génère une réponse automatique.
+Le site web affiche la réponse du service client à l'utilisateur.
+Pages PHP :
+
+ServiceClient.php
