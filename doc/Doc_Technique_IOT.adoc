@@ -74,13 +74,27 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 == Installer java
 
-Pour exécuter l'application Java et Python, vérifiez d'abord que Java est installé sur votre ordinateur en ouvrant une invite de commande et en saisissant la commande suivante :
+Pour exécuter l'application Java, vérifiez d'abord que Java est installé sur votre ordinateur en ouvrant une invite de commande et en saisissant la commande suivante :
 
 - java -version
 
-Si JAVA n'est pas installé, vous pouvez le télécharger depuis https://www.java.com/fr/download/.
+Si la version de Java apparaît et qu'il s'agit bien de la version 17, vous pouvez sauter l’étape d’installation de Java.
+
+Si JAVA n'est pas installé, vous pouvez le télécharger https://www.oracle.com/fr/java/technologies/downloads/#java17[ici], veillez à bien choisir la version 17 ainsi que la version adaptée pour votre système d'exploitation.
 
 == Installer Python
+
+Pour vérifier si votre système dispose de Python : 
+
+Ouvrir un terminal
+[source,cmd]
+----
+Python –version
+----
+
+Si la version de Python apparaît, vous pouvez sauter l’étape d’installation de Python.
+
+Si Python n’est pas installé, vous pouvez le télécharger depuis https://www.python.org/downloads/.
 
 Ensuite, pour que l'application Java puisse exécuter le script Python, assurez-vous d'avoir les bibliothèques requises installées pour Python. Voici les bibliothèques nécessaires :
 
@@ -91,8 +105,6 @@ Ensuite, pour que l'application Java puisse exécuter le script Python, assurez-
 5. `time` (sous Windows uniquement) : Module Python pour le temps.
 6. `datetime`: Module Python pour manipuler les dates et heures.
 
-Si Python n'est pas installé, vous pouvez le télécharger depuis https://www.python.org/downloads/.
-
 Pour installer les bibliothèques Python, ouvrez une invite de commande ou un terminal et saisissez les commandes suivantes :
 
 [source,cmd]
@@ -102,6 +114,7 @@ pip install jsonlib-python3
 pip install configparser
 pip install datetime
 ----
+
 
 == Lancer l'application
 
