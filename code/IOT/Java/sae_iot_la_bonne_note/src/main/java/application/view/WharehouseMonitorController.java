@@ -278,7 +278,7 @@ public class WharehouseMonitorController {
     // volume du son
     private Double soundLvl;
     // chemin du fichier du son d'alerte
-    private final String audioFile = "/application/images/alert_sound.mp3";
+    private final String audioFile = "/application/sound/alert_sound.mp3";
     // MediaPlayer qui permettra de manipuler le son
     private final MediaPlayer mediaPlayer = new MediaPlayer(new javafx.scene.media.Media(
             getClass().getResource(audioFile).toExternalForm()));
