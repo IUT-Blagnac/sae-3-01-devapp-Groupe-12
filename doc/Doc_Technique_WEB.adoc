@@ -151,6 +151,8 @@ Pages PHP :
 
 deconnexion.php
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_deconnexion.png[]
+
 == Fonctionnalité "Suivre ses Commandes"
 
 La fonctionnalité "Suivre ses Commandes" offre aux clients la possibilité de consulter l'état et l'historique de leurs commandes passées. Elle fournit des informations détaillées sur le statut de chaque commande, de la validation à la livraison. Les clients peuvent ainsi suivre en temps réel l'évolution de leurs achats.
@@ -173,8 +175,7 @@ Pages PHP :
 
 SuiviCommandes.php
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_suivicommande.png[]
 
 == Fonctionnalité "Modifier les Informations du Compte"
 
@@ -226,7 +227,8 @@ Pages PHP :
 
 FormConnexion.php / TraitConnexion.php
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_formconnexion.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_traitconnexion.png[]
 
 == Fonctionnalité "Créer un Compte"
 
@@ -252,8 +254,8 @@ Pages PHP :
 
 Inscription.php / TraitInscription.php
 
-
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_inscription.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_traitinscription.png[]
 
 == Fonctionnalité "Noter un Produit"
 
@@ -305,6 +307,7 @@ Pages PHP :
 
 CommanderChoixPaiement.php
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_commanderchoixpaiement.png[]
 
 == Fonctionnalité "Ajouter au Panier"
 
@@ -326,7 +329,7 @@ Pages PHP :
 
 addToCart.php
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_addtocart.png[]
 
 == Fonctionnalité "Partager des Produits sur les Réseaux Sociaux"
 
@@ -352,6 +355,7 @@ Pages PHP :
 
 detailsProduit.php
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_detailsproduit.png[]
 
 == Fonctionnalité "Chercher des Produits"
 
@@ -375,6 +379,7 @@ Pages PHP :
 
 index.php
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_index.png[]
 
 == Fonctionnalité "Contacter le Service Client"
 
@@ -399,3 +404,5 @@ Le site web affiche la réponse du service client à l'utilisateur.
 Pages PHP :
 
 ServiceClient.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_serviceclient.png[]
