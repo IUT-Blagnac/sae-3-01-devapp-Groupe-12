@@ -280,6 +280,21 @@ La commande fonctionne parfaitement.
 Une alerte indiquant les différents produits hors stock s'affiche bien.
 |====
 
+=== Suivre ses commandes
+
+|====
+|Cas de test 4+|Test-02-09-01
+|Titre 4+|Suivre ses commandes
+|Objectif 4+|Vérifier que la commande peut être consulté via le suivi des commandes
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Allez dans le menu "Mes Commandes" ^|Toutes vos commandes passées sont visibles ^| Avoir au moins une commande passée sur le site ^|OK
+
+5+|Commentaire :
+Le suivi des commandes fonctionne bien.
+|====
+
 === Contacter le service client
 
 |====
