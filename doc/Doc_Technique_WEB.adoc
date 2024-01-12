@@ -225,6 +225,7 @@ Le site web redirige l'utilisateur vers son compte.
 Pages PHP :
 
 FormConnexion.php
+TraitConnexion.php
 
 
 
