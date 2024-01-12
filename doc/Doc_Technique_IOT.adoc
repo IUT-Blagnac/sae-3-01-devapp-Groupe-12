@@ -47,11 +47,46 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 = Structure du projet 
 
-== Packages Java
-- application : comporte le main permettant de lancer l'application ainsi que la classe qui permet de connaître l'état de l'application
-- application.control : contient les contrôleurs et l'accès aux données, regroupés dans le package "application.control", sont responsables de la gestion des fonctionnalités de l'application. Ils traitent les requêtes des utilisateurs et assurent la liaison avec la base de données Oracle via les classes du package "model.orm".
-- application.tools : fournit des outils d'aide supplémentaires facilitant ainsi le développement et la maintenance de l'application.
-- application.view : contient les vues de l'application, gérée par le package "application.view", est basée sur des fichiers FXML et leurs contrôleurs associés. Chaque page FXML possède sa propre vue, garantissant une interface utilisateur claire et intuitive.
+== Packages et classes Java
+* **application** : comporte le main permettant de lancer l'application ainsi que la classe qui permet de connaître l'état de l'application
+** Classes :
+*** Main.java : Classe principale permettant de lancer l'application.
+
+* application.**control** : contient les contrôleurs et l'accès aux données, regroupés dans le package "application.control", sont responsables de la gestion des fonctionnalités de l'application
+** Classes :
+*** Configuration.java : gère la récupération et l'affichage de la scène de configuration
+*** LogHistory.java : gère la récupération et l'affichage de la scène de l'historique
+*** MainMenu.java : gère la récupération et l'affichage de la scène du menu principal
+*** WharehouseMonitor.java : gère la récupération et l'affichage de la scène des données en temps réel
+
+* application.**model** : 
+** Classes : 
+*** Alert.java : représente une alerte en fonction des seuils définis pour la température, l'humidité, l'activité et le CO2
+*** Data.java : représente les données associées à une mesure spécifique. 
+
+* application.**tools** : fournit des outils d'aide supplémentaires facilitant ainsi le développement et la maintenance de l'application
+** Classes :
+*** AlertUtilities.java : fournit des méthodes pour afficher différents types d'alertes
+*** Animations.java : permet de créer des animations sur des Node javafx
+*** DateUtilities : fournit des méthodes utilitaires pour manipuler les dates et les formats de date
+*** GraphMaker.java : fournit des méthodes pour manipuler et gérer les graphiques JavaFX
+*** JsonReader.java : utilitaire pour la lecture et la manipulation de fichiers JSON
+*** ListViewUtilities.java : utilitaire pour la configuration des cellules dans une ListView
+*** MQTTConnection.java : utilitaire pour la gestion des connexions MQTT
+*** NumbersUtilities.java : utilitaire pour la conversion des chaînes en nombres
+*** PythonAndThreadManagement.java : gère le démarrage, l'arrêt et la surveillance des processus Python et la mise à jour des données via des threads
+*** StageManagement.java : utilitaire pour centrer automatiquement une fenêtre sur une autre
+*** Style.java : fournit des méthodes pour gérer et appliquer des styles personnalisés ainsi que pour manipuler des icônes dans une interface utilisateur JavaFX
+
+* application.**view** : contient les vues de l'application, gérée par le package "application.view", est basée sur des fichiers FXML et leurs contrôleurs associés. Chaque page FXML possède sa propre vue, garantissant une interface utilisateur claire et intuitive
+** Classes :
+*** ConfigurationController.java : gère les actions de la scène de configuration
+*** LogHistoryController.java : gère les actions de la scène de l'historique
+*** MainMenuController.java : gère les actions de la scène du menu principal
+*** WharehouseMonitorController.java : gère les actions de la scène des données en temps réel
+
+Le dossier ressources contient tous les éléments nécessaires à l'application (images, sons, scène FXML).
+
 
 == Fichiers Python
   - connect_linux.py : version Linux du script.
