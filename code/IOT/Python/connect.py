@@ -18,7 +18,9 @@ config = configparser.ConfigParser()
 found = config.read(config_file_path)
 
 # Récupèrer la fréquence d'affichage à partir des paramètres de configuration MQTT
-frequence_affichage = config.getfloat('CONFIG', 'frequence_affichage') 
+frequence_affichage = config.getfloat('CONFIG', 'frequence_affichage')
+# Conversion de la fréquence qui est un float en un int
+frequence_affichage = int(frequence_affichage)  
 
 print("Fichiers de configuration trouvés :", found)
 print("Sections trouvées :", config.sections())
@@ -78,9 +80,6 @@ def ecrire(ecrire_log, nom_fichier, room, data):
         os.write(fichier, json.dumps(donnees, indent=4).encode())
         # Fermeture du descripteur de fichier
         os.close(fichier)
-        # Mise en "sommeil" avant la prochaine écriture
-        if(ecrire_log):
-            time.sleep(frequence_affichage)
     except Exception as e:
         print(f"Erreur lors de l'écriture dans le fichier données : {e}")
 
@@ -186,6 +185,10 @@ def on_message(client, userdata, msg):
             ecrire_alerte(room, alerte)  # S'il y a des alertes, les écrire dans le fichier
         ecrire(False, fichier_donnees, room, salle_donnees)
         ecrire(True, fichier_logs, room, salle_donnees)
+
+        # Mise en "sommeil" avant la prochaine écriture
+        if(frequence_affichage > 0):
+            time.sleep(frequence_affichage)
 
     except Exception as e:
         print(f"Erreur lors du traitement du message: {e}")
