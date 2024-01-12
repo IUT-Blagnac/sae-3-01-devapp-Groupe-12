@@ -252,3 +252,134 @@ Le site web redirige l'utilisateur vers son nouveau compte.
 Pages PHP :
 
 Inscription.php
+
+
+
+
+== Fonctionnalité "Noter un Produit"
+
+La fonctionnalité "Noter un Produit" permet aux utilisateurs de laisser des commentaires et des évaluations sur les produits disponibles sur le site. Cela offre une plateforme interactive où les clients peuvent partager leurs expériences avec les produits, aidant ainsi d'autres utilisateurs dans leurs décisions d'achat.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Noter un Produit" sur le site web.
+Le site web affiche un formulaire d'évaluation.
+L'utilisateur soumet l'évaluation du produit.
+Le site web enregistre l'évaluation du produit dans la base de données.
+La base de données confirme l'enregistrement.
+Le site web affiche une confirmation à l'utilisateur.
+Pages PHP :
+
+noter_produit.php
+
+
+
+== Fonctionnalité "Payer sa Commande"
+
+La fonctionnalité "Payer sa Commande" propose différentes méthodes de paiement sécurisées pour permettre aux utilisateurs de finaliser l'achat de leurs produits. Elle assure un processus de paiement fluide et sécurisé, garantissant la confidentialité des informations financières des clients.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Payer sa Commande" sur le site web.
+Le site web affiche les options de paiement disponibles.
+L'utilisateur sélectionne une méthode de paiement.
+Le site web valide la transaction avec la base de données.
+La base de données confirme le paiement.
+Le site web affiche une confirmation de paiement à l'utilisateur.
+Pages PHP :
+
+CommanderChoixPaiement.php
+
+
+== Fonctionnalité "Ajouter au Panier"
+
+La fonctionnalité "Ajouter au Panier" permet aux utilisateurs de sélectionner des produits et de les ajouter à leur panier d'achat. Cela offre une expérience d'achat conviviale, permettant aux clients de rassembler les articles souhaités avant de passer à la caisse.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Ajouter au Panier" sur le site web.
+Le site web confirme l'ajout au panier.
+Pages PHP :
+
+addToCart.php
+
+
+
+== Fonctionnalité "Partager des Produits sur les Réseaux Sociaux"
+
+La fonctionnalité "Partager des Produits sur les Réseaux Sociaux" facilite le partage des produits sur différentes plateformes de médias sociaux. Cela permet aux utilisateurs de recommander des produits à leur réseau, élargissant ainsi la visibilité de la boutique en ligne.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Partager sur Réseaux Sociaux" sur le site web.
+Le site web affiche les options de partage.
+L'utilisateur sélectionne une plateforme de médias sociaux.
+Le site web partage le lien du produit avec la plateforme sociale.
+La plateforme sociale confirme le partage à l'utilisateur.
+
+Pages PHP :
+
+index.php
+
+
+== Fonctionnalité "Chercher des Produits"
+
+La fonctionnalité "Chercher des Produits" offre une fonction de recherche permettant aux clients de trouver rapidement des produits spécifiques. Cela améliore l'efficacité de la navigation, permettant aux utilisateurs de filtrer et de trouver des articles en fonction de leurs besoins.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur saisit une recherche de produit sur le site web.
+Le site web envoie une requête de recherche à la base de données.
+La base de données renvoie les résultats de recherche au site web.
+Le site web affiche les résultats de recherche à l'utilisateur.
+Pages PHP :
+
+index.php
