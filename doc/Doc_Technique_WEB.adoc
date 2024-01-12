@@ -224,8 +224,7 @@ La base de données confirme la connexion.
 Le site web redirige l'utilisateur vers son compte.
 Pages PHP :
 
-FormConnexion.php
-TraitConnexion.php
+FormConnexion.php / TraitConnexion.php
 
 
 
@@ -251,7 +250,7 @@ La base de données confirme l'inscription.
 Le site web redirige l'utilisateur vers son nouveau compte.
 Pages PHP :
 
-Inscription.php
+Inscription.php / TraitInscription.php
 
 
 
