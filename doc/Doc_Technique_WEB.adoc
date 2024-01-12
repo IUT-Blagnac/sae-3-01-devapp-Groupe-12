@@ -139,3 +139,21 @@ Pages PHP :
 
 - X : que la page
 ...
+
+La fonctionnalité de gestion des comptes utilisateurs permet à chaque client d'interagir avec son compte sur le site e-commerce "La Bonne Note". Un ensemble de fonctionnalités clés facilite la gestion des informations personnelles, l'interaction avec les commandes passées, la connexion, la déconnexion, et la création de compte.
+
+Partie du UseCase :
+
+Diagramme de séquence :
+
+Description du diagramme de séquence:
+
+Le diagramme de séquence illustre le flux d'actions lorsque les utilisateurs interagissent avec leurs comptes, y compris la création, la modification et la connexion/déconnexion. Il met en lumière les échanges d'informations entre le frontend et le backend.
+
+Pages PHP:
+
+Inscription.php : Page PHP gérant la création d'un nouveau compte utilisateur.
+login.php : Page PHP traitant le processus de connexion des utilisateurs.
+logout.php : Page PHP pour déconnecter un utilisateur de son compte.
+update_account.php : Page PHP permettant aux utilisateurs de mettre à jour leurs informations de compte.
+view_orders.php : Page PHP affichant l'historique des commandes pour les utilisateurs connectés.
