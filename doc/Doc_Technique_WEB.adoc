@@ -79,39 +79,30 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 == Ressources Utilisées
 
-1. Technologies et Langages
+Le site web de La Bonne Note repose sur diverses technologies et outils pour assurer son bon fonctionnement et sa gestion efficace. Voici un aperçu des ressources utilisées dans le cadre de ce projet :
 
-Hébergement : Le site est hébergé sur MobaXterm, fournissant une plateforme pour le développement et le déploiement du projet.
+- *Hébergement :* Le site est hébergé sur MobaXterm, fournissant une plateforme stable et sécurisée pour le déploiement du site.
 
-Langages Frontend : Utilisation de HTML, CSS et JavaScript pour créer l'interface utilisateur interactive et dynamique.
+- *Langages de Programmation :* Le développement du site web a été réalisé en utilisant les langages suivants :
+  - HTML : Utilisé pour la structure et la présentation des pages web.
+  - CSS : Employé pour le stylisme et le design du site, assurant une interface utilisateur attrayante.
+  - PHP : Intégré pour la gestion dynamique du contenu et l'interaction avec la base de données.
+  - JavaScript : Employé pour des fonctionnalités interactives du côté client, améliorant l'expérience utilisateur.
 
-Langage Backend : Utilisation de PHP pour traiter les requêtes côté serveur, générer des pages dynamiques et interagir avec la base de données.
+- *Base de Données :* Le site est connecté à une base de données MySQL via phpMyAdmin. Cette base de données stocke de manière sécurisée les informations relatives aux produits, aux utilisateurs, aux commandes, et autres données essentielles.
 
-Base de Données : Utilisation de phpMyAdmin pour la gestion de la base de données MySQL, stockant les informations relatives aux produits, utilisateurs et commandes.
+- *API Externe :* La fonctionnalité du service client intègre l'API ChatGPT pour faciliter les interactions avec les utilisateurs.
 
-API ChatGPT : Intégration de l'API ChatGPT pour la fonctionnalité de service client, permettant des interactions conversationnelles automatisées.
+- *Outils de Développement :* Les principaux outils utilisés pour le développement incluent :
+  - Visual Studio Code (VSCode) : Utilisé comme environnement de développement intégré (IDE) pour la rédaction du code.
+  - GitHub Desktop : Employé pour le suivi des mises à jour du code, la collaboration en équipe, et le contrôle de version avec Git.
+  - phpMyAdmin : Utilisé comme interface graphique pour la gestion de la base de données MySQL.
 
-2. Outils de Développement
+- *Architecture du Projet :* Actuellement, aucune information sur l'architecture du projet n'est disponible. Une analyse plus approfondie pourrait être effectuée pour décrire l'organisation interne du code source, les modèles de conception utilisés, et la structure globale du projet.
 
-Environnement de Développement : Utilisation de MobaXterm comme plateforme d'hébergement et de développement.
+- *Tests et Débogage :* Les tests et le débogage ont été effectués manuellement, sans l'utilisation d'un framework spécifique.
 
-Éditeur de Code : Utilisation de Visual Studio Code (VSCode) comme éditeur principal pour coder le frontend et le backend.
-
-Contrôle de Version : Utilisation de GitHub Desktop pour suivre les mises à jour du code, collaborer en équipe et gérer les versions du projet.
-
-3. Architecture du Projet
-
-Méthodologie Agile : Adoption de la méthodologie Agile Scrum, avec un Scrum Master, pour favoriser la flexibilité et la collaboration tout au long du cycle de développement.
-
-4. Tests et Débogage
-
-Tests et Débogage Manuel : Les tests et débogages sont réalisés manuellement sans l'utilisation d'un framework spécifique.
-
-5. Gestion de Projet
-
-Plateforme de Gestion de Projet : Utilisation de GitHub pour le suivi de l'avancement du projet, la gestion des tâches et la collaboration au sein de l'équipe.
-
-Cette combinaison de technologies, outils et méthodologies a été choisie pour créer un site web dynamique, fonctionnel et collaboratif, répondant aux besoins de La Bonne Note. La méthodologie Agile Scrum, associée à GitHub, a permis une gestion efficace du projet, tandis que l'utilisation de MobaXterm et de phpMyAdmin a facilité le développement et la gestion de l'infrastructure technique.
+- *Gestion de Projet :* La méthodologie agile Scrum a été adoptée pour la gestion du projet. GitHub a été utilisé comme plateforme de partage et de suivi de l'avancement du projet.
 
 == Se rendre sur le site Web
 
@@ -140,20 +131,124 @@ Pages PHP :
 - X : que la page
 ...
 
-La fonctionnalité de gestion des comptes utilisateurs permet à chaque client d'interagir avec son compte sur le site e-commerce "La Bonne Note". Un ensemble de fonctionnalités clés facilite la gestion des informations personnelles, l'interaction avec les commandes passées, la connexion, la déconnexion, et la création de compte.
+== Fonctionnalité "Se Déconnecter"
+
+La fonctionnalité "Se Déconnecter" permet aux utilisateurs du site de mettre fin à leur session actuelle. Elle offre une option de déconnexion simple et rapide, assurant la sécurité des comptes en ligne. Lorsqu'un utilisateur choisit de se déconnecter, toutes les informations de session sont effacées, assurant ainsi la confidentialité des données personnelles.
 
 Partie du UseCase :
 
+Image partie du use case (à remplir)
+
 Diagramme de séquence :
 
-Description du diagramme de séquence:
 
-Le diagramme de séquence illustre le flux d'actions lorsque les utilisateurs interagissent avec leurs comptes, y compris la création, la modification et la connexion/déconnexion. Il met en lumière les échanges d'informations entre le frontend et le backend.
 
-Pages PHP:
+Description du diagramme de séquence :
 
-Inscription.php : Page PHP gérant la création d'un nouveau compte utilisateur.
-login.php : Page PHP traitant le processus de connexion des utilisateurs.
-logout.php : Page PHP pour déconnecter un utilisateur de son compte.
-update_account.php : Page PHP permettant aux utilisateurs de mettre à jour leurs informations de compte.
-view_orders.php : Page PHP affichant l'historique des commandes pour les utilisateurs connectés.
+L'utilisateur sélectionne l'option "Se Déconnecter" sur le site web.
+Le site web confirme la déconnexion et met fin à la session de l'utilisateur.
+Pages PHP :
+
+deconnexion.php
+
+== Fonctionnalité "Suivre ses Commandes"
+
+La fonctionnalité "Suivre ses Commandes" offre aux clients la possibilité de consulter l'état et l'historique de leurs commandes passées. Elle fournit des informations détaillées sur le statut de chaque commande, de la validation à la livraison. Les clients peuvent ainsi suivre en temps réel l'évolution de leurs achats.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Suivre ses Commandes" sur le site web.
+Le site web envoie une requête à la base de données pour récupérer l'historique des commandes de l'utilisateur.
+La base de données renvoie l'historique des commandes au site web.
+Le site web affiche l'historique des commandes à l'utilisateur.
+Pages PHP :
+
+suivi_commandes.php
+
+
+
+
+== Fonctionnalité "Modifier les Informations du Compte"
+
+La fonctionnalité "Modifier les Informations du Compte" permet aux utilisateurs de mettre à jour leurs informations personnelles enregistrées sur le site. Cela inclut des éléments tels que l'adresse e-mail, le mot de passe, les informations de livraison, etc. Cette fonctionnalité offre une flexibilité aux clients pour maintenir des informations à jour.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Modifier les Informations du Compte" sur le site web.
+Le site web affiche un formulaire permettant à l'utilisateur de saisir les modifications souhaitées.
+L'utilisateur soumet le formulaire.
+Le site web met à jour les informations du compte dans la base de données.
+La base de données confirme la mise à jour.
+Le site web affiche une confirmation de la mise à jour à l'utilisateur.
+Pages PHP :
+
+modifier_informations_compte.php
+
+
+
+== Fonctionnalité "Se Connecter à son Compte"
+
+La fonctionnalité "Se Connecter à son Compte" permet aux utilisateurs enregistrés d'accéder à leur compte en saisissant leurs identifiants de connexion. Cela offre un moyen sécurisé et rapide pour les clients de naviguer sur le site et d'accéder à leurs informations personnalisées.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Se Connecter à son Compte" sur le site web.
+Le site web affiche un formulaire de connexion.
+L'utilisateur saisit ses identifiants et soumet le formulaire.
+Le site web vérifie les identifiants dans la base de données.
+La base de données confirme la connexion.
+Le site web redirige l'utilisateur vers son compte.
+Pages PHP :
+
+FormConnexion.php
+
+
+
+== Fonctionnalité "Créer un Compte"
+
+La fonctionnalité "Créer un Compte" offre aux nouveaux clients la possibilité de s'inscrire sur la plateforme. Elle propose un formulaire d'inscription où les utilisateurs peuvent fournir leurs informations de base pour créer un compte personnalisé. Cette fonctionnalité est essentielle pour étendre la base de clients.
+
+Partie du UseCase :
+
+Image partie du use case (à remplir)
+
+Diagramme de séquence :
+
+
+
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Créer un Compte" sur le site web.
+Le site web affiche un formulaire d'inscription.
+L'utilisateur saisit les informations requises et soumet le formulaire.
+Le site web enregistre les nouvelles informations dans la base de données.
+La base de données confirme l'inscription.
+Le site web redirige l'utilisateur vers son nouveau compte.
+Pages PHP :
+
+Inscription.php
