@@ -160,7 +160,7 @@ code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\features\login.featur
 Puis nous avons réalisé les étapes pour mener a bien ce test : 
 code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\step-defination\login\loginSteps.js[LoginSteps.js]
 
-Étapes pour éxecuter les tests :
+Étapes pour exécuter les tests :
 
 1. npm install @badeball/cypress-cucumber-preprocessor
 
