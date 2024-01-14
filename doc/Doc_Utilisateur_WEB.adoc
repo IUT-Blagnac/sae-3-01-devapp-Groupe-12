@@ -422,7 +422,7 @@ Cette option va vous mettre en contact avec une IA qui répondra à vos question
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient8.png[]
 
-===Page à propos
+=== Page à propos
 
 Après avoir cliqué sur l'icône "?", il vous suffira de cliquer sur le logo "i".
 
