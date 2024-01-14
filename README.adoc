@@ -154,11 +154,19 @@ code\Web\HTML-PHP\CypressCucumber[Cypress]
 
 Implémentation de cucumber avec cypress pour tester la partie web, à l'aide de cypress-cucumber-preprocessor.
 
+Étapes pour exécuter les tests :
+
+1. npm install cypress
+2. npm install @badeball/cypress-cucumber-preprocessor
+3. npm install @cypress/browserify-preprocessor
+4. npx cypress run
+
 === Test de connexion 
 En utilisant la syntaxe cucumber, nous avons définit les feature du test.
 code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\features\login.feature[login.Feature]
 Puis nous avons réalisé les étapes pour mener a bien ce test : 
 code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\features\loginSteps.js[LoginSteps.js]
+code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\step-defination\login\loginSteps.js[LoginSteps.js]
 
 === Test de recherche 
 Ce test a pour but de faire une recherche dans la barre de recherche et vérifier si l'élément recherché est bien affiché
