@@ -77,19 +77,154 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 = Tutoriel d'installation
 
-
 == Aller sur le site
 
 Pour aller sur le site :
 
+Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de recherche de votre navigateur web : http://193.54.227.208/~saephp12/index.php 
 
 = Prise en main du site web
 
-== Fonctionnalité x
+== Fonctionnement du site
 
-Paragraphe de description de la fonctionnalité x
+Créer un Compte
 
-== Fonctionnalité x
+Si vous n'avez pas encore de compte, sélectionnez "Créer un Compte" depuis la page d'accueil et suivez les étapes d'inscription.
 
-Paragraphe de description de la fonctionnalité x
-Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte3.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte4.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte5.png[]
+
+
+Se Connecter à son Compte
+
+Pour vous connecter, cliquez sur "Se Connecter" en haut à droite, puis saisissez vos identifiants sur la page de connexion.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/seconnecter1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/seconnecter2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/seconnecter3.png[]
+
+
+
+Se Déconnecter
+
+Pour vous déconnecter de votre compte, cliquez sur le lien "Se Déconnecter" situé en haut à droite de la page d'accueil.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/sedeconnecter1.png[]
+
+
+Suivre ses Commandes
+
+Pour suivre l'état de vos commandes, rendez-vous dans la section "Mon Compte" et sélectionnez l'onglet "Suivre mes Commandes".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/suivrecommande1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/suivrecommande2.png[]
+
+
+
+Modifier les Informations du Compte
+
+Mettez à jour vos informations personnelles en accédant à la section "Mon Compte" et en choisissant l'option "Modifier mes Informations".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/changerinfocompte1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/changerinfocompte2.png[]
+
+
+
+
+Noter un Produit
+
+Après vous être connecté, vous pouvez noter un produit en attribuant une évaluation et en laissant un commentaire sur la page du produit.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit3.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit4.png[]
+
+Laisser un avis
+
+Laisse un avis poto
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/laisserunavis1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouterunavis1.png[]
+
+
+
+Chercher des Produits
+
+Utilisez la barre de recherche en haut de la page pour trouver rapidement des produits spécifiques.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/rechercherunproduit1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/rechercherunproduit2.png[]
+
+
+
+
+Ajouter au Panier
+
+Ajoutez des produits à votre panier en cliquant sur le bouton "Ajouter au Panier" depuis la page du produit.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouteraupanier1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouteraupanier2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouteraupanier3.png[]
+
+
+
+Payer sa Commande
+
+Lors du processus de paiement, suivez les étapes indiquées pour sélectionner votre méthode de paiement et finaliser la commande.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande3.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande4.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande5.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande6.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande7.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande8.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande9.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande10.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande11.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande12.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande13.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande14.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande15.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande16.png[]
+
+
+
+
+Partager des Produits sur les Réseaux Sociaux
+
+Sur la page du produit, utilisez les icônes de partage pour partager vos produits préférés sur les réseaux sociaux.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit3.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit4.png[]
+
+
+
+Contacter le Service Client
+
+Si vous avez des questions, cliquez sur "Contacter le Service Client" et suivez les instructions pour nous envoyer un message.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient3.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient4.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient5.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient6.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient7.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient8.png[]
+
+Page à propos
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/apropos1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/apeopos2.png[]
+
+
+
+
