@@ -1,5 +1,5 @@
 .background {
-    -fx-background-image: url('images/entrepot_fond.jpg');
+    -fx-background-image: url('images/1.jpg');
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
@@ -105,7 +105,7 @@
 
 .leaveButton {
     -fx-background-radius: 15;
-    -fx-background-color: rgba(252, 0, 0, 0.669);
+    -fx-background-color: rgba(252, 0, 0);
 }
 
 .confirmButton {

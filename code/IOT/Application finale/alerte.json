@@ -12,6 +12,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 14:52:21",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.6,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 740,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "E006": [
@@ -57,6 +70,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:24:42",
+            "donnees": {
+                "temperature": {
+                    "valeur": 16.7,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 447,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "E004": [
@@ -72,6 +98,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:24:44",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 534,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "C006": [
@@ -84,6 +123,19 @@
                 },
                 "co2": {
                     "valeur": 554,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:24:44",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 442,
                     "seuil_max": 0.0
                 }
             }
@@ -106,6 +158,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:24:46",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.7,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 444,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "B202": [
@@ -118,6 +183,19 @@
                 },
                 "co2": {
                     "valeur": 927,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:24:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.1,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 456,
                     "seuil_max": 0.0
                 }
             }
@@ -136,6 +214,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:25:12",
+            "donnees": {
+                "temperature": {
+                    "valeur": 24.6,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 444,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "B106": [
@@ -148,6 +239,19 @@
                 },
                 "co2": {
                     "valeur": 537,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:25:16",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.4,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 453,
                     "seuil_max": 0.0
                 }
             }
@@ -166,6 +270,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:25:32",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 469,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "E209": [
@@ -178,6 +295,19 @@
                 },
                 "co2": {
                     "valeur": 492,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:25:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 14.8,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 483,
                     "seuil_max": 0.0
                 }
             }
@@ -196,6 +326,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:26:31",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 468,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "E103": [
@@ -208,6 +351,19 @@
                 },
                 "co2": {
                     "valeur": 488,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:26:44",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 470,
                     "seuil_max": 0.0
                 }
             }
@@ -226,6 +382,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:27:13",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.4,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 1702,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "B212": [
@@ -238,6 +407,19 @@
                 },
                 "co2": {
                     "valeur": 977,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:27:18",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 493,
                     "seuil_max": 0.0
                 }
             }
@@ -256,6 +438,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:27:19",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.5,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 457,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "B113": [
@@ -268,6 +463,19 @@
                 },
                 "co2": {
                     "valeur": 985,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:27:18",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.9,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 453,
                     "seuil_max": 0.0
                 }
             }
@@ -286,6 +494,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:27:30",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 447,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "E102": [
@@ -298,6 +519,19 @@
                 },
                 "co2": {
                     "valeur": 616,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:27:43",
+            "donnees": {
+                "temperature": {
+                    "valeur": 26.1,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 453,
                     "seuil_max": 0.0
                 }
             }
@@ -316,6 +550,19 @@
                     "seuil_max": 0.0
                 }
             }
+        },
+        {
+            "date": "14-01-2024 15:27:45",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 451,
+                    "seuil_max": 0.0
+                }
+            }
         }
     ],
     "Foyer-personnels": [
@@ -328,6 +575,347 @@
                 },
                 "co2": {
                     "valeur": 851,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 14:47:51",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 450,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:27:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.4,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 448,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "amphi1": [
+        {
+            "date": "14-01-2024 14:47:54",
+            "donnees": {
+                "temperature": {
+                    "valeur": 13.6,
+                    "seuil_max": 10.0
+                },
+                "humidity": {
+                    "valeur": 51,
+                    "seuil_max": 50.0
+                },
+                "co2": {
+                    "valeur": 504,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:27:50",
+            "donnees": {
+                "temperature": {
+                    "valeur": 13.7,
+                    "seuil_max": 10.0
+                },
+                "humidity": {
+                    "valeur": 51,
+                    "seuil_max": 50.0
+                },
+                "co2": {
+                    "valeur": 501,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E208": [
+        {
+            "date": "14-01-2024 14:48:22",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.1,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 478,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:28:18",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.2,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 477,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E105": [
+        {
+            "date": "14-01-2024 14:48:46",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.8,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 452,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 15:28:43",
+            "donnees": {
+                "temperature": {
+                    "valeur": 17.8,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 449,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E206": [
+        {
+            "date": "14-01-2024 14:48:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.2,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 462,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "B112": [
+        {
+            "date": "14-01-2024 14:48:48",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 448,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "hall-entr\u00e9e-principale": [
+        {
+            "date": "14-01-2024 14:48:48",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.6,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 459,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E104": [
+        {
+            "date": "14-01-2024 14:49:15",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 458,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "B110": [
+        {
+            "date": "14-01-2024 14:49:46",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.5,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 451,
+                    "seuil_max": 0.0
+                }
+            }
+        },
+        {
+            "date": "14-01-2024 14:49:49",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.5,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 451,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E101": [
+        {
+            "date": "14-01-2024 14:49:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.8,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 460,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E100": [
+        {
+            "date": "14-01-2024 14:49:47",
+            "donnees": {
+                "temperature": {
+                    "valeur": 24.8,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 415,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "B111": [
+        {
+            "date": "14-01-2024 14:49:49",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.9,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 449,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "Salle-conseil": [
+        {
+            "date": "14-01-2024 14:49:51",
+            "donnees": {
+                "temperature": {
+                    "valeur": 19.6,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 444,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "B109": [
+        {
+            "date": "14-01-2024 14:49:51",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 519,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E210": [
+        {
+            "date": "14-01-2024 14:49:55",
+            "donnees": {
+                "humidity": {
+                    "valeur": 82,
+                    "seuil_max": 50.0
+                },
+                "co2": {
+                    "valeur": 560,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "E007": [
+        {
+            "date": "14-01-2024 14:50:06",
+            "donnees": {
+                "temperature": {
+                    "valeur": 16.7,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 458,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "B203": [
+        {
+            "date": "14-01-2024 14:50:17",
+            "donnees": {
+                "temperature": {
+                    "valeur": 18.9,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 471,
+                    "seuil_max": 0.0
+                }
+            }
+        }
+    ],
+    "B003": [
+        {
+            "date": "14-01-2024 14:50:50",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.3,
+                    "seuil_max": 10.0
+                },
+                "co2": {
+                    "valeur": 443,
                     "seuil_max": 0.0
                 }
             }

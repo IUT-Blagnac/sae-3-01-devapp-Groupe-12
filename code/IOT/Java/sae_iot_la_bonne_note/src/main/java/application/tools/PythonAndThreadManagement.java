@@ -70,18 +70,6 @@ public class PythonAndThreadManagement {
                     pythonProcess.waitFor();
                 } catch (InterruptedException e) {
                 }
-                // System.out.println(exitValue);
-                // if (exitValue > 0) {
-                // Platform.runLater(() -> {
-                // AlertUtilities.showAlert(_primaryStage, "Erreur",
-                // "Lancement du script Python impossible.",
-                // "Une erreur est survenue lors du lancement du script Python.",
-                // AlertType.ERROR);
-                // });
-                // } else {
-                // Style.setNewIcon(imgConnexionState, "connexion_icon.png");
-                // Animations.startConnectedAnimation(imgConnexionState);
-                // }
             } catch (IOException e) {
                 Platform.runLater(() -> {
                     AlertUtilities.showAlert(_primaryStage, "Erreur",

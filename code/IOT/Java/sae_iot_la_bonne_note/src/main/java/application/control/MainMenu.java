@@ -7,8 +7,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Classe de contrôleur de dialogue de la fenêtre du menu principal de
@@ -50,6 +52,7 @@ public class MainMenu extends Application {
             primaryStage.setMinHeight(850);
             primaryStage.setMinWidth(1200);
             primaryStage.setResizable(true);
+            primaryStage.getIcons().add(new Image("/application/images/la_bonne_note_logo.png"));
 
             // Récupération du contrôleur associé au fichier FXML chargé
             MainMenuController mainMenu = loader.getController();
@@ -59,7 +62,7 @@ public class MainMenu extends Application {
             this.show(); // Affichage de la fenêtre du menu principal
 
             // Utilisé lors du développement
-            
+
             // LogHistory a = new LogHistory(_primaryStage);
             // b.show();
 
