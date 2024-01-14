@@ -70,14 +70,10 @@ if (!isset($_SESSION['choixPaiement'])) {
 } else {
     switch ($_SESSION['choixPaiement']['methode']) {
         case 'Carte bancaire':
-            $choixPaiement = "Carte bancaire" . "<br><br>";
-            $choixPaiement .= $_SESSION['choixPaiement']['proprietaireCarte'] . "<br>";
-            $choixPaiement .= $_SESSION['choixPaiement']['numCarte'] . "<br>";
-            $choixPaiement .= $_SESSION['choixPaiement']['dateExpiration'] . " " . $_SESSION['choixPaiement']['cvv'];
+            $choixPaiement = "Carte bancaire";
             break;
         case 'Paypal':
-            $choixPaiement = "Paypal" . "<br><br>";
-            $choixPaiement .= $_SESSION['choixPaiement']['email'];
+            $choixPaiement = "Paypal";
             break;
         case 'Paiement en magasin':
             $choixPaiement = "Paiement en magasin";
@@ -103,20 +99,20 @@ $total += $totalFrais + $totalLivraison;
 
 if (isset($_POST['commander'])) {
     try {
-        $stmt = $conn->prepare("INSERT INTO Commande (dateCommande, montantFrais, montant, numClient, idAdresseLivraison, typeLivraison) VALUES ('2023-12-31', 5, 50, 1, 5, 'Retrait magasin')");
-        $stmt->execute();
+        $stmt = $conn->prepare("INSERT INTO Commande (dateCommande, montantFrais, montant, numClient, idAdresseLivraison, typeLivraison, statut) VALUES ('2023-12-31', 5, 50, :numClient, 5, 'Retrait magasin', 'En cours')");
+        $stmt->execute(['numClient' => $_SESSION['numClient']]);
         $numCommandeInserted = $conn->lastInsertId();
         // $panier = $_SESSION['panier'];
 
         foreach ($items as $item) {
             $numProduit = $item['numProduit'];
             $quantiteCommandee = $item['quantite'];
-            // Insérer ces valeurs dans la table LigneCde
+            
             $stmt = $conn->prepare("INSERT INTO LigneCde (numProduit, numCommande, quantiteCommandee) VALUES (?, ?, ?)");
             $stmt->execute([$numProduit, $numCommandeInserted, $quantiteCommandee]);
         }
 
-        // Insérer ces valeurs dans la table Paiement
+        
         $stmt = $conn->prepare("INSERT INTO Paiement (numCommande, montantTotal, statut, typePaiement) VALUES (?, ?, ?, ?)");
         $stmt->execute([$numCommandeInserted, $total, 'accepté', $choixPaiement]);
 
@@ -131,8 +127,9 @@ if (isset($_POST['commander'])) {
             alert(\"Commande impossible, stock insuffisant !\");
             window.location.href = 'Panier.php'</script>";
         } else {
+            echo $e;
             echo "<script>
-            alert(\"Une erreur s'est produite lors de la commande, veuillez réessayer.\");
+            alert(\"Une erreur s'est produite lors de la commande, veuillez réessayer.\nCode d'erreur : " . $e->getCode() . ");
             window.location.href = 'Panier.php'</script>";
         }
     }
@@ -310,7 +307,6 @@ if (isset($_POST['commander'])) {
 //         // Corps de l'email avec le récapitulatif de la commande
 //         $message = '
 //         <div class="center">
-//             <!-- Votre HTML de récapitulatif ici -->
 //         </div>';
 
 //         $mail->Body = $message;

@@ -9,6 +9,38 @@ function getProducts($conn, $section) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function modifNomProduit($name) {
+    $name = str_replace(' ', '_', $name); // Remplace les espaces par des underscores
+    $name = strtolower($name); // Convertit en minuscules
+
+    // Tableau de correspondance pour la suppression des accents
+    $accents = array(
+        'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a',
+        'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o',
+        'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e',
+        'Ç'=>'C', 'ç'=>'c',
+        'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i',
+        'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u',
+        'ÿ'=>'y',
+        'Ñ'=>'N', 'ñ'=>'n',
+        'Ÿ'=>'Y',
+        'Æ'=>'AE', 'æ'=>'ae',
+        'Œ'=>'OE', 'œ'=>'oe',
+        'ß'=>'ss'
+    );
+
+    // Remplacement des caractères accentués
+    foreach ($accents as $accent => $replacement) {
+        $name = str_replace($accent, $replacement, $name);
+    }
+
+    return $name;
+}
+
+
+
+
+
 // Fonction pour récupérer tous les produits selon les critères demandées
 function getProduitFiltre($conn, $recherche = null, $categorie = null, $trie = null) {
     $query = "SELECT Produit.* FROM Produit 
@@ -80,7 +112,9 @@ if ($categorie == 'Tous nos produits' || empty($categorie)) {
 $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
 
 ?>
-
+<?php
+include 'include/header.php'; 
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -91,9 +125,7 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
     <link rel="stylesheet" href="styles.css">
     <!-- Ajoutez votre propre CSS ici pour styliser la page et les produits -->
     <style>
-                body {
-            font-family: Arial, sans-serif;
-        }
+
 
         .main-content {
             display: flex;
@@ -208,6 +240,20 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
     padding: 10px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: auto; /* Supprimez la hauteur fixe pour permettre aux images de définir la hauteur */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-image {
+    width: 200px; /* Largeur fixe pour toutes les images des produits */
+    height: 200px; /* Hauteur fixe pour toutes les images des produits */
+    object-fit: cover; /* Redimensionnement de l'image pour remplir le cadre tout en conservant ses proportions */
+}
+
+.product-details {
+    padding: 10px;
 }
 
 .search-input {
@@ -215,19 +261,19 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
 }
 
 .wishlist-button {
-        border: none;
-        background: none;
-        cursor: pointer;
-        padding: 5px; /* Ajustez au besoin */
-        display: inline-block; /* Assurez-vous que le bouton ne prend pas toute la largeur */
-    }
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px; /* Ajustez au besoin */
+    display: inline-block; /* Assurez-vous que le bouton ne prend pas toute la largeur */
+}
 
-    .wishlist-button img {
-        width: 24px; /* Ajustez la taille de l'icône ici */
-        height: auto; /* Conserve les proportions de l'image */
-    }
+.wishlist-button img {
+    width: 24px; /* Ajustez la taille de l'icône ici */
+    height: auto; /* Conserve les proportions de l'image */
+}
 
-    .product-link {
+.product-link {
     color: inherit; /* Utilise la couleur de texte actuelle */
     text-decoration: none; /* Supprime le soulignement */
 }
@@ -237,46 +283,122 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
 }
 
 
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.search-welcome-container {
+    background-color: #131921; /* Bleu marine foncé */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+/* Texte de bienvenue */
+.welcome-text {
+    color: white;
+    font-size: 24px; /* Taille du texte */
+    margin-bottom: 10px; /* Espace entre le texte et la barre de recherche */
+}
+
+/* Barre de recherche */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 15px; /* Ajoutez un padding si nécessaire */
+}
+
+.search-bar {
+    display: flex;
+    max-width: 700px; /* Ajustez en fonction de la largeur souhaitée */
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px; /* Pour les coins arrondis */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Effet d'ombre */
+}
+
+.search-input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px; /* Taille de la police pour l'input */
+    border-radius: 20px 0 0 20px; /* Coins arrondis à gauche */
+}
+
+.search-button {
+    background-color: #febd69; /* Couleur du bouton de recherche */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0 20px 20px 0; /* Coins arrondis à droite */
+    cursor: pointer;
+}
+
+.search-button img {
+    width: 24px; /* Taille de l'icône de la loupe */
+}
+
+/* Style pour le select des catégories, si présent */
+.category-select {
+    border: none;
+    padding: 10px 20px;
+    margin-right: -1px; /* Pour enlever l'espace entre le select et l'input */
+    border-radius: 20px 0 0 20px; /* Coins arrondis à gauche */
+    background-color: #fff; /* Couleur de fond pour le select */
+}
+
+/* Styles pour les images des produits dans les carrousels */
+.carousel-product-image {
+    max-width: 100%;
+    height: auto;
+    width: 200px; 
+    height: 200px; 
+    object-fit: cover; 
+}
+
+
     </style>
 </head>
 <body>
 
-<?php include 'include/header.php'; ?>
+<div class="search-welcome-container">
+    <p class="welcome-text">Bienvenue chez La Bonne Note !</p>
+    <div class="search-bar-container">
+        <form id="search-form" action="index.php" method="GET" class="search-bar">
+            <select name="category" class="category-select">
+            <option value="Tous nos produits" <?= isset($selectedCategory) && ($selectedCategory == 'Tous nos produits' || empty($selectedCategory)) ? 'selected' : '' ?>>Tous nos produits</option>
+                    <option value="Cordes" <?= ($selectedCategory == 'Cordes') ? 'selected' : '' ?>>Cordes</option>
+                    <option value="Percussions" <?= ($selectedCategory == 'Percussions') ? 'selected' : '' ?>>Percussions</option>
+                    <option value="Clavier" <?= ($selectedCategory == 'Clavier') ? 'selected' : '' ?>>Clavier</option>
+                    <option value="Vent" <?= ($selectedCategory == 'Vent') ? 'selected' : '' ?>>Vent</option>
+                    <option value="Livres" <?= ($selectedCategory == 'Livres') ? 'selected' : '' ?>>Livres</option>
+                    <option value="Matériel Studio" <?= ($selectedCategory == 'Matériel Studio') ? 'selected' : '' ?>>Matériel Studio</option>
+            </select>
+            <input type="text" name="search" placeholder="Rechercher un article..." class="search-input">
+            <button type="submit" class="search-button">
+                <img src="img/loupe.png" alt="Rechercher">
+            </button>
+        </form>
+    </div>
+</div>
 <?php if ($showCarousels): ?>
 <section class="product-section">
     <h2>Les plus vendus</h2>
     <div class="product-carousel">
         <?php foreach ($bestSellers as $produit): ?>
 
-                <div class="product">
-                    <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
-                        <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
-                        <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
-                    </a>
-                    <p><?= $produit['prixVente'] ?> €</p>
-                    <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
-                    <button class="wishlist-button" data-numproduit="<?= $produit['numProduit'] ?>">
-                        <?php if (in_array($produit['numProduit'], $wishlist)): ?>
-                            <img src="img/coeur-rempli.png" alt="Dans la liste de souhaits">
-                        <?php else: ?>
-                            <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
-                        <?php endif; ?>
-                    </button>
-
-                </div>
-
-        <?php endforeach; ?>
-    </div>
-</section>
-
-<section class="product-section">
-    <h2>Promotions</h2>
-   <div class="product-carousel">
-        <?php foreach ($promotions as $produit): ?>
-
             <div class="product">
                 <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
-                    <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+                    <?php
+                        $nom = modifNomProduit($produit['nomProduit']);
+                        $imagePath = "img/{$nom}.png";
+                    ?>
+                    <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($produit['nomProduit']) ?>" class="carousel-product-image">
                     <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
                 </a>
                 <p><?= $produit['prixVente'] ?> €</p>
@@ -288,7 +410,35 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
                         <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
                     <?php endif; ?>
                 </button>
+            </div>
 
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<section class="product-section">
+    <h2>Promotions</h2>
+    <div class="product-carousel">
+        <?php foreach ($promotions as $produit): ?>
+
+            <div class="product">
+                <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
+                    <?php
+                        $nom = modifNomProduit($produit['nomProduit']);
+                        $imagePath = "img/{$nom}.png";
+                    ?>
+                    <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($produit['nomProduit']) ?>" class="carousel-product-image">
+                    <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
+                </a>
+                <p><?= $produit['prixVente'] ?> €</p>
+                <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
+                <button class="wishlist-button" data-numproduit="<?= $produit['numProduit'] ?>">
+                    <?php if (in_array($produit['numProduit'], $wishlist)): ?>
+                        <img src="img/coeur-rempli.png" alt="Dans la liste de souhaits">
+                    <?php else: ?>
+                        <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
+                    <?php endif; ?>
+                </button>
             </div>
 
         <?php endforeach; ?>
@@ -302,7 +452,11 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
 
             <div class="product">
                 <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
-                    <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+                    <?php
+                        $nom = modifNomProduit($produit['nomProduit']);
+                        $imagePath = "img/{$nom}.png";
+                    ?>
+                    <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($produit['nomProduit']) ?>" class="carousel-product-image">
                     <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
                 </a>
                 <p><?= $produit['prixVente'] ?> €</p>
@@ -314,13 +468,13 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
                         <img src="img/coeur.png" alt="Ajouter à la liste de souhaits">
                     <?php endif; ?>
                 </button>
-
             </div>
 
         <?php endforeach; ?>
     </div>
 </section>
 <?php endif; ?>
+
 
 <div class="sorting-container">
     <label for="sort-by">Trier par:</label>
@@ -339,7 +493,11 @@ $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]', true);
 
             <div class="product-item">
                 <a href="detailsProduit.php?numProduit=<?= $produit['numProduit'] ?>" class="product-link">
-                    <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+                        <?php
+                            $nom = modifNomProduit($produit['nomProduit']);
+                            $imagePath = "img/{$nom}.png";
+                        ?>
+                        <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
                     <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
                 </a>
                 <p><?= htmlspecialchars($produit['prixVente']) ?> €</p>

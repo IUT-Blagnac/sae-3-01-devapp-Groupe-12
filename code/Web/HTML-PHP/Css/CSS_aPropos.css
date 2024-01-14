@@ -22,7 +22,7 @@ h1, h2, h3 {
     text-align: center;
     margin: 10px;
     padding: 10px;
-    border: none;
+    border:none;
 }
 
 .team-member img {
@@ -41,6 +41,7 @@ p {
 .team-table {
     width: 100%;
     border-collapse: collapse;
+    border-color: white;
 }
 
 .Passion {

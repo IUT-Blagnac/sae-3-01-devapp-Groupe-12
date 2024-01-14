@@ -1,5 +1,4 @@
 <?php
-// Inclusion de la connexion à la base de données
 require_once 'Connect.inc.php';
 
 // Fonction pour récupérer les produits de la liste de souhaits
@@ -29,13 +28,13 @@ $wishlistProducts = getWishlistProducts($conn, $wishlist);
     <title>Liste de Souhaits</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-    .wishlist-container {
+    .wishlist {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 20px;
         padding: 20px;
     }
-    .wishlist-item {
+    .wishlist-produit {
         background-color: #ffffff;
         border: 1px solid #ddd;
         padding: 15px;
@@ -43,34 +42,34 @@ $wishlistProducts = getWishlistProducts($conn, $wishlist);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         position: relative;
     }
-    .wishlist-item img {
+    .wishlist-produit img {
         float: left;
         width: 120px;
         height: 120px;
         margin-right: 15px;
         border-radius: 4px;
     }
-    .wishlist-item h3 {
+    .wishlist-produit h3 {
         margin-top: 0;
         color: #333;
         font-size: 18px;
     }
-    .wishlist-item .price {
+    .wishlist-produit .price {
         font-weight: bold;
         margin-top: 5px;
     }
-    .wishlist-item .description {
+    .wishlist-produit .description {
         font-size: 14px;
         color: #555;
         margin: 10px 0;
     }
-    .wishlist-item .add-to-cart {
+    .wishlist-produit .add-to-cart {
         position: absolute;
         bottom: 15px;
         right: 15px;
     }
 
-    .delete-wishlist-item {
+    .delete-wishlist-produit {
     border: none;
     background: none;
     cursor: pointer;
@@ -79,7 +78,7 @@ $wishlistProducts = getWishlistProducts($conn, $wishlist);
     right: 10px;
 }
 
-.delete-wishlist-item img {
+.delete-wishlist-produit img {
     width: 20px; /* ou la taille souhaitée */
     height: auto;
 }
@@ -103,23 +102,22 @@ $wishlistProducts = getWishlistProducts($conn, $wishlist);
 </head>
 <body>
 <?php include 'include/header.php'; ?>
-<div class="clear-wishlist-container">
+<div class="clear-wishlist">
     <button id="clear-wishlist">Vider la Liste de Souhaits</button>
 </div>
 
-<div class="wishlist-container">
+<div class="wishlist">
     <?php if (!empty($wishlistProducts)): ?>
         <?php foreach ($wishlistProducts as $produit): ?>
-            <div class="wishlist-item">
+            <div class="wishlist-produit">
                 <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
                 <div class="product-info">
                     <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
                     <p class="price"><?= htmlspecialchars($produit['prixVente']) ?> €</p>
-                    <p class="description">Brève description du produit...</p>
-                    <!-- Vous pouvez ajouter plus de détails ici -->
+                    <p class="description"><?= htmlspecialchars($produit['description']) ?></p>
                 </div>
                 <button type="button" class="add-to-cart" data-numproduit="<?= $produit['numProduit'] ?>">Ajouter au panier</button>
-                <button class="delete-wishlist-item" data-numproduit="<?= $produit['numProduit'] ?>">
+                <button class="delete-wishlist-produit" data-numproduit="<?= $produit['numProduit'] ?>">
                     <img src="img/delete.png" alt="Supprimer">
                 </button>
             </div>
@@ -154,13 +152,13 @@ $wishlistProducts = getWishlistProducts($conn, $wishlist);
 });
 
 document.getElementById('clear-wishlist').addEventListener('click', function() {
-        setCookie('wishlist', JSON.stringify([]), 30); // Réinitialiser le cookie avec un tableau vide
+        setCookie('wishlist', JSON.stringify([]), 30); // on mets un tableau vide dans le cookie
         alert("La liste de souhaits a été vidée.");
-        window.location.reload(); // Recharger la page pour refléter les changements
+        window.location.reload(); // Recharge la page
     });
 
 $(document).ready(function() {
-        $('.delete-wishlist-item').on('click', function() {
+        $('.delete-wishlist-produit').on('click', function() {
             var numProduit = $(this).data('numproduit');
             var wishlist = JSON.parse(getCookie('wishlist') || '[]');
             var index = wishlist.indexOf(numProduit);
@@ -168,7 +166,7 @@ $(document).ready(function() {
             if (index !== -1) {
                 wishlist.splice(index, 1); // Supprime l'élément du tableau
                 setCookie('wishlist', JSON.stringify(wishlist), 30); // Met à jour le cookie
-                $(this).closest('.wishlist-item').remove(); // Supprime l'élément de l'interface utilisateur
+                $(this).closest('.wishlist-produit').remove(); // Supprime l'élément de l'interface utilisateur
             }
         });
     });

@@ -1,273 +1,223 @@
 <?php
-// Démarrage ou récupération de la session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre Boutique de Musique</title>
     <style>
-        /* Styles principaux */
         .header-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            background-color: #696969;
-            color: white;
-            margin: 0 auto;
-            padding: 0 20px;
-            height: 70px;
+            justify-content: space-between;
+            background-color: #f8f8f8;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .logo,
-        .cart {
-            position: absolute;
-        }
-
-        .logo {
-            left: 20px;
-        }
-
-        .cart {
-            right: 20px;
-        }
-
-        .logo img,
-        .cart img {
-            max-height: 50px;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            background-color: #fff;
-            border-radius: 4px;
-            margin: 0 auto;
-            padding: 0;
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .category-select,
-        .search-input,
-        .search-button {
-            height: 40px;
-        }
-
-        /* Styles pour le select */
-        .category-select {
-            background-color: #f3f3f3;
-            color: #555;
-            border: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border-radius: 4px 0 0 4px;
-        }
-
-        /* Ajout d'une flèche pour le select */
-        .category-select::after {
-            content: '▼';
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: #555;
-        }
-
-        .search-input {
+        .header-slogan {
             flex-grow: 1;
-            border: none;
-            padding-left: 10px;
+            text-align: left; /* Alignement du texte à gauche */
         }
 
-        .search-button {
-            background-color: #febd69;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            width: 40px;
-        }
-
-        .search-button img {
-            width: 100%;
-            height: auto;
-        }
-
-        /* Styles pour la navigation principale */
-        .main-nav {
+        .header-links {
             display: flex;
-            justify-content: flex-end;
-            position: absolute;
-            right: 90px;
-            height: 70px;
-        }
-
-        .main-nav ul {
-            list-style-type: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
             align-items: center;
+            gap: 20px;
+            flex-grow: 1;
+            justify-content: flex-end; /* Alignement des liens à droite */
         }
 
-        .main-nav ul li {
-            padding: 0 10px;
-        }
-
-        .main-nav ul li a {
+        .header-links a,
+        .header-links img {
             text-decoration: none;
-            color: white;
+            color: #333;
             font-weight: bold;
         }
 
-
-        /* Styles pour le menu déroulant */
-        .menu-item {
-            position: relative;
-            /* Position relative pour le menu déroulant */
+        .logo img,
+        .home-link img,
+        .cart-link img,
+        .user-link img {
+            height: 30px;
+            cursor: pointer;
         }
 
         .submenu {
             display: none;
             position: absolute;
-            background-color: #131921;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            border-radius: 0px 0px 4px 4px;
-            padding: 0;
-            z-index: 100;
-            right: 0;
-            /* Ajouté pour aligner le menu déroulant avec l'élément parent */
-        }
-
-        .submenu li {
-            display: block;
-            text-align: left;
-            /* Alignement du texte à gauche */
+            background-color: #f8f8f8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            padding: 10px;
+            list-style-type: none;
+            margin: 0;
         }
 
         .submenu li a {
-            color: white;
-            padding: 10px;
             text-decoration: none;
             display: block;
+            padding: 5px;
+            color: #333;
         }
 
-        .menu-item:hover .submenu {
-            display: block;
-            /* Affichage du sous-menu au survol */
+        /* Positionnez correctement votre menu en fonction de votre mise en page */
+        .menu-item {
+            position: relative;
         }
 
-        /* Styles responsives */
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-slogan,
+            .header-links {
+                flex-grow: 0;
+                justify-content: center;
+                width: 100%;
                 text-align: center;
             }
 
-            .logo,
-            .cart {
-                position: relative;
-                padding: 10px 0;
+            .header-slogan {
+                margin-bottom: 10px;
             }
-
-            .search-bar {
-                order: -1;
-                width: 100%;
-                max-width: none;
-                margin-top: 10px;
-            }
-
-            .main-nav {
-                position: relative;
-                width: 100%;
-                justify-content: center;
-                margin-top: 10px;
-            }
-
-            .logo img,
-            .cart img {
-                max-height: 40px;
-            }
-        }
-
-        .home-link {
-            position: absolute;
-            left: 80px;
-        }
-
-
-        .menu-item a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     </style>
 </head>
-
 <body>
     <header>
         <div class="header-container">
-            <a href="/" class="logo">
-                <img src="img/logo.jpg" alt="Logo de la boutique">
-            </a>
-            <a href="index.php" class="home-link">
-                <img src="img/accueil.png" alt="Accueil" style="height: 50px;">
-            </a>
-            <!-- Formulaires de recherche -->
-            <form id="search-form" action="index.php" method="GET">
-                <select name="category" class="category-select">
-                    <option value="Tous nos produits" <?= isset($selectedCategory) && ($selectedCategory == 'Tous nos produits' || empty($selectedCategory)) ? 'selected' : '' ?>>Tous nos produits</option>
-                    <option value="Cordes" <?= ($selectedCategory == 'Cordes') ? 'selected' : '' ?>>Cordes</option>
-                    <option value="Percussions" <?= ($selectedCategory == 'Percussions') ? 'selected' : '' ?>>Percussions</option>
-                    <option value="Clavier" <?= ($selectedCategory == 'Clavier') ? 'selected' : '' ?>>Clavier</option>
-                    <option value="Vent" <?= ($selectedCategory == 'Vent') ? 'selected' : '' ?>>Vent</option>
-                    <option value="Livres" <?= ($selectedCategory == 'Livres') ? 'selected' : '' ?>>Livres</option>
-                    <option value="Matériel Studio" <?= ($selectedCategory == 'Matériel Studio') ? 'selected' : '' ?>>Matériel Studio</option>
-                </select>
-                <input type="text" name="search" placeholder="Rechercher LaBonneNote.fr" class="search-input" value="<?= isset($searchTerm) ? htmlspecialchars($searchTerm) : '' ?>">
-                <button type="submit" class="search-button">
-                    <img src="img/loupe.png" alt="Rechercher">
-                </button>
-            </form>
-            <nav class="main-nav">
-                <ul>
-                    <?php
-                    if (isset($_SESSION['Sgroupe12'])) {
-                        echo '<li class="menu-item">
-                            <a href="#">
-                                <img src="img/compte.png" alt="Compte" style="height: 50px;">
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="VotreCompte.php">Votre Compte</a></li>
-                                <li><a href="ListeDeSouhaits.php">Liste de Souhait</a></li>
-                                <li><a href="Coupons.php">Coupons</a></li>
-                                <li><a href="ServiceClient.php">Service Client</a></li>
-                                <li><a href="Deconnexion.php">Déconnexion</a></li>
-                            </ul>
-                        </li>';
-                    } else {
-                        echo '<li><a href="FormConnexion.php">Connexion</a></li>';
-                    }
-                    ?>
-                </ul>
-            </nav>
-            <div class="cart">
-                <a href="Panier.php">
-                    <img src="img/panier.png" alt="Panier d'achat">
+            <span class="header-slogan">Où la musique trouve sa voix...</span>
+            <div class="header-links">
+                <a href="index.php" class="home-link">
+                    <img src="img/accueil.png" alt="Home">
                 </a>
+                <?php if (!isset($_SESSION['admin'])): ?>
+                    <a href="Panier.php" class="cart-link">
+                        <img src="img/panier.png" alt="Panier">
+                    </a>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['Sgroupe12']) || isset($_SESSION['admin'])): ?>
+                    <div class="menu-item">
+                    <a href="javascript:void(0);" id="user-icon">
+                        <img src="img/compte.png" alt="Compte" style="height: 50px;">
+                    </a>
+                    <ul class="submenu" id="user-menu">
+                        <li><a href="VotreCompte.php">Votre Compte</a></li>
+                        <li><a href="SuiviCommandes.php">Mes Commandes</a></li>
+                        <li><a href="ListeDeSouhaits.php">Liste de Souhaits</a></li>
+                        <li><a href="Coupons.php">Coupons</a></li>
+                        <li><a href="Deconnexion.php">Déconnexion</a></li>
+                        <li><a href="ServiceClient.php">Service Client</a></li>
+                        
+                    </ul>
+                </div>
+                <?php else: ?>
+                    <a href="FormConnexion.php">Se connecter</a>
+                <?php endif; ?>
+                <a href="index.php" class="logo">
+                    <img src="img/logo.jpg" alt="Logo de la boutique">
+                </a>
+                <?php if (isset($_SESSION['admin'])): ?>
+                    <div class="menu-item">
+                        <a href="javascript:void(0);" id="admin-icon">
+                            Admin
+                        </a>
+                        <ul class="submenu" id="admin-menu">
+                            <li><a href="AjoutProduit.php">Ajout Produit</a></li>
+                            <li><a href="SuppressionProduit.php">Suppression Produit</a></li>
+                            <li><a href="ModificationProduit.php">Modification Produit</a></li>
+                            <li><a href="Promotions.php">Promotions</a></li>
+                            <li><a href="Ventes.php">Ventes</a></li>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
             </div>
         </div>
     </header>
-</body>
 
+    <?php if (isset($_SESSION['admin'])): ?>
+    <div class="menu-item">
+        <a href="javascript:void(0);" id="admin-icon">
+            Admin
+        </a>
+        <ul class="submenu" id="admin-menu">
+            <li><a href="AjoutProduit.php">Ajout Produit</a></li>
+            <li><a href="SuppressionProduit.php">Suppression Produit</a></li>
+            <li><a href="ModificationProduit.php">Modification Produit</a></li>
+            <!-- Ajoutez d'autres liens d'administration au besoin -->
+        </ul>
+    </div>
+<?php endif; ?>
+
+<script>
+    // Ajoutez ce script juste avant la fermeture de votre balise body
+    document.addEventListener('DOMContentLoaded', function() {
+        var userIcon = document.getElementById('user-icon');
+        var userMenu = document.getElementById('user-menu');
+        var adminIcon = document.getElementById('admin-icon'); // Ajout de la variable adminIcon
+        var adminMenu = document.getElementById('admin-menu'); // Ajout de la variable adminMenu
+        
+        var isUserMenuVisible = false; // Variable pour suivre la visibilité du menu utilisateur
+        var isAdminMenuVisible = false; // Variable pour suivre la visibilité du menu admin
+        
+        userIcon.addEventListener('click', function() {
+            // Inverser la visibilité du menu utilisateur à chaque clic
+            isUserMenuVisible = !isUserMenuVisible;
+            userMenu.style.display = isUserMenuVisible ? 'block' : 'none';
+            
+            // Cacher le menu admin s'il est ouvert
+            isAdminMenuVisible = false;
+            adminMenu.style.display = 'none';
+        });
+        
+        adminIcon.addEventListener('click', function() {
+            // Inverser la visibilité du menu admin à chaque clic
+            isAdminMenuVisible = !isAdminMenuVisible;
+            adminMenu.style.display = isAdminMenuVisible ? 'block' : 'none';
+            
+            // Cacher le menu utilisateur s'il est ouvert
+            isUserMenuVisible = false;
+            userMenu.style.display = 'none';
+        });
+        
+        // Pour fermer le menu si on clique en dehors (pour les deux menus)
+        document.addEventListener('click', function(event) {
+            var isClickInsideUserMenu = userIcon.contains(event.target) || userMenu.contains(event.target);
+            var isClickInsideAdminMenu = adminIcon.contains(event.target) || adminMenu.contains(event.target);
+            
+            if (!isClickInsideUserMenu && isUserMenuVisible) {
+                userMenu.style.display = 'none';
+                isUserMenuVisible = false;
+            }
+            
+            if (!isClickInsideAdminMenu && isAdminMenuVisible) {
+                adminMenu.style.display = 'none';
+                isAdminMenuVisible = false;
+            }
+        });
+        
+        // Masquer les menus déroulants si l'utilisateur correspondant n'est pas connecté
+        <?php if (!isset($_SESSION['Sgroupe12'])): ?>
+        userMenu.style.display = 'none';
+        <?php endif; ?>
+        
+        <?php if (!isset($_SESSION['admin'])): ?>
+        adminMenu.style.display = 'none';
+        <?php endif; ?>
+    });
+</script>
+
+
+
+</body>
 </html>
+
+
+

@@ -1,10 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['Sgroupe12'])) {
+if (!isset($_SESSION['Sgroupe12']) && !isset($_SESSION['admin'])) {
     header("Location: index.php");
     exit();
 }
 session_destroy();
-$message = "Déconnexion effectuée !";
+$message = "Dï¿½connexion effectuï¿½e !";
 header("Location: index.php?deconnexion_message=" . urlencode($message));
 ?>

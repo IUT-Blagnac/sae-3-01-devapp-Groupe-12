@@ -145,6 +145,57 @@ foreach ($avis as $unAvis) {
     cursor: pointer;
 }
 
+.leave-review {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.leave-review h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.leave-review form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.leave-review label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.leave-review input[type="text"],
+.leave-review textarea,
+.leave-review select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.leave-review textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.leave-review button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.leave-review button:hover {
+    background-color: #45a049;
+}
+
 
     </style>
 </head>
@@ -156,6 +207,36 @@ foreach ($avis as $unAvis) {
     <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
     <p><?= htmlspecialchars($produit['prixVente']) ?> €</p>
     <p><?= htmlspecialchars($produit['description']) ?></p>
+    <?php
+        // Vérifier si l'utilisateur connecté a déjà laissé un avis
+$stmt = $conn->prepare("SELECT COUNT(*) FROM Avis WHERE numProduit = ? AND numClient = ?");
+$stmt->execute([$numProduit, $_SESSION['numClient']]);
+$canReview = $stmt->fetchColumn() == 0;
+
+// Afficher un message d'erreur si l'utilisateur a déjà laissé un avis
+if (isset($_GET['error']) && $_GET['error'] == 'alreadyReviewed') {
+    echo "<p>Vous avez déjà laissé un avis pour ce produit.</p>";
+}
+
+if ($canReview) {
+    // Afficher le formulaire d'avis
+        echo '<div class="leave-review">';
+        echo '<h3>Laissez un avis</h3>';
+        echo '<form action="laisserAvis.php" method="post">';
+        echo '<input type="hidden" name="numProduit" value="' . $numProduit . '">';
+        echo '<label for="note">Note :</label>';
+        echo '<select name="note" id="note">';
+        for ($i = 1; $i <= 5; $i++) {
+            echo "<option value=\"$i\">$i</option>";
+        }
+        echo '</select>';
+        echo '<label for="commentaire">Commentaire :</label>';
+        echo '<textarea name="commentaire" id="commentaire" rows="4"></textarea>';
+        echo '<button type="submit">Soumettre lavis</button>';
+        echo '</form>';
+        echo '</div>';
+}
+    ?>
 
     <!-- Boutons de partage sur les réseaux sociaux -->
     <div class="product-share">
