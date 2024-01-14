@@ -88,27 +88,81 @@ Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de r
 == Fonctionnement du site partie Admin
 
 = Gérer les produits
+(Il faut être connecté à un compte admin pour cette option)
+
+Tout d'abord cliquez sur le menu admin tout en haut à droite de la page.
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin1.png[]
+
+
+Un menu avec les options réservées aux admins s'afficheront.
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin2.png[]
+
+Pour commencer l'option "Ajouter un produit" qui va vous amener sur une page où il faudra simplement remplir les champs.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminajoutprod.png[]
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin3.png[]
+
+N'oubliez pas de cliquer sur le bout "Ajouter un produit"
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin4.png[]
+
+
+Ensuite l'option "Supprimer un produit" qui va vous amener sur la page de suppression de produit. Mettez le numéro du produit à supprimer.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminsuppressionprod.png[]
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin5.png[]
+
+
+N'oubliez pas d'appuyer sur le bouton supprimer pour supprimer le produit !
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin6.png[]
+
+L'option de "Modification produits" 
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin7.png[]
-image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin8.png[]
+
+Vous êtes donc emmener sur la page où vous aller mettre le numéro du produit que vous voulez changer.
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin9.png[]
+
+Une fois le produit trouvé, vous pouvez changer le contenu des champs d'informations sur le produit. N'oubliez pas d'appuyer sur "Enregistrer les informations" pour sauvegarder les modifications !
+
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin20.png[]
 
 
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminajouterprod.png
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminpromo.png
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminsupprprod.png
-https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminventes.png
+L'option "Ajouter produit". Cela va vous emmener sur la page d'ajout de produit. Vous n'avez plus qu'à remplir les champs et ne pas oublier d'appuyer sur "Ajouter le produit" pour qu'il s'ajoute !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminajouterprod.png[]
+
+L'option "Supprimer produit". Cela va vous emmener sur la page de suppression de produit où vous aller mettre le numéro du produit à supprimer. Une fois le proudit trouvé il vous suffira d'appuyer sur le bouton "Supprimer" pour supprimer le produit voulu !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminsupprprod.png[]
+
 
 = Gérer les promotions
+(Il faut être connecté à un compte admin pour cette option)
 
-= Voir les statistiques de ventes
+L'option de "Promotions" qui va permettre de mettre des promotions sur les produits.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin8.png[]
+
+Ici vous allez pouvoir cocher le ou les produit(s) que vous voulez mettre en promotion en détaillant le pourcentage souhaité dans le champs dédié.
+N'oubliez pas d'appuyer sur le bouton "Lancer la promotion" !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminpromo.png[]
+
+= Voir l'historique des ventes
+(Il faut être connecté à un compte admin pour cette option)
+
+L'option "Ventes". Cela va vous emmener sur la page d'historique des ventes qui va vous permettre de consulter la liste de toutes les ventes effectuées !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminventeventevente.png[]
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminventes.png[]
 
 == Fonctionnement du site partie Client
 
