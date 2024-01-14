@@ -229,7 +229,7 @@ La navigation et la recherche de produits fonctionne correctement
 ^|All_G_C.7 ^|L'utilisateur clique sur le bouton "Liste de souhaits" ^|L'utilisateur se retrouve sur la page de sa liste de souhaits ^| L'utilisateur doit se trouver sur une autre page que la page Liste de souhaits ^|OK
 ^|All_G_C.8 ^|L'utilisateur clique sur le bouton "Votre Compte" ^|L'utilisateur se retrouve sur la page de gestion de son Compte ^| L'utilisateur doit se trouver sur une autre page que la page Votre Compte ^|OK
 5+|Commentaire :
-La navigation entre les différentes pages n'est pas encore terminé
+La navigation entre les différentes pages fonctionne correctement
 |====
 
 === Passer une commande 
@@ -306,7 +306,8 @@ Le suivi des commandes fonctionne bien.
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
 
-5+|
+5+|Commentaire :
+On peut se rendre correctement sur le service client
 |====
 
 |====
@@ -318,20 +319,22 @@ Le suivi des commandes fonctionne bien.
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client sans vous être connecté ^|La page du service client s'affiche mais une alerte disant qu'il faut être connecté s'affiche, après avoir cliqué dessus, vous serez redirigé vers la page d'accueil index.php ^| Etre connecté au site et avoir cliqué sur le service client sans s'être connecté ^|OK
 
-5+|
+5+|Commentaire :
+On ne peut bien pas se rendre sur le service client si on est pas connecté
 |====
 
 |====
 |Cas de test 4+|Test-02-05-03
 |Titre 4+|Contacter le service client par mail
-|Objectif 4+|Vérifier qu'il est de contacter le service client par mail
+|Objectif 4+|Vérifier qu'il est possible de contacter le service client par mail
 
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
 ^|All_G_C.2 ^|Cliquer sur "Mail" ^|Votre application de mail va s'ouvrir et vous pourrez rédiger le mail ^|Aucune ^|OK
 
-5+|
+5+|Commentaire :
+On peut correctement contacte le service client par mail
 |====
 
 |====
@@ -344,7 +347,8 @@ Le suivi des commandes fonctionne bien.
 ^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
 ^|All_G_C.2 ^|Cliquer sur "Téléphone" ^|Votre application pour appeler va s'ouvrir et vous pourrez appeler le service client ^|Aucune ^|OK
 
-5+|
+5+|Commentaire :
+On peut correctement contacter le service client par téléphone
 |====
 
 |====
@@ -357,7 +361,8 @@ Le suivi des commandes fonctionne bien.
 ^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
 ^|All_G_C.2 ^|Cliquer sur "Chat" ^|Une fenêtre va s'afficher et vous pourrez rédiger votre message, cliquer sur envoyer pour envoyer le message ^|Le message ne doit pas être vide pour être envoyé ^|OK
 
-5+|
+5+|Commentaire :
+On peut correctement contacter le service client par chat
 |====
 
 
@@ -372,7 +377,8 @@ Le suivi des commandes fonctionne bien.
 ^| All_G_C.2 ^| Cliquer sur "Chat" ^| Une fenêtre va s'afficher et vous pourrez rédiger votre message, cliquer sur envoyer pour envoyer le message ^ | Le message ne doit pas être vide pour être envoyé ^| OK
 ^| All_G_C.3 ^| Attendre le chargement (à droite du bouton "Envoyer") ^| Le message reçu va s'afficher ^| Ne pas avoir rafraîchi la page pendant le chargement ^| OK
 
-5+|
+5+|Commentaire :
+On reçoit bien les réponses du chat en direct
 |====
 
 === Avis
@@ -387,7 +393,7 @@ Le suivi des commandes fonctionne bien.
 ^|All_G_C.2 ^|Laisser l'avis et la note ^|L'avis et la note sont visible sur la page et ont ne voit plus le formulaire pour laisser un avis ^| Avoir déjà commandé se produit et n'avoir jamais laissé d'avis dessus ^|OK
 ^|All_G_C.3 ^Consulter les avis ^|On doit voir les avis et les réponses aux avis du produit ^| Etre sur la page du produit ^|OK
 5+|Commentaire :
-Le menu administrateur marche parfaitement
+On peut correctement laisser un avis et les consulter
 |====
 
 
