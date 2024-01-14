@@ -208,8 +208,8 @@ Le changement du mot de passe n'est pas encore fini
 ^|All_G_C.6 ^|L'utilisateur choisit de trier les produits par popularité croissante' ^|les produits s'affiche dans l'ordre de popularité croissante ^|Aucune ^|OK
 ^|All_G_C.7 ^|L'utilisateur choisit de trier les produits par popularité décroissante' ^|les produits s'affiche dans l'ordre de popularité décroissante ^|Aucune ^|OK
 ^|All_G_C.8 ^|L'Utilisateur clique sur les boutons précédents ou suivant des carrousels de produit' ^|le carrousel bouge afin de faire scroll les produits dans l'ordre choisit ^|Aucune ^|OK
-^|All_G_C.9 ^|L'Utilisateur clique sur la fenêtre du produit' ^|la page du produit s'affiche ^|Aucune ^|En cours
-^|All_G_C.9 ^|L'Utilisateur clique sur l'icone de coeur à côté du prix du produit' ^|la produit s'ajoute à la liste de souhaits de l'utilisateur ^|être connecté ^|En cours
+^|All_G_C.9 ^|L'Utilisateur clique sur la fenêtre du produit' ^|la page du produit s'affiche ^|Aucune ^|OK
+^|All_G_C.9 ^|L'Utilisateur clique sur l'icone de coeur à côté du prix du produit' ^|la produit s'ajoute à la liste de souhaits de l'utilisateur ^|être connecté ^|OK
 5+|Commentaire :
 La navigation et la recherche de produits fonctionne correctement
 |====
@@ -222,12 +222,12 @@ La navigation et la recherche de produits fonctionne correctement
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|L'utilisateur clique sur l'icone de maison ^|L'utilisateur se retrouve sur la page d'accueil ^| L'utilisateur doit se trouver sur une autre page que l'accueil ^|OK
-^|All_G_C.2 ^|L'utilisateur clique sur l'icone de panier ^|L'utilisateur se retrouve sur la page du panier ^| L'utilisateur doit se trouver sur une autre page que le panier ^|OK
+^|All_G_C.2 ^|L'utilisateur clique sur l'icone de panier ^|L'utilisateur se retrouve sur la page du panier ^| L'utilisateur doit se trouver sur une autre page que le panier, et ne pas être administrateur ^|OK
 ^|All_G_C.3 ^|L'utilisateur clique sur l'icone ? ^|Cela ouve un menu circulaire autour du ? proposant le service client et le Apropos ^| Aucun ^|OK
-^|All_G_C.4 ^|L'utilisateur clique sur l'icone de service client ^|L'utilisateur se retrouve sur la page Service Client ^| L'utilisateur doit se trouver sur une autre page que le service Client et doit avoir cliqué sur sur l'icone ? ^|En Cours
-^|All_G_C.5 ^|L'utilisateur clique sur l'icone de APropos ^|L'utilisateur se retrouve sur la page APropos ^| L'utilisateur doit se trouver sur une autre page que le APropos et doit avoir cliqué sur sur l'icone ? ^|En Cours
-^|All_G_C.6 ^|L'utilisateur clique sur le bouton "Coupons" ^|L'utilisateur se retrouve sur la page de ses coupons de réduction ^| L'utilisateur doit se trouver sur une autre page que la page Coupons ^|En Cours
-^|All_G_C.7 ^|L'utilisateur clique sur le bouton "Liste de souhaits" ^|L'utilisateur se retrouve sur la page de sa liste de souhaits ^| L'utilisateur doit se trouver sur une autre page que la page Liste de souhaits ^|En Cours
+^|All_G_C.4 ^|L'utilisateur clique sur l'icone de service client ^|L'utilisateur se retrouve sur la page Service Client ^| L'utilisateur doit se trouver sur une autre page que le service Client et doit avoir cliqué sur sur l'icone ? ^|OK
+^|All_G_C.5 ^|L'utilisateur clique sur l'icone de APropos ^|L'utilisateur se retrouve sur la page APropos ^| L'utilisateur doit se trouver sur une autre page que le APropos et doit avoir cliqué sur sur l'icone ? ^|OK
+^|All_G_C.7 ^|L'utilisateur clique sur le bouton "Liste de souhaits" ^|L'utilisateur se retrouve sur la page de sa liste de souhaits ^| L'utilisateur doit se trouver sur une autre page que la page Liste de souhaits ^|OK
+^|All_G_C.8 ^|L'utilisateur clique sur le bouton "Votre Compte" ^|L'utilisateur se retrouve sur la page de gestion de son Compte ^| L'utilisateur doit se trouver sur une autre page que la page Votre Compte ^|OK
 5+|Commentaire :
 La navigation entre les différentes pages n'est pas encore terminé
 |====
@@ -283,7 +283,7 @@ Une alerte indiquant les différents produits hors stock s'affiche bien.
 === Suivre ses commandes
 
 |====
-|Cas de test 4+|Test-02-09-01
+|Cas de test 4+|Test-02-04-01
 |Titre 4+|Suivre ses commandes
 |Objectif 4+|Vérifier que la commande peut être consulté via le suivi des commandes
 
@@ -298,7 +298,7 @@ Le suivi des commandes fonctionne bien.
 === Contacter le service client
 
 |====
-|Cas de test 4+|Test-02-04-01
+|Cas de test 4+|Test-02-05-01
 |Titre 4+|Se rendre sur la page "Service Client"
 |Objectif 4+|Vérifier que la page fonctionne bien
 
@@ -310,7 +310,7 @@ Le suivi des commandes fonctionne bien.
 |====
 
 |====
-|Cas de test 4+|Test-02-04-02
+|Cas de test 4+|Test-02-05-02
 |Titre 4+|Se rendre sur la page "Service Client" sans être connecté
 |Objectif 4+|Vérifier qu'il est impossible de se rendre sur la page du service client sans être connecté
 
@@ -322,7 +322,7 @@ Le suivi des commandes fonctionne bien.
 |====
 
 |====
-|Cas de test 4+|Test-02-04-03
+|Cas de test 4+|Test-02-05-03
 |Titre 4+|Contacter le service client par mail
 |Objectif 4+|Vérifier qu'il est de contacter le service client par mail
 
@@ -335,7 +335,7 @@ Le suivi des commandes fonctionne bien.
 |====
 
 |====
-|Cas de test 4+|Test-02-04-04
+|Cas de test 4+|Test-02-05-04
 |Titre 4+|Contacter le service client par téléphone
 |Objectif 4+|Vérifier qu'il est de contacter le service client par téléphone
 
@@ -348,7 +348,7 @@ Le suivi des commandes fonctionne bien.
 |====
 
 |====
-|Cas de test 4+|Test-02-04-05
+|Cas de test 4+|Test-02-05-05
 |Titre 4+|Contacter le service client par chat en direct
 |Objectif 4+|Vérifier qu'il est de contacter le service client par chat
 
@@ -362,7 +362,7 @@ Le suivi des commandes fonctionne bien.
 
 
 |====
-|Cas de test 4+|Test-02-04-06
+|Cas de test 4+|Test-02-05-06
 |Titre 4+|Recevoir les réponses lors du chat en direct
 |Objectif 4+|Vérifier que les questions envoyées obtiennent bien des réponses
 
@@ -373,4 +373,38 @@ Le suivi des commandes fonctionne bien.
 ^| All_G_C.3 ^| Attendre le chargement (à droite du bouton "Envoyer") ^| Le message reçu va s'afficher ^| Ne pas avoir rafraîchi la page pendant le chargement ^| OK
 
 5+|
+|====
+
+=== Avis
+|====
+|Cas de test 4+|Test-02-06-01
+|Titre 4+|Laisser des avis et noter un produit
+|Objectif 4+|Vérifier que l'utilisateur peut bien laisser un avis et une note sur un produit commandé
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Aller sur la page produit ^|Un formulaire d'avis et de note apparait ^| Avoir déjà commandé se produit et n'avoir jamais laissé d'avis dessus ^|OK
+^|All_G_C.2 ^|Laisser l'avis et la note ^|L'avis et la note sont visible sur la page et ont ne voit plus le formulaire pour laisser un avis ^| Avoir déjà commandé se produit et n'avoir jamais laissé d'avis dessus ^|OK
+^|All_G_C.3 ^Consulter les avis ^|On doit voir les avis et les réponses aux avis du produit ^| Etre sur la page du produit ^|OK
+5+|Commentaire :
+Le menu administrateur marche parfaitement
+|====
+
+
+=== Administrateur
+|====
+|Cas de test 4+|Test-02-07-01
+|Titre 4+|Gérer le site pour l'administrateur
+|Objectif 4+|Vérifier que les fonctionnalités administrateur fonctionne
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Se connecter en tant qu'administrateur ^|Le header change est on voit alors Admin au lieu du Panier ^| Avoir un compte administatrateur ^|OK
+^|All_G_C.2 ^|Ajouter un produit ^|Le produit est ajouté à la base de données et est donc visible sur le site ^| Etre connecté en tant qu'administrateur ^|OK
+^|All_G_C.3 ^Modifier un produit ^|Le produit est modifié à la base de données et les modifications sont visible sur le site ^| Etre connecté en tant qu'administrateur ^|OK
+^|All_G_C.4 ^|Supprimer un produit ^|Le produit est supprimé de la base de données et n'est donc plus visible sur le site ^| Etre connecté en tant qu'administrateur ^|OK
+^|All_G_C.5 ^|Lancer des promotions ^|Le prix des différents produits séléctionnés sont modifiés dans la base de données et donc sur le site ^| Etre connecté en tant qu'administrateur, avoir sélectionné des produits et avoir saisie un % pour la promotion ^|OK
+^|All_G_C.6 ^|Consulter les ventes ^|La liste de toutes les commandes passés en détails est affichée ^| Etre connecté en tant qu'administrateur ^|OK
+5+|Commentaire :
+Le menu administrateur marche parfaitement
 |====

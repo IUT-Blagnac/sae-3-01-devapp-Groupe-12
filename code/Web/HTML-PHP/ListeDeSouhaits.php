@@ -14,10 +14,38 @@ function getWishlistProducts($conn, $wishlist) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function modifNomProduit($name) {
+    $name = str_replace(' ', '_', $name); // Remplace les espaces par des underscores
+    $name = strtolower($name); // Convertit en minuscules
+
+    // Tableau de correspondance pour la suppression des accents
+    $accents = array(
+        'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a',
+        'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o',
+        'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e',
+        'Ç'=>'C', 'ç'=>'c',
+        'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i',
+        'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u',
+        'ÿ'=>'y',
+        'Ñ'=>'N', 'ñ'=>'n',
+        'Ÿ'=>'Y',
+        'Æ'=>'AE', 'æ'=>'ae',
+        'Œ'=>'OE', 'œ'=>'oe',
+        'ß'=>'ss'
+    );
+
+    // Remplacement des caractères accentués
+    foreach ($accents as $accent => $replacement) {
+        $name = str_replace($accent, $replacement, $name);
+    }
+
+    return $name;
+}
 
 // Récupérer la liste de souhaits du cookie
 $wishlist = json_decode($_COOKIE['wishlist'] ?? '[]');
 $wishlistProducts = getWishlistProducts($conn, $wishlist);
+
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +138,11 @@ $wishlistProducts = getWishlistProducts($conn, $wishlist);
     <?php if (!empty($wishlistProducts)): ?>
         <?php foreach ($wishlistProducts as $produit): ?>
             <div class="wishlist-produit">
-                <img src="img/youtube.png" alt="<?= htmlspecialchars($produit['nomProduit']) ?>">
+            <?php
+                $nomProduitModifie = modifNomProduit($produit['nomProduit']);
+                $imagePath = "img/{$nomProduitModifie}.png"; // Ou .jpg selon le format de vos images
+            ?>
+            <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($produit['nomProduit']); ?>">
                 <div class="product-info">
                     <h3><?= htmlspecialchars($produit['nomProduit']) ?></h3>
                     <p class="price"><?= htmlspecialchars($produit['prixVente']) ?> €</p>
