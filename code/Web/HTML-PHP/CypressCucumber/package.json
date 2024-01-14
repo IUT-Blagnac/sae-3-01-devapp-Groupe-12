@@ -1,7 +1,6 @@
 {
   "name": "cypresscucumber",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open",
@@ -16,6 +15,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.1",
+    "@cypress/browserify-preprocessor": "^3.0.2",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "prettier": "^3.1.1"
   },
@@ -24,7 +25,9 @@
     "typescript": "^5.3.3"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true,
-    "step_definitions": "cypress/e2e/login.feature"
-  }
+    "stepDefinitions": "cypress/e2e/bdd-cucumber/step-defination/*.js",
+    "filterSpecs": true,
+    "omitFiltered": true
+   },
+  "description": ""
 }
