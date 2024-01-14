@@ -87,7 +87,7 @@ Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de r
 
 == Fonctionnement du site
 
-===Créer un Compte
+= Créer un Compte
 
 Si vous n'avez pas encore de compte, vous dever d'abord aller sur se connecter.
 
@@ -114,7 +114,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Se Connecter à son Compte
+= Se Connecter à son Compte
 
 Pour vous connecter, cliquez sur "Se Connecter" en haut à droite.
 
@@ -140,7 +140,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Se Déconnecter
+= Se Déconnecter
 (Il faut être connecté à un compte client pour cette option)
 
 Pour vous déconnecter de votre compte, cliquez sur "Déconnexion" situé en haut à droite de la page d'accueil.
@@ -149,7 +149,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Suivre ses Commandes
+= Suivre ses Commandes
 (Il faut être connecté à un compte client pour cette option)
 
 Pour suivre l'état de vos commandes, rendez-vous dans la section "Mon Compte" en cliquant sur le petit bonhomme et sélectionnez l'onglet "Mes Commandes".
@@ -163,7 +163,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Modifier les Informations du Compte
+= Modifier les Informations du Compte
 
 Mettez à jour vos informations personnelles en accédant à la section "Votre Compte".
 
@@ -178,7 +178,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Noter un Produit
+= Noter un Produit
 (Il faut être connecté à un compte client pour cette option)
 
 Après vous être connecté, vous pouvez noter un produit en attribuant une évaluation et en laissant un commentaire sur la page du produit.
@@ -210,7 +210,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Laisser un avis
+= Laisser un avis
 (Il faut être connecté à un compte client pour cette option)
 
 Au même endroit que pour laisser une note puisque la note fait partie de l'avis, il suffit d'écrire votre avis dans le champs dédié.
@@ -239,7 +239,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Ajouter au Panier
+= Ajouter au Panier
 (Il faut être connecté à un compte client pour cette option)
 
 Ajoutez des produits à votre panier en cliquant sur le bouton "Ajouter au Panier" depuis la page du produit.
@@ -262,7 +262,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Payer sa Commande
+= Payer sa Commande
 (Il faut être connecté à un compte client pour cette option)
 
 Lors du processus de paiement, suivez les étapes indiquées pour sélectionner votre méthode de paiement et finaliser la commande.
@@ -357,7 +357,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Partager des Produits sur les Réseaux Sociaux
+= Partager des Produits sur les Réseaux Sociaux
 (Il faut être connecté à un compte client pour cette option)
 Sur la page du produit que vous voulez partager, appuyez sur l'icône de partage. 
 
@@ -381,7 +381,7 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 
 
 
-===Contacter le Service Client
+= Contacter le Service Client
 (Il faut être connecté à un compte client pour cette option)
 
 
@@ -393,7 +393,6 @@ image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/
 Puis sur le petit opérateur.
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient2.png[]
-
 
 
 Vous avez donc le choix parmi plusieurs options de contact et d'aide.
@@ -422,7 +421,7 @@ Cette option va vous mettre en contact avec une IA qui répondra à vos question
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient8.png[]
 
-=== Page à propos
+= Page à propos
 
 Après avoir cliqué sur l'icône "?", il vous suffira de cliquer sur le logo "i".
 
