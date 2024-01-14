@@ -1,0 +1,5 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "integrationFolder": "cypress/tests/BDD",
+    "pluginsFile": "cypress/plugins/cucumber-plugins.js"
+ }
