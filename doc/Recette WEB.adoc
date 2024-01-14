@@ -408,3 +408,31 @@ Le menu administrateur marche parfaitement
 5+|Commentaire :
 Le menu administrateur marche parfaitement
 |====
+
+=== A propos
+|====
+|Cas de test 4+|Test-02-08-01
+|Titre 4+|Consulter la page à propos
+|Objectif 4+|Vérifier que la page à propos s'affiche correctement
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur le site et cliquer sur le bouton "?" (en bas à droite). ^|Deux autres boutons vont apparaîtes, un "Service Client" et un autre "A propos" ^| Aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur à propos ^|La page à propos va apparaître ^| Aucune ^|OK
+5+|Commentaire :
+La page à propos s'affiche correctement.
+|====
+
+=== Partage des produits
+|====
+|Cas de test 4+|Test-02-09-01
+|Titre 4+|Partager des produits sur les réseaux sociaux
+|Objectif 4+|Vérifier qu'il est possible de partager des produits
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur la page d'un produit et cliquer sur le bouton de partage. ^|Les options de partage vont apparaîtres ^| Aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur l'option de partage souhaité ^|Vous allez être redirigé vers le site où partager le produit ^| Aucune ^|OK
+5+|Commentaire :
+Le partage des produits est fonctionnel.
+|====
