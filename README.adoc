@@ -162,9 +162,8 @@ code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\step-defination\login
 
 Étapes pour exécuter les tests :
 
-1. npm install @badeball/cypress-cucumber-preprocessor
-
-2. npm install @cypress/browserify-preprocessor
-
-3. npx cypress run
+1. npm install cypress
+2. npm install @badeball/cypress-cucumber-preprocessor
+3. npm install @cypress/browserify-preprocessor
+4. npx cypress run
 
