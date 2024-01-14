@@ -75,7 +75,7 @@ Contacter le Service Client : Permet aux clients de communiquer directement avec
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
 
-= Tutoriel d'installation
+= Tutoriel de navigation
 
 == Aller sur le site
 
@@ -85,7 +85,32 @@ Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de r
 
 = Prise en main du site web
 
-== Fonctionnement du site
+== Fonctionnement du site partie Admin
+
+= Gérer les produits
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin1.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin2.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin3.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin4.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin5.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin6.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin7.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin8.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin9.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin20.png[]
+
+
+https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminajouterprod.png
+https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminpromo.png
+https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminsupprprod.png
+https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminventes.png
+
+= Gérer les promotions
+
+= Voir les statistiques de ventes
+
+== Fonctionnement du site partie Client
 
 = Créer un Compte
 
