@@ -156,9 +156,15 @@ Implémentation de cucumber avec cypress pour tester la partie web, à l'aide de
 
 === Test de connexion 
 En utilisant la syntaxe cucumber, nous avons définit les feature du test.
-code\Web\HTML-PHP\CypressCucumber/cypress/e2e/login.feature[login.Feature]
+code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\features\login.feature[login.Feature]
 Puis nous avons réalisé les étapes pour mener a bien ce test : 
-code\Web\HTML-PHP\CypressCucumber\cypress\e2e\login\loginSteps.js[LoginSteps.js]
-, Cypress detecte le fichier feature mais ne trouve pas le fichier loginSteps.js ni quand il est dans le dossier login,
- ni quand il est placé dans le meme dossier que le fichier login.feature.
+code\Web\HTML-PHP\CypressCucumber\cypress\e2e\bdd-cucumber\step-defination\login\loginSteps.js[LoginSteps.js]
+
+Étapes pour éxecuter les tests :
+
+1. npm install @badeball/cypress-cucumber-preprocessor
+
+2. npm install @cypress/browserify-preprocessor
+
+3. npx cypress run
 
