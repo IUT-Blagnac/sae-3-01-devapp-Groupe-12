@@ -407,7 +407,7 @@ On peut correctement laisser un avis et les consulter
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|All_G_C.1 ^|Se connecter en tant qu'administrateur ^|Le header change est on voit alors Admin au lieu du Panier ^| Avoir un compte administatrateur ^|OK
 ^|All_G_C.2 ^|Ajouter un produit ^|Le produit est ajouté à la base de données et est donc visible sur le site ^| Etre connecté en administrateur ^|OK
-^|All_G_C.3 ^Modifier un produit ^|Le produit est modifié à la base de données et les modifications sont visible sur le site ^| Etre connecté en administrateur ^|OK
+^|All_G_C.3 ^|Modifier un produit ^|Le produit est modifié à la base de données et les modifications sont visible sur le site ^| Etre connecté en administrateur ^|OK
 ^|All_G_C.4 ^|Supprimer un produit ^|Le produit est supprimé de la base de données et n'est donc plus visible sur le site ^| Etre connecté en administrateur ^|OK
 ^|All_G_C.5 ^|Lancer des promotions ^|Le prix des différents produits séléctionnés sont modifiés dans la base de données et donc sur le site ^| Etre connecté en administrateur, avoir sélectionné des produits et avoir saisie un % pour la promotion ^|OK
 ^|All_G_C.6 ^|Consulter les ventes ^|La liste de toutes les commandes passés en détails est affichée ^| Etre connecté en administrateur ^|OK
