@@ -28,6 +28,6 @@
     "stepDefinitions": "cypress/e2e/bdd-cucumber/step-defination/*.js",
     "filterSpecs": true,
     "omitFiltered": true
-   },
+  },
   "description": ""
 }
