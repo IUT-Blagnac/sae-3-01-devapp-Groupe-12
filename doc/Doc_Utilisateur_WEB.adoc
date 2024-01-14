@@ -36,9 +36,42 @@ toc::[]
 = Présentation du site
 == Contexte général
 
+L'entreprise La Bonne Note, spécialisée dans la vente d'instruments de musique, envisage d'améliorer son modèle commercial en introduisant un site e-commerce dédié. Cette initiative stratégique vise à élargir la portée géographique de l'entreprise, permettant ainsi d'atteindre des clients plus éloignés et de répondre à une demande croissante de produits musicaux en ligne.
+
+Le contexte général de cette expansion découle de la nécessité de rester compétitif sur le marché tout en répondant aux évolutions des habitudes d'achat des consommateurs. Le marché en ligne offre une opportunité unique d'atteindre un public plus large et de proposer une gamme diversifiée d'instruments de musique à une clientèle mondiale.
+
+Le site e-commerce de "La Bonne Note" sera conçu pour offrir une expérience utilisateur optimale, avec une interface conviviale permettant aux clients de parcourir facilement le catalogue d'instruments, de rechercher des produits spécifiques, et de passer des commandes en ligne en toute simplicité. Cette plateforme virtuelle permettra aux clients d'explorer le large éventail d'instruments disponibles, d'accéder à des informations détaillées et de finaliser leurs achats depuis le confort de leur domicile.
+
+En adoptant le commerce électronique, La Bonne Note vise à garantir la satisfaction de sa clientèle en offrant un service de qualité, des informations transparentes sur les produits, et une gestion efficace des commandes et des livraisons. Cette expansion dans le monde numérique permettra également à l'entreprise de rester en phase avec les tendances du marché et de capitaliser sur les opportunités de croissance offertes par le commerce en ligne.
+
+Le projet du site e-commerce est une étape cruciale dans l'évolution de "La Bonne Note", transformant son modèle commercial traditionnel en une présence plus dynamique et accessible sur la scène mondiale du commerce électronique des instruments de musique.
+
 == Description du besoin
 
+L'entreprise "La Bonne Note" a identifié le besoin crucial de mettre en place un site e-commerce afin d'étendre sa présence sur le marché et de répondre aux besoins changeants de ses clients. L'objectif principal de ce projet est de créer une plateforme en ligne attractive et fonctionnelle qui permettra aux clients d'explorer, de choisir, et d'acheter des instruments de musique de haute qualité depuis n'importe où dans le monde.
+
 == Cas d'utilisation
+
+1. Administration
+Gérer les Produits : Permet à l'administrateur de gérer le catalogue de produits, y compris l'ajout, la modification et la suppression d'articles.
+Gérer les Promotions : Autorise l'administrateur à créer et gérer des offres spéciales et des promotions.
+Accéder aux Statistiques de Ventes : Offre à l'administrateur une vue détaillée des performances de vente, permettant une analyse approfondie.
+2. Utilisateur
+Gérer son Compte : Fonction principale pour les clients, offrant plusieurs options pour gérer leur compte en ligne.
+Se Déconnecter : Permet aux utilisateurs de se déconnecter de leur compte.
+Suivre ses Commandes : Permet aux clients de suivre l'état et l'historique de leurs commandes.
+Modifier les Informations du Compte : Autorise les utilisateurs à mettre à jour leurs informations personnelles.
+Se Connecter à son Compte : Permet aux utilisateurs de se connecter à leur compte existant.
+Créer un Compte : Permet aux nouveaux clients de créer un compte sur la plateforme.
+3. Achat
+Acheter : Fonction principale pour les clients, facilitant le processus d'achat en ligne.
+Noter un Produit : Permet aux clients de laisser des commentaires et des évaluations sur les produits.
+Payer sa Commande : Propose différentes méthodes de paiement sécurisées pour finaliser l'achat.
+Ajouter au Panier : Permet aux clients de sélectionner des produits et de les ajouter à leur panier d'achat.
+Partager des Produits sur les Réseaux Sociaux : Facilite le partage de produits sur les plateformes de médias sociaux.
+Chercher des Produits : Offre une fonction de recherche permettant aux clients de trouver rapidement des produits spécifiques.
+4. Service Client
+Contacter le Service Client : Permet aux clients de communiquer directement avec le service client pour poser des questions, signaler des problèmes ou demander de l'aide.
 
 image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
 
