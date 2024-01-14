@@ -112,24 +112,78 @@ Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de r
 
 = Fonctionnalités développées
 
-== Fonctionnalité X
+== Gérer les Produits
 
-Paragraphe décrivant la fonctionnalité x.
+La fonctionnalité "Gérer les Produits" est spécialement conçue pour les administrateurs du site. Elle offre la possibilité de manipuler le catalogue de produits, y compris l'ajout, la modification et la suppression d'articles. Cette fonctionnalité permet aux administrateurs de maintenir le catalogue à jour et de répondre rapidement aux changements de stock, aux nouveaux produits ou à d'autres ajustements nécessaires.
 
 Partie du UseCase :
 
-Image partie du use de case
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_gererproduit.png[]
 
-Diagramme de séquence : 
 
-Diagramme de séquence sur la fonctionnalité 
+Diagramme de séquence :
 
-Description du diagramme de séquence 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diaggererproduit.png[]
 
-Pages PHP : 
+Description du diagramme de séquence :
 
-- X : que la page
-...
+L'administrateur sélectionne l'option "Gérer les Produits" sur le site web.
+Le site web récupère la liste des produits depuis la base de données.
+La base de données renvoie la liste des produits au site web.
+Le site web affiche la liste des produits à l'administrateur.
+Pages PHP :
+
+ModificationProduits.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_codeproduit.png[]
+
+== Gérer les Promotions
+
+La fonctionnalité "Gérer les Promotions" permet à l'administrateur de créer et de gérer des offres spéciales ainsi que des promotions sur le site. Cela inclut la définition de remises, la durée de validité des promotions, et d'autres paramètres pertinents. Cette fonctionnalité donne à l'administrateur un contrôle total sur les stratégies promotionnelles du site.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diaggererpromo.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagrammepromo.png[]
+
+Description du diagramme de séquence :
+
+L'administrateur sélectionne l'option "Gérer les Promotions" sur le site web.
+Le site web récupère la liste des promotions en cours depuis la base de données.
+La base de données renvoie la liste des promotions au site web.
+Le site web affiche les promotions à l'administrateur.
+Pages PHP :
+
+Promotions.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_codepromo.png[]
+
+== Accéder aux Statistiques de Ventes
+
+La fonctionnalité "Accéder aux Statistiques de Ventes" offre à l'administrateur une vue détaillée des performances de vente. Elle permet une analyse approfondie des données relatives aux ventes, aux produits populaires, aux périodes d'activité accrue, et d'autres métriques importantes. Cette fonctionnalité fournit des informations cruciales pour orienter les décisions commerciales.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diaggererstats.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagrammeventes.png
+
+Description du diagramme de séquence :
+
+L'administrateur sélectionne l'option "Accéder aux Statistiques de Ventes" sur le site web.
+Le site web récupère les statistiques de ventes depuis la base de données.
+La base de données renvoie les statistiques au site web.
+Le site web affiche les statistiques à l'administrateur.
+Pages PHP :
+
+Ventes.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_codevente.png[]
 
 == Fonctionnalité "Se Déconnecter"
 
@@ -199,8 +253,9 @@ La base de données confirme la mise à jour.
 Le site web affiche une confirmation de la mise à jour à l'utilisateur.
 Pages PHP :
 
-modifier_informations_compte.php
+VotreCompte.php
 
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_votrecompte.png[]
 
 
 == Fonctionnalité "Se Connecter à son Compte"
@@ -279,9 +334,9 @@ La base de données confirme l'enregistrement.
 Le site web affiche une confirmation à l'utilisateur.
 Pages PHP :
 
-noter_produit.php
+laisserAvis.php
 
-
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_laisseravis.png[]
 
 == Fonctionnalité "Payer sa Commande"
 
