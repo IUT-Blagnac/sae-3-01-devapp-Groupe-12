@@ -1,4 +1,4 @@
-= Cahier de recettes (Tests) de l’application (Partie IOT) - Version 1.6 - La Bonne Note
+= Cahier de recettes (Tests) de l’application (Partie IOT) - Version 1.7 - La Bonne Note
 :icons: font
 :models: models
 :experimental:
