@@ -107,14 +107,4 @@ public class Alert extends Data {
                                                                 + this.maxCo2 + " ppm) ,"
                                                 : "");
         }
-
-        /**
-         * Vérifie si l'identifiant de la pièce est égal à celui de l'alerte.
-         *
-         * @param _idRoom L'identifiant de la pièce à vérifier.
-         * @return true si l'identifiant correspond, sinon false.
-         */
-        public boolean Equals(String _idRoom) {
-                return this.getId().equals(_idRoom);
-        }
 }

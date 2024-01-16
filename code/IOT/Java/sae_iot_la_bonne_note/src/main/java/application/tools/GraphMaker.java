@@ -236,29 +236,31 @@ public class GraphMaker {
      * @param _graph          Le graphique à agrandir.
      * @param _listStages     La liste des fenêtres de graphiques.
      * @param _largeTxtSearch Le champ de recherche pour le graphique agrandi.
-     * @param _dataUnit       L'unité des données affichées dans le graphique.
+     * @param _isHistory      S'il d'agit d'un graphique de l'historique ou non, utilisé pour le titre.
      * @return Le graphique agrandi affiché dans une nouvelle fenêtre.
      */
     public static XYChart<String, Number> displayLargeGraph(Stage _primaryStage, XYChart<String, Number> _graph,
-            List<Stage> _listStages, TextField _largeTxtSearch,
-            String _dataUnit) {
+            List<Stage> _listStages, TextField _largeTxtSearch, boolean _isHistory) {
         Stage largeGraphStage = new Stage();
         StageManagement.manageCenteringStage(_primaryStage, largeGraphStage);
         largeGraphStage.setWidth(_primaryStage.getWidth() / 2);
         largeGraphStage.setHeight(_primaryStage.getHeight() / 1.5);
         largeGraphStage.setMinWidth(800);
         largeGraphStage.setMinHeight(600);
-        largeGraphStage.setTitle("Graphique");
-        _listStages.add(largeGraphStage);
+        largeGraphStage.setTitle((_isHistory ? "Historique : " : "Temps Réel : ") + _graph.getTitle());
 
         XYChart<String, Number> largeGraph;
         if (_graph instanceof BarChart) {
+            largeGraphStage.getIcons().add(new Image("/application/images/bar-chart_icon.png"));
             largeGraph = new BarChart<>(new CategoryAxis(), new NumberAxis());
         } else if (_graph instanceof LineChart) {
+            largeGraphStage.getIcons().add(new Image("/application/images/line-chart_icon.png"));
             largeGraph = new LineChart<>(new CategoryAxis(), new NumberAxis());
         } else {
             throw new IllegalArgumentException("Type de graphique non pris en charge");
         }
+        _listStages.add(largeGraphStage);
+
         largeGraph.setTitle(_graph.getTitle());
 
         BorderPane layout = new BorderPane();

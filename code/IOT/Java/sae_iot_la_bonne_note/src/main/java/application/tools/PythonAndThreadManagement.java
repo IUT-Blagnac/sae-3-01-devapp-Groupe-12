@@ -64,6 +64,8 @@ public class PythonAndThreadManagement {
             String scriptPath = "connect.py";
             ProcessBuilder processBuilder = new ProcessBuilder("python", scriptPath);
             try {
+                // Remet à vide le fichier de données en temps réel
+                JsonReader.deleteJsonFile("fichier_donnees");
                 pythonProcess = processBuilder.start();
                 updateImgConnexionState();
                 try {
@@ -99,7 +101,6 @@ public class PythonAndThreadManagement {
     public static void stopPythonThread() {
         if (isPythonRunning()) {
             pythonProcess.destroy();
-            JsonReader.deleteHistory("fichier_donnees");
         }
         if (pythonThread != null && pythonThread.isAlive()) {
             pythonThread.interrupt();

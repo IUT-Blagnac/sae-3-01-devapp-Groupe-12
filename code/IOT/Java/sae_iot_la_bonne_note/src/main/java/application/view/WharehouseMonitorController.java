@@ -29,6 +29,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -146,7 +147,7 @@ public class WharehouseMonitorController {
     private BarChart<String, Number> barChartCo2 = new BarChart<>(new CategoryAxis(), new NumberAxis());
 
     private List<Stage> listLargeGraphsStages = new ArrayList<>();
-    private ArrayList<List<Data>> listSearchedDatasByLargeGraph = new ArrayList<>();
+    private List<List<Data>> listSearchedDatasByLargeGraph = new ArrayList<>();
     private List<XYChart<String, Number>> listLargeGraphs = new ArrayList<>();
     private String largeGraphViewDataName = "";
     private String largeGraphViewDataUnit = "";
@@ -187,6 +188,7 @@ public class WharehouseMonitorController {
 
         PythonAndThreadManagement.initImgConnexionState(imgConnexionState);
         if (!PythonAndThreadManagement.isPythonRunning()) {
+            JsonReader.deleteJsonFile(fileDataPath);
             PythonAndThreadManagement.startPythonThread(primaryStage);
         }
         PythonAndThreadManagement.updateImgConnexionState();
@@ -225,11 +227,16 @@ public class WharehouseMonitorController {
                                     checkAlertForLastData();
                                 }
                                 updateDatasHistory();
+                                updateDataForLargeGraph(listSearchedDatas, "");
+                                updateLargeGraphs();
                             }
                         });
                         lastTime = currentTime;
                     }
                 } catch (Exception e) {
+                    AlertUtilities.showAlert(primaryStage, "Erreur",
+                            "Une erreur a été rencontré durant la mise à jour des données.",
+                            "Code d'erreur : " + e + ".", AlertType.ERROR);
                     Thread.currentThread().interrupt();
                 }
             }
@@ -585,7 +592,7 @@ public class WharehouseMonitorController {
             ArrayList<Data> searchedDatasByGraph = new ArrayList<>(listSearchedDatas);
             listSearchedDatasByLargeGraph.add(searchedDatasByGraph);
             XYChart<String, Number> largeGraph = GraphMaker.displayLargeGraph(primaryStage, _graph,
-                    listLargeGraphsStages, largeTxtSearch, _dataUnit);
+                    listLargeGraphsStages, largeTxtSearch, false);
             GraphMaker.updateGraphData(largeGraph, searchedDatasByGraph, largeGraphViewDataName,
                     largeGraphViewDataUnit, comboBoxDateFormat.getValue(), cbAvg.isSelected());
             initTxtSearch(largeTxtSearch, searchedDatasByGraph, largeGraph);
@@ -647,7 +654,6 @@ public class WharehouseMonitorController {
             GraphMaker.updateGraphData(barChartCo2, listSearchedDatas, "co2", "ppm", comboBoxDateFormat.getValue(),
                     cbAvg.isSelected());
         }
-        updateDataForLargeGraph(listSearchedDatas, "");
     }
 
     /**
@@ -699,7 +705,7 @@ public class WharehouseMonitorController {
      * @param _listSearched  La liste des données recherchées.
      * @param _searchedRooms Les salles recherchées.
      */
-    private void updateDataForLargeGraph(ArrayList<Data> _listSearched, String _searchedRooms) {
+    private void updateDataForLargeGraph(List<Data> _listSearched, String _searchedRooms) {
         _listSearched.clear();
         if (_searchedRooms == null || _searchedRooms.trim().isEmpty()) {
             _listSearched.addAll(listAllRoomsDatas);
@@ -713,6 +719,46 @@ public class WharehouseMonitorController {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Met à jour tout les grands graphiques actuellement ouverts à condition
+     * qu'aucune salle spécifique n'est recherchée par le graphique en question.
+     *
+     */
+    private void updateLargeGraphs() {
+        for (int i = 0; i < listLargeGraphs.size(); i++) {
+            String dataName, dataUnit;
+            String title = listLargeGraphs.get(i).getTitle();
+            if (title.contains("°c")) {
+                dataName = "temperature";
+                dataUnit = "°c";
+            } else if (title.contains("%")) {
+                dataName = "humidity";
+                dataUnit = "%";
+            } else if (title.contains("ppm")) {
+                dataName = "co2";
+                dataUnit = "ppm";
+            } else {
+                dataName = "activity";
+                dataUnit = "";
+            }
+            String search = "";
+            try {
+                Scene scene = listLargeGraphsStages.get(i).getScene();
+                if (scene != null) {
+                    TextField largeTxtSearch = (TextField) scene.lookup(".txtArea");
+                    if (largeTxtSearch != null) {
+                        search = largeTxtSearch.getText().trim();
+                    }
+                }
+            } catch (Exception e) {
+                search = "";
+            }
+            updateDataForLargeGraph(listSearchedDatasByLargeGraph.get(i), search);
+            GraphMaker.updateGraphData(listLargeGraphs.get(i), listSearchedDatasByLargeGraph.get(i), dataName, dataUnit,
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
         }
     }
 
@@ -741,6 +787,7 @@ public class WharehouseMonitorController {
      */
     @FXML
     private void doCheckHistory() {
+        closeLargeGraphsStages();
         clickedNotif = null;
         LogHistory history = new LogHistory(primaryStage);
         history.show();
@@ -752,6 +799,7 @@ public class WharehouseMonitorController {
      */
     @FXML
     private void doConfiguration() {
+        closeLargeGraphsStages();
         Configuration conf = new Configuration(primaryStage);
         conf.show();
     }
@@ -762,6 +810,7 @@ public class WharehouseMonitorController {
      */
     @FXML
     private void doMenu() {
+        closeLargeGraphsStages();
         MainMenu menu = new MainMenu();
         menu.start(primaryStage);
         menu.show();

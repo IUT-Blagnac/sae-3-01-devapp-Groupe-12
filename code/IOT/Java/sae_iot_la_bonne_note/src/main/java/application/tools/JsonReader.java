@@ -27,13 +27,13 @@ import javafx.stage.Stage;
 public class JsonReader {
 
     /**
-     * Supprime les données historiques enregistrées dans un fichier JSON spécifié.
+     * Supprime les données d'un fichier Json spécifié.
      *
      * @param _nameFile nom du type de fichier à supprimer
      * 
-     * @return Vrai si la suppression a réussi, sinon faux.
+     * @return Vrai si la suppression a réussi, sinon faux si la supression a échouée ou le fichier indiqué n'est pas trouvé.
      */
-    public static boolean deleteHistory(String _nameFile) {
+    public static boolean deleteJsonFile(String _nameFile) {
         try (FileInputStream fileInputStream = new FileInputStream("config.ini")) {
             Properties properties = new Properties();
             properties.load(fileInputStream);

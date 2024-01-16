@@ -405,7 +405,7 @@ public class LogHistoryController {
 
         if (AlertUtilities.confirmYesCancel(primaryStage, "Vider l'historique",
                 "Voulez-vous vraiment supprimer l'historique des " + type + " ?", null, AlertType.CONFIRMATION)) {
-            if (JsonReader.deleteHistory(_isAlert ? "fichier_alerte" : "fichier_logs")) {
+            if (JsonReader.deleteJsonFile(_isAlert ? "fichier_alerte" : "fichier_logs")) {
                 JsonReader.updateHistoryFromFile(primaryStage, false, _isAlert, obsList,
                         _isAlert ? null : listAllRoomsDatas, _isAlert ? listAllRoomsAlerts : null, comboBoxRooms);
                 updateSceneByView();
@@ -445,7 +445,7 @@ public class LogHistoryController {
             ArrayList<Data> searchedDatasByGraph = new ArrayList<>(listSearchedDatas);
             listSearchedDatasByLargeGraph.add(searchedDatasByGraph);
             XYChart<String, Number> largeGraph = GraphMaker.displayLargeGraph(primaryStage, _graph,
-                    listLargeGraphsStages, largeTxtSearch, _dataUnit);
+                    listLargeGraphsStages, largeTxtSearch, true);
             GraphMaker.updateGraphData(largeGraph, searchedDatasByGraph, largeGraphViewDataName,
                     largeGraphViewDataUnit, comboBoxDateFormat.getValue(), false);
             initTxtSearch(largeTxtSearch, searchedDatasByGraph, largeGraph);

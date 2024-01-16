@@ -6,20 +6,20 @@
 --release
 11
 -sourcepath
-'C:/Users/1/Documents/GitHub/sae3-solo/sae_iot_la_bonne_note/src/main/java;C:/Users/1/Documents/GitHub/sae3-solo/sae_iot_la_bonne_note/target/generated-sources/annotations'
+'C:/Users/1/Documents/GitHub/sae-3-01-devapp-Groupe-12/code/IOT/Java/sae_iot_la_bonne_note/src/main/java;C:/Users/1/Documents/GitHub/sae-3-01-devapp-Groupe-12/code/IOT/Java/sae_iot_la_bonne_note/target/generated-sources/annotations'
 -author
 -bottom
 'Copyright &#169; 2024. All rights reserved.'
 -charset
 'UTF-8'
 -d
-'C:/Users/1/Documents/GitHub/sae3-solo/sae_iot_la_bonne_note/target/site/apidocs'
+'C:/Users/1/Documents/GitHub/sae-3-01-devapp-Groupe-12/code/IOT/Java/sae_iot_la_bonne_note/target/site/apidocs'
 -docencoding
 'UTF-8'
 -doctitle
 'sae_iot_la_bonne_note 1.0-SNAPSHOT API'
 -linkoffline
-'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/1/Documents/GitHub/sae3-solo/sae_iot_la_bonne_note/target/javadoc-bundle-options'
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/1/Documents/GitHub/sae-3-01-devapp-Groupe-12/code/IOT/Java/sae_iot_la_bonne_note/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle

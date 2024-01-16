@@ -111,5 +111,6 @@ public class MainMenuController {
     private void doLeave() {
         PythonAndThreadManagement.stopPythonThread();
         this.primaryStage.close();
+        System.exit(0);
     }
 }

@@ -1,5 +1,5 @@
 .background {
-    -fx-background-image: url('images/1.jpg');
+    -fx-background-image: url('images/entrepot_fond.jpeg');
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
@@ -105,7 +105,7 @@
 
 .leaveButton {
     -fx-background-radius: 15;
-    -fx-background-color: rgba(252, 0, 0);
+    -fx-background-color: rgba(252, 0, 0, 0.703);
 }
 
 .confirmButton {
@@ -401,13 +401,10 @@
     -fx-background-color: linear-gradient(#a3a3a3, #8b8b8b 34%, #777777 36%, #777777 63%, #8b8b8b 65%, #adadad);
 }
 
-/* application.css */
 .notification-bar>.pane .graphic>.imageView {
     -fx-margin: 0 10 0 0;
-    /* Ajustement de la marge pour décaler l'image vers la droite */
 }
 
-/* Style pour ajuster la taille de la police du titre */
 .notification-bar>.pane .title {
     -fx-font-size: 20px;
     -fx-text-fill: red;
@@ -417,7 +414,6 @@
 .notification-bar>.pane:hover {
     -fx-cursor: hand;
 }
-
 
 .slider {
     -fx-cursor: hand;
