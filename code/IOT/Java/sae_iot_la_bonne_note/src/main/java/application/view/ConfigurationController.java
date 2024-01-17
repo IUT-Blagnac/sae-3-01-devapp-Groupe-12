@@ -367,7 +367,7 @@ public class ConfigurationController {
 
             // Écrit les nouvelles valeurs dans le fichier de configuration
             writer.write("[MQTT]\n");
-            writer.write("broker=" + host + "\n");
+            writer.write("broker=" + (host != null && host.length() > 1 ? host : "null") + "\n");
             writer.write("port=" + String.valueOf(port) + "\n");
             if (topic.equals("#") || topic.trim().equals("")) {
                 topic = "AM107/by-room/#";
@@ -384,9 +384,14 @@ public class ConfigurationController {
             }
             writer.write("topic=" + topic + "\n");
             writer.write("[CONFIG]\n");
-            writer.write("fichier_alerte=" + alertFile + "\n");
-            writer.write("fichier_donnees=" + dataFile + "\n");
-            writer.write("fichier_logs=" + logsFile + "\n");
+
+            // écrit les noms des fichiers, attribue un nom par défaut s'ils sont nulles ou
+            // vides
+            writer.write(
+                    "fichier_alerte=" + (alertFile != null && alertFile.length() > 0 ? alertFile : "alerte") + "\n");
+            writer.write(
+                    "fichier_donnees=" + (dataFile != null && dataFile.length() > 0 ? dataFile : "donnees") + "\n");
+            writer.write("fichier_logs=" + (logsFile != null && logsFile.length() > 0 ? logsFile : "logs") + "\n");
             String choixDonnee = "";
             if (cbTemperature.isSelected()) {
                 choixDonnee += "temperature,";
@@ -400,12 +405,15 @@ public class ConfigurationController {
             if (cbCo2.isSelected()) {
                 choixDonnee += "co2,";
             }
-            // Suppression de la dernière virgule, si présente
+            // Supprime la dernière virgule, si présente
             if (choixDonnee.endsWith(",")) {
                 choixDonnee = choixDonnee.substring(0, choixDonnee.length() - 1);
             }
-            writer.write("choix_donnees=" + choixDonnee + "\n");
-
+            if (choixDonnee.trim().isEmpty()) {
+                writer.write("choix_donnees=" + "null" + "\n");
+            } else {
+                writer.write("choix_donnees=" + choixDonnee + "\n");
+            }
             tpTemps = cbTimeUnit.getValue();
             if (frequency != null) {
                 if (tpTemps == "minute(s)") {
@@ -450,7 +458,9 @@ public class ConfigurationController {
         } catch (IOException e) {
             AlertUtilities.showAlert(primaryStage, "Opération échouée.",
                     "Une erreur est survenue !",
-                    "Une erreur est survenue lors de la sauvegarde.", AlertType.INFORMATION);
+                    "Une erreur est survenue lors de la sauvegarde, un nouveau fichier sera créé.\nCode d'erreur : "
+                            + e,
+                    AlertType.INFORMATION);
         }
     }
 
@@ -514,18 +524,22 @@ public class ConfigurationController {
                 cbCo2.setSelected(true);
             }
             frequency = NumbersUtilities.getDoubleFromString(properties.getProperty("frequence_affichage"));
-            typeDuTemps = properties.getProperty("typeTemps");
-            if (typeDuTemps.equals("minute(s)")) {
-                frequency /= 60;
-            }
-            if (typeDuTemps.equals("heure(s)")) {
-                frequency /= 3600;
-            }
-            if (typeDuTemps.equals("jour(s)")) {
-                frequency /= 86400;
-            }
             txtFrequency.setText("" + frequency);
-            cbTimeUnit.setValue(typeDuTemps);
+            typeDuTemps = properties.getProperty("typeTemps");
+            if (typeDuTemps != null) {
+                if (typeDuTemps.equals("minute(s)")) {
+                    frequency /= 60;
+                }
+                if (typeDuTemps.equals("heure(s)")) {
+                    frequency /= 3600;
+                }
+                if (typeDuTemps.equals("jour(s)")) {
+                    frequency /= 86400;
+                }
+            } else {
+                typeDuTemps = "seconde(s)";
+            }
+            this.cbTimeUnit.setValue("seconde(s)");
             Double soundLvl = NumbersUtilities.getDoubleFromString(properties.getProperty("son_Alertes"));
             if (soundLvl != null) {
                 sliderSound.setValue(soundLvl.intValue());

@@ -44,7 +44,7 @@ public class LogHistory {
 
         } catch (Exception e) {
             AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML History.fxml",
-                    "Merci de réessayer.", AlertType.ERROR);
+                    "Merci de réessayer.\nCode d'erreur :" + e, AlertType.ERROR);
             e.printStackTrace();
             System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }

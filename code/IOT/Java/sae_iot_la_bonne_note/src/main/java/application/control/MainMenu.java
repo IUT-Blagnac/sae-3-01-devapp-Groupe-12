@@ -42,11 +42,16 @@ public class MainMenu extends Application {
                     MainMenuController.class.getResource("MainMenu.fxml"));
             BorderPane root = loader.load();
 
-            // Création de la scène et configuration du stage
-            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-            scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+            if (primaryStage.getScene() == null) {
+                // Création de la scène une seule fois
+                Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
+                scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+                primaryStage.setScene(scene);
+            } else {
+                // Changement de la scène si celle ci n'était pas nulle
+                primaryStage.getScene().setRoot(root);
+            }
 
-            primaryStage.setScene(scene);
             primaryStage.setTitle("Menu Principal");
             primaryStage.setMinHeight(850);
             primaryStage.setMinWidth(1200);
@@ -73,7 +78,7 @@ public class MainMenu extends Application {
 
         } catch (Exception e) {
             AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML MainMenu.fxml",
-                    "Merci de réessayer.", AlertType.ERROR);
+                    "Merci de réessayer.\nCode d'erreur :" + e, AlertType.ERROR);
             System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }
     }

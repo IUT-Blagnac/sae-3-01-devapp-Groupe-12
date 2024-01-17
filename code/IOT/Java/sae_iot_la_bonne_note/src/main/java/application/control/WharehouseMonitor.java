@@ -47,7 +47,7 @@ public class WharehouseMonitor {
             e.printStackTrace();
             AlertUtilities.showAlert(primaryStage, "Erreur",
                     "Échec du chargement du fichier FXML WharehouseMonitor.fxml",
-                    "Merci de réessayer + \n." + e, AlertType.ERROR);
+                    "Merci de réessayer.\nCode d'erreur :" + e, AlertType.ERROR);
             System.exit(-1); // En cas d'erreur, arrêt brutal de l'application
         }
     }
