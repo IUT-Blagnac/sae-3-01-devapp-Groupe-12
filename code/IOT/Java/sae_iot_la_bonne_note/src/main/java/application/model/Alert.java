@@ -30,14 +30,14 @@ public class Alert extends Data {
          * @param _co2            Valeur actuelle du CO2.
          * @param _maxCo2         Seuil maximal de CO2.
          */
-        public Alert(String _roomId, Date _date, double _temperature, double _maxTemperature, double _humidity,
-                        double _maxHumidity, double _activity, double _maxActivity,
-                        double _co2, double _maxCo2) {
+        public Alert(String _roomId, Date _date, Double _temperature, Double _maxTemperature, Double _humidity,
+                        Double _maxHumidity, Double _activity, Double _maxActivity,
+                        Double _co2, Double _maxCo2) {
                 super(_roomId, _date, _temperature, null, _humidity, null, _activity, null, _co2, null);
-                this.maxTemperature = _maxTemperature;
-                this.maxHumidity = _maxHumidity;
-                this.maxActivity = _maxActivity;
-                this.maxCo2 = _maxCo2;
+                this.maxTemperature = _maxTemperature != null ? _maxTemperature : null;
+                this.maxHumidity = _maxHumidity != null ? _maxHumidity : null;
+                this.maxActivity = _maxActivity != null ? _maxActivity : null;
+                this.maxCo2 = _maxCo2 != null ? _maxCo2 : null;
         }
 
         /**
@@ -106,5 +106,33 @@ public class Alert extends Data {
                                                                 + " ppm & seuil maximal :  "
                                                                 + this.maxCo2 + " ppm) ,"
                                                 : "");
+        }
+
+        /**
+         * Génère une représentation textuelle de l'alerte qui est utilisée lors des
+         * notifications.
+         *
+         * @return Une chaîne de caractères représentant l'alerte.
+         */
+        @Override
+        public String toString() {
+                return (super.getTemperature() != null && super.getTemperature() != null && this.maxTemperature != null
+                                && super.getTemperature() > maxTemperature
+                                                ? "     Seuil de température dépassé !\n"
+                                                : "")
+                                + (super.getHumidity() != null && super.getHumidity() != null
+                                                && this.maxHumidity != null
+                                                && super.getHumidity() > maxHumidity
+                                                                ? "     Seuil d'humidité dépassé !\n"
+                                                                : "")
+                                + (super.getActivity() != null && super.getActivity() != null
+                                                && this.maxActivity != null
+                                                && super.getActivity() > maxActivity
+                                                                ? "     Seuil d'activité dépassé !\n"
+                                                                : "")
+                                + (super.getCo2() != null && super.getCo2() != null && this.maxCo2 != null
+                                                && super.getCo2() > maxCo2
+                                                                ? "     Seuil de Co2 dépassé !"
+                                                                : "");
         }
 }

@@ -2,8 +2,10 @@ package application.tools;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 /**
  * La classe Style fournit des méthodes pour gérer et appliquer des styles
@@ -56,5 +58,23 @@ public class Style {
                 _img.getFitWidth(), _img.getFitHeight(), true,
                 true));
         _img.setVisible(true);
+    }
+
+    /**
+     * Configure les propriétés d'un objet Tooltip, notamment la taille de la
+     * police, le délai d'affichage et la durée d'affichage.
+     *
+     * @param _tooltip      L'objet Tooltip à configurer.
+     * @param _fontSize     La taille de la police à appliquer au texte du Tooltip,
+     *                      en pixels.
+     * @param _showDelay    Le délai avant l'affichage du Tooltip, spécifié en
+     *                      millisecondes.
+     * @param _showDuration La durée pendant laquelle le Tooltip reste affiché,
+     *                      spécifiée en millisecondes.
+     */
+    public static void setToolTip(Tooltip _tooltip, int _fontSize, Duration _showDelay, Duration _showDuration) {
+        _tooltip.setStyle("-fx-font-size: " + _fontSize + "px;");
+        _tooltip.setShowDelay(_showDelay);
+        _tooltip.setShowDuration(_showDuration);
     }
 }

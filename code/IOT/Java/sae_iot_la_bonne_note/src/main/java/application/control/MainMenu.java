@@ -47,16 +47,16 @@ public class MainMenu extends Application {
                 Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
                 scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
                 primaryStage.setScene(scene);
+                primaryStage.setMinHeight(880);
+                primaryStage.setMinWidth(1280);
+                primaryStage.setResizable(true);
+                primaryStage.getIcons().add(new Image("/application/images/entrepot_logo.png"));
             } else {
                 // Changement de la scène si celle ci n'était pas nulle
                 primaryStage.getScene().setRoot(root);
             }
 
             primaryStage.setTitle("Menu Principal");
-            primaryStage.setMinHeight(850);
-            primaryStage.setMinWidth(1200);
-            primaryStage.setResizable(true);
-            primaryStage.getIcons().add(new Image("/application/images/entrepot_logo.png"));
 
             // Récupération du contrôleur associé au fichier FXML chargé
             MainMenuController mainMenu = loader.getController();

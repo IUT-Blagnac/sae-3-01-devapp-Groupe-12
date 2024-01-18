@@ -13,6 +13,7 @@ import application.control.Configuration;
 import application.control.LogHistory;
 import application.control.MainMenu;
 import application.control.WharehouseMonitor;
+import application.model.Alert;
 import application.model.Data;
 import application.tools.AlertUtilities;
 import application.tools.Animations;
@@ -22,6 +23,7 @@ import application.tools.JsonReader;
 import application.tools.ListViewUtilities;
 import application.tools.NumbersUtilities;
 import application.tools.PythonAndThreadManagement;
+import application.tools.Style;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,6 +104,13 @@ public class WharehouseMonitorController {
             "Activer / Désactiver l'affichage des moyennes sur la vue \"Histogramme / Diagramme en bâtons.");
 
     @FXML
+    private CheckBox cbAlertsIconsOnGraphs;
+    @FXML
+    private ImageView imgInfoAlertsIconsOnGraphs;
+    private final Tooltip tooltipAlertsIconsOnGraphs = new Tooltip(
+            "Activer / Désactiver l'affichage des alertes sur la vue \"Histogramme / Diagramme en bâtons.");
+
+    @FXML
     private CheckBox cbTemperature;
     @FXML
     private Label labTemperature;
@@ -172,8 +181,6 @@ public class WharehouseMonitorController {
     private Double maxActivity;
     private Double maxCo2;
 
-    public static String clickedNotif = null;
-
     /**
      * Initialise le contrôleur de vue WharehouseMonitorController.
      *
@@ -184,7 +191,10 @@ public class WharehouseMonitorController {
         this.wharehouseMonitor = _wharehouse;
         this.primaryStage = _primaryStage;
         this.primaryStage.setOnCloseRequest(e -> this.closeWindow(e));
+
         setConfiguration();
+
+        GraphMaker.setMaxValues(maxTemperature, maxHumidity, maxActivity, maxCo2);
 
         PythonAndThreadManagement.initImgConnexionState(imgConnexionState);
         if (!PythonAndThreadManagement.isPythonRunning()) {
@@ -247,7 +257,6 @@ public class WharehouseMonitorController {
 
     // Permet d'éviter les doubles envoies d'une notification
     private String lastRoomId = "";
-    private long lastNotifTime = 0;
 
     /**
      * Vérifie les alertes pour les dernières données reçues et déclenche des
@@ -256,28 +265,26 @@ public class WharehouseMonitorController {
     private void checkAlertForLastData() {
         if (listAllRoomsDatas.size() > 0) {
             Data data = listAllRoomsDatas.get(listAllRoomsDatas.size() - 1);
-            String alerts = "";
 
-            if (maxTemperature != null && data.getTemperature() > maxTemperature) {
-                alerts += "     Seuil de température dépassé !\n";
-            }
-            if (maxHumidity != null && data.getHumidity() > maxHumidity) {
-                alerts += "     Seuil d'humidité dépassé !\n";
-            }
-            if (maxActivity != null && data.getActivity() > maxActivity) {
-                alerts += "     Seuil d'activité dépassé !\n";
-            }
-            if (maxCo2 != null && data.getCo2() > maxCo2) {
-                alerts += "     Seuil de Co2 dépassé !";
-            }
-            if (!alerts.equals("") && !lastRoomId.equals(data.getId())
-                    || System.currentTimeMillis() - lastNotifTime > 30_000) {
-                createAlertNotification(data, alerts);
-                if (soundLvl != null) {
-                    playSoundAlert();
+            Alert alert = new Alert(data.getId() != null ? data.getId() : null,
+                    data.getDate() != null ? data.getDate() : null,
+                    data.getTemperature() != null ? data.getTemperature() : null,
+                    maxTemperature,
+                    data.getHumidity() != null ? data.getHumidity() : null,
+                    maxHumidity,
+                    data.getActivity() != null ? data.getActivity() : null,
+                    maxActivity,
+                    data.getCo2() != null ? data.getCo2() : null,
+                    maxCo2);
+
+            if (!lastRoomId.equals(data.getId())) {
+                if (alert.toString().length() > 1) {
+                    createAlertNotification(alert);
+                    if (soundLvl != null) {
+                        playSoundAlert();
+                    }
+                    lastRoomId = data.getId();
                 }
-                lastRoomId = data.getId();
-                lastNotifTime = System.currentTimeMillis();
             }
         }
     }
@@ -309,13 +316,13 @@ public class WharehouseMonitorController {
      * @param _data  Les données pour lesquelles créer l'alerte.
      * @param _alert Le message d'alerte à afficher.
      */
-    private void createAlertNotification(Data _data, String _alert) {
+    private void createAlertNotification(Alert _alert) {
         Notifications.create()
-                .title(_data.getId())
-                .text(_alert)
+                .title(_alert.getId())
+                .text(_alert.toString())
                 .onAction(event -> {
-                    clickedNotif = _data.getId();
-                    LogHistory history = new LogHistory(primaryStage);
+                    closeLargeGraphsStages();
+                    LogHistory history = new LogHistory(primaryStage, _alert);
                     history.show();
                 })
                 .hideAfter(Duration.seconds(5))
@@ -337,14 +344,13 @@ public class WharehouseMonitorController {
         Animations.setAnimatedButton(buttConfiguration, 1.1, 1, 100);
         Animations.setSelectedMenuAnimation(buttCheckWhareHouse, 0.5, 0.8, 1000);
 
-        tooltipImgSearch.setStyle("-fx-font-size: 18px;");
-        tooltipImgSearch.setShowDelay(Duration.ZERO);
-        tooltipImgSearch.setShowDuration(Duration.INDEFINITE);
-        tooltipInfoAverage.setStyle("-fx-font-size: 18px;");
-        tooltipInfoAverage.setShowDelay(Duration.ZERO);
-        tooltipInfoAverage.setShowDuration(Duration.INDEFINITE);
+        Style.setToolTip(tooltipImgSearch, 18, Duration.ZERO, Duration.INDEFINITE);
+        Style.setToolTip(tooltipInfoAverage, 18, Duration.ZERO, Duration.INDEFINITE);
+        Style.setToolTip(tooltipAlertsIconsOnGraphs, 18, Duration.ZERO, Duration.INDEFINITE);
+
         Tooltip.install(imgInfoSearch, tooltipImgSearch);
         Tooltip.install(imgInfoAvg, tooltipInfoAverage);
+        Tooltip.install(imgInfoAlertsIconsOnGraphs, tooltipAlertsIconsOnGraphs);
 
         comboBoxDateFormat.getItems().addAll(
                 "JJ",
@@ -380,8 +386,14 @@ public class WharehouseMonitorController {
         });
         cbAvg.selectedProperty().addListener((obs, oldVal, newVal) -> {
             updateDatasHistory();
+            updateDataForLargeGraph(listSearchedDatas, "");
+            updateLargeGraphs();
         });
-
+        cbAlertsIconsOnGraphs.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            updateDatasHistory();
+            updateDataForLargeGraph(listSearchedDatas, "");
+            updateLargeGraphs();
+        });
         initializeCheckboxes(cbTemperature);
         initializeCheckboxes(cbHumidity);
         initializeCheckboxes(cbActivity);
@@ -473,6 +485,7 @@ public class WharehouseMonitorController {
         buttBarChartView.setDisable(false);
         buttLineChartView.setDisable(true);
         cbAvg.setDisable(true);
+        cbAlertsIconsOnGraphs.setDisable(true);
         comboBoxDateFormat.setDisable(false);
         setSceneForView(true);
         updateDatasHistory();
@@ -488,6 +501,7 @@ public class WharehouseMonitorController {
         buttLineChartView.setDisable(false);
         buttBarChartView.setDisable(true);
         cbAvg.setDisable(false);
+        cbAlertsIconsOnGraphs.setDisable(false);
         comboBoxDateFormat.setDisable(true);
         setSceneForView(true);
         updateDatasHistory();
@@ -503,6 +517,7 @@ public class WharehouseMonitorController {
         buttLineChartView.setDisable(false);
         buttBarChartView.setDisable(false);
         cbAvg.setDisable(true);
+        cbAlertsIconsOnGraphs.setDisable(true);
         comboBoxDateFormat.setDisable(false);
         setSceneForView(false);
         updateDatasHistory();
@@ -514,8 +529,8 @@ public class WharehouseMonitorController {
     @FXML
     private void showAlerts() {
         closeLargeGraphsStages();
-        clickedNotif = "";
-        LogHistory history = new LogHistory(primaryStage);
+        LogHistory history = new LogHistory(primaryStage, new Alert("null", null, null, null, null,
+                null, null, null, null, null));
         history.show();
     }
 
@@ -539,10 +554,18 @@ public class WharehouseMonitorController {
             } else {
                 soundLvl = null;
             }
-            maxTemperature = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Temperature"));
-            maxHumidity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Humidity"));
-            maxActivity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Activity"));
-            maxCo2 = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_CO2"));
+            if (properties.containsKey("seuil_Temperature")) {
+                maxTemperature = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Temperature"));
+            }
+            if (properties.containsKey("seuil_Humidity")) {
+                maxHumidity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Humidity"));
+            }
+            if (properties.containsKey("seuil_Activity")) {
+                maxActivity = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_Activity"));
+            }
+            if (properties.containsKey("seuil_CO2")) {
+                maxCo2 = NumbersUtilities.getDoubleFromString(properties.getProperty("seuil_CO2"));
+            }
             ListViewUtilities.updateSelectedElements(cbTemperature.isSelected(), cbHumidity.isSelected(),
                     cbActivity.isSelected(), cbCo2.isSelected());
 
@@ -567,8 +590,8 @@ public class WharehouseMonitorController {
         if (_dataChoosen.contains(_dataToCheck)) {
             _cbData.setSelected(true);
         } else {
-            _cbData.setVisible(false);
-            _labData.setVisible(false);
+            _cbData.setDisable(true);
+            _labData.setDisable(true);
         }
     }
 
@@ -595,7 +618,8 @@ public class WharehouseMonitorController {
             XYChart<String, Number> largeGraph = GraphMaker.displayLargeGraph(primaryStage, _graph,
                     listLargeGraphsStages, largeTxtSearch, false);
             GraphMaker.updateGraphData(largeGraph, searchedDatasByGraph, largeGraphViewDataName,
-                    largeGraphViewDataUnit, comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    largeGraphViewDataUnit, comboBoxDateFormat.getValue(), cbAvg.isSelected(),
+                    cbAlertsIconsOnGraphs.isSelected());
             initTxtSearch(largeTxtSearch, searchedDatasByGraph, largeGraph);
             listLargeGraphs.add(largeGraph);
         });
@@ -638,22 +662,22 @@ public class WharehouseMonitorController {
         }
         if (buttLineChartView.isDisabled()) {
             GraphMaker.updateGraphData(lineChartTemperature, listSearchedDatas, "temperature", "°c",
-                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
             GraphMaker.updateGraphData(lineChartHumidity, listSearchedDatas, "humidity", "%",
-                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
             GraphMaker.updateGraphData(lineChartActivity, listSearchedDatas, "activity", "",
-                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
             GraphMaker.updateGraphData(lineChartCo2, listSearchedDatas, "co2", "ppm", comboBoxDateFormat.getValue(),
-                    cbAvg.isSelected());
+                    cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
         } else if (buttBarChartView.isDisabled()) {
             GraphMaker.updateGraphData(barChartTemperature, listSearchedDatas, "temperature", "°c",
-                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
             GraphMaker.updateGraphData(barChartHumidity, listSearchedDatas, "humidity", "%",
-                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
             GraphMaker.updateGraphData(barChartActivity, listSearchedDatas, "activity", "",
-                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
             GraphMaker.updateGraphData(barChartCo2, listSearchedDatas, "co2", "ppm", comboBoxDateFormat.getValue(),
-                    cbAvg.isSelected());
+                    cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
         }
     }
 
@@ -689,7 +713,8 @@ public class WharehouseMonitorController {
             if (_largeGraph != null) {
                 updateDataForLargeGraph(_listSearchedDatasLargeGraph, newValue.trim());
                 GraphMaker.updateGraphData(_largeGraph, _listSearchedDatasLargeGraph, largeGraphViewDataName,
-                        largeGraphViewDataUnit, comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                        largeGraphViewDataUnit, comboBoxDateFormat.getValue(), cbAvg.isSelected(),
+                        cbAlertsIconsOnGraphs.isSelected());
             } else {
                 if (!currentSearch.toLowerCase().equals(newValue.trim().toLowerCase())) {
                     currentSearch = newValue.trim();
@@ -759,7 +784,7 @@ public class WharehouseMonitorController {
             }
             updateDataForLargeGraph(listSearchedDatasByLargeGraph.get(i), search);
             GraphMaker.updateGraphData(listLargeGraphs.get(i), listSearchedDatasByLargeGraph.get(i), dataName, dataUnit,
-                    comboBoxDateFormat.getValue(), cbAvg.isSelected());
+                    comboBoxDateFormat.getValue(), cbAvg.isSelected(), cbAlertsIconsOnGraphs.isSelected());
         }
     }
 
@@ -789,8 +814,7 @@ public class WharehouseMonitorController {
     @FXML
     private void doCheckHistory() {
         closeLargeGraphsStages();
-        clickedNotif = null;
-        LogHistory history = new LogHistory(primaryStage);
+        LogHistory history = new LogHistory(primaryStage, null);
         history.show();
     }
 

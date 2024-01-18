@@ -36,7 +36,7 @@ public class WharehouseMonitor {
 
             primaryStage.getScene().setRoot(root);
             
-            primaryStage.setTitle("Surveillance de l'entrepôt");
+            primaryStage.setTitle("Données en temps réel");
 
             // Récupération du contrôleur associé au fichier FXML chargé
             this.controller = loader.getController();

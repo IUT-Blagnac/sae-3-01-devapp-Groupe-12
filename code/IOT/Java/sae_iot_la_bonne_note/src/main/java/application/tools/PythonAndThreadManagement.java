@@ -63,6 +63,8 @@ public class PythonAndThreadManagement {
         pythonThread = new Thread(() -> {
             String scriptPath = "connect.py";
             ProcessBuilder processBuilder = new ProcessBuilder("python", scriptPath);
+            processBuilder.redirectOutput(ProcessBuilder.Redirect.DISCARD);
+            processBuilder.redirectError(ProcessBuilder.Redirect.DISCARD);
             try {
                 // Remet à vide le fichier de données en temps réel
                 JsonReader.deleteJsonFile("fichier_donnees");

@@ -234,9 +234,7 @@ public class ConfigurationController {
         Animations.setSelectedMenuAnimation(buttConfiguration, 0.5, 0.8, 1000);
 
         // Initialise le style du Tooltip associé à txtTopic
-        tooltipTopic.setStyle("-fx-font-size: 18px;");
-        tooltipTopic.setShowDelay(Duration.ZERO);
-        tooltipTopic.setShowDuration(Duration.INDEFINITE);
+        Style.setToolTip(tooltipTopic, 18, Duration.ZERO, Duration.INDEFINITE);
 
         // Installe le Tooltip sur l'ImageView imgInfoTopic
         Tooltip.install(imgInfoTopic, tooltipTopic);
@@ -281,7 +279,7 @@ public class ConfigurationController {
      */
     @FXML
     private void doCheckHistory() {
-        LogHistory history = new LogHistory(primaryStage);
+        LogHistory history = new LogHistory(primaryStage, null);
         history.show();
     }
 

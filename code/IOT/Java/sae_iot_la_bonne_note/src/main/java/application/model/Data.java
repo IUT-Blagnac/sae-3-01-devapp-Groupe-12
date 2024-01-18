@@ -155,4 +155,16 @@ public class Data {
                 + (activity != null ? " Activité : " + activity + " ," : "")
                 + (co2 != null ? " CO2 : " + co2 + "ppm " : "");
     }
+
+    /**
+     * Permet de comparer si deux données sont identiques à travers leurs
+     * identifiant et la data.
+     *
+     * @param _id   Identifiant de la donnée à comparer.
+     * @param _date Date de la donnée à comparer.
+     * @return True si l'identifiant et la date sont les mêmes, false sinon.
+     */
+    public boolean equals(String _id, Date _date) {
+        return this.id.equals(_id) && this.date.equals(_date);
+    }
 }

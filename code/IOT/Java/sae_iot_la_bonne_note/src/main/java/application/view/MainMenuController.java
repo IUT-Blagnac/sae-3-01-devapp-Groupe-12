@@ -89,7 +89,7 @@ public class MainMenuController {
      */
     @FXML
     private void doCheckHistory() {
-        LogHistory history = new LogHistory(primaryStage);
+        LogHistory history = new LogHistory(primaryStage, null);
         history.show();
     }
 

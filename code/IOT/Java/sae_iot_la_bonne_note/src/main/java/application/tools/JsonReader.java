@@ -166,7 +166,6 @@ public class JsonReader {
                             AlertType.ERROR);
                 }
             } else {
-                System.out.println(filePath);
                 AlertUtilities.showAlert(_primaryStage, "Erreur",
                         "Fichier JSON introuvable.",
                         "Le fichier JSON " + filePath

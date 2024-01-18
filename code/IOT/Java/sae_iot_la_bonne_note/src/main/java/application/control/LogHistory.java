@@ -1,5 +1,6 @@
 package application.control;
 
+import application.model.Alert;
 import application.tools.AlertUtilities;
 import application.view.MainMenuController;
 import application.view.LogHistoryController;
@@ -24,8 +25,10 @@ public class LogHistory {
      * Constructeur de la classe LogHistory.
      * 
      * @param _primaryStage Le stage de la fenêtre principale.
+     * @param _clickedAlert La notification d'alerte qui a été cliquée.
+     * 
      */
-    public LogHistory(Stage _primaryStage) {
+    public LogHistory(Stage _primaryStage, Alert _clickedAlert) {
         this.primaryStage = _primaryStage;
 
         try {
@@ -40,7 +43,7 @@ public class LogHistory {
             // Récupération du contrôleur associé au fichier FXML chargé
             this.controller = loader.getController();
             // Initialisation du contexte du contrôleur
-            this.controller.initContext(this, primaryStage);
+            this.controller.initContext(this, primaryStage, _clickedAlert);
 
         } catch (Exception e) {
             AlertUtilities.showAlert(primaryStage, "Erreur", "Échec du chargement du fichier FXML History.fxml",

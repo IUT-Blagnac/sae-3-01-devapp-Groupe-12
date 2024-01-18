@@ -18,6 +18,7 @@ import application.tools.GraphMaker;
 import application.tools.JsonReader;
 import application.tools.ListViewUtilities;
 import application.tools.PythonAndThreadManagement;
+import application.tools.Style;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -144,8 +145,9 @@ public class LogHistoryController {
      *
      * @param _mainMenu     L'instance du menu principal.
      * @param _primaryStage La scène principale associée au contrôleur.
+     * @param _clickedAlert La notification d'alerte qui a été cliquée.
      */
-    public void initContext(LogHistory _mainMenu, Stage _primaryStage) {
+    public void initContext(LogHistory _mainMenu, Stage _primaryStage, Alert _clickedAlert) {
         this.logHistory = _mainMenu;
         this.primaryStage = _primaryStage;
 
@@ -170,11 +172,17 @@ public class LogHistoryController {
             Collections.reverse(listAllRoomsDatas);
 
             initViewElements();
-            if (WharehouseMonitorController.clickedNotif != null) {
+            if (_clickedAlert != null) {
                 setListView();
                 showAlerts();
-                if (!WharehouseMonitorController.clickedNotif.equals("")) {
-                    lvHistory.getSelectionModel().select(0);
+                if (!_clickedAlert.getId().equals("null")) {
+                    // Recherche l'alerte cliqué pour la sélectionner
+                    for (Alert alert : listAllRoomsAlerts) {
+                        if (_clickedAlert.equals(alert.getId(), alert.getDate())) {
+                            lvHistory.getSelectionModel().select(listAllRoomsAlerts.indexOf(alert));
+                            break;
+                        }
+                    }
                 }
             } else {
                 setGraphView();
@@ -235,9 +243,7 @@ public class LogHistoryController {
         Animations.setAnimatedButton(buttConfiguration, 1.1, 1, 100);
         Animations.setSelectedMenuAnimation(buttCheckHistory, 0.5, 0.8, 1000);
 
-        tooltipImgSearch.setStyle("-fx-font-size: 18px;");
-        tooltipImgSearch.setShowDelay(Duration.ZERO);
-        tooltipImgSearch.setShowDuration(Duration.INDEFINITE);
+        Style.setToolTip(tooltipImgSearch, 18, Duration.ZERO, Duration.INDEFINITE);
 
         Tooltip.install(imgInfoSearch, tooltipImgSearch);
 
@@ -447,7 +453,7 @@ public class LogHistoryController {
             XYChart<String, Number> largeGraph = GraphMaker.displayLargeGraph(primaryStage, _graph,
                     listLargeGraphsStages, largeTxtSearch, true);
             GraphMaker.updateGraphData(largeGraph, searchedDatasByGraph, largeGraphViewDataName,
-                    largeGraphViewDataUnit, comboBoxDateFormat.getValue(), false);
+                    largeGraphViewDataUnit, comboBoxDateFormat.getValue(), false, false);
             initTxtSearch(largeTxtSearch, searchedDatasByGraph, largeGraph);
             listLargeGraphs.add(largeGraph);
         });
@@ -528,13 +534,13 @@ public class LogHistoryController {
         }
         if (!_isAlert && buttGraphView.isDisabled()) {
             GraphMaker.updateGraphData(graphTemperature, listSearchedDatas, "temperature", "°c",
-                    comboBoxDateFormat.getValue(), false);
+                    comboBoxDateFormat.getValue(), false, false);
             GraphMaker.updateGraphData(graphHumidity, listSearchedDatas, "humidity", "%",
-                    comboBoxDateFormat.getValue(), false);
+                    comboBoxDateFormat.getValue(), false, false);
             GraphMaker.updateGraphData(graphActivity, listSearchedDatas, "activity", "",
-                    comboBoxDateFormat.getValue(), false);
+                    comboBoxDateFormat.getValue(), false, false);
             GraphMaker.updateGraphData(graphCo2, listSearchedDatas, "co2", "ppm",
-                    comboBoxDateFormat.getValue(), false);
+                    comboBoxDateFormat.getValue(), false, false);
         }
     }
 
@@ -575,7 +581,7 @@ public class LogHistoryController {
             if (_largeGraph != null) {
                 updateDataForLargeGraph(_listSearchedDatasLargeGraph, newValue.trim());
                 GraphMaker.updateGraphData(_largeGraph, _listSearchedDatasLargeGraph, largeGraphViewDataName,
-                        largeGraphViewDataUnit, comboBoxDateFormat.getValue(), false);
+                        largeGraphViewDataUnit, comboBoxDateFormat.getValue(), false, false);
             } else {
                 if (!currentSearch.toLowerCase().equals(newValue.trim().toLowerCase())) {
                     currentSearch = newValue.trim();

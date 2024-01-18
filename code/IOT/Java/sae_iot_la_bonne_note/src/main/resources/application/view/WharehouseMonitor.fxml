@@ -23,9 +23,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderpane" minHeight="768.0" minWidth="1024.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WharehouseMonitorController">
+<BorderPane fx:id="borderpane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.WharehouseMonitorController">
    <top>
-      <GridPane minHeight="-Infinity" minWidth="1024.0" BorderPane.alignment="CENTER">
+      <GridPane minHeight="-Infinity" minWidth="1200.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -259,27 +259,60 @@
                   </Button>
                   <HBox>
                      <children>
-                        <CheckBox fx:id="cbAvg" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" styleClass="checkBox" stylesheets="@../application.css">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </CheckBox>
-                        <Label maxWidth="89.0" minWidth="89.0" prefHeight="90.0" prefWidth="89.0" text="Moyennes">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <ImageView fx:id="imgInfoAvg" fitHeight="30.0" fitWidth="30.0">
-                           <image>
-                              <Image url="@../images/info_icon.jpg" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="5.0" top="35.0" />
-                           </HBox.margin>
-                        </ImageView>
+                        <VBox prefHeight="100.0" prefWidth="174.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <CheckBox fx:id="cbAvg" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" styleClass="checkBox" stylesheets="@../application.css">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Label maxWidth="393.0" minWidth="89.0" prefHeight="40.0" prefWidth="393.0" text="Moyennes">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ImageView fx:id="imgInfoAvg" fitHeight="30.0" fitWidth="30.0">
+                                       <image>
+                                          <Image url="@../images/info_icon.jpg" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <CheckBox fx:id="cbAlertsIconsOnGraphs" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="126.0" prefWidth="7.0" styleClass="checkBox" stylesheets="@../application.css">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Label maxWidth="215.0" minWidth="133.0" prefHeight="40.0" prefWidth="215.0" text="Icônes d'alertes">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ImageView fx:id="imgInfoAlertsIconsOnGraphs" fitHeight="30.0" fitWidth="30.0">
+                                       <image>
+                                          <Image url="@../images/info_icon.jpg" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                         <VBox>
                            <children>
                               <HBox>
