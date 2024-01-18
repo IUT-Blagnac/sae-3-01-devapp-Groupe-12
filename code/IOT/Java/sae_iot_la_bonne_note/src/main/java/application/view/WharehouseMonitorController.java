@@ -509,10 +509,11 @@ public class WharehouseMonitorController {
     }
 
     /**
-     * Affiche les alertes et met à jour l'historique.
+     * Affiche l'historique des alertes.
      */
     @FXML
     private void showAlerts() {
+        closeLargeGraphsStages();
         clickedNotif = "";
         LogHistory history = new LogHistory(primaryStage);
         history.show();

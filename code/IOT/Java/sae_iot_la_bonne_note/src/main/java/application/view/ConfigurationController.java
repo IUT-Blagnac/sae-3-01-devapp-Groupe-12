@@ -474,7 +474,7 @@ public class ConfigurationController {
         if (checkConfFile()) {
             // Récupère les valeurs depuis le fichier de configuration
             host = properties.getProperty("broker");
-            txtHost.setText(host == null ? "" : host);
+            txtHost.setText(host == null || host.trim().equals("null") ? "" : host);
             hostIsFilled = host == null ? false : true;
 
             port = NumbersUtilities.getIntFromString(properties.getProperty("port"));
