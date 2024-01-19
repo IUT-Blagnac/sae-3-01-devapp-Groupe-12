@@ -2,7 +2,7 @@
 require_once 'Connect.inc.php';
 
 session_start();
-if (!isset($_SESSION['numClient'])) {
+if (!isset($_SESSION['user_id'])) {
     // Rediriger l'utilisateur s'il n'est pas connecté
     header('Location: FormConnexion.php');
     exit();

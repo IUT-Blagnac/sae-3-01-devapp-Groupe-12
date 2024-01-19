@@ -102,7 +102,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <img src="img/panier.png" alt="Panier">
                     </a>
                 <?php endif; ?>
-                <?php if (isset($_SESSION['Sgroupe12']) || isset($_SESSION['admin'])): ?>
+                <?php if (isset($_SESSION['user_id']) || isset($_SESSION['admin'])): ?>
                     <div class="menu-item">
                     <a href="javascript:void(0);" id="user-icon">
                         <img src="img/compte.png" alt="Compte" style="height: 50px;">

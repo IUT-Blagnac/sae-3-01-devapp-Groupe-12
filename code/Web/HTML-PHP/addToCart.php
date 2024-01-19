@@ -2,9 +2,18 @@
 session_start();
 require_once 'Connect.inc.php';
 
-// check si l'utilisateur est connecté
-if (!isset($_SESSION['Sgroupe12']) || $_SESSION['Sgroupe12'] !== "oui") {
-    echo "Vous devez être connecté pour ajouter des articles au panier.";
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>
+    alert(\"Vous devez être connecté pour ajouter des articles au Panier. Vous allez être redirigé vers la page de connexion.\");
+    window.location.href = 'FormConnexion.php'</script>";
+    exit;
+}
+
+if (isset($_SESSION['admin']) && $_SESSION['admin'] == "oui") {
+    echo "<script>
+    alert(\"Vous devez être connecté en tant que client pour ajouter des articles au Panier. Vous allez être redirigé vers la page de connexion.\");
+    window.location.href = 'FormConnexion.php'</script>";
     exit;
 }
 
@@ -21,12 +30,12 @@ if (isset($_POST['numProduit'])) {
         exit;
     }
 
-    // Vérifiez si le cookie de panier existe déjà
-    if (isset($_COOKIE['panier'])) {
-        $cart = json_decode($_COOKIE['panier'], true);
-    } else {
-        $cart = [];
+    // Initialiser le panier pour l'utilisateur actuel
+    if (!isset($_SESSION['panier'][$_SESSION['user_id']])) {
+        $_SESSION['panier'][$_SESSION['user_id']] = [];
     }
+
+    $cart = &$_SESSION['panier'][$_SESSION['user_id']];
 
     // Ajoutez le produit au panier ou augmentez la quantité
     $found = false;
@@ -42,11 +51,8 @@ if (isset($_POST['numProduit'])) {
         $cart[] = ['numProduit' => $numProduit, 'quantite' => 1];
     }
 
-    // Enregistrez le panier mis à jour dans un cookie
-    setcookie('panier', json_encode($cart), time() + 86400 * 30, '/'); // Expiration dans 30 jours
-
     echo "Produit ajouté au panier avec succès.";
 } else {
     echo "Aucun numéro de produit fourni.";
 }
-?>
+

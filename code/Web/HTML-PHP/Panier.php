@@ -6,24 +6,35 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-function modifNomProduit($name) {
+if (!isset($_SESSION['user_id'])) {
+    header("Location: FormConnexion.php");
+    exit;
+}
+
+if (isset($_SESSION['admin']) && $_SESSION['admin'] == "oui") {
+    header("Location: FormConnexion.php");
+    exit;
+}
+
+function modifNomProduit($name)
+{
     $name = str_replace(' ', '_', $name); // Remplace les espaces par des underscores
     $name = strtolower($name); // Convertit en minuscules
 
     // Tableau de correspondance pour la suppression des accents
     $accents = array(
-        'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a',
-        'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o',
-        'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e',
-        'Ç'=>'C', 'ç'=>'c',
-        'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i',
-        'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u',
-        'ÿ'=>'y',
-        'Ñ'=>'N', 'ñ'=>'n',
-        'Ÿ'=>'Y',
-        'Æ'=>'AE', 'æ'=>'ae',
-        'Œ'=>'OE', 'œ'=>'oe',
-        'ß'=>'ss'
+        'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a',
+        'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ø' => 'o',
+        'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+        'Ç' => 'C', 'ç' => 'c',
+        'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
+        'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u',
+        'ÿ' => 'y',
+        'Ñ' => 'N', 'ñ' => 'n',
+        'Ÿ' => 'Y',
+        'Æ' => 'AE', 'æ' => 'ae',
+        'Œ' => 'OE', 'œ' => 'oe',
+        'ß' => 'ss'
     );
 
     // Remplacement des caractères accentués
@@ -37,12 +48,10 @@ function modifNomProduit($name) {
 // Initialisation du panier
 $items = [];
 
-// Vérifie si le cookie 'panier' existe
-if (isset($_COOKIE['panier'])) {
-    // Décode le cookie panier pour obtenir le tableau des produits
-    $cart = json_decode($_COOKIE['panier'], true);
+// Vérifiez si le panier existe dans la session pour l'utilisateur actuel
+if (isset($_SESSION['panier'][$_SESSION['user_id']])) {
+    $cart = $_SESSION['panier'][$_SESSION['user_id']];
 
-    // Boucle sur chaque produit dans le panier
     foreach ($cart as $item) {
         if (isset($item['numProduit'])) {
             // Récupération de l'information produit
@@ -51,7 +60,7 @@ if (isset($_COOKIE['panier'])) {
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($product) {
-                $product['quantite'] = $item['quantite']; // Utiliser la quantité du cookie
+                $product['quantite'] = $item['quantite']; // Utiliser la quantité de la session
                 $items[] = $product;
             }
         }
@@ -73,7 +82,6 @@ foreach ($items as $item) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier - LaBonneNote</title>
-
     <style>
         /* Mise en page générale */
         body {
@@ -260,8 +268,6 @@ foreach ($items as $item) {
 
 <body>
 
-
-
     <?php
     $selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'Tous nos produits';
     include 'include/header.php';
@@ -271,11 +277,11 @@ foreach ($items as $item) {
         <?php if (!empty($items)) : ?>
             <?php foreach ($items as $item) : ?>
                 <?php
-                 $nomProduitModifie = modifNomProduit($item['nomProduit']);
-                 $imagePath = "img/{$nomProduitModifie}.png"; 
+                $nomProduitModifie = modifNomProduit($item['nomProduit']);
+                $imagePath = "img/{$nomProduitModifie}.png";
                 ?>
                 <div class="cart-item">
-                <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($item['nomProduit']); ?>">
+                    <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($item['nomProduit']); ?>">
                     <div class="panier-item-details">
                         <h4><?= htmlspecialchars($item['nomProduit']) ?></h4>
                         <p class="prix-panier" data-price="<?= $item['prixVente'] ?>" data-numproduit="<?= $item['numProduit'] ?>">
@@ -286,9 +292,12 @@ foreach ($items as $item) {
                             <span class="quantite" data-numproduit="<?= $item['numProduit'] ?>"><?= $item['quantite'] ?></span>
                             <button class="quantite-plus" data-numproduit="<?= $item['numProduit'] ?>">+</button>
                         </div>
-                        <button class="delete-item" data-numproduit="<?= $item['numProduit'] ?>">
-                            <img src="img/delete.png" alt="Supprimer">
-                        </button>
+                        <form method="POST" action="Panier.php">
+                            <input type="hidden" name="deleteProduct" value="<?= $item['numProduit'] ?>">
+                            <button class="delete-item" type="submit">
+                                <img src="img/delete.png" alt="Supprimer">
+                            </button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -304,51 +313,6 @@ foreach ($items as $item) {
     <?php include 'include/footer.php'; ?>
 
     <script>
-        // Fonction pour obtenir la valeur d'un cookie
-        function getCookie(name) {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].split('=');
-                if (cookie[0].trim() === name) {
-                    return cookie[1];
-                }
-            }
-            return "";
-        }
-
-        // Fonction pour définir un cookie
-        function setCookie(name, value, days) {
-            var expires = "";
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
-
-        // Mettre à jour le cookie de panier
-        function updateCartCookie(numProduit, newquantite) {
-            var cart = JSON.parse(decodeURIComponent(getCookie('panier'))) || [];
-            var productIndex = cart.findIndex(item => item.numProduit == numProduit);
-
-            if (newquantite > 0) {
-                if (productIndex > -1) {
-                    cart[productIndex].quantite = newquantite;
-                } else {
-                    cart.push({
-                        numProduit: numProduit,
-                        quantite: newquantite
-                    });
-                }
-            } else {
-                cart = cart.filter(item => item.numProduit != numProduit);
-            }
-
-            setCookie('panier', JSON.stringify(cart), 7);
-            location.reload();
-        }
-
         // Gestion des clics sur les boutons + et -
         document.addEventListener('DOMContentLoaded', function() {
             var minusButtons = document.querySelectorAll('.quantite-moins');
@@ -361,10 +325,10 @@ foreach ($items as $item) {
                     var currentquantite = parseInt(quantiteSpan.innerText);
 
                     if (currentquantite > 1) {
-                        updateCartCookie(numProduit, currentquantite - 1);
+                        updateCartSession(numProduit, currentquantite - 1);
                     } else {
                         if (confirm('Êtes-vous sûr de vouloir supprimer cet article du panier ?')) {
-                            updateCartCookie(numProduit, 0);
+                            updateCartSession(numProduit, 0);
                         }
                     }
                 });
@@ -376,48 +340,77 @@ foreach ($items as $item) {
                     var quantiteSpan = document.querySelector('.quantite[data-numproduit="' + numProduit + '"]');
                     var currentquantite = parseInt(quantiteSpan.innerText);
 
-                    updateCartCookie(numProduit, currentquantite + 1);
+                    updateCartSession(numProduit, currentquantite + 1);
                 });
             });
+
+            // Fonction pour mettre à jour le panier en session
+            function updateCartSession(numProduit, newquantite) {
+                // Utilisez une requête AJAX ou la méthode fetch pour mettre à jour le panier en session côté serveur
+                // Exemple d'utilisation de fetch :
+                fetch('update_cart.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            numProduit: numProduit,
+                            quantite: newquantite,
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Mise à jour réussie, rafraîchissez la page ou mettez à jour l'affichage du panier
+                            location.reload();
+                        } else {
+                            alert('Une erreur s\'est produite lors de la mise à jour du panier.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur de mise à jour du panier :', error);
+                    });
+            }
+
+            // Fonction pour supprimer un article du panier
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Gestion des clics sur les boutons de suppression
-            document.querySelectorAll('.delete-item').forEach(button => {
-                button.addEventListener('click', function() {
-                    var numProduit = this.getAttribute('data-numproduit');
-                    if (confirm('Êtes-vous sûr de vouloir supprimer cet article du panier ?')) {
-                        updateCartCookie(numProduit, 0);
+    // Gestion des clics sur les boutons de suppression
+    document.querySelectorAll('.delete-item').forEach(button => {
+        button.addEventListener('click', function() {
+            var numProduit = this.getAttribute('data-numproduit');
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet article du panier ?')) {
+                // Envoyer une requête AJAX pour retirer le produit de la session
+                fetch('delete_cart_item.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        numProduit: numProduit,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Affichez la réponse pour le débogage
+
+                    if (data.success) {
+                        // Suppression réussie, rafraîchissez la page ou mettez à jour l'affichage du panier
+                        location.reload();
+                    } else {
+                        alert('Une erreur s\'est produite lors de la suppression de l\'article du panier.');
                     }
+                })
+                .catch(error => {
+                    console.error('Erreur de suppression de l\'article du panier :', error);
                 });
-            });
-
-            // Mettre à jour le cookie de panier
-            function updateCartCookie(numProduit, newquantite) {
-                var cart = JSON.parse(decodeURIComponent(getCookie('panier'))) || [];
-                cart = cart.filter(item => item.numProduit != numProduit);
-
-                setCookie('panier', JSON.stringify(cart), 7);
-                location.reload();
             }
-
-            // Fonctions pour manipuler les cookies
-            function getCookie(name) {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i].split('=');
-                    if (cookie[0].trim() === name) {
-                        return cookie[1];
-                    }
-                }
-                return "";
-            }
-
-
         });
+    });
+});
     </script>
-
-
+    <?php print_r($_SESSION); ?>
 </body>
 
 </html>

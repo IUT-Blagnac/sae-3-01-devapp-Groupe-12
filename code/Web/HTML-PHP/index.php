@@ -246,6 +246,7 @@ include 'include/header.php';
     justify-content: space-between;
 }
 
+
 .product-image {
     width: 200px; /* Largeur fixe pour toutes les images des produits */
     height: 200px; /* Hauteur fixe pour toutes les images des produits */
@@ -538,7 +539,7 @@ body {
 $(document).ready(function(){
     $('.product-carousel').slick({
         infinite: true,
-        slidesToShow: 3,
+        slidesToShow: 6,
         slidesToScroll: 1,
         nextArrow: '<button type="button" class="slick-next">Suivant</button>',
         prevArrow: '<button type="button" class="slick-prev">Précédent</button>',

@@ -70,9 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO Client (prenomClient, nomClient, pseudoClient, mailClient, telephoneClient, mdpClient) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->execute([$prenomClient, $nomClient, $pseudoClient, $emailClient, $telClient, $passwordClientHashed]);
 
+            // Récupération de l'identifiant du dernier utilisateur inséré
+            $idClient = $conn->lastInsertId();
+
             //Création de la session
-            $_SESSION['Sgroupe12'] = "oui";
-            $_SESSION['nom'] = htmlentities($pseudoClient);
+            $_SESSION['user_id'] = $idClient; // Enregistrez l'identifiant unique de l'utilisateur
+            $_SESSION['user_pseudo'] = $pseudoClient; // Enregistrez le pseudoClient
             
             header('Location: index.php'); // Rediriger vers une page d'accueil
             exit();

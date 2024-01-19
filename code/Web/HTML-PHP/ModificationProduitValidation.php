@@ -30,8 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($stmt->execute($params)) {
             $message = "Le produit a été modifié avec succès.";
-            header("Location : ModificationProduit.php");
+            header("Location: ModificationProduit.php");
             exit();
+
         } else {
             $message = "Erreur lors de la mise à jour du produit.";
         }

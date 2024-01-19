@@ -235,18 +235,20 @@ $imagePath = "img/{$nomProduitModifie}.png"; // Ou .jpg selon le format de vos i
     <p><?= htmlspecialchars($produit['prixVente']) ?> €</p>
     <p><?= htmlspecialchars($produit['description']) ?></p>
     <?php
-        // Vérifier si l'utilisateur connecté a déjà laissé un avis
-$stmt = $conn->prepare("SELECT COUNT(*) FROM Avis WHERE numProduit = ? AND numClient = ?");
-$stmt->execute([$numProduit, $_SESSION['numClient']]);
-$canReview = $stmt->fetchColumn() == 0;
+// Affichez le formulaire d'avis uniquement si l'utilisateur est connecté
+if (isset($_SESSION['user_id'])) {
+    // Vérifier si l'utilisateur connecté a déjà laissé un avis
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM Avis WHERE numProduit = ? AND numClient = ?");
+    $stmt->execute([$numProduit, $_SESSION['user_id']]);
+    $canReview = $stmt->fetchColumn() == 0;
 
-// Afficher un message d'erreur si l'utilisateur a déjà laissé un avis
-if (isset($_GET['error']) && $_GET['error'] == 'alreadyReviewed') {
-    echo "<p>Vous avez déjà laissé un avis pour ce produit.</p>";
-}
+    // Afficher un message d'erreur si l'utilisateur a déjà laissé un avis
+    if (isset($_GET['error']) && $_GET['error'] == 'alreadyReviewed') {
+        echo "<p>Vous avez déjà laissé un avis pour ce produit.</p>";
+    }
 
-if ($canReview) {
-    // Afficher le formulaire d'avis
+    if ($canReview) {
+        // Afficher le formulaire d'avis
         echo '<div class="leave-review">';
         echo '<h3>Laissez un avis</h3>';
         echo '<form action="laisserAvis.php" method="post">';
@@ -259,9 +261,10 @@ if ($canReview) {
         echo '</select>';
         echo '<label for="commentaire">Commentaire :</label>';
         echo '<textarea name="commentaire" id="commentaire" rows="4"></textarea>';
-        echo '<button type="submit">Soumettre lavis</button>';
+        echo '<button type="submit">Soumettre l\avis</button>';
         echo '</form>';
         echo '</div>';
+    }
 }
     ?>
 

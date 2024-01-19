@@ -2,12 +2,12 @@
 require_once 'Connect.inc.php';
 
 session_start();
-if (!isset($_SESSION['Sgroupe12']) || $_SESSION['Sgroupe12'] != "oui") {
+if (!isset($_SESSION['user_id'])) {
     header('Location: FormConnexion.php');
     exit();
 }
 
-$idClient = $_SESSION['numClient'];
+$idClient = $_SESSION['user_id'];
 
 // Mettre à jour les informations du client
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

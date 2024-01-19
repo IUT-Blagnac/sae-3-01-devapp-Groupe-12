@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['Sgroupe12']) || $_SESSION['Sgroupe12'] != "oui") {
+if (!isset($_SESSION['user_id'])) {
     echo "<script>
     alert(\"Vous devez être connecté pour accéder au service client. Vous allez être redirigé vers la page d\'accueil.\");
     window.location.href = 'index.php'</script>";

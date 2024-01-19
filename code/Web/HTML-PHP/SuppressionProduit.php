@@ -10,7 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require_once 'Connect.inc.php';
 
     $numProduit = $_POST["numProduit"];
+    $st = $conn->prepare("DELETE FROM ProduitApparente WHERE numProduitEnfant = ?");
+    $st->execute([$numProduit]);
 
+    $s = $conn->prepare("DELETE FROM LigneCde WHERE numProduit = ?");
+    $s->execute([$numProduit]);
     // Préparez et exécutez la requête de suppression
     $stmt = $conn->prepare("DELETE FROM Produit WHERE numProduit = ?");
     $stmt->execute([$numProduit]);

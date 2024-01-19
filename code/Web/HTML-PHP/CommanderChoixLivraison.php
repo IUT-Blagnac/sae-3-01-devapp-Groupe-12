@@ -4,26 +4,21 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['Sgroupe12']) || $_SESSION['Sgroupe12'] != "oui") {
+if (!isset($_SESSION['user_id'])) {
     echo "<script>
     alert(\"Vous devez être connecté passer une commande. Vous allez être redirigé vers la page d\'accueil.\");
     window.location.href = 'index.php'</script>";
 }
-if (isset($_COOKIE['panier'])) {
-    $cart = json_decode($_COOKIE['panier'], true);
-} else {
-    echo "<script>
-    alert(\"Votre panier ne doit pas être vide pour passer une commande. Vous allez être redirigé vers la page d\'accueil.\");
-    window.location.href = 'index.php'</script>";
-}
+
 require_once('Connect.inc.php');
-if (empty($cart)) {
+if (!isset($_SESSION['panier'])) {
     echo "<script>
     alert(\"Votre panier ne doit pas être vide pour passer une commande. Vous allez être redirigé vers la page d'accueil.\");
     window.location.href = 'index.php'</script>";
     exit();
 } else {
     $message = "";
+    $cart = $_SESSION['panier'];
     foreach ($cart as $item) {
         if (isset($item['numProduit'])) {
             $stmt = $conn->prepare("SELECT numProduit, nomProduit, prixVente, stock FROM Produit WHERE numProduit = ?");

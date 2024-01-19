@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'Connect.inc.php';
-if (!isset($_SESSION['Sgroupe12']) || $_SESSION['Sgroupe12'] != "oui") {
+if (!isset($_SESSION['user_id'])) {
     echo "<script>
     alert(\"Vous devez être connecté pour voir vos commandes. Vous allez être redirigé vers la page d\'accueil.\");
     window.location.href = 'index.php'</script>";
@@ -28,7 +28,7 @@ $selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'Tous nos pro
 
     $sql = "SELECT * FROM Commande WHERE numClient = :numClient";
     $stmt = $conn->prepare($sql);
-    $stmt->execute(['numClient' => $_SESSION['numClient']]);
+    $stmt->execute(['numClient' => $_SESSION['user_id']]);
     $result = $stmt->fetchAll();
 
     if (count($result) > 0) {

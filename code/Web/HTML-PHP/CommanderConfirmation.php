@@ -3,34 +3,64 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'Connect.inc.php';
-if (!isset($_SESSION['Sgroupe12']) || $_SESSION['Sgroupe12'] != "oui") {
+if (!isset($_SESSION['user_id'])) {
     echo "<script>
     alert(\"Vous devez être connecté passer une commande. Vous allez être redirigé vers la page d\'accueil.\");
     window.location.href = 'index.php'</script>";
 }
 
-if (isset($_COOKIE['panier'])) {
-    $cart = json_decode($_COOKIE['panier'], true);
+if (isset($_SESSION['panier'])) {
+    $cart = $_SESSION['panier'];
 } else {
     echo "<script>
     alert(\"Votre panier ne doit pas être vide pour passer une commande. Vous allez être redirigé vers la page d\'accueil.\");
     window.location.href = 'index.php'</script>";
 }
+
+function modifNomProduit($name) {
+    $name = str_replace(' ', '_', $name); // Remplace les espaces par des underscores
+    $name = strtolower($name); // Convertit en minuscules
+
+    // Tableau de correspondance pour la suppression des accents
+    $accents = array(
+        'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a',
+        'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o',
+        'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e',
+        'Ç'=>'C', 'ç'=>'c',
+        'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i',
+        'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u',
+        'ÿ'=>'y',
+        'Ñ'=>'N', 'ñ'=>'n',
+        'Ÿ'=>'Y',
+        'Æ'=>'AE', 'æ'=>'ae',
+        'Œ'=>'OE', 'œ'=>'oe',
+        'ß'=>'ss'
+    );
+
+    // Remplacement des caractères accentués
+    foreach ($accents as $accent => $replacement) {
+        $name = str_replace($accent, $replacement, $name);
+    }
+
+    return $name;
+}
+
 if (count($cart) == 0) {
     echo "<script>
     alert(\"Votre panier ne doit pas être vide pour passer une commande. Vous allez être redirigé vers la page d\'accueil.\");
     window.location.href = 'index.php'</script>";
 } else {
     foreach ($cart as $item) {
-        if (isset($item['numProduit'])) {
-            // Récupération de l'information produit
-            $stmt = $conn->prepare("SELECT numProduit, nomProduit, prixVente, fraisSupplementaires, 'img/youtube.png' as image FROM Produit WHERE numProduit = ?");
-            $stmt->execute([$item['numProduit']]);
-            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+        foreach ($item as $key => $value) {
+            if (isset($value['numProduit'])) {
+                $stmt = $conn->prepare("SELECT numProduit, nomProduit, prixVente, fraisSupplementaires, 'img/youtube.png' as image FROM Produit WHERE numProduit = ?");
+                $stmt->execute([$value['numProduit']]);
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($product) {
-                $product['quantite'] = $item['quantite'];
-                $items[] = $product;
+                if ($product) {
+                    $product['quantite'] = $value['quantite'];
+                    $items[] = $product;
+                }
             }
         }
     }
@@ -51,7 +81,7 @@ if (!isset($_SESSION['choixLivraison'])) {
         $totalLivraison = 0;
     } else {
         $req = $conn->prepare("SELECT * FROM AdresseLivraison WHERE numClient = :numClient");
-        $req->bindParam(':numClient', $_SESSION['numClient']);
+        $req->bindParam(':numClient', $_SESSION['user_id']);
         $req->execute();
         $resAdresse = $req->fetchAll();
         $choixAdresse = "(" . $resAdresse[0]['LibelleLivraison'] . ")<br><br>";
@@ -99,25 +129,27 @@ $total += $totalFrais + $totalLivraison;
 
 if (isset($_POST['commander'])) {
     try {
-        $stmt = $conn->prepare("INSERT INTO Commande (dateCommande, montantFrais, montant, numClient, idAdresseLivraison, typeLivraison, statut) VALUES ('2023-12-31', 5, 50, :numClient, 5, 'Retrait magasin', 'En cours')");
-        $stmt->execute(['numClient' => $_SESSION['numClient']]);
+        $stmt = $conn->prepare("INSERT INTO Commande (dateCommande, montantFrais, montant, numClient, idAdresseLivraison, typeLivraison, statut) VALUES ('2023-12-31', 5, :montant, :numClient, 5, 'Retrait magasin', 'En cours')");
+        $stmt->execute(['numClient' => $_SESSION['user_id'], 'montant' => $total]);
         $numCommandeInserted = $conn->lastInsertId();
         // $panier = $_SESSION['panier'];
 
         foreach ($items as $item) {
             $numProduit = $item['numProduit'];
             $quantiteCommandee = $item['quantite'];
-            
+
             $stmt = $conn->prepare("INSERT INTO LigneCde (numProduit, numCommande, quantiteCommandee) VALUES (?, ?, ?)");
             $stmt->execute([$numProduit, $numCommandeInserted, $quantiteCommandee]);
         }
 
-        
+
         $stmt = $conn->prepare("INSERT INTO Paiement (numCommande, montantTotal, statut, typePaiement) VALUES (?, ?, ?, ?)");
         $stmt->execute([$numCommandeInserted, $total, 'accepté', $choixPaiement]);
 
         // sendMail();
-        setcookie('panier', '', time() - 3600, '/');
+        if (isset($_SESSION['panier'][$_SESSION['user_id']])) {
+            unset($_SESSION['panier'][$_SESSION['user_id']]);
+        }
         echo "<script>
         alert(\"Merci pour votre commande !\");
         window.location.href = 'index.php'</script>";

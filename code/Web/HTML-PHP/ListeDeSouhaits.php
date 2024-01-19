@@ -140,7 +140,7 @@ $wishlistProducts = getWishlistProducts($conn, $wishlist);
             <div class="wishlist-produit">
             <?php
                 $nomProduitModifie = modifNomProduit($produit['nomProduit']);
-                $imagePath = "img/{$nomProduitModifie}.png"; // Ou .jpg selon le format de vos images
+                $imagePath = "img/{$nomProduitModifie}.png"; 
             ?>
             <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($produit['nomProduit']); ?>">
                 <div class="product-info">
