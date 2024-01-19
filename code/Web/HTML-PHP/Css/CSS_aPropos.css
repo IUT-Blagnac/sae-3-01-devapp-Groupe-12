@@ -1,0 +1,114 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #333;
+    font-family: "Georgia", serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.team-member {
+    width: 200px;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    border:none;
+}
+
+.team-member img {
+    width: 100%;
+    max-width: 250px;
+    max-height: 250px;
+    height: auto;
+    border-radius: 25%;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.team-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-color: white;
+}
+
+.Passion {
+    background-color: red;
+    text-align: left;
+    column-count: 2;
+    column-gap: 50px;
+}
+
+.Passion img {
+    max-width: 100px;
+    max-height: 100px;
+    position: relative;
+    left: 50%;
+}
+
+.container h1,
+.container h2,
+.container p {
+    margin-bottom: 20px;
+}
+
+.grande-box{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.harmonie{
+    display: grid;
+    grid-template-columns: 8fr 4fr ;
+    gap: 20px;
+}
+
+.harmonieimg img{
+    width: 450px;
+    height: 250px;
+}
+
+.creativite{
+    display: grid;
+    grid-template-columns: 4fr 8fr ;
+    gap: 20px;
+}
+
+.creativiteimg img{
+    width: 450px;
+    height: 250px;
+}
+
+.accessibilite{
+    display: grid;
+    grid-template-columns: 8fr 4fr ;
+    gap: 20px;
+}
+
+.accessibiliteimg img{
+    width: 450px;
+    height: 250px;
+}
+
+.durable{
+    display: grid;
+    grid-template-columns: 4fr 8fr ;
+    gap: 20px;
+}
+
+.durableimg img{
+    width: 450px;
+    height: 250px;
+}

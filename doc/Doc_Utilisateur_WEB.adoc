@@ -1,0 +1,516 @@
+= Document Utilisateur du site Web (Partie WEB) - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
+
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
+
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
+
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
+
+toc::[]
+
+= Présentation du site
+== Contexte général
+
+L'entreprise La Bonne Note, spécialisée dans la vente d'instruments de musique, envisage d'améliorer son modèle commercial en introduisant un site e-commerce dédié. Cette initiative stratégique vise à élargir la portée géographique de l'entreprise, permettant ainsi d'atteindre des clients plus éloignés et de répondre à une demande croissante de produits musicaux en ligne.
+
+Le contexte général de cette expansion découle de la nécessité de rester compétitif sur le marché tout en répondant aux évolutions des habitudes d'achat des consommateurs. Le marché en ligne offre une opportunité unique d'atteindre un public plus large et de proposer une gamme diversifiée d'instruments de musique à une clientèle mondiale.
+
+Le site e-commerce de "La Bonne Note" sera conçu pour offrir une expérience utilisateur optimale, avec une interface conviviale permettant aux clients de parcourir facilement le catalogue d'instruments, de rechercher des produits spécifiques, et de passer des commandes en ligne en toute simplicité. Cette plateforme virtuelle permettra aux clients d'explorer le large éventail d'instruments disponibles, d'accéder à des informations détaillées et de finaliser leurs achats depuis le confort de leur domicile.
+
+En adoptant le commerce électronique, La Bonne Note vise à garantir la satisfaction de sa clientèle en offrant un service de qualité, des informations transparentes sur les produits, et une gestion efficace des commandes et des livraisons. Cette expansion dans le monde numérique permettra également à l'entreprise de rester en phase avec les tendances du marché et de capitaliser sur les opportunités de croissance offertes par le commerce en ligne.
+
+Le projet du site e-commerce est une étape cruciale dans l'évolution de "La Bonne Note", transformant son modèle commercial traditionnel en une présence plus dynamique et accessible sur la scène mondiale du commerce électronique des instruments de musique.
+
+== Description du besoin
+
+L'entreprise "La Bonne Note" a identifié le besoin crucial de mettre en place un site e-commerce afin d'étendre sa présence sur le marché et de répondre aux besoins changeants de ses clients. L'objectif principal de ce projet est de créer une plateforme en ligne attractive et fonctionnelle qui permettra aux clients d'explorer, de choisir, et d'acheter des instruments de musique de haute qualité depuis n'importe où dans le monde.
+
+== Cas d'utilisation
+
+1. Administration
+Gérer les Produits : Permet à l'administrateur de gérer le catalogue de produits, y compris l'ajout, la modification et la suppression d'articles.
+Gérer les Promotions : Autorise l'administrateur à créer et gérer des offres spéciales et des promotions.
+Accéder aux Statistiques de Ventes : Offre à l'administrateur une vue détaillée des performances de vente, permettant une analyse approfondie.
+2. Utilisateur
+Gérer son Compte : Fonction principale pour les clients, offrant plusieurs options pour gérer leur compte en ligne.
+Se Déconnecter : Permet aux utilisateurs de se déconnecter de leur compte.
+Suivre ses Commandes : Permet aux clients de suivre l'état et l'historique de leurs commandes.
+Modifier les Informations du Compte : Autorise les utilisateurs à mettre à jour leurs informations personnelles.
+Se Connecter à son Compte : Permet aux utilisateurs de se connecter à leur compte existant.
+Créer un Compte : Permet aux nouveaux clients de créer un compte sur la plateforme.
+3. Achat
+Acheter : Fonction principale pour les clients, facilitant le processus d'achat en ligne.
+Noter un Produit : Permet aux clients de laisser des commentaires et des évaluations sur les produits.
+Payer sa Commande : Propose différentes méthodes de paiement sécurisées pour finaliser l'achat.
+Ajouter au Panier : Permet aux clients de sélectionner des produits et de les ajouter à leur panier d'achat.
+Partager des Produits sur les Réseaux Sociaux : Facilite le partage de produits sur les plateformes de médias sociaux.
+Chercher des Produits : Offre une fonction de recherche permettant aux clients de trouver rapidement des produits spécifiques.
+4. Service Client
+Contacter le Service Client : Permet aux clients de communiquer directement avec le service client pour poser des questions, signaler des problèmes ou demander de l'aide.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
+
+= Tutoriel de navigation
+
+== Aller sur le site
+
+Pour aller sur le site :
+
+Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de recherche de votre navigateur web : http://193.54.227.208/~saephp12/index.php 
+
+= Prise en main du site web
+
+== Fonctionnement du site partie Admin
+
+= Gérer les produits
+(Il faut être connecté à un compte admin pour cette option)
+
+Tout d'abord cliquez sur le menu admin tout en haut à droite de la page.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin1.png[]
+
+
+Un menu avec les options réservées aux admins s'afficheront.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin2.png[]
+
+Pour commencer l'option "Ajouter un produit" qui va vous amener sur une page où il faudra simplement remplir les champs.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminajoutprod.png[]
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin3.png[]
+
+N'oubliez pas de cliquer sur le bout "Ajouter un produit"
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin4.png[]
+
+
+Ensuite l'option "Supprimer un produit" qui va vous amener sur la page de suppression de produit. Mettez le numéro du produit à supprimer.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminsuppressionprod.png[]
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin5.png[]
+
+
+N'oubliez pas d'appuyer sur le bouton supprimer pour supprimer le produit !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin6.png[]
+
+L'option de "Modification produits" 
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin7.png[]
+
+Vous êtes donc emmener sur la page où vous aller mettre le numéro du produit que vous voulez changer.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin9.png[]
+
+Une fois le produit trouvé, vous pouvez changer le contenu des champs d'informations sur le produit. N'oubliez pas d'appuyer sur "Enregistrer les informations" pour sauvegarder les modifications !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin20.png[]
+
+
+L'option "Ajouter produit". Cela va vous emmener sur la page d'ajout de produit. Vous n'avez plus qu'à remplir les champs et ne pas oublier d'appuyer sur "Ajouter le produit" pour qu'il s'ajoute !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminajouterprod.png[]
+
+L'option "Supprimer produit". Cela va vous emmener sur la page de suppression de produit où vous aller mettre le numéro du produit à supprimer. Une fois le proudit trouvé il vous suffira d'appuyer sur le bouton "Supprimer" pour supprimer le produit voulu !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminsupprprod.png[]
+
+
+= Gérer les promotions
+(Il faut être connecté à un compte admin pour cette option)
+
+L'option de "Promotions" qui va permettre de mettre des promotions sur les produits.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/admin8.png[]
+
+Ici vous allez pouvoir cocher le ou les produit(s) que vous voulez mettre en promotion en détaillant le pourcentage souhaité dans le champs dédié.
+N'oubliez pas d'appuyer sur le bouton "Lancer la promotion" !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminpromo.png[]
+
+= Voir l'historique des ventes
+(Il faut être connecté à un compte admin pour cette option)
+
+L'option "Ventes". Cela va vous emmener sur la page d'historique des ventes qui va vous permettre de consulter la liste de toutes les ventes effectuées !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminventeventevente.png[]
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/adminventes.png[]
+
+== Fonctionnement du site partie Client
+
+= Créer un Compte
+
+Si vous n'avez pas encore de compte, vous dever d'abord aller sur se connecter.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte1.png[]
+
+Sélectionnez ensuite "Créer un Compte".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte2.png[]
+
+
+Suivez les étapes d'inscription.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte3.png[]
+
+Cliquez sur s'inscrire.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte4.png[]
+
+
+Dans le cas où il reste des champs libre, un petit message apparaît pour vous le signaler.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte5.png[]
+
+
+
+
+= Se Connecter à son Compte
+
+Pour vous connecter, cliquez sur "Se Connecter" en haut à droite.
+
+
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/creercompte1.png[]
+
+
+Saisissez vos identifiants sur la page de connexion.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/seconnecter1.png[]
+
+
+
+Vous pouvez choisir de cocher "se souvenir de moi" qui permet de garder l'identifiant lorsque vous vous déconnecter puis vous avez envie de vous reconnecter.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/seconnecter2.png[]
+
+
+Vous êtes maintenant connecté !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/seconnecter3.png[]
+
+
+
+= Se Déconnecter
+(Il faut être connecté à un compte client pour cette option)
+
+Pour vous déconnecter de votre compte, cliquez sur "Déconnexion" situé en haut à droite de la page d'accueil.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/sedeconnecter1.png[]
+
+
+
+= Suivre ses Commandes
+(Il faut être connecté à un compte client pour cette option)
+
+Pour suivre l'état de vos commandes, rendez-vous dans la section "Mon Compte" en cliquant sur le petit bonhomme et sélectionnez l'onglet "Mes Commandes".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/suivrecommande1.png[]
+
+
+Vous pouvez maintenant suivre vos commandes !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/suivrecommande2.png[]
+
+
+
+= Modifier les Informations du Compte
+
+Mettez à jour vos informations personnelles en accédant à la section "Votre Compte".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/changerinfocompte1.png[]
+
+
+
+N'oubliez pas de valider vos changements !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/changerinfocompte2.png[]
+
+
+
+
+= Noter un Produit
+(Il faut être connecté à un compte client pour cette option)
+
+Après vous être connecté, vous pouvez noter un produit en attribuant une évaluation et en laissant un commentaire sur la page du produit.
+Commencez par cliquer sur un produit.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit1.png[]
+
+
+
+Vous allez pouvoir choisir la note sur 5.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit2.png[]
+
+
+
+
+Choisissez donc une note.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit3.png[]
+
+
+
+
+La note sera mise en compagnie de votre avis avec succès !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/noterunproduit4.png[]
+
+
+
+
+
+= Laisser un avis
+(Il faut être connecté à un compte client pour cette option)
+
+Au même endroit que pour laisser une note puisque la note fait partie de l'avis, il suffit d'écrire votre avis dans le champs dédié.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/laisserunavis1.png[]
+
+
+Après avoir cliqué sur "Soumettre l'avis" votre avis sera enregistré avec succès !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouterunavis1.png[]
+
+
+
+===Chercher des Produits
+
+Utilisez la barre de recherche en haut de la page pour trouver rapidement des produits spécifiques.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/rechercherunproduit1.png[]
+
+
+
+Vous pouvez sélectionner une catégorie en particulier pour votre les produits classifiés dans cette dernière.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/rechercherunproduit2.png[]
+
+
+
+
+= Ajouter au Panier
+(Il faut être connecté à un compte client pour cette option)
+
+Ajoutez des produits à votre panier en cliquant sur le bouton "Ajouter au Panier" depuis la page du produit.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouteraupanier1.png[]
+
+Un message vous informant que le produit a été ajouté apparaîtra.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouteraupanier2.png[]
+
+
+Pour voir votre panier, cliquez sur le petit panier en haut à droite
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouteraupanier4.png[]
+
+
+Vous avez maintenant accès à votre panier !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/ajouteraupanier3.png[]
+
+
+
+= Payer sa Commande
+(Il faut être connecté à un compte client pour cette option)
+
+Lors du processus de paiement, suivez les étapes indiquées pour sélectionner votre méthode de paiement et finaliser la commande.
+
+Depuis votre panier, cliquez sur "Continuer ma commande".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande1.png[]
+
+
+
+Vous avez 2 choix.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande2.png[]
+
+
+
+Le retrait en magasin qui est gratuit.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande3.png[]
+
+
+
+
+Ou encore la livraison à domicile qui est payante.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande4.png[]
+
+
+Pour cette dernière il suffira de donner une adresse pour continuer.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande17.png[]
+
+
+
+Pour la suite du payement, il faut choisir un des 3 moyens disponible.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande5.png[]
+
+
+
+Premièrement si vous choisissez la Carte bancaire.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande6.png[]
+
+
+Il vous suffit de remplir les champs.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande9.png[]
+
+
+N'oubliez pas d'appuyer sur "Confirmer".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande10.png[]
+
+
+Enfin vous avez le récapitulatif de votre commande !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande11.png[]
+
+N'oubliez pas d'appuyer sur "Commander.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande12.png[]
+
+
+Vous pouvez retourner en arrière ou au panier si besoin.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande13.png[]
+
+Félicitation vous avez finie de payer !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande14.png[]
+
+Pour le paiement Paypal.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande7.png[]
+
+Vous pouvez mettre votre adresse mail et votre mot de passe. Le reste est pareil qu'avec la carte bancaire au niveau du récapitulatif.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande15.png[]
+
+Vous pouvez changer de moyen de payement en cliquant sur le bouton dédié.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande16.png[]
+
+Enfin pour le paiement en magasin vous aurez juste le récapitulatif, donc rien de différent ou de plus que les 2 autres moyens de paiement.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/payersacommande8.png[]
+
+
+
+
+
+
+
+= Partager des Produits sur les Réseaux Sociaux
+(Il faut être connecté à un compte client pour cette option)
+Sur la page du produit que vous voulez partager, appuyez sur l'icône de partage. 
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit1.png[]
+
+
+
+Des icônes apparaîtront. Utilisez les pour partager vos produits préférés sur le réseaux social de votre choix.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit2.png[]
+
+
+A noter que pour le partage sur Instagram, il y a des restriction lié à l'API de partage de ce réseau, ce qui vous oblige à le faire directement à la main.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit3.png[]
+
+
+Un message vous prévenant de le faire s'affichera donc si vous cliquez sur le logo d'Instagram.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/partagerproduit4.png[]
+
+
+
+= Contacter le Service Client
+(Il faut être connecté à un compte client pour cette option)
+
+
+Si vous avez des questions, cliquez sur l'icône "?".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient1.png[]
+
+
+Puis sur le petit opérateur.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient2.png[]
+
+
+Vous avez donc le choix parmi plusieurs options de contact et d'aide.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient3.png[]
+
+Tout d'abord le mail.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient4.png[]
+
+On vous demande de choisir l'application que vous voulez choisir pour envoyer votre mail.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient5.png[]
+
+Ensuite l'option appel par téléphone, qui si vous clique, vous ouvrira le gestionnaire d'appel avec le numéro à contacter directement dessus.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient6.png[]
+
+
+Enfin arrive l'option de chat.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient7.png[]
+
+
+Cette option va vous mettre en contact avec une IA qui répondra à vos questions.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/serviceclient8.png[]
+
+= Page à propos
+
+Après avoir cliqué sur l'icône "?", il vous suffira de cliquer sur le logo "i".
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/apropos1.png[]
+
+
+Vous vez maintenant accès à la page "à propos" de l'entreprise La Bonne Note !
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/apeopos2.png[]
+
+
+
+

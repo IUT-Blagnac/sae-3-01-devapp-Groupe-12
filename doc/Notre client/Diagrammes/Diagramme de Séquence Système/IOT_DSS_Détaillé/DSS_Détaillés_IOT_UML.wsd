@@ -1,0 +1,101 @@
+DSS 1)
+
+@startuml
+skinparam monochrome true
+
+actor User
+
+participant LogHistoryController
+participant WhareHouseMonitorController
+participant Configuration
+participant ConfigurationController
+
+User -> LogHistoryController: Clic sur bouton de configuration
+LogHistoryController -> Configuration: Instanciation
+Configuration -> ConfigurationController: Appel de la méthode initContext()
+ConfigurationController -> ConfigurationController: Initialisation des éléments visuels
+ConfigurationController -> ConfigurationController: Initialisation du thread de test de connexion
+Configuration -> Configuration: Affichage de la fenêtre de configuration
+ConfigurationController -> User: Affichage de l'IHM de configuration
+@enduml
+
+
+
+DSS 2)
+
+@startuml
+skinparam monochrome true
+
+actor User
+
+participant ConfigurationController
+participant WhareHouseMonitorController
+participant LogHistory
+participant LogHistoryController
+
+User -> ConfigurationController: Clic sur bouton de l'historique
+User -> WhareHouseMonitorController: Clic sur bouton de l'historique
+ConfigurationController-> LogHistory: Instanciation
+WhareHouseMonitorController -> LogHistory: Instanciation
+LogHistory-> LogHistoryController: Appel de la méthode initContext()
+LogHistoryController-> LogHistoryController: Initialisation des éléments visuels
+LogHistory-> LogHistoryController: Affichage de la fenêtre de configuration
+LogHistoryController-> User: Affichage de l'IHM de configuration
+@enduml
+
+
+
+DSS 3)
+
+@startuml
+skinparam monochrome true
+
+actor User
+
+participant ConfigurationController
+participant LogHistoryController
+participant WhareHouse
+participant WhareHouseMonitorController
+
+User -> ConfigurationController: Clic sur bouton de l'entrepôt
+User -> LogHistoryController: Clic sur bouton de l'entrepôt
+ConfigurationController-> WhareHouse: Instanciation
+LogHistoryController-> WhareHouse: Instanciation
+WhareHouse-> WhareHouseMonitorController: Appel de la méthode initContext()
+WhareHouseMonitorController-> LogHistoryController: Initialisation des éléments visuels
+WhareHouse-> WhareHouseMonitorController: Affichage de la fenêtre de configuration
+WhareHouseMonitorController-> User: Affichage de l'IHM de configuration
+@enduml
+
+
+
+DSS 4)
+
+@startuml
+skinparam monochrome true
+
+actor "File System" as FS
+participant "Thread" as T
+participant "JsonUtilities" as JU
+participant "LogHistoryController" as LHC
+participant "Notification" as N
+
+FS -> T: Modifie le fichier donnees.json
+activate T
+T -> FS: Vérifie la dernière modification
+FS --> T: Nouvelle modification détectée
+T -> JU: Met à jour l'historique à partir du fichier JSON
+activate JU
+JU -> LHC: Met à jour l'IHM
+activate LHC
+LHC -> LHC: Vérifie les alertes pour les dernières données
+LHC -> LHC: Vérifie seuils de données
+deactivate LHC
+JU --> T: Données mises à jour
+T -> LHC: Crée les notifications d'alerte si dépassement des seuils
+activate N
+LHC -> N: Crée la notification
+deactivate N
+deactivate JU
+deactivate T
+@enduml

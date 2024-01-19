@@ -1,0 +1,189 @@
+= Document Utilisateur de l’application (Partie IOT) - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
+
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
+
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
+
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
+
+toc::[]
+
+= Présentation de l'application
+== Contexte général
+L'entreprise "La Bonne Note", spécialisée dans la vente d'instruments de musique, ambitionne d'améliorer la gestion de son entrepôt par le biais d'une application Java. Cette dernière sera conçue pour optimiser l'accès aux données des capteurs, l'écriture de ces informations dans des fichiers, et pour paramétrer le fonctionnement d'une application Python associée. L'objectif est de permettre une gestion précise et efficace des capteurs déployés à l'IUT, diffusant des données relatives au CO2, à la température et à l'humidité via le bus MQTT.
+
+== Description du besoin
+L'application Java de "La Bonne Note" vise à fournir une interface ergonomique et fonctionnelle pour gérer les capteurs et les données qu'ils génèrent. Elle proposera différentes fonctionnalités telles que la configuration des types de données récupérées, la fréquence de lecture des capteurs, les seuils d'alerte, et les noms de fichiers associés. Cette application Java servira également à afficher en temps réel les données captées, différenciées par salle pour offrir une représentation terrain réaliste. Elle permettra également la visualisation graphique des fichiers logs, l'affichage des alertes de dépassement de seuils, tout en mettant l'accent sur une architecture logicielle proposée par les étudiants, justifiée et analysée en profondeur.
+
+== Cas d'utilisation
+L'application de "La Bonne Note" propose plusieurs cas d'utilisation essentiels pour optimiser la gestion de son entrepôt. Tout d'abord, elle permet la configuration des capteurs en offrant la possibilité de sélectionner les types de données à récupérer, de définir la fréquence de lecture des capteurs et de fixer les seuils d'alerte pour chaque type de donnée. Ensuite, elle offre une interface conviviale pour afficher en temps réel les données captées par les capteurs, distinguant ces données par salle pour une représentation précise de l'état actuel de l'entrepôt. De plus, elle facilite la visualisation graphique des fichiers logs, permettant aux utilisateurs de consulter l'historique des données captées. Enfin, elle assure une gestion proactive des alertes en affichant en permanence les dépassements de seuils détectés par les capteurs, fournissant ainsi un aperçu immédiat des situations critiques et nécessitant une attention particulière.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[]
+
+= Tutoriel d'installation
+
+== Installer java
+
+Pour exécuter l'application Java, vérifiez d'abord que Java est installé sur votre ordinateur en ouvrant une invite de commande et en saisissant la commande suivante :
+
+- java -version
+
+Si la version de Java apparaît et qu'il s'agit bien de la version 17, vous pouvez sauter l’étape d’installation de Java.
+
+Si JAVA n'est pas installé, vous pouvez le télécharger https://www.oracle.com/fr/java/technologies/downloads/#java17[ici], veillez à bien choisir la version 17 ainsi que la version adaptée pour votre système d'exploitation.
+
+== Installer Python
+
+Pour vérifier si votre système dispose de Python : 
+
+Ouvrir un terminal
+[source,cmd]
+----
+Python –version
+----
+
+Si la version de Python apparaît, vous pouvez sauter l’étape d’installation de Python.
+
+Si Python n’est pas installé, vous pouvez le télécharger depuis https://www.python.org/downloads/.
+
+Ensuite, pour que l'application Java puisse exécuter le script Python, assurez-vous d'avoir les bibliothèques requises installées pour Python. Voici les bibliothèques nécessaires :
+
+1. `paho.mqtt.client`: Bibliothèque MQTT pour Python.
+2. `json`: Module Python pour travailler avec JSON.
+3. `configparser`: Module Python pour lire les fichiers de configuration.
+4. `os`: Module Python pour des fonctionnalités liées au système d'exploitation.
+5. `time` (sous Windows uniquement) : Module Python pour le temps.
+6. `datetime`: Module Python pour manipuler les dates et heures.
+
+Pour installer les bibliothèques Python, ouvrez une invite de commande ou un terminal et saisissez les commandes suivantes :
+
+[source,cmd]
+----
+pip install paho-mqtt
+pip install jsonlib-python3
+pip install configparser
+pip install datetime
+----
+
+== Lancer l'application
+
+Pour lancer l'application :
+
+- Télécharger tous les fichiers du https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/tree/master/code/IOT/Application%20finale[dossier de l'application finale] comprenant le .JAR (exécutable), les fichiers Python et le fichier de configuration 
+
+- Assurez-vous que les fichiers Python (scripts python .py), le fichier de configuration (.ini) sont placés dans le même répertoire que le JAR de l'application.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/img_dossier_application.png[]
+
+(En bleu les script python, en rouge l’exécutable de l’application et en jaune le fichier de configuration)
+
+Deux méthodes pour lancer l'application :
+
+- Ouvrez une invite de commande et exécutez la commande suivante : 
+
+[source,cmd]
+----
+java -jar sae_iot_la_bonne_note.jar
+----
+
+- Double-cliquez sur le fichier exécutable (sae_iot_la_bonne_note.jar)
+
+Si vous préférez exécuter le projet à partir d'Eclipse, veuillez installer le JDK 17. De plus, l'installation de JavaFX depuis Eclipse Marketplace est nécessaire (version recommandée : 3.8.0).
+
+
+= Prise en main de l'application
+
+[WARNING]
+====
+Attention : Les éléments visuels présentés ne sont pas définitifs et peuvent être sujets à des évolutions ultérieures.
+====
+
+== Paramétrer le fichier de configuration
+
+L'application JavaFX permet à l'utilisateur de configurer un fichier utilisé par le programme Python. Cette configuration inclut divers paramètres comme les types de données récupérées des capteurs (température, CO2, humidité etc), la fréquence de lecture des données, les valeurs seuils d'alerte pour chaque type de donnée, ainsi que les noms des fichiers.
+
+- Une fois l'application lancé, cliquer sur le menu "Configuration" comme ci-dessous : 
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppConf1.jpg[]
+
+La scène de configuration va apparaître, si le fichier de configuration n'a pas été trouvé, une alerte va apparaître (Rappel : le fichier de configuration et les fichiers Python doivent se trouver dans le même dossier que l'exécutable de l'application).
+Si aucune alerte n'appraît, cela veut dire que le fichier de configuration a bien été trouvé, vous pouvez faire votre configuration.
+
+Dans cette fenêtre vous pouvez : 
+
+- choisir l'host et le port
+- tester la connection pour vérifier que l'host et le port sont valides
+- choisir les salles spécifiques dont on va récupérer les données (topic)
+- choisir les noms des fichiers d'alertes, de logs et de données
+- choisir les température à récupérer (Température, Humidité, Activité, Co2)
+- choisir la fréquence et son unité (secondes, minutes, heures, jours)
+- définir les seuils d'alertes pour chaque donnée
+- réinitialiser toute la configuration
+- sauvegarder la nouvelle configuration
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppConf2.jpg[]
+
+
+== Visualiser l'historique de logs
+
+L'application JavaFX permet de visualiser graphiquement les données des fichiers de logs.
+
+- Cliquer sur le bonton "Historique" :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppHistory1.jpg[]
+
+La scène de l'historique va apparaître, si les fichiers de l'historique des alertes et des données existent et qu'ils ne sont pas vides, les données vont s'afficher graphiquement de base, vous avez la possibilité de :
+
+- choisir l'historique à afficher (historique des alertes ou des données)
+- choisir les types de valeurs à afficher (température, humidité, activité, co2)
+- rechercher une ou plusieurs salle par leurs noms et afficher seulement les données correspondantes à ces salles (si plusieurs salles recherchées, les séparer avec des ','
+- afficher seulement les données pour une salle à travers un menu déroulant
+- choisir le format de la date pour l'affichage
+- agrandir les graphiques en cliquant dessus, cela vous ouvrir une nouvelle fenêtre avec le graphique en grand
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppHistory2.jpg[]
+
+== Visualiser les données par salle (temps réel)
+
+L'application JavaFX permet de visualiser graphiquement les données en temps réel.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppDirect1.jpg[]
+
+La scène de visualisation des données en direct va apparaître, si le script python n'a pas été trouvé si son lancement a échoué, une alerte va apparaître.
+Cette fenêtre permet de voir les données émises en direct par les capteurs, elle propose principalement les mêmes options de seléction / tri des données que la scène de l'historique.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppDirect2.jpg[]
+
+
+== Recevoir des alertes pour les seuils de dépassement
+
+Vérifie les données captées par les capteurs pour chaque salle surveillée. Si une donnée dépasse le seuil prédéfini, l'application affiche instantanément une alerte correspondante.
+
+Peu importe où vous vous trouvez dans l'application et si le script python et la connexion sont valides, à chaque fois qu'une nouvelle donnée reçue dépasse un certain seuil maximale défini, une alerte comme ci-dessous va apparaître pendant 5 secondes, il est possible de cliquer dessus pour avoir plus d'informations.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/AppAlert.png[]

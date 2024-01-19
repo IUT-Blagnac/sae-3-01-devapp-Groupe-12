@@ -1,0 +1,347 @@
+= Cahier de recettes (Tests) de l’application (Partie IOT) - Version 1.7 - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
+
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
+
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
+
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
+
+toc::[]
+
+= I. Contexte
+[.text-justify]
+Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce document traitera de la partie IOT de l'application. Celle-ci vise à établir une interaction entre un programme Python et Java. Le programme Python récupère les données des capteurs déployés dans l'entrepôt et les stockent dans des fichiers, tandis que le programme Java configure le comportement du premier via un fichier de configuration et affichera en temps réel les données captées, différenciées par salle. De plus, l'application permet la visualisation des données des fichiers logs, l'affichage continu des alertes de dépassement de seuil.
+
+= II. Pre-Requis
+[.text-justify]
+L'exécution des tests spécifiés au chapitre suivant requiert :
+
+* Un environnement python bien configuré https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Doc_Technique_IOT.adoc#pr%C3%A9-requis-pour-lancer-lapplication[(tutoriel sur la documentation technique)].
+* L'environnement de test tel que spécifié dans la partie "Environnement de test" de ce document.
+
+== 1. Fonctionnalités de l'application
+[.text-justify]
+Les éléments testés concernent les cas d'utilisations ci-contre :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/US_IOT.png[]
+
+== 2. Environnement de test
+[.text-justify]
+Ordinateur capable d'executer Java 17, JavaFX et Python.
+Peu importe le système d'exploitation.
+(Nous avons fait un programme pour les ordinateurs sous Windows s'appellant connect.py et un programme pour les ordinateurs sous Linux s'appellant connect_linux.py)
+
+
+
+
+= III. Cas de test
+== 1. Partie Python
+
+=== 1.1 Récupération des données
+
+|====
+|Cas de test 4+|Test-01-01-01
+|Titre 4+|Récupération des données dans un fichier JSON
+|Objectif 4+|Vérifier que les données sont bien récupérées et écrites dans un fichier JSON
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Lancer le programme ^|Les données sont écrites dans le fichier JSON ^|Le temps d'attente de la fréquence doit être écoulé ^|OK
+^|All_G_C.2 ^|Lancer le programme ^|Les valeurs affichées sont précises et correspondent aux données réelles du capteur ^|Le temps d'attente de la fréquence doit être écoulé ^|OK
+^|All_G_C.3 ^|Lancer le programme ^|Les données doivent être récupérées pour chaque salle disponible ^|Aucune ^|OK
+^|All_G_C.4 ^|Lancer le programme ^|Les données doivent être clairement différenciées par salle ^|Aucune ^|OK
+
+5+|
+
+5+|Commentaire :
+Les données sont bien écrites dans le fichier JSON qui se crée s'il n'existe pas encore.
+|====
+
+|====
+
+|Cas de test 4+|Test-01-01-02
+|Titre 4+|Récupération des alertes dans un fichier JSON
+|Objectif 4+|Vérifier que les alertes sont bien récupérées et écrites dans un fichier JSON
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Une donnée capturée dépasse son seuil maximal ^|L'alerte s'envoie et s'écrit dans le fichier JSON d'alerte ^|Une donnée doit dépasser son seuil maximal ^|OK
+
+5+|
+
+5+|Commentaire :
+Les alertes sont bien écrites dans le fichier JSON qui se crée s'il n'existe pas encore.
+|====
+
+=== 1.2 Configuration du programme
+
+|====
+
+|Cas de test 4+|Test-01-02-01
+|Titre 4+|Prise en compte du fichier de configuration
+|Objectif 4+|Vérifier que le programme prend bien en compte les données du fichier de configuration "config.ini"
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|L'utilisateur modifie les données à récupérer ^|Seules les données écrites dans le fichier de configuration doivent être écrites ^|Le temps d'attente de la fréquence doit être écoulé ^|OK
+^|All_G_C.2 ^|L'utilisateur modifie la fréquence de récupération ^|Le programme doit attendre la fin de la fréquence pour écrire les données qu'il a récupérées depuis la dernière écriture ^|Le temps d'attente de la fréquence doit être écoulé en n'écrivant, dans le cas de plusieurs captures pour une même salle, que la dernière capture ^|OK
+^|All_G_C.3 ^|L'utilisateur modifie les seuils d'alerte des données ^|Le programme doit envoyer des alertes dès qu'une des données capturées dépasse son seuil ^|Aucune ^|OK
+
+5+|
+
+|====
+
+== 2. Partie Java
+=== 2.1 Paramétrer le fichier de configuration
+
+|====
+|Cas de test 4+|Test-02-01-01
+|Titre 4+|Ouverture de la scène pour entrer les données de configuration
+|Objectif 4+|Vérifier que la scène de configuration s'affiche correctement comme prévu
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "fichier de configuration" ^|La scène de configuration du fichier doit apparaître ^|L'application doit être lancée ^|OK
+5+|
+
+|====
+
+|====
+
+|Cas de test 4+|Test-02-01-02
+|Titre 4+|Sauvegarde des nouvelles données entrées dans l'interface de configuration
+|Objectif 4+|Vérifier que le fichier de configuration s'est mis à jour avec les nouvelles données
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Modifier la configuration en entrant de nouvelles valeurs ^|Les valeurs doivent pouvoir être saisies ^|L'interface de configuration du fichier doit être lancée ^|OK
+^|All_G_C.2 ^|Sauvegarder la nouvelle configuration en appuyant sur le bouton "Sauvegarder" ^|Un message de confirmation de la sauvegarde doit apparaître ^|Le bouton de sauvegarde doit avoir été appuyé ^|OK
+^|All_G_C.3 ^|Vérifier la bonne mise à jour de la configuration dans le fichier de configuration en ouvrant le fichier "config.ini" ^|Les valeurs doivent être mises à jour ^|Il faut que la configuration entrée soit différente de l'ancienne et que la sauvegarde ait été effectuée pour voir la différence ^|OK
+
+5+|
+
+5+|Commentaire : Les nouvelles valeurs sont bien entrées dans le fichier de configuration en écrasant les anciennes valeurs. Si aucune valeur n'est entrée pour les seuils maximaux par exemple, une valeur par défaut de 0 leur est attribuée.
+
+|====
+
+|====
+
+|Cas de test 4+|Test-02-01-03
+|Titre 4+|Réinitialiser la configuration
+|Objectif 4+|Vérifier que la réinitialisation remet bien les valeurs par défaut dans le fichier de configuration
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Modifier la configuration en entrant de nouvelles valeurs puis appuyer sur "Sauvegarder" ^|Les valeurs doivent pouvoir être saisies ^|L'interface de configuration du fichier doit être lancée ^|OK
+^|All_G_C.2 ^|Réinitialiser la configuration en appuyant sur le bouton "Réinitialiser" puis confirmer la suppression ^|Un message de confirmation de la réinitialisation doit apparaître ^|Le bouton de sauvegarde doit avoir été appuyé ^|OK
+^|All_G_C.3 ^|Vérifier la bonne mise à jour des valeurs par défaut dans le fichier de configuration en ouvrant le fichier "config.ini" ^|Les valeurs doivent être mises à jour ^|Il faut que la configuration entrée soit différente de celle par défaut et que la réinitialisation ait été effectuée pour voir la différence ^|OK
+
+5+|
+
+5+|Commentaire : Les valeurs par défaut sont bien dans le fichier de configuration en écrasant les anciennes valeurs.
+
+|====
+
+=== 2.2 Visualiser les données des logs 
+
+Certains tests présents ici sont aussi valables pour la partie "Visualisation des données en temps réel" car des options de tri / selection sont les mêmes.
+
+|====
+
+>|Cas de test 4+|Test-02-02-01
+>|Titre 4+|Ouverture de la scène pour entrer dans le menu de visualisation de l'historique
+>|Objectif 4+| Vérifier que la scène de visualisation de l'historique s'affiche bien comme prévu
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+5+|
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-02
+>|Titre 4+|Visualiser l'historique des logs sous forme de graphique
+>|Objectif 4+| Vérifier qu'il est possible de visualiser l'historique des logs sous forme de graphique
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+^|All_G_C.2 ^|Seléctionner le bouton de visualisation graphique (logo d'un graphique) ^|Des graphiques doivent apparaîtres ^| L'historique ne doit pas être vide ^|OK
+
+5+|
+
+5+|Commentaire : Les graphiques apparraissent bien avec les données des anciens logs.
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-03
+>|Titre 4+|Visualiser l'historique des logs dans une liste
+>|Objectif 4+| Vérifier qu'il est possible de visualiser l'historique des logs dans une liste
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+^|All_G_C.2 ^|Seléctionner le bouton de visualisation graphique (logo d'une liste) ^|La liste doit apparaître ^| L'historique ne doit pas être vide ^|OK
+
+5+|
+
+5+|Commentaire : Les données apparraissent bien dans une liste déroulante.
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-04
+>|Titre 4+|Visualiser l'historique des alertes dans une liste
+>|Objectif 4+| Vérifier qu'il est possible de visualiser l'historique des logs dans une liste
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+^|All_G_C.2 ^|Seléctionner le bouton "Voir les alertes" ^|La liste contenant l'historique des alertes doit apparaître ^| L'historique des alertes ne doit pas être vide ^|OK
+
+5+|
+
+5+|Commentaire : Les alertes apparraissent bien dans une liste déroulante avec pour chaque alerte la valeur du capteur et le seuil maximale dépassé.
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-05
+>|Titre 4+|Pouvoir rechercher une salle en tapant son nom
+>|Objectif 4+| Vérifier qu'il est possible de cibler la recherche sur une salle en entrant son nom
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+^|All_G_C.2 ^|Entrer le nom d'une salle dans le champ textuel "Rechercher une salle..." ^|Les données dans les graphiques ou dans la liste doivent se mettre à jour en fonction de la recherche ^| L'historique des données ne doit pas être vide et le nom de la salle doit être valide pour avoir un résultat ^|OK
+
+5+|
+
+5+|Commentaire : Seulement les données de la salle ciblée apparaissent.
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-06
+>|Titre 4+|Pouvoir rechercher une salle à travers le menu déroulant comportant les salles dont des données existe
+>|Objectif 4+| Vérifier qu'il est possible de cibler la recherche sur une salle à travers le menu déroulant
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+^|All_G_C.2 ^|Seléctionner une salle dans le menu déroulant à droite du champ "Salle :" ^|Les données dans les graphiques ou dans la liste doivent se mettre à jour en fonction de la salle choisie ^| L'historique des données ne doit pas être vide pour que le menu déroulant ne soit pas vide ^|OK
+
+5+|
+
+5+|Commentaire : Seulement les données de la salle choisie apparaissent.
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-07
+>|Titre 4+|Pouvoir choisir le format d'affichage de la date
+>|Objectif 4+| Vérifier qu'il est possible de choisir le format d'affichage de la date dans le menu déroulant
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+^|All_G_C.2 ^|Seléctionner un format de date dans le menu déroulant à droite de "Format de la date :" ^|Les données dans les graphiques ou dans la liste doivent se mettre à jour en fonction du format de date choisi ^| L'historique des données ne doit pas être vide pour voir le changement du format ^|OK
+
+5+|
+
+5+|Commentaire : Les données des graphiques et des liste mettent bien à jour le format de la date en fonction de l'option choisie.
+
+|====
+
+|====
+
+>|Cas de test 4+|Test-02-02-08
+>|Titre 4+|Pouvoir choisir le type de données à afficher (parmi température, humidité, activité, co2)
+>|Objectif 4+| Vérifier qu'il est possible de choisir le type des données que l'on souhaite afficher
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "historique" ^|La scène de de visualisation de l'historique doit apparaître ^| L'application doit être lancé ^|OK
+^|All_G_C.2 ^|Cocher / décocher les données souhaitées dans les checkbox en haut à droite de la scène ^|Les données dans les graphiques ou dans la liste doivent se mettre à jour en affichant seulement les données choisies ^| L'historique des données ne doit pas être vide pour voir la mise à jour ^|OK
+
+5+|
+
+5+|Commentaire : Les données des graphiques et des liste mettent bien à jour en fonction des types de données choisies.
+
+|====
+
+=== 2.3 Visualiser les données en temps réel
+|====
+
+|Cas de test 4+|Test-02-03-01
+|Titre 4+|Ouverture de la scène pour entrer dans la visualisation des données en temps réel
+|Objectif 4+|Vérifier que la scène de visualisation des données en temps réel s'affiche bien
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "Temps Réel" ^|La scène de visualisation des données en temps réel doit apparaître ^|L'application doit être lancée ^|OK
+5+|
+
+|====
+
+|====
+
+|Cas de test 4+|Test-02-03-02
+|Titre 4+|Visualiser les données en temps réel
+|Objectif 4+|Vérifier que les données sont récupérées en temps réel
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "Temps Réel" ^|La scène de visualisation des données en temps réel doit apparaître ^|L'application doit être lancée ^|OK
+^|All_G_C.2 ^|Attendre que les capteurs émettent ^|La scène va se mettre à jour en fonction des nouvelles données captées ^|L'application doit être lancée et ne doit pas être sur le menu de configuration (où le script est arrêté) et une connexion est nécessaire ^|OK
+
+5+|Commentaire : Les graphiques / liste (en fonction du mode d'affichage choisi) se mettent bien à jour avec les nouvelles données récupérées.
+
+|====
+
+=== 2.4 Visualisation des alertes lors des dépassements
+
+|====
+
+|Cas de test 4+|Test-02-04-01
+|Titre 4+|Visualiser les alertes lors des dépassements
+|Objectif 4+|Vérifier que les alertes s'affichent lors des dépassements des seuils maximaux définis
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "Temps Réel" ^|La scène de visualisation des données en temps réel doit apparaître ^|L'application doit être lancée ^|OK
+^|All_G_C.2 ^|Attendre que les capteurs émettent ^|La scène va se mettre à jour en fonction des nouvelles données captées et une alerte sera affichée s'il y a dépassement des seuils ^|L'application doit être lancée et ne doit pas être sur le menu de configuration (où le script est arrêté), des seuils maximaux doivent avoir été configurés (à 0 pour toutes les données par exemple pour être sûr d'avoir des alertes) et une connexion est nécessaire ^|OK
+
+5+|Commentaire : Les alertes s'affichent bien directement lors des nouvelles données pour lesquelles il y a dépassement.
+
+|====
+
+|====
+
+|Cas de test 4+|Test-02-04-02
+|Titre 4+|Visualiser les alertes dans les autres scènes de l'application
+|Objectif 4+|Vérifier que les alertes s'affichent bien même dans les autres scènes de l'application
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "Temps Réel" ^|La scène de visualisation des données en temps réel doit apparaître ^|L'application doit être lancée ^|OK
+^|All_G_C.2 ^|Changer de scène et attendre que les capteurs émettent ^|Une alerte sera affichée s'il y a dépassement des seuils ^|L'application doit être lancée et ne doit pas être sur le menu de configuration (où le script est arrêté), des seuils maximaux doivent avoir été configurés (à 0 pour toutes les données par exemple pour être sûr d'avoir des alertes) et une connexion est nécessaire ^|OK
+
+5+|Commentaire : Les alertes s'affichent bien directement lors des nouvelles données pour lesquelles il y a dépassement dans les différentes scènes de l'application.
+
+|====

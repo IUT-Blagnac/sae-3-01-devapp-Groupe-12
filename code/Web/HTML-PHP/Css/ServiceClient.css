@@ -1,0 +1,137 @@
+.search-input {
+    min-width: 500px;
+}
+
+.contact-options {
+    text-align: center;
+}
+
+.contact-options h2 {
+    font-size: 45px; 
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase; 
+    color: #333; 
+    text-shadow: 1px 1px 1px #ccc; 
+    letter-spacing: 2px; 
+}
+
+.content-container {
+    display: flex;
+    align-items: center;
+}
+
+.contact-image {
+    max-width: 500px; 
+    margin-left: 10%; 
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    justify-content: center; 
+}
+
+.contact-button {
+    display: block; 
+    padding: 10px 20px;
+    margin: 50px; 
+    text-decoration: none;
+    color: black;
+    background-color: #a9890a;
+    border: none;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.contact-button:hover {
+    background-color: #d89f2f;
+    transform: scale(1.1); 
+}
+
+.content-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contact-button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.chat-scene {
+    display: none;
+    width: 50%;
+    height: 50%;
+    border: 4.5px solid #000000;
+    border-radius: 10px;
+    margin: 50px;
+
+}
+
+.chat-window {
+    height: 600px;
+    background-color: rgb(255, 249, 249);
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.input-area {
+    width: 100%;
+    display: flex;
+    background-color: black;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.808);
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.input-area button {
+    padding: 5px 15px;
+    background-color: grey;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 20px;
+}
+
+.messages {
+    width: 100%;
+    font-size: 24px;
+}
+
+.sent-message {
+    text-align: left;
+    border-bottom: 2px solid #6f6e6e11;
+    margin: 5px;
+    background-color: #c9c5c5;
+    font-size: 20px;
+}
+
+.loading-animation {
+    width: 40px; 
+    height: 40px;
+    border: 4px solid #04bae3;
+    border-top: 4px solid #000000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 5px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

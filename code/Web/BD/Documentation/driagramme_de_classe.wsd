@@ -1,0 +1,133 @@
+@startuml
+' Définition des classes
+class CLIENT {
+    
+numclient
+nomclient
+adrclient
+adrpostalclient
+adrvilleclient
+adrPaysClient
+telclient
+mailclient
+}
+
+class COMMANDE {
+    
+numcommande
+datecommande
+montantfrais
+}
+
+class Paiement {
+    
+montant
+datePaiement
+status
+}
+
+class CarteBancaire {
+    
+numCarte
+dateExpiration
+cvv
+titulaireCarte
+}
+
+class PayPal {
+    
+email
+motDePasse
+}
+
+class TypePaiement {
+    
+idType
+libelleType
+}
+
+class DESCRIPTION {
+    
+prixachat
+delailivraison
+}
+
+class ETIQUETTE {
+    
+codeetiquette
+codebarre
+libelletiquette
+}
+
+class LISTEPRIX {
+    
+codeliste
+libelleliste
+}
+
+class LIVRAISON{
+
+idLivraison
+libelleLivraison
+
+}
+
+class ADRESSELIVRAISON{
+
+adrLivraison
+adrpostalLivraison
+adrvilleLivraison
+adrPaysLivraison
+
+}
+
+class PRODUIT {
+    
+numproduit
+coutachat
+prixvente
+codebarre
+referenceinterne
+nomproduit
+fraisSupplementaire
+seuilreapprovisionnement
+stockmax
+}
+
+class CATEGORIE {
+    
+numcategorie
+libellecategorie
+}
+
+class TYPEPRODUIT {
+    
+codetype
+libelletype
+}
+
+class LIGNECODE {
+    
+quantitecommande
+quantitelivree
+}
+
+' Relations
+LIVRAISON "0.." -- "1" ADRESSELIVRAISON
+LIVRAISON "1" -- "*" COMMANDE
+ADRESSELIVRAISON "0.." -- "0.." CLIENT
+CLIENT "1" -- "0.." COMMANDE
+COMMANDE "0.." -- "1" DESCRIPTION
+COMMANDE "1" -- "0.." ETIQUETTE
+COMMANDE "0.." -- "0.." LISTEPRIX
+PRODUIT "0.." -- "0.." COMMANDE
+CATEGORIE "1" -- "0.." PRODUIT : contient
+TYPEPRODUIT "1" -- "0.." PRODUIT
+LIGNECODE "0.." -- "1" COMMANDE
+COMMANDE "1" -- "0..1" Paiement
+
+' Associations Paiement, méthodes de paiement et TypePaiement
+Paiement "1" -- "1" TypePaiement
+TypePaiement "1" -- "0.." CarteBancaire
+TypePaiement "1" -- "0.." PayPal
+@enduml

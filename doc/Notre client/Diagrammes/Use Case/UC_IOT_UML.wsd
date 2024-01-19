@@ -1,0 +1,14 @@
+@startuml
+actor Utilisateur
+participant "Interface Utilisateur" as Interface
+participant ApplicationJavaFX as App
+participant fichierData as BD
+
+Utilisateur -> Interface: Interagit avec l'interface
+Interface -> App: Demande de visualisation par salle
+App -> BD: Récupèration des données par salle
+BD --> App: Renvoie les données demandées
+App --> Interface: Affiche les données par salle
+Interface --> Utilisateur: Affiche les données
+
+@enduml
