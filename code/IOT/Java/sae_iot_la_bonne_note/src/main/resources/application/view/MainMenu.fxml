@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="800.0" minWidth="1200.0" styleClass="background" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.MainMenuController">
+   <center>
+      <GridPane maxHeight="564.0" maxWidth="1024.0" minHeight="564.0" minWidth="1024.0" prefWidth="1024.0" stylesheets="@../application.css" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1024.0" minWidth="1024.0" prefWidth="1024.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="125.0" minHeight="80.0" prefHeight="125.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="buttConfiguration" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#doConfiguration" stylesheets="@../application.css" text="Fichier de configuration" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="250.0" right="250.0" top="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="settingsButton" />
+                  <String fx:value="mainButtonOnClick" />
+                  <String fx:value="mainButtonOnHover" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" translateX="10.0">
+                     <image>
+                        <Image url="@../images/settings_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttLeave" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#doLeave" stylesheets="@../application.css" text="Quitter" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="350.0" right="350.0" top="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Arial Bold" size="32.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="leaveButton" />
+                  <String fx:value="mainButtonOnClick" />
+                  <String fx:value="mainButtonOnHover" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" translateX="10.0">
+                     <image>
+                        <Image url="@../images/leave_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="buttCheckHistory" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#doCheckHistory" stylesheets="@../application.css" text="Visualiser l'historique" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="250.0" right="250.0" top="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" translateX="25.0">
+                     <image>
+                        <Image url="@../images/historique_logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="checkHistoryButton" />
+                  <String fx:value="mainButtonOnClick" />
+                  <String fx:value="mainButtonOnHover" />
+               </styleClass>
+            </Button>
+            <Button fx:id="buttCheckWhareHouse" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#doWharehouseMonitor" stylesheets="@../application.css" text="Temps Réel" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="250.0" right="250.0" top="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" translateX="35.0">
+                     <image>
+                        <Image url="@../images/entrepot_logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="checkWharehouseButton" />
+                  <String fx:value="mainButtonOnClick" />
+                  <String fx:value="mainButtonOnHover" />
+               </styleClass>
+            </Button>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,463 @@
+= Documentation Technique du site Web (Partie Web) - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
+
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
+
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
+
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
+
+toc::[]
+
+= Présentation du site
+== Contexte général
+
+L'entreprise La Bonne Note, spécialisée dans la vente d'instruments de musique, envisage d'améliorer son modèle commercial en introduisant un site e-commerce dédié. Cette initiative stratégique vise à élargir la portée géographique de l'entreprise, permettant ainsi d'atteindre des clients plus éloignés et de répondre à une demande croissante de produits musicaux en ligne.
+
+Le contexte général de cette expansion découle de la nécessité de rester compétitif sur le marché tout en répondant aux évolutions des habitudes d'achat des consommateurs. Le marché en ligne offre une opportunité unique d'atteindre un public plus large et de proposer une gamme diversifiée d'instruments de musique à une clientèle mondiale.
+
+Le site e-commerce de "La Bonne Note" sera conçu pour offrir une expérience utilisateur optimale, avec une interface conviviale permettant aux clients de parcourir facilement le catalogue d'instruments, de rechercher des produits spécifiques, et de passer des commandes en ligne en toute simplicité. Cette plateforme virtuelle permettra aux clients d'explorer le large éventail d'instruments disponibles, d'accéder à des informations détaillées et de finaliser leurs achats depuis le confort de leur domicile.
+
+En adoptant le commerce électronique, La Bonne Note vise à garantir la satisfaction de sa clientèle en offrant un service de qualité, des informations transparentes sur les produits, et une gestion efficace des commandes et des livraisons. Cette expansion dans le monde numérique permettra également à l'entreprise de rester en phase avec les tendances du marché et de capitaliser sur les opportunités de croissance offertes par le commerce en ligne.
+
+Le projet du site e-commerce est une étape cruciale dans l'évolution de "La Bonne Note", transformant son modèle commercial traditionnel en une présence plus dynamique et accessible sur la scène mondiale du commerce électronique des instruments de musique.
+
+== Description du besoin
+
+L'entreprise "La Bonne Note" a identifié le besoin crucial de mettre en place un site e-commerce afin d'étendre sa présence sur le marché et de répondre aux besoins changeants de ses clients. L'objectif principal de ce projet est de créer une plateforme en ligne attractive et fonctionnelle qui permettra aux clients d'explorer, de choisir, et d'acheter des instruments de musique de haute qualité depuis n'importe où dans le monde.
+
+== Cas d'utilisation
+
+1. Administration
+Gérer les Produits : Permet à l'administrateur de gérer le catalogue de produits, y compris l'ajout, la modification et la suppression d'articles.
+Gérer les Promotions : Autorise l'administrateur à créer et gérer des offres spéciales et des promotions.
+Accéder aux Statistiques de Ventes : Offre à l'administrateur une vue détaillée des performances de vente, permettant une analyse approfondie.
+2. Utilisateur
+Gérer son Compte : Fonction principale pour les clients, offrant plusieurs options pour gérer leur compte en ligne.
+Se Déconnecter : Permet aux utilisateurs de se déconnecter de leur compte.
+Suivre ses Commandes : Permet aux clients de suivre l'état et l'historique de leurs commandes.
+Modifier les Informations du Compte : Autorise les utilisateurs à mettre à jour leurs informations personnelles.
+Se Connecter à son Compte : Permet aux utilisateurs de se connecter à leur compte existant.
+Créer un Compte : Permet aux nouveaux clients de créer un compte sur la plateforme.
+3. Achat
+Acheter : Fonction principale pour les clients, facilitant le processus d'achat en ligne.
+Noter un Produit : Permet aux clients de laisser des commentaires et des évaluations sur les produits.
+Payer sa Commande : Propose différentes méthodes de paiement sécurisées pour finaliser l'achat.
+Ajouter au Panier : Permet aux clients de sélectionner des produits et de les ajouter à leur panier d'achat.
+Partager des Produits sur les Réseaux Sociaux : Facilite le partage de produits sur les plateformes de médias sociaux.
+Chercher des Produits : Offre une fonction de recherche permettant aux clients de trouver rapidement des produits spécifiques.
+4. Service Client
+Contacter le Service Client : Permet aux clients de communiquer directement avec le service client pour poser des questions, signaler des problèmes ou demander de l'aide.
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
+
+= Structure du projet 
+
+== Ressources Utilisées
+
+Le site web de La Bonne Note repose sur diverses technologies et outils pour assurer son bon fonctionnement et sa gestion efficace. Voici un aperçu des ressources utilisées dans le cadre de ce projet :
+
+- *Hébergement :* Le site est hébergé sur MobaXterm, fournissant une plateforme stable et sécurisée pour le déploiement du site.
+
+- *Langages de Programmation :* Le développement du site web a été réalisé en utilisant les langages suivants :
+  - HTML : Utilisé pour la structure et la présentation des pages web.
+  - CSS : Employé pour le stylisme et le design du site, assurant une interface utilisateur attrayante.
+  - PHP : Intégré pour la gestion dynamique du contenu et l'interaction avec la base de données.
+  - JavaScript : Employé pour des fonctionnalités interactives du côté client, améliorant l'expérience utilisateur.
+
+- *Base de Données :* Le site est connecté à une base de données MySQL via phpMyAdmin. Cette base de données stocke de manière sécurisée les informations relatives aux produits, aux utilisateurs, aux commandes, et autres données essentielles.
+
+- *API Externe :* La fonctionnalité du service client intègre l'API ChatGPT pour faciliter les interactions avec les utilisateurs.
+
+- *Outils de Développement :* Les principaux outils utilisés pour le développement incluent :
+  - Visual Studio Code (VSCode) : Utilisé comme environnement de développement intégré (IDE) pour la rédaction du code.
+  - GitHub Desktop : Employé pour le suivi des mises à jour du code, la collaboration en équipe, et le contrôle de version avec Git.
+  - phpMyAdmin : Utilisé comme interface graphique pour la gestion de la base de données MySQL.
+
+- *Architecture du Projet :* Actuellement, aucune information sur l'architecture du projet n'est disponible. Une analyse plus approfondie pourrait être effectuée pour décrire l'organisation interne du code source, les modèles de conception utilisés, et la structure globale du projet.
+
+- *Tests et Débogage :* Les tests et le débogage ont été effectués manuellement, sans l'utilisation d'un framework spécifique.
+
+- *Gestion de Projet :* La méthodologie agile Scrum a été adoptée pour la gestion du projet. GitHub a été utilisé comme plateforme de partage et de suivi de l'avancement du projet.
+
+== Se rendre sur le site Web
+
+Pour se rendre sur le site web :
+
+Rien de bien compliquer, il suffit de mettre le liens suivant dans la barre de recherche de votre navigateur web : http://193.54.227.208/~saephp12/index.php 
+
+= Fonctionnalités développées
+
+== Gérer les Produits
+
+La fonctionnalité "Gérer les Produits" est spécialement conçue pour les administrateurs du site. Elle offre la possibilité de manipuler le catalogue de produits, y compris l'ajout, la modification et la suppression d'articles. Cette fonctionnalité permet aux administrateurs de maintenir le catalogue à jour et de répondre rapidement aux changements de stock, aux nouveaux produits ou à d'autres ajustements nécessaires.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_gererproduit.png[]
+
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diaggererproduit.png[]
+
+Description du diagramme de séquence :
+
+L'administrateur sélectionne l'option "Gérer les Produits" sur le site web.
+Le site web récupère la liste des produits depuis la base de données.
+La base de données renvoie la liste des produits au site web.
+Le site web affiche la liste des produits à l'administrateur.
+Pages PHP :
+
+ModificationProduits.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_codeproduit.png[]
+
+== Gérer les Promotions
+
+La fonctionnalité "Gérer les Promotions" permet à l'administrateur de créer et de gérer des offres spéciales ainsi que des promotions sur le site. Cela inclut la définition de remises, la durée de validité des promotions, et d'autres paramètres pertinents. Cette fonctionnalité donne à l'administrateur un contrôle total sur les stratégies promotionnelles du site.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diaggererpromo.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagrammepromo.png[]
+
+Description du diagramme de séquence :
+
+L'administrateur sélectionne l'option "Gérer les Promotions" sur le site web.
+Le site web récupère la liste des promotions en cours depuis la base de données.
+La base de données renvoie la liste des promotions au site web.
+Le site web affiche les promotions à l'administrateur.
+Pages PHP :
+
+Promotions.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_codepromo.png[]
+
+== Accéder aux Statistiques de Ventes
+
+La fonctionnalité "Accéder aux Statistiques de Ventes" offre à l'administrateur une vue détaillée des performances de vente. Elle permet une analyse approfondie des données relatives aux ventes, aux produits populaires, aux périodes d'activité accrue, et d'autres métriques importantes. Cette fonctionnalité fournit des informations cruciales pour orienter les décisions commerciales.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diaggererstats.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagrammeventes.png
+
+Description du diagramme de séquence :
+
+L'administrateur sélectionne l'option "Accéder aux Statistiques de Ventes" sur le site web.
+Le site web récupère les statistiques de ventes depuis la base de données.
+La base de données renvoie les statistiques au site web.
+Le site web affiche les statistiques à l'administrateur.
+Pages PHP :
+
+Ventes.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_codevente.png[]
+
+== Fonctionnalité "Se Déconnecter"
+
+La fonctionnalité "Se Déconnecter" permet aux utilisateurs du site de mettre fin à leur session actuelle. Elle offre une option de déconnexion simple et rapide, assurant la sécurité des comptes en ligne. Lorsqu'un utilisateur choisit de se déconnecter, toutes les informations de session sont effacées, assurant ainsi la confidentialité des données personnelles.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp2.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys2.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Se Déconnecter" sur le site web.
+Le site web confirme la déconnexion et met fin à la session de l'utilisateur.
+Pages PHP :
+
+deconnexion.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_deconnexion.png[]
+
+== Fonctionnalité "Suivre ses Commandes"
+
+La fonctionnalité "Suivre ses Commandes" offre aux clients la possibilité de consulter l'état et l'historique de leurs commandes passées. Elle fournit des informations détaillées sur le statut de chaque commande, de la validation à la livraison. Les clients peuvent ainsi suivre en temps réel l'évolution de leurs achats.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp3.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys3.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Suivre ses Commandes" sur le site web.
+Le site web envoie une requête à la base de données pour récupérer l'historique des commandes de l'utilisateur.
+La base de données renvoie l'historique des commandes au site web.
+Le site web affiche l'historique des commandes à l'utilisateur.
+Pages PHP :
+
+SuiviCommandes.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_suivicommande.png[]
+
+== Fonctionnalité "Modifier les Informations du Compte"
+
+La fonctionnalité "Modifier les Informations du Compte" permet aux utilisateurs de mettre à jour leurs informations personnelles enregistrées sur le site. Cela inclut des éléments tels que l'adresse e-mail, le mot de passe, les informations de livraison, etc. Cette fonctionnalité offre une flexibilité aux clients pour maintenir des informations à jour.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp4.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys4.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Modifier les Informations du Compte" sur le site web.
+Le site web affiche un formulaire permettant à l'utilisateur de saisir les modifications souhaitées.
+L'utilisateur soumet le formulaire.
+Le site web met à jour les informations du compte dans la base de données.
+La base de données confirme la mise à jour.
+Le site web affiche une confirmation de la mise à jour à l'utilisateur.
+Pages PHP :
+
+VotreCompte.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_votrecompte.png[]
+
+
+== Fonctionnalité "Se Connecter à son Compte"
+
+La fonctionnalité "Se Connecter à son Compte" permet aux utilisateurs enregistrés d'accéder à leur compte en saisissant leurs identifiants de connexion. Cela offre un moyen sécurisé et rapide pour les clients de naviguer sur le site et d'accéder à leurs informations personnalisées.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp5.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys5.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Se Connecter à son Compte" sur le site web.
+Le site web affiche un formulaire de connexion.
+L'utilisateur saisit ses identifiants et soumet le formulaire.
+Le site web vérifie les identifiants dans la base de données.
+La base de données confirme la connexion.
+Le site web redirige l'utilisateur vers son compte.
+Pages PHP :
+
+FormConnexion.php / TraitConnexion.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_formconnexion.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_traitconnexion.png[]
+
+== Fonctionnalité "Créer un Compte"
+
+La fonctionnalité "Créer un Compte" offre aux nouveaux clients la possibilité de s'inscrire sur la plateforme. Elle propose un formulaire d'inscription où les utilisateurs peuvent fournir leurs informations de base pour créer un compte personnalisé. Cette fonctionnalité est essentielle pour étendre la base de clients.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp6.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys6.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Créer un Compte" sur le site web.
+Le site web affiche un formulaire d'inscription.
+L'utilisateur saisit les informations requises et soumet le formulaire.
+Le site web enregistre les nouvelles informations dans la base de données.
+La base de données confirme l'inscription.
+Le site web redirige l'utilisateur vers son nouveau compte.
+Pages PHP :
+
+Inscription.php / TraitInscription.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_inscription.png[]
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_traitinscription.png[]
+
+== Fonctionnalité "Noter un Produit"
+
+La fonctionnalité "Noter un Produit" permet aux utilisateurs de laisser des commentaires et des évaluations sur les produits disponibles sur le site. Cela offre une plateforme interactive où les clients peuvent partager leurs expériences avec les produits, aidant ainsi d'autres utilisateurs dans leurs décisions d'achat.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp7.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys7.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Noter un Produit" sur le site web.
+Le site web affiche un formulaire d'évaluation.
+L'utilisateur soumet l'évaluation du produit.
+Le site web enregistre l'évaluation du produit dans la base de données.
+La base de données confirme l'enregistrement.
+Le site web affiche une confirmation à l'utilisateur.
+Pages PHP :
+
+laisserAvis.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_laisseravis.png[]
+
+== Fonctionnalité "Payer sa Commande"
+
+La fonctionnalité "Payer sa Commande" propose différentes méthodes de paiement sécurisées pour permettre aux utilisateurs de finaliser l'achat de leurs produits. Elle assure un processus de paiement fluide et sécurisé, garantissant la confidentialité des informations financières des clients.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp8.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys8.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Payer sa Commande" sur le site web.
+Le site web affiche les options de paiement disponibles.
+L'utilisateur sélectionne une méthode de paiement.
+Le site web valide la transaction avec la base de données.
+La base de données confirme le paiement.
+Le site web affiche une confirmation de paiement à l'utilisateur.
+Pages PHP :
+
+CommanderChoixPaiement.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_commanderchoixpaiement.png[]
+
+== Fonctionnalité "Ajouter au Panier"
+
+La fonctionnalité "Ajouter au Panier" permet aux utilisateurs de sélectionner des produits et de les ajouter à leur panier d'achat. Cela offre une expérience d'achat conviviale, permettant aux clients de rassembler les articles souhaités avant de passer à la caisse.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp9.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys9.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Ajouter au Panier" sur le site web.
+Le site web confirme l'ajout au panier.
+Pages PHP :
+
+addToCart.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_addtocart.png[]
+
+== Fonctionnalité "Partager des Produits sur les Réseaux Sociaux"
+
+La fonctionnalité "Partager des Produits sur les Réseaux Sociaux" facilite le partage des produits sur différentes plateformes de médias sociaux. Cela permet aux utilisateurs de recommander des produits à leur réseau, élargissant ainsi la visibilité de la boutique en ligne.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp10.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys10.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Partager sur Réseaux Sociaux" sur le site web.
+Le site web affiche les options de partage.
+L'utilisateur sélectionne une plateforme de médias sociaux.
+Le site web partage le lien du produit avec la plateforme sociale.
+La plateforme sociale confirme le partage à l'utilisateur.
+
+Pages PHP :
+
+detailsProduit.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_detailsproduit.png[]
+
+== Fonctionnalité "Chercher des Produits"
+
+La fonctionnalité "Chercher des Produits" offre une fonction de recherche permettant aux clients de trouver rapidement des produits spécifiques. Cela améliore l'efficacité de la navigation, permettant aux utilisateurs de filtrer et de trouver des articles en fonction de leurs besoins.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp11.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys11.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur saisit une recherche de produit sur le site web.
+Le site web envoie une requête de recherche à la base de données.
+La base de données renvoie les résultats de recherche au site web.
+Le site web affiche les résultats de recherche à l'utilisateur.
+Pages PHP :
+
+index.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_index.png[]
+
+== Fonctionnalité "Contacter le Service Client"
+
+La fonctionnalité "Contacter le Service Client" permet aux clients de communiquer directement avec le service client pour poser des questions, signaler des problèmes, ou demander de l'aide. Cette fonctionnalité utilise l'API ChatGPT pour offrir une assistance automatisée et répondre aux préoccupations des utilisateurs.
+
+Partie du UseCase :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagp12.png[]
+
+Diagramme de séquence :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/diagsys12.png[]
+
+Description du diagramme de séquence :
+
+L'utilisateur sélectionne l'option "Contacter le Service Client" sur le site web.
+Le site web affiche un formulaire de contact.
+L'utilisateur soumet sa demande via le formulaire.
+Le site web transmet la demande à l'API ChatGPT.
+L'API ChatGPT génère une réponse automatique.
+Le site web affiche la réponse du service client à l'utilisateur.
+Pages PHP :
+
+ServiceClient.php
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/screen_serviceclient.png[]

@@ -1,0 +1,15 @@
+@startuml
+skinparam actorStyle awesome
+actor Utilisateur
+participant "Interface Utilisateur" as Interface #grey
+participant ApplicationJavaFX as App #grey
+participant fichierData as BD #grey
+
+Utilisateur -> Interface: Interagit avec l'interface
+Interface -> App: Demande de visualisation par salle
+App -> BD: Récupèration des données par salle
+BD --> App: Renvoie les données demandées
+App --> Interface: Affiche les données par salle
+Interface --> Utilisateur: Affiche les données
+
+@enduml

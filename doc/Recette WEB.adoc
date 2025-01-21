@@ -1,0 +1,444 @@
+= Cahier de recettes (Tests) du site Web (Partie Web) - Version 1.7 - La Bonne Note
+:icons: font
+:models: models
+:experimental:
+:incremental:
+:numbered:
+:toc: macro
+:window: _blank
+:correction!:
+
+// Useful definitions
+:asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]
+:icongit: icon:git[]
+:git: http://git-scm.com/[{icongit}]
+:plantuml: https://plantuml.com/fr/[plantUML]
+
+ifndef::env-github[:icons: font]
+// Specific to GitHub
+ifdef::env-github[]
+:correction:
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+:icongit: Git
+endif::[]
+
+Équipe de développement : Yannis Gibert, Ahmad KHALIL, Rayan SELLOU (Groupe 12)
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Images%20pour%20les%20documentations/Images_IOT/la_bonne_note_logo.png[]
+
+toc::[]
+
+= I. Contexte
+[.text-justify]
+Ce document a été produit dans le cadre d'un projet d'élaboration d'un site de e-commerce pour l'entreprise La Bonne Note. Ce document traitera de la partie Web du site.
+
+= II. Pre-Requis
+[.text-justify]
+L'exécution des tests spécifiés au chapitre suivant requiert :
+
+* Une connexion internet stable
+* Etre sur la page du site web se trouvant à cette adresse : http://193.54.227.208/~saephp12/
+
+== 1. Fonctionnalités du site
+[.text-justify]
+Les éléments testés concernent les cas d'utilisations ci-contre :
+
+image::https://github.com/IUT-Blagnac/sae-3-01-devapp-Groupe-12/blob/master/doc/Notre%20client/Diagrammes/Use%20Case/UC_Site_Web.png[]
+
+
+
+
+
+= III. Cas de test
+== Partie Base de données
+
+|====
+|Cas de test 4+|Test-01-01-01
+|Titre 4+|Trigger MaJ du stock
+|Objectif 4+|Vérifier que le stock se met à jour après une commande
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Insérer une nouvelle commande dans la table LigneCde. ^|Le stock se met à jour ^| La quantité commandée doit être inférieur au stock actuel^|OK
+^|All_G_C.2 ^|Insérer une nouvelle commande dans la table LigneCde. ^|L'insertion ne se fait pas. ^| La quantité commandée doit être supérieur au stock actuel^|OK
+
+5+|
+
+5+|Commentaire :
+La mise à jour du stock marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-02-01-01
+|Titre 4+|Trigger insert stock produit
+|Objectif 4+|Vérifier que le stock inséré est valide
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.3 ^|Faire un insert du stock. ^|Le stock est rajouté correctement ^| Le nouveau stock doit être inférieur au stock Max^|OK
+^|All_G_C.4 ^|Faire un insert du stock. ^|L'insertion ne se fait pas. Une erreur est levée. ^| Le nouveau stock doit être supérieur au stock Max^|OK
+
+5+|
+
+5+|Commentaire :
+Le trigger marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-03-01-01
+|Titre 4+|Trigger update stock produit
+|Objectif 4+|Vérifier que la mise à jour du stock est valide
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.5 ^|Faire un update du stock. ^|Le stock est mis à jour correctement ^| Le nouveau stock doit être inférieur au stock Max^|OK
+^|All_G_C.6 ^|Faire un update du stock. ^|L'update ne se fait pas. Une erreur est levée. ^| Le nouveau stock doit être supérieur au stock Max^|OK
+
+5+|
+
+5+|Commentaire :
+Le trigger marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-04-01-01
+|Titre 4+|Trigger contrainte quantité commandée stock
+|Objectif 4+|Vérifier que la quantité commandée ne dépasse pas le stock
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.7 ^|Faire une commande. ^|La commande est valide ^| La quantité commandée est inférieur au stock^|OK
+^|All_G_C.8 ^|Faire une commande. ^|La commande n'est pas valide. Une erreur est levée. ^| La quantité commandée est supérieur au stock^|OK
+
+5+|
+
+5+|Commentaire :
+Le trigger marche correctement
+|====
+
+|====
+|Cas de test 4+|Test-05-01-01
+|Titre 4+|Procédure pour passer commande
+|Objectif 4+|Pouvoir passer une commande
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.9 ^|Faire une commande en appelant la procédure. ^|La commande est insérée dans la bd ^| Le stock ne doit pas être nul, on doit commander au moins un produit et la quantité commandée doit être inférieur au stock^|OK
+^|All_G_C.10 ^|Faire une commande en appelant la procédure. ^|La commande n'est pas insérée dans la bd. Une erreur est levée. ^| Le stock est nul (il n'y a plus ce produit en stock)^|OK
+^|All_G_C.11 ^|Faire une commande en appelant la procédure. ^|La commande n'est pas insérée dans la bd. Une erreur est levée. ^| La quantité commandée est de 0^|OK
+^|All_G_C.12 ^|Faire une commande en appelant la procédure. ^|La commande n'est pas insérée dans la bd. Une erreur est levée. ^| La quantité commandée est supérieur au stock du produit^|OK
+
+5+|
+
+5+|Commentaire :
+La procédure fonctionne correctement
+|====
+
+|====
+|Cas de test 4+|Test-06-01-01
+|Titre 4+|Procédure pour mettre à jour le montant total d'une commande
+|Objectif 4+|Mettre à jour le montant total d'une commande
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.13 ^|Mettre à jour le montant total en appelant la procédure. ^|La mise à jour s'effectue ^| Le montant ne doit pas être négatif^|OK
+^|All_G_C.14 ^|Mettre à jour le montant total en appelant la procédure. ^|La mise à jour ne s'effectue pas ^| Le montant est négatif^|OK
+
+5+|
+
+5+|Commentaire :
+La procédure fonctionne correctement
+|====
+
+== Partie PHP
+=== Connexion et Inscription
+
+|====
+|Cas de test 4+|Test-02-01-01
+|Titre 4+|Connexion au site
+|Objectif 4+|Vérifier que l'inscription et la connexion au site s'effectue correctement
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|cliquer sur Connexion ^|Le formulaire de connexion s'affiche ^| ^|OK
+^|All_G_C.2 ^|cliquer sur créer un compte ^|Le formulaire pour créer un compte s'affiche ^| ^|OK
+^|All_G_C.3 ^|L'utilisateur clique sur s'inscrire ^|L'utilisateur est inscrit et se retrouve directement connecté sur la page d'accueil' ^|L'utilisateur a corresctement rempli le formulaire ^|OK
+^|All_G_C.4 ^|L'utilisateur rentre ses identifiants de connexion ^|L'utilisateur se voit connecté et se retrouve sur la page d'accueil ^|Aucune ^|OK
+^|All_G_C.5 ^|L'utilisateur clique sur déconnection ^|L'utilisateur se voit déconnecté et se retrouve sur la page d'accueil ^|L'utilisateur doit être connecté ^|OK
+5+|
+
+5+|Commentaire :
+La connexion et l'inscription d'un utilisateur marche correctement
+|====
+
+
+|====
+|Cas de test 4+|Test-02-01-02
+|Titre 4+|Oublie de mot de passe
+|Objectif 4+|Vérifier que la récupération du mot de passe marche correctement
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|cliquer mot de passe oublié ^|Le formulaire d'envoie du mail de récupération apparait ^| ^|OK
+^|All_G_C.2 ^|cliquer sur envoyer le mail ^|Le mail s'envoie ^| Avoir mit son adresse mail dans le formulaire ^|OK
+^|All_G_C.3 ^|L'utilisateur rentre un nouveau mot de passe' ^|le mot de passe de l'utilisateur est changé et se voit redirigé vers la page de connexion' ^|L'utilisateur a corresctement rempli le formulaire ^|En Cours
+
+
+5+|Commentaire :
+Le changement du mot de passe n'est pas encore fini
+|====
+
+=== Navigation sur le site
+
+|====
+|Cas de test 4+|Test-02-02-01
+|Titre 4+|Navigation entre les produits
+|Objectif 4+|Vérifier que l'utilisateur peut correctement naviguer sur le site et rechercher ses produits
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Scroll vers le bas ^|l'utilisateur voir les différents produits proposés ^| ^|OK
+^|All_G_C.2 ^|Rechercher un produit par son nom dans la barre de recherche ^|seulement les produits contenant les caractères écrit dans leur nom sont affichés ^| ^|OK
+^|All_G_C.3 ^|Rechercher des produits par rapport à leur sous-catégorie sélectionnable dans le menu déroulant ^|seulement les produits de la sous-catégorie sélectionnée sont affichés ^| ^|OK
+^|All_G_C.4 ^|L'utilisateur choisit de trier les produits par prix croissant' ^|les produits s'affiche dans l'ordre de prix croissant ^|Aucune ^|OK
+^|All_G_C.5 ^|L'utilisateur choisit de trier les produits par prix décroissant' ^|les produits s'affiche dans l'ordre de prix décroissant ^|Aucune ^|OK
+^|All_G_C.6 ^|L'utilisateur choisit de trier les produits par popularité croissante' ^|les produits s'affiche dans l'ordre de popularité croissante ^|Aucune ^|OK
+^|All_G_C.7 ^|L'utilisateur choisit de trier les produits par popularité décroissante' ^|les produits s'affiche dans l'ordre de popularité décroissante ^|Aucune ^|OK
+^|All_G_C.8 ^|L'Utilisateur clique sur les boutons précédents ou suivant des carrousels de produit' ^|le carrousel bouge afin de faire scroll les produits dans l'ordre choisit ^|Aucune ^|OK
+^|All_G_C.9 ^|L'Utilisateur clique sur la fenêtre du produit' ^|la page du produit s'affiche ^|Aucune ^|OK
+^|All_G_C.9 ^|L'Utilisateur clique sur l'icone de coeur à côté du prix du produit' ^|la produit s'ajoute à la liste de souhaits de l'utilisateur ^|être connecté ^|OK
+5+|Commentaire :
+La navigation et la recherche de produits fonctionne correctement
+|====
+
+|====
+|Cas de test 4+|Test-02-02-02
+|Titre 4+|Navigation entre page
+|Objectif 4+|Vérifier que l'utilisateur peut correctement navigeur entre les différentes page du site web
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|L'utilisateur clique sur l'icone de maison ^|L'utilisateur se retrouve sur la page d'accueil ^| L'utilisateur doit se trouver sur une autre page que l'accueil ^|OK
+^|All_G_C.2 ^|L'utilisateur clique sur l'icone de panier ^|L'utilisateur se retrouve sur la page du panier ^| L'utilisateur doit se trouver sur une autre page que le panier, et ne pas être administrateur ^|OK
+^|All_G_C.3 ^|L'utilisateur clique sur l'icone ? ^|Cela ouve un menu circulaire autour du ? proposant le service client et le Apropos ^| Aucun ^|OK
+^|All_G_C.4 ^|L'utilisateur clique sur l'icone de service client ^|L'utilisateur se retrouve sur la page Service Client ^| L'utilisateur doit se trouver sur une autre page que le service Client et doit avoir cliqué sur sur l'icone ? ^|OK
+^|All_G_C.5 ^|L'utilisateur clique sur l'icone de APropos ^|L'utilisateur se retrouve sur la page APropos ^| L'utilisateur doit se trouver sur une autre page que le APropos et doit avoir cliqué sur sur l'icone ? ^|OK
+^|All_G_C.7 ^|L'utilisateur clique sur le bouton "Liste de souhaits" ^|L'utilisateur se retrouve sur la page de sa liste de souhaits ^| L'utilisateur doit se trouver sur une autre page que la page Liste de souhaits ^|OK
+^|All_G_C.8 ^|L'utilisateur clique sur le bouton "Votre Compte" ^|L'utilisateur se retrouve sur la page de gestion de son Compte ^| L'utilisateur doit se trouver sur une autre page que la page Votre Compte ^|OK
+5+|Commentaire :
+La navigation entre les différentes pages fonctionne correctement
+|====
+
+=== Passer une commande 
+
+|====
+|Cas de test 4+|Test-02-03-01
+|Titre 4+|Gestion du Panier
+|Objectif 4+|Vérifier que le CRUD du panier fonctionne correctement
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "Ajouter au Panier" sous un produit ^|le produit est ajouté au panier ^| Etre connecté au site ^|OK
+^|All_G_C.2 ^|L'utilisateur clique sur le bouton + à côté du prix du produit ^|la quantité du produit dans le panier est incrémenté de 1 et le prix est actualisé ^| Etre connecté au site ainsi que d'être sur la page Panier ^|OK
+^|All_G_C.3 ^|L'utilisateur clique sur le bouton - à côté du prix du produit ^|la quantité du produit dans le panier est décrémenté de 1 et le prix est actualisé ^| Etre connecté au site ainsi que d'être sur la page Panier ^|OK
+^|All_G_C.4 ^|L'utilisateur clique sur le bouton avec l'icone de poubelle en dessous du prix du produit ^|le produit est supprimé du panier et le prix est actualisé ^| Etre connecté au site ainsi que d'être sur la page Panier ^|OK
+5+|Commentaire :
+Le CRUD du panier fonctionne correctement
+|====
+
+|====
+|Cas de test 4+|Test-02-03-02
+|Titre 4+|Passer la commande
+|Objectif 4+|Vérifier que la commande fonctionne
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Cliquer sur le bouton "Commander" ^|Le formulaire des informations de livraison de la commande s'affiche ^| Etre connecté au site et être sur la page du panier, avoir au moins un produit dedans ^|OK
+^|All_G_C.2 ^|Rentrer les informations de livraison ^|Le formulaire des informations de paiement de la commande s'affiche^| Etre connecté au site et avoir au moins un produit dans le panier ^|OK
+^|All_G_C.3 ^|Rentrer les informations de paiement ^|le paiement s'effectue^| Etre connecté au site et avoir au moins un produit dans le panier ^|OK
+^|All_G_C.4 ^|Confirmer la commande sur le récapitulatif ^|Une alerte de confirmation s'affiche^| Etre connecté au site et avoir au moins un produit dans le panier ^|OK
+
+5+|Commentaire :
+La commande fonctionne parfaitement.
+|====
+
+|====
+|Cas de test 4+|Test-02-03-03
+|Titre 4+|Commander un produit hors stock
+|Objectif 4+|Vérifier qu'il n'est pas possible de commander un produit hors stock
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Ajouter un produit au panier puis rendez vous dans le panier ^|La page du panier s'affiche^| Etre connecté au site ^|OK
+^|All_G_C.2 ^|Modifier sa quantité jusqu'à 199 ^|La quantité du produit doit être modifié ^| Etre connecté au site et être sur la page du panier, avoir au moins un produit dedans ^|OK
+^|All_G_C.3 ^|Cliquer sur le bouton "Commander" ^|Une alerte indiquant les produits dont les quantitées commandés sont supérieurs aux quantitées en stock va s'afficher^| Etre connecté au site et avoir au moins un produit dans le panier avec une quantitée supérieur à celle en stock^|OK
+
+5+|Commentaire :
+Une alerte indiquant les différents produits hors stock s'affiche bien.
+|====
+
+=== Suivre ses commandes
+
+|====
+|Cas de test 4+|Test-02-04-01
+|Titre 4+|Suivre ses commandes
+|Objectif 4+|Vérifier que la commande peut être consulté via le suivi des commandes
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Allez dans le menu "Mes Commandes" ^|Toutes vos commandes passées sont visibles ^| Avoir au moins une commande passée sur le site ^|OK
+
+5+|Commentaire :
+Le suivi des commandes fonctionne bien.
+|====
+
+=== Contacter le service client
+
+|====
+|Cas de test 4+|Test-02-05-01
+|Titre 4+|Se rendre sur la page "Service Client"
+|Objectif 4+|Vérifier que la page fonctionne bien
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+
+5+|Commentaire :
+On peut se rendre correctement sur le service client
+|====
+
+|====
+|Cas de test 4+|Test-02-05-02
+|Titre 4+|Se rendre sur la page "Service Client" sans être connecté
+|Objectif 4+|Vérifier qu'il est impossible de se rendre sur la page du service client sans être connecté
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client sans vous être connecté ^|La page du service client s'affiche mais une alerte disant qu'il faut être connecté s'affiche, après avoir cliqué dessus, vous serez redirigé vers la page d'accueil index.php ^| Etre connecté au site et avoir cliqué sur le service client sans s'être connecté ^|OK
+
+5+|Commentaire :
+On ne peut bien pas se rendre sur le service client si on est pas connecté
+|====
+
+|====
+|Cas de test 4+|Test-02-05-03
+|Titre 4+|Contacter le service client par mail
+|Objectif 4+|Vérifier qu'il est possible de contacter le service client par mail
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+^|All_G_C.2 ^|Cliquer sur "Mail" ^|Votre application de mail va s'ouvrir et vous pourrez rédiger le mail ^|Aucune ^|OK
+
+5+|Commentaire :
+On peut correctement contacte le service client par mail
+|====
+
+|====
+|Cas de test 4+|Test-02-05-04
+|Titre 4+|Contacter le service client par téléphone
+|Objectif 4+|Vérifier qu'il est de contacter le service client par téléphone
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+^|All_G_C.2 ^|Cliquer sur "Téléphone" ^|Votre application pour appeler va s'ouvrir et vous pourrez appeler le service client ^|Aucune ^|OK
+
+5+|Commentaire :
+On peut correctement contacter le service client par téléphone
+|====
+
+|====
+|Cas de test 4+|Test-02-05-05
+|Titre 4+|Contacter le service client par chat en direct
+|Objectif 4+|Vérifier qu'il est de contacter le service client par chat
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connecter vous à votre compte puis aller dans le mnu "Service Client" ^|La page du service client s'affiche ^| Etre connecté au site et avoir un compte ^|OK
+^|All_G_C.2 ^|Cliquer sur "Chat" ^|Une fenêtre va s'afficher et vous pourrez rédiger votre message, cliquer sur envoyer pour envoyer le message ^|Le message ne doit pas être vide pour être envoyé ^|OK
+
+5+|Commentaire :
+On peut correctement contacter le service client par chat
+|====
+
+
+|====
+|Cas de test 4+|Test-02-05-06
+|Titre 4+|Recevoir les réponses lors du chat en direct
+|Objectif 4+|Vérifier que les questions envoyées obtiennent bien des réponses
+
+5+|
+^| ID ^| Action ^| Comportement attendu ^| Pré-conditions ^| Résultat
+^| All_G_C.1 ^| Rendez-vous sur l'accueil du site puis soit cliquer sur le "?" puis l'image du service client, soit connectez-vous à votre compte puis allez dans le menu "Service Client" ^| La page du service client s'affiche ^| Être connecté au site et avoir un compte ^| OK
+^| All_G_C.2 ^| Cliquer sur "Chat" ^| Une fenêtre va s'afficher et vous pourrez rédiger votre message, cliquer sur envoyer pour envoyer le message ^ | Le message ne doit pas être vide pour être envoyé ^| OK
+^| All_G_C.3 ^| Attendre le chargement (à droite du bouton "Envoyer") ^| Le message reçu va s'afficher ^| Ne pas avoir rafraîchi la page pendant le chargement ^| OK
+
+5+|Commentaire :
+On reçoit bien les réponses du chat en direct
+|====
+
+=== Avis
+|====
+|Cas de test 4+|Test-02-06-01
+|Titre 4+|Laisser des avis et noter un produit
+|Objectif 4+|Vérifier que l'utilisateur peut bien laisser un avis et une note sur un produit commandé
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Aller sur la page produit ^|Un formulaire d'avis et de note apparait ^| Avoir déjà commandé se produit et n'avoir jamais laissé d'avis dessus ^|OK
+^|All_G_C.2 ^|Laisser l'avis et la note ^|L'avis et la note sont visible sur la page et ont ne voit plus le formulaire pour laisser un avis ^| Avoir déjà commandé se produit et n'avoir jamais laissé d'avis dessus ^|OK
+^|All_G_C.3 ^Consulter les avis ^|On doit voir les avis et les réponses aux avis du produit ^| Etre sur la page du produit ^|OK
+5+|Commentaire :
+On peut correctement laisser un avis et les consulter
+|====
+
+
+=== Administrateur
+|====
+|Cas de test 4+|Test-02-07-01
+|Titre 4+|Gérer le site pour l'administrateur
+|Objectif 4+|Vérifier que les fonctionnalités administrateur fonctionne
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Se connecter en tant qu'administrateur ^|Le header change est on voit alors Admin au lieu du Panier ^| Avoir un compte administatrateur ^|OK
+^|All_G_C.2 ^|Ajouter un produit ^|Le produit est ajouté à la base de données et est donc visible sur le site ^| Etre connecté en administrateur ^|OK
+^|All_G_C.3 ^|Modifier un produit ^|Le produit est modifié à la base de données et les modifications sont visible sur le site ^| Etre connecté en administrateur ^|OK
+^|All_G_C.4 ^|Supprimer un produit ^|Le produit est supprimé de la base de données et n'est donc plus visible sur le site ^| Etre connecté en administrateur ^|OK
+^|All_G_C.5 ^|Lancer des promotions ^|Le prix des différents produits séléctionnés sont modifiés dans la base de données et donc sur le site ^| Etre connecté en administrateur, avoir sélectionné des produits et avoir saisie un % pour la promotion ^|OK
+^|All_G_C.6 ^|Consulter les ventes ^|La liste de toutes les commandes passés en détails est affichée ^| Etre connecté en administrateur ^|OK
+5+|Commentaire :
+Le menu administrateur marche parfaitement
+|====
+
+=== A propos
+|====
+|Cas de test 4+|Test-02-08-01
+|Titre 4+|Consulter la page à propos
+|Objectif 4+|Vérifier que la page à propos s'affiche correctement
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur le site et cliquer sur le bouton "?" (en bas à droite). ^|Deux autres boutons vont apparaîtes, un "Service Client" et un autre "A propos" ^| Aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur à propos ^|La page à propos va apparaître ^| Aucune ^|OK
+5+|Commentaire :
+La page à propos s'affiche correctement.
+|====
+
+=== Partage des produits
+|====
+|Cas de test 4+|Test-02-09-01
+|Titre 4+|Partager des produits sur les réseaux sociaux
+|Objectif 4+|Vérifier qu'il est possible de partager des produits
+
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|All_G_C.1 ^|Rendez-vous sur la page d'un produit et cliquer sur le bouton de partage. ^|Les options de partage vont apparaîtres ^| Aucune ^|OK
+^|All_G_C.2 ^|Cliquer sur l'option de partage souhaité ^|Vous allez être redirigé vers le site où partager le produit ^| Aucune ^|OK
+5+|Commentaire :
+Le partage des produits est fonctionnel.
+|====

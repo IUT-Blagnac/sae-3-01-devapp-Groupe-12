@@ -1,0 +1,38 @@
+@startuml SEP
+[*] --> Navigation: Accéder au site web
+
+state Navigation {
+  [*] --> Accueil
+    state "Accueil\n\n\n\n\n\n\n\n\n\n\n\n" as Accueil {
+    
+    
+  }
+  Accueil --> Produits: Naviguer
+  Accueil --> Connexion: Se connecter
+  Produits --> Accueil: Retour à l'accueil
+  Accueil --> APropos : Consulter
+  APropos --> Accueil : Retour à l'acceuil
+  Accueil --> Coupons : Voir ses coupons de réduction {Connecté}
+  Accueil --> VosCommandes : Voir anciennes commandes {Connecté}
+  Accueil --> ServiceClient : Accéder au service client {Connecté}
+  Accueil --> Déconnexion : Se déconnecter {Connecté}
+  Accueil --> ListeDeSouhait : Voir sa wishList {Connecté}
+  Accueil --> VotreCompte : Accéder à son profil {Connecté}
+  Accueil --> Panier : Consulter et modifier son panier {Connecté}
+  Panier --> Commander : Commander son panier
+  Commander --> Paiement : Payer son panier
+  Connexion --> Connexion : [Si indentifiants incorrects]
+  Connexion --> Accueil : [Si indentifiants correct, Passer en état connecté]
+  Déconnexion --> Accueil : Retour à l'accueil
+  Coupons --> Accueil : Retour à l'accueil
+  VosCommandes --> Accueil : Retour à l'accueil
+  ServiceClient --> Accueil : Retour à l'accueil
+  ListeDeSouhait --> Accueil : Retour à l'accueil
+  VotreCompte --> Accueil : Retour à l'accueil
+  Panier --> Accueil : retour à l'accueil
+  Paiement --> Paiement : [Si informations de paiement non valide]
+  Paiement --> Accueil : [Si paiement abouti]
+}
+
+
+@enduml
