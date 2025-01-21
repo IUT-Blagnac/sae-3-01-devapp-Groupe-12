@@ -1,0 +1,48 @@
+{
+    "B105": [
+        {
+            "date": "18-01-2024 22:00:09",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.6,
+                    "moyenne": 20.6
+                },
+                "humidity": {
+                    "valeur": 46.5,
+                    "moyenne": 46.5
+                },
+                "activity": {
+                    "valeur": 0,
+                    "moyenne": 0.0
+                },
+                "co2": {
+                    "valeur": 608,
+                    "moyenne": 608.0
+                }
+            }
+        }
+    ],
+    "B203": [
+        {
+            "date": "18-01-2024 22:00:16",
+            "donnees": {
+                "temperature": {
+                    "valeur": 20.1,
+                    "moyenne": 20.1
+                },
+                "humidity": {
+                    "valeur": 51.5,
+                    "moyenne": 51.5
+                },
+                "activity": {
+                    "valeur": 0,
+                    "moyenne": 0.0
+                },
+                "co2": {
+                    "valeur": 734,
+                    "moyenne": 734.0
+                }
+            }
+        }
+    ]
+}
